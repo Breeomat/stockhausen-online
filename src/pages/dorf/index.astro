@@ -1,0 +1,164 @@
+---
+import Basis from '../../layouts/Basis.astro';
+
+const steckbrief = [
+  { wert: '797', text: 'Einwohner (30. Juni 2021)' },
+  { wert: '1287', text: 'erste urkundliche Erwähnung' },
+  { wert: '1972', text: 'Ortsteil von Herbstein' },
+];
+
+const zeitstrahl = [
+  { jahr: '1287', text: 'Älteste urkundliche Erwähnung: Als „Stochusen“ wird der Ort genannt, als zur Gründung des Klosters Blankenau Güter und Einkünfte in Stockhausen gestiftet werden.' },
+  { jahr: '1428', text: 'Die Junker Riedesel übernehmen das Gericht Stockhausen.' },
+  { jahr: '16. Jh.', text: 'Adolph Hermann Riedesel lässt die Hermannsburg erbauen, den Vorgängerbau des heutigen Schlosses.' },
+  { jahr: '1680', text: 'Die Riedesel werden in den Freiherrenstand erhoben.' },
+  { jahr: '1770', text: 'Baubeginn des barocken Schlosses auf den Mauern der Hermannsburg, unter Baumeister Georg Koch für Friedrich Georg Riedesel.' },
+  { jahr: '1801–1807', text: 'Das Schloss wird mit weiteren Umbauten fertiggestellt.' },
+  { jahr: '1847–1849', text: 'Bau der evangelischen Kirche als neuromanische Saalkirche anstelle eines Vorgängerbaus; Einweihung 1849.' },
+  { jahr: '1852', text: 'Stockhausen gehört nun zum Kreis Lauterbach in der Provinz Oberhessen.' },
+  { jahr: '1874', text: 'Gründung der Freiwilligen Feuerwehr Stockhausen.' },
+  { jahr: '1880', text: 'Gründung der Spar- und Darlehenskasse Stockhausen.' },
+  { jahr: '1894', text: 'Gründung des Gesangvereins „Germania“ als Männergesangverein.' },
+  { jahr: '1899', text: 'Gründung des Obst- und Gartenbauvereins Stockhausen.' },
+  { jahr: '1900', text: 'Gründung des gemischten Chores „Germania“.' },
+  { jahr: '1920', text: 'Gründung des Sportvereins Stockhausen.' },
+  { jahr: '1946', text: 'Neugründung des Sportvereins Stockhausen.' },
+  { jahr: '1972', text: 'Am 1. August wird Stockhausen im Zuge der hessischen Gebietsreform Ortsteil der Stadt Herbstein.' },
+];
+
+const einwohner = [
+  ['1834', '836'],
+  ['1840', '892'],
+  ['1871', '888'],
+  ['1939', '715'],
+  ['1946', '1.037'],
+  ['1961', '875'],
+  ['1967', '859'],
+  ['2021', '797'],
+];
+
+const sehenswert = [
+  { titel: 'Schloss Stockhausen', text: 'Barockes Schloss der Riedesel, ab 1770 auf den Mauern der Hermannsburg errichtet und 1807 vollendet. Heute nutzt die Gemeinschaft Altenschlirf die Anlage.' },
+  { titel: 'Evangelische Kirche', text: 'Neuromanische Saalkirche von 1847–1849, ein Kulturdenkmal.' },
+  { titel: 'Alte Eiche', text: 'Naturdenkmal mit einem Stammumfang von 6,92 Metern in Brusthöhe (gemessen 2015).' },
+];
+
+const entfernungen = [
+  ['Schadges', '2 km'],
+  ['Hosenfeld-Blankenau', '2 km'],
+  ['Großenlüder-Müs', '6 km'],
+  ['Rudlos', '6 km'],
+  ['Herbstein', '9 km'],
+  ['Lauterbach', '11 km'],
+  ['Fulda', '22 km'],
+];
+---
+<Basis titel="Unser Dorf" beschreibung="Stockhausen im Vogelsberg: Lage, Geschichte von 1287 bis heute, Einwohner und Sehenswertes.">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Unser Dorf</span>
+    <h1>Stockhausen im Vogelsberg</h1>
+    <p>Der größte Ortsteil von Herbstein liegt am Nordostrand des Vogelsbergs und zieht sich entlang der Altefeld. Der Name geht vermutlich auf die Baumstümpfe zurück, die nach einer Rodung stehen blieben.</p>
+  </section>
+
+  <section class="huelle dorf">
+    <ul class="steckbrief">
+      {steckbrief.map(({ wert, text }) => (
+        <li class="karte"><strong>{wert}</strong><span>{text}</span></li>
+      ))}
+    </ul>
+
+    <div class="spalten">
+      <div>
+        <span class="kicker">Geschichte</span>
+        <h2>Von Stochusen bis heute</h2>
+        <ol class="zeitstrahl">
+          {zeitstrahl.map(({ jahr, text }) => (
+            <li><span class="zeitstrahl__jahr">{jahr}</span><p>{text}</p></li>
+          ))}
+        </ol>
+      </div>
+
+      <aside class="seitenleiste">
+        <div class="karte kasten">
+          <h3>Einwohner</h3>
+          <table>
+            <tbody>
+              {einwohner.map(([jahr, zahl]) => <tr><th scope="row">{jahr}</th><td>{zahl}</td></tr>)}
+            </tbody>
+          </table>
+          <p class="klein">1961: 749 evangelische und 125 katholische Einwohner.</p>
+        </div>
+        <div class="karte kasten">
+          <h3>Nachbarorte</h3>
+          <table>
+            <tbody>
+              {entfernungen.map(([ort, km]) => <tr><th scope="row">{ort}</th><td>{km}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+      </aside>
+    </div>
+
+    <div>
+      <span class="kicker">Sehenswert</span>
+      <h2>Was man gesehen haben sollte</h2>
+      <div class="sehenswert">
+        {sehenswert.map(({ titel, text }) => (
+          <article class="karte"><h3>{titel}</h3><p>{text}</p></article>
+        ))}
+      </div>
+    </div>
+
+    <p class="quelle">
+      Quellen: Wikipedia, Artikel <a href="https://de.wikipedia.org/wiki/Stockhausen_(Herbstein)" rel="noopener">Stockhausen (Herbstein)</a>,
+      <a href="https://de.wikipedia.org/wiki/Schloss_Stockhausen" rel="noopener">Schloss Stockhausen</a> und
+      <a href="https://de.wikipedia.org/wiki/Evangelische_Kirche_Stockhausen_(Herbstein)" rel="noopener">Evangelische Kirche Stockhausen (Herbstein)</a>
+      (Lizenz <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" rel="noopener">CC BY-SA 4.0</a>).
+    </p>
+  </section>
+</Basis>
+
+<style>
+  .dorf { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .steckbrief { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .steckbrief li { padding: 1.5rem; display: flex; flex-direction: column; }
+  .steckbrief strong { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--ziegel); font-weight: 600; line-height: 1; }
+  .steckbrief span { color: var(--text-leise); margin-top: 0.4rem; }
+  @media (max-width: 640px) { .steckbrief { grid-template-columns: 1fr; } }
+
+  .spalten { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
+
+  .zeitstrahl { list-style: none; margin: 1.5rem 0 0; padding: 0; position: relative; }
+  .zeitstrahl::before { content: ''; position: absolute; left: 0.45rem; top: 0.5rem; bottom: 0.5rem; width: 2px; background: var(--linie); }
+  .zeitstrahl li { position: relative; padding: 0 0 1.4rem 2.25rem; }
+  .zeitstrahl li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.35rem;
+    width: 0.95rem;
+    height: 0.95rem;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 3px solid var(--moos);
+  }
+  .zeitstrahl__jahr { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; color: var(--ziegel); }
+  .zeitstrahl p { margin: 0.15rem 0 0; }
+
+  .seitenleiste { display: grid; gap: 1rem; position: sticky; top: 90px; }
+  @media (max-width: 900px) { .seitenleiste { position: static; } }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin-bottom: 0.75rem; }
+  .kasten table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .kasten th, .kasten td { padding: 0.4rem 0; border-bottom: 1px solid var(--linie); }
+  .kasten th { text-align: left; font-weight: 500; color: var(--text-leise); }
+  .kasten td { text-align: right; font-weight: 600; }
+  .klein { font-size: 0.85rem; color: var(--text-leise); margin: 0.75rem 0 0; }
+
+  .sehenswert { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .sehenswert article { padding: 1.5rem; }
+  .sehenswert p { margin: 0; color: var(--text-leise); }
+
+  .quelle { font-size: 0.85rem; color: var(--text-leise); margin: 0; }
+</style>

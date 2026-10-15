@@ -94,10 +94,11 @@ const demnaechst = [
       <div class="karte wissen">
         <span class="kicker">Wussten Sie schon?</span>
         <ul>
-          <li><strong>1770</strong><span>wird das barocke Schloss Stockhausen der Freiherren Riedesel fertiggestellt – auf den Grundmauern der älteren Hermannsburg.</span></li>
-          <li><strong>1840er</strong><span>entsteht die evangelische Kirche im neoromanischen Stil.</span></li>
-          <li><strong>1972</strong><span>wird Stockhausen am 1. August Ortsteil der Stadt Herbstein.</span></li>
+          <li><strong>1287</strong><span>wird der Ort als „Stochusen“ zum ersten Mal urkundlich erwähnt.</span></li>
+          <li><strong>1770</strong><span>beginnt der Bau des barocken Schlosses der Riedesel – fertig wird es erst 1807.</span></li>
+          <li><strong>1847</strong><span>beginnt der Bau der evangelischen Kirche im neuromanischen Stil, 1849 wird sie eingeweiht.</span></li>
         </ul>
+        <a class="wissen__mehr" href={url('dorf/')}>Mehr zur Dorfgeschichte →</a>
       </div>
     </div>
   </section>
@@ -191,6 +192,7 @@ const demnaechst = [
   .wissen li { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; align-items: baseline; }
   .wissen li + li { border-top: 1px solid var(--linie); padding-top: 1.1rem; }
   .wissen strong { font-family: var(--serif); font-size: 1.5rem; color: var(--ziegel); font-weight: 600; }
+  .wissen__mehr { display: inline-block; margin-top: 1.25rem; font-weight: 600; }
 
   .demnaechst { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
   .demnaechst li { padding: 1.5rem; }
