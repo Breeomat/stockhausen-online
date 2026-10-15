@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Basis from '../../layouts/Basis.astro';
 import luftbild from '../../assets/fotos/stockhausen-luftbild.jpg';
+import kirche from '../../assets/fotos/stockhausen-kirche.jpg';
 
 const steckbrief = [
   { wert: '797', text: 'Einwohner (30. Juni 2021)' },
@@ -112,7 +113,11 @@ const einwohner = [
 
 const sehenswert = [
   { titel: 'Schloss Stockhausen', text: 'Barockes Schloss der Riedesel, ab 1770 auf den Mauern der Hermannsburg errichtet und 1807 vollendet. Heute nutzt die Gemeinschaft Altenschlirf die Anlage.' },
-  { titel: 'Evangelische Kirche', text: 'Neuromanische Saalkirche, 1849 eingeweiht, ein Kulturdenkmal.' },
+  {
+    titel: 'Evangelische Kirche',
+    text: 'Neuromanische Saalkirche, 1849 eingeweiht, ein Kulturdenkmal.',
+    bild: { src: kirche, alt: 'Die evangelische Kirche aus der Luft: roter Sandsteinbau mit Turm und Uhr, davor die Freitreppe', foto: 'Marc Ahne' },
+  },
 ];
 
 const entfernungen = [
@@ -226,8 +231,16 @@ const entfernungen = [
       <span class="kicker">Sehenswert</span>
       <h2>Was man gesehen haben sollte</h2>
       <div class="sehenswert">
-        {sehenswert.map(({ titel, text }) => (
-          <article class="karte"><h3>{titel}</h3><p>{text}</p></article>
+        {sehenswert.map(({ titel, text, bild }) => (
+          <article class:list={['karte', { 'mit-bild': bild }]}>
+            {bild && (
+              <figure class="sehenswert__bild">
+                <Image src={bild.src} alt={bild.alt} widths={[480, 800, 1200]} sizes="(max-width: 640px) calc(100vw - 32px), 560px" />
+                <figcaption>Foto: {bild.foto}</figcaption>
+              </figure>
+            )}
+            <div><h3>{titel}</h3><p>{text}</p></div>
+          </article>
         ))}
       </div>
     </div>
@@ -278,9 +291,18 @@ const entfernungen = [
   .kasten td { text-align: right; font-weight: 600; }
   .klein { font-size: 0.85rem; color: var(--text-leise); margin: 0.75rem 0 0; }
 
-  .sehenswert { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .sehenswert { display: grid; gap: 1rem; margin-top: 1.5rem; }
+  .sehenswert p { max-width: 68ch; }
   .sehenswert article { padding: 1.5rem; }
   .sehenswert p { margin: 0; color: var(--text-leise); }
+  .mit-bild { order: -1; display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: center; padding: 0 2rem 0 0 !important; overflow: hidden; }
+  .sehenswert__bild { margin: 0; position: relative; }
+  .sehenswert__bild img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  @media (max-width: 760px) {
+    .mit-bild { grid-template-columns: 1fr; gap: 1.25rem; padding: 0 0 1.5rem !important; }
+    .mit-bild > div { padding-inline: 1.5rem; }
+  }
+  .sehenswert__bild figcaption { position: absolute; right: 0.6rem; bottom: 0.4rem; font-size: 0.72rem; color: rgb(255 255 255 / 0.9); text-shadow: 0 1px 4px rgb(0 0 0 / 0.7); }
 
   .steckbrief { grid-template-columns: repeat(3, 1fr); }
   .steckbrief strong { white-space: nowrap; }
