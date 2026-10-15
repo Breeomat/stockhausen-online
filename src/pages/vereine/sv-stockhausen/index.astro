@@ -10,6 +10,7 @@ import turnFoto from '../../../assets/fotos/sv-turnkinder-nikolaus.jpg';
 import sportplatzFoto from '../../../assets/fotos/sv-sportplatz-luftbild.jpg';
 import fussballFoto from '../../../assets/fotos/sv-fussball.jpg';
 import faschingFoto from '../../../assets/fotos/sv-fasching.jpg';
+import theaterPlakat from '../../../assets/fotos/sv-theater-2023.jpg';
 
 const termine = (await kommendeTermine()).filter((t) => t.data.verein === 'SV Stockhausen');
 
@@ -80,6 +81,19 @@ const erweitert = [
       </div>
     </div>
 
+    <div class="karte theater">
+      <div>
+        <span class="kicker">Theatergruppe</span>
+        <h2>Jedes Jahr ein Stück auf der Bühne</h2>
+        <p>Die Theatergruppe des SV spielt jedes Jahr in der Altfellhalle. Zum Jahreswechsel 2023/24 war es die Komödie „Drei Männer im Schnee“ von Erich Kästner, unter der Regie von Frank Lang: sechs Abende von Ende Dezember bis Mitte Januar, dazu eine öffentliche Generalprobe.</p>
+        <p class="klein">Die Termine für das nächste Stück stehen im Kalender, sobald sie feststehen.</p>
+      </div>
+      <a class="theater__plakat" href={theaterPlakat.src} title="Plakat in voller Größe öffnen">
+        <Image src={theaterPlakat} alt="Plakat „Drei Männer im Schnee“, Theatergruppe des SV Stockhausen, Aufführungen vom 29. Dezember 2023 bis 13. Januar 2024 in der Altfellhalle" widths={[360, 560, 750]} sizes="(max-width: 760px) 70vw, 320px" />
+        <span>Plakat 2023/24</span>
+      </a>
+    </div>
+
     <div class="anlage">
       <div class="anlage__text">
         <span class="kicker">Unsere Sportanlage</span>
@@ -138,6 +152,14 @@ const erweitert = [
   .galerie .galerie__breit { grid-column: 1 / -1; }
   .galerie .galerie__breit img { aspect-ratio: 16 / 9; object-position: 50% 50%; }
   @media (max-width: 760px) { .galerie { grid-template-columns: 1fr; } }
+  .theater { display: grid; grid-template-columns: 1fr 320px; gap: 2.5rem; align-items: center; padding: clamp(1.5rem, 4vw, 2.5rem); }
+  .theater p { max-width: 58ch; }
+  .theater .klein { font-size: 0.9rem; color: var(--text-leise); margin: 0; }
+  .theater__plakat { display: block; text-decoration: none; }
+  .theater__plakat img { width: 100%; height: auto; border-radius: 10px; box-shadow: var(--schatten); transform: rotate(1.5deg); transition: transform 0.2s ease; }
+  .theater__plakat:hover img { transform: rotate(0); }
+  .theater__plakat span { display: block; margin-top: 0.6rem; font-size: 0.8rem; color: var(--text-leise); text-align: center; }
+  @media (max-width: 760px) { .theater { grid-template-columns: 1fr; } .theater__plakat { max-width: 280px; margin-inline: auto; } }
   .anlage { display: grid; grid-template-columns: 1fr 1.6fr; gap: 2.5rem; align-items: center; }
   .anlage .sv-foto img { aspect-ratio: 4 / 3; }
   .anlage__text p { color: var(--text-leise); }
