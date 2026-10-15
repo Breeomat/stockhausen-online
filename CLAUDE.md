@@ -6,7 +6,10 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
 ## Inhalte pflegen
 - Termine: `src/content/termine.yaml` (Felder siehe Kommentar in der Datei). Vergangene Termine fallen automatisch weg.
 - Plakate: Bild nach `src/assets/plakate/`, Eintrag in `src/content/plakate.yaml`. Nach `gueltig_bis` → Archiv.
-- Bilder/Plakate liefert der Betreiber über Google Drive (Ordner „Stockhausen-Webseite/Eingang“).
+- Bilder/Plakate liefert der Betreiber über Google Drive, Ordner „Stockhausen-Webseite“:
+  - „Plakate“ (Ordner-ID 16d65tlcJ2OzsJkx36GuNBOwnsk6SqfCc)
+  - „Fotos und Sonstiges“ (Ordner-ID 1gykGhG4TPb4o3Ep1tVcJaSTgClbFIT1Z)
+  Nach dem Einbau Bilder für das Web verkleinern (max. ca. 1600 px, JPG).
 - Nichts erfinden. Fehlende Angaben als `<span class="fehlt">[fehlt: …]</span>` markieren.
 - Personenfotos nur Gruppen oder mit Einwilligung.
 
