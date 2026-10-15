@@ -3,6 +3,8 @@ import Basis from '../../layouts/Basis.astro';
 import { aktion, aktionLaeuft } from '../../lib/enso';
 
 const laeuft = aktionLaeuft();
+// Paten laut Aushang „Unsere Paten – Hilfe bei der Anmeldung“
+const paten = ['Jonas Domaschka', 'Nadine Wahl', 'Judith Dörr', 'Kirsten Antritter', 'Markus Dörr', 'Paul Miller', 'Christoph Schell', 'Jasmin Fritz', 'Marc Ahne'];
 const quellen = [
   { titel: 'Lauterbacher Anzeiger: 222 Anteile schon gezeichnet – Tante Enso soll das „Lädchen“ in Stockhausen retten', href: 'https://www.lauterbacher-anzeiger.de/vogelsbergkreis/herbstein/222-anteile-schon-gezeichnet-tante-enso-soll-das-laedchen-in-stockhausen-retten-94509284.html' },
   { titel: 'Osthessen|News: Stockhausen kämpft um Erhalt seines „Lädchens“ – Tante Enso als Rettungsanker', href: 'https://osthessen-news.de/n11800665/rettung-fuer-das-ladchen-stockhausen-kampft-um-seine-nahversorgung.html' },
@@ -73,12 +75,12 @@ const quellen = [
       </div>
       <div class="karte vor-ort">
         <h2>Hilfe beim Zeichnen</h2>
-        <p>Neun Paten aus dem Dorf helfen bei Fragen zu Tante Enso, beim Zeichnen der Anteile im Internet und beim Beantragen der Karte. Sprechzeiten gibt es bis zum 19. Oktober in der Altfellhalle und im Lädchen.</p>
+        <p>Neun Paten aus dem Dorf helfen bei Fragen zu Tante Enso, beim Zeichnen der Anteile im Internet und beim Beantragen der Karte. Sprechzeiten gibt es bis zum 19. Oktober in der Altfellhalle (Bleichstraße 19) und im Lädchen (Welzgasse 1).</p>
         <dl>
           <dt>Nächste Sprechzeit</dt>
-          <dd>Montag, 19. Oktober 2026, 18–20 Uhr</dd>
+          <dd>Montag, 19. Oktober 2026, 18–20 Uhr<br /><span class="fehlt">[fehlt: Ort – Altfellhalle oder Lädchen]</span></dd>
           <dt>Paten</dt>
-          <dd><span class="fehlt">[fehlt: Namen oder Kontakt der Paten]</span></dd>
+          <dd>{paten.join(', ')}</dd>
           <dt>Tante Enso</dt>
           <dd>Fragen zum Anteilskauf beantwortet Tante Enso über das Kontaktformular auf <a href={aktion.standort} rel="noopener">tanteenso.de</a>. Dort gibt es auch ein Erklärvideo zum Zeichnen und zur Karte.</dd>
         </dl>
