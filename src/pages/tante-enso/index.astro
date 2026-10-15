@@ -10,11 +10,11 @@ const quellen = [
   { titel: 'hessenschau: Diese 16 tegut-Filialen werden in Hessen zu Tante-Enso-Läden', href: 'https://www.hessenschau.de/wirtschaft/diese-16-tegut-filialen-werden-in-hessen-zu-tante-enso-laeden-v1,tante-enso-104.html' },
 ];
 ---
-<Basis titel="Tante Enso" beschreibung="Das Lädchen in Stockhausen soll ein Tante-Enso-Laden werden. Alles zu Anteilen, Fristen und Hilfe beim Zeichnen.">
+<Basis titel="Tante Enso" beschreibung="Das Lädchen in Stockhausen wird ein Tante-Enso-Laden. Alles zu Teilhabern, Fristen und Hilfe beim Zeichnen.">
   <section class="huelle seitenkopf">
     <span class="kicker">Einkaufen im Dorf</span>
     <h1>Tante Enso fürs Lädchen</h1>
-    <p>Nach dem Rückzug von tegut soll das Lädchen in der Welzgasse ein Tante-Enso-Laden werden. Betreiber bleibt die Gemeinschaft Altenschlirf. Dafür braucht es genug Menschen aus Stockhausen und Umgebung, die Anteile zeichnen.</p>
+    <p>Nach dem Rückzug von tegut soll das Lädchen in der Welzgasse ein Tante-Enso-Laden werden. Betreiber bleibt die Gemeinschaft Altenschlirf. Dafür mussten mindestens {aktion.ziel} Menschen aus Stockhausen und Umgebung Teilhaber werden. Dieses Ziel ist erreicht: Laut Tante Enso kommt dann eine Filiale in den Ort.</p>
     <p><a class="knopf knopf--leise" href={aktion.standort} rel="noopener">Tante Enso Stockhausen auf tanteenso.de</a></p>
   </section>
 
@@ -22,13 +22,13 @@ const quellen = [
     {laeuft && (
       <div class="karte aktion">
         <div class="aktion__zahl">
-          <strong>{aktion.ziel}</strong>
-          <span>Anteile à {aktion.preis} €</span>
+          <strong>{aktion.stand}</strong>
+          <span>von {aktion.ziel}<br />Teilhabern</span>
         </div>
         <div>
-          <span class="kicker">Jetzt mitmachen</span>
-          <h2>Bis {aktion.fristText} müssen {aktion.ziel} Anteile gezeichnet sein</h2>
-          <p>Sonst ist das Lädchen weg. Ende September waren laut Presse {aktion.stand} Anteile gezeichnet. Mitmachen können auch Menschen aus den Nachbarorten.</p>
+          <span class="kicker">Ziel erreicht</span>
+          <h2>{aktion.stand} von {aktion.ziel} Teilhaberschaften sind gezeichnet</h2>
+          <p>Stand {aktion.standText}, die nächste Aktualisierung kommt am {aktion.naechsterStandText}. Die Kampagne läuft bis {aktion.fristText}. Jede weiteren 100 Teilhaber bringen dem Dorf {aktion.praemie} € „Dorfsponsoringprämie“ für ein Projekt nach Wahl. Mitmachen können auch Menschen aus den Nachbarorten.</p>
           <a class="knopf" href={aktion.link} rel="noopener">Anteile online zeichnen</a>
         </div>
       </div>
@@ -38,7 +38,8 @@ const quellen = [
       <article class="karte">
         <span class="schritte__nr">1</span>
         <h2>Anteil zeichnen</h2>
-        <p>Ein Anteil kostet {aktion.preis} €, mehrere sind möglich. Auf jeden Anteil gibt es jährlich 5 % Guthaben, also 5 € zum Einkaufen. Anteile sind jährlich kündbar.</p>
+        <p>Ein Anteil kostet einmalig {aktion.preis} €, mehrere sind möglich. Auf jeden Anteil gibt es jährlich 5 % Guthaben, also 5 € zum Einkaufen. Anteile sind jährlich kündbar.</p>
+        <p>Wichtig: Jede Person braucht ein eigenes Kundenkonto bei Tante Enso, sonst wird sie nicht gezählt. Mehrere Anteile einer Person zählen als eine Teilhaberschaft.</p>
       </article>
       <article class="karte">
         <span class="schritte__nr">2</span>
@@ -67,7 +68,7 @@ const quellen = [
           <dt>Umbau</dt>
           <dd>Die Umstellung der ehemaligen tegut-Läden auf Tante Enso ist von November 2026 bis April 2027 geplant. Ein Termin für Stockhausen steht noch nicht fest.</dd>
           <dt>Öffnungszeiten</dt>
-          <dd><span class="fehlt">[fehlt: aktuelle Öffnungszeiten – die Angaben im Netz widersprechen sich]</span></dd>
+          <dd>Lädchen derzeit: <span class="fehlt">[fehlt: aktuelle Öffnungszeiten]</span><br />Tante Enso: noch nicht festgelegt. Teilhaber können über „Mitgestalten“ bei Tante Enso mitentscheiden, von den Öffnungszeiten bis zum Sortiment.</dd>
         </dl>
       </div>
       <div class="karte vor-ort">
@@ -76,8 +77,10 @@ const quellen = [
         <dl>
           <dt>Nächste Sprechzeit</dt>
           <dd>Montag, 19. Oktober 2026, 18–20 Uhr</dd>
-          <dt>Ansprechpartner</dt>
+          <dt>Paten</dt>
           <dd><span class="fehlt">[fehlt: Namen oder Kontakt der Paten]</span></dd>
+          <dt>Tante Enso</dt>
+          <dd>Fragen zum Anteilskauf beantwortet Tante Enso über das Kontaktformular auf <a href={aktion.standort} rel="noopener">tanteenso.de</a>. Dort gibt es auch ein Erklärvideo zum Zeichnen und zur Karte.</dd>
         </dl>
       </div>
     </div>
@@ -131,6 +134,7 @@ const quellen = [
   .schritte article { padding: 1.75rem; }
   .schritte h2 { font-size: 1.4rem; margin-top: 1rem; }
   .schritte p { margin: 0; color: var(--text-leise); }
+  .schritte p + p { margin-top: 0.75rem; }
   .schritte__nr {
     display: grid;
     place-items: center;
