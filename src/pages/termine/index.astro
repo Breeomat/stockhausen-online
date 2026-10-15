@@ -76,6 +76,10 @@ const webcal = feed.href.replace(/^https?:/, 'webcal:');
   document.querySelectorAll<HTMLElement>('.monat').forEach((m) => {
     if (!m.querySelector('.termin')) m.remove();
   });
+
+  // Link mit ?verein=… (z. B. von der Startseite) wählt den passenden Filter vor
+  const verein = new URLSearchParams(location.search).get('verein');
+  if (verein) [...chips].find((c) => c.dataset.filter === verein)?.click();
 </script>
 
 <style>

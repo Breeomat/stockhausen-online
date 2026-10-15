@@ -1,15 +1,9 @@
 ---
 import Basis from '../../layouts/Basis.astro';
 import { url } from '../../lib/site';
+import { vereinsseiten as vereine, weitereVereine } from '../../lib/vereine';
 
-const vereine = [
-  {
-    name: 'Freiwillige Feuerwehr Stockhausen e.V.',
-    seit: 'seit 1874',
-    text: 'Einsatzabteilung, Feuerwehrverein und 150 Jahre Geschichte – von der Spritzenmannschaft bis zum LF 10.',
-    href: 'vereine/feuerwehr/',
-  },
-];
+const weitere = await weitereVereine();
 ---
 <Basis titel="Vereine" beschreibung="Die Vereine in Stockhausen: Ansprechpartner, Geschichte und Termine.">
   <section class="huelle seitenkopf">
@@ -27,6 +21,13 @@ const vereine = [
         <span class="verein__mehr">Zur Vereinsseite →</span>
       </a>
     ))}
+    {weitere.map((name) => (
+      <a class="karte verein verein--klein" href={`${url('termine/')}?verein=${encodeURIComponent(name)}`}>
+        <h2>{name}</h2>
+        <p>Vereinsseite folgt.</p>
+        <span class="verein__mehr">Termine ansehen →</span>
+      </a>
+    ))}
   </section>
 </Basis>
 
@@ -36,5 +37,6 @@ const vereine = [
   .verein:hover { transform: translateY(-2px); }
   .verein h2 { font-size: 1.5rem; }
   .verein p { color: var(--text-leise); }
+  .verein--klein h2 { font-size: 1.2rem; }
   .verein__mehr { margin-top: auto; font-weight: 600; color: var(--lagune); }
 </style>

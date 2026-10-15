@@ -1,0 +1,20 @@
+import { kommendeTermine } from './termine';
+
+// Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
+export const vereinsseiten = [
+  {
+    name: 'Freiwillige Feuerwehr Stockhausen e.V.',
+    kurz: 'Feuerwehr',
+    seit: 'seit 1874',
+    text: '57 Aktive, 183 Mitglieder und 150 Jahre Geschichte – von der Spritzenmannschaft bis zum LF 10.',
+    href: 'vereine/feuerwehr/',
+  },
+];
+
+const hatSeite = (name: string) => vereinsseiten.some((v) => name.includes(v.kurz));
+
+// Vereine mit kommenden Terminen, die (noch) keine eigene Seite haben
+export async function weitereVereine(): Promise<string[]> {
+  const namen = (await kommendeTermine()).flatMap((t) => (t.data.verein ? [t.data.verein] : []));
+  return [...new Set(namen)].filter((n) => !hatSeite(n)).sort((a, b) => a.localeCompare(b, 'de'));
+}

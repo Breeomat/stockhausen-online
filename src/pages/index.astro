@@ -8,12 +8,13 @@ import { kommendeTermine } from '../lib/termine';
 import { plakate } from '../lib/plakate';
 import { url } from '../lib/site';
 import { aktion, aktionLaeuft } from '../lib/enso';
+import { vereinsseiten, weitereVereine } from '../lib/vereine';
 
 const naechste = (await kommendeTermine()).slice(0, 4);
 const { aktuell } = await plakate();
+const weitere = await weitereVereine();
 
 const demnaechst = [
-  { titel: 'Vereine', text: 'Alle Vereine mit Ansprechpartnern, Übungszeiten und eigenen Terminen.' },
   { titel: 'Neuigkeiten', text: 'Was sich im Dorf tut – kurz, aktuell und aus erster Hand.' },
   { titel: 'Damals in Stockhausen', text: 'Alte Fotos, Geschichten und ein Zeitstrahl der Dorfgeschichte.' },
   { titel: 'Ortsbeirat', text: 'Sitzungstermine, Beschlüsse und alles Wichtige aus dem Ortsbeirat.' },
@@ -62,6 +63,38 @@ const demnaechst = [
           Die ersten Termine der Vereine werden in Kürze eingetragen.
         </div>
       )}
+    </div>
+  </section>
+
+  <section class="abschnitt vereine-start">
+    <div class="huelle">
+      <div class="kopf-abschnitt">
+        <div>
+          <span class="kicker">Vereine</span>
+          <h2>Gemeinsam im Dorf</h2>
+        </div>
+        <a class="knopf knopf--leise" href={url('vereine/')}>Alle Vereine</a>
+      </div>
+      <div class="vereine-raster">
+        {vereinsseiten.map((v) => (
+          <a class="karte verein-gross" href={url(v.href)}>
+            <span class="kicker">{v.seit}</span>
+            <h3>{v.name}</h3>
+            <p>{v.text}</p>
+            <span class="verein-gross__pfeil">Zur Vereinsseite →</span>
+          </a>
+        ))}
+        {weitere.length > 0 && (
+          <div class="karte verein-liste">
+            <h3>Weitere Vereine</h3>
+            <ul>
+            {weitere.map((name) => (
+              <li><a href={`${url('termine/')}?verein=${encodeURIComponent(name)}`}><span>{name}</span><small>Termine →</small></a></li>
+            ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   </section>
 
@@ -212,6 +245,34 @@ const demnaechst = [
   .enso p { max-width: 40ch; color: #dce9f1; }
   .enso__pfeil { margin-top: auto; font-weight: 600; color: var(--gold); }
 
+  .vereine-start { padding-top: 0; }
+  .vereine-raster { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; }
+  @media (max-width: 860px) { .vereine-raster { grid-template-columns: 1fr; } }
+  .verein-gross {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    text-decoration: none;
+    color: #fff;
+    border: 0;
+    min-height: 260px;
+    background:
+      radial-gradient(420px 260px at 100% 100%, color-mix(in srgb, var(--gold) 45%, transparent), transparent 70%),
+      linear-gradient(140deg, #8f2f1a, #c0522b);
+    transition: transform 0.2s ease;
+  }
+  .verein-gross:hover { transform: translateY(-3px); color: #fff; }
+  .verein-gross .kicker { color: #ffd98a; }
+  .verein-gross h3 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .verein-gross p { color: #fbe6dc; max-width: 42ch; }
+  .verein-gross__pfeil { margin-top: auto; font-weight: 600; color: #ffd98a; }
+  .verein-liste { padding: 1.5rem 1.75rem; }
+  .verein-liste h3 { margin-bottom: 0.5rem; }
+  .verein-liste ul { list-style: none; margin: 0; padding: 0; }
+  .verein-liste li + li { border-top: 1px solid var(--linie); }
+  .verein-liste a { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.9rem 0; text-decoration: none; color: var(--text); font-weight: 500; }
+  .verein-liste a:hover { color: var(--ziegel); }
+  .verein-liste small { color: var(--lagune); font-weight: 600; white-space: nowrap; }
   .wissen { padding: clamp(1.75rem, 4vw, 2.5rem); }
   .wissen ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
   .wissen li { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; align-items: baseline; }
