@@ -2,19 +2,19 @@
 @import '@fontsource-variable/inter';
 
 :root {
-  --bg: #f7f3ea;
-  --bg-tief: #efe8d9;
-  --flaeche: #fffdf8;
-  --text: #1e2a22;
-  --text-leise: #5a6a5e;
-  --linie: #e0d8c6;
-  --wald: #1f3d2c;
-  --moos: #3f6b45;
-  --wiese: #8fb069;
-  --ziegel: #b8502a;
-  --ziegel-hell: #f4ddd0;
-  --gold: #d9a441;
-  --schatten: 0 1px 2px rgb(30 42 34 / 0.06), 0 8px 24px -12px rgb(30 42 34 / 0.18);
+  --bg: #fbf5ec;
+  --bg-tief: #f5e8d5;
+  --flaeche: #fffcf7;
+  --text: #2a211c;
+  --text-leise: #6f6157;
+  --linie: #ecdcc6;
+  --meer: #1d4e6e;
+  --lagune: #1f6e92;
+  --aprikose: #eab489;
+  --ziegel: #c0522b;
+  --ziegel-hell: #f9dfd2;
+  --gold: #e9ad3f;
+  --schatten: 0 1px 2px rgb(42 33 28 / 0.06), 0 8px 24px -12px rgb(42 33 28 / 0.18);
   --radius: 18px;
   --serif: 'Fraunces Variable', Georgia, serif;
   --sans: 'Inter Variable', system-ui, sans-serif;
@@ -24,18 +24,18 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #121a15;
-    --bg-tief: #0d1410;
-    --flaeche: #1a241e;
-    --text: #ecebe4;
-    --text-leise: #a3b0a6;
-    --linie: #2c3a31;
-    --wald: #a9cf9a;
-    --moos: #8fbf86;
-    --wiese: #6f9150;
-    --ziegel: #ec8a62;
-    --ziegel-hell: #3a2419;
-    --gold: #e6b860;
+    --bg: #1c1714;
+    --bg-tief: #161210;
+    --flaeche: #26201b;
+    --text: #f1e9de;
+    --text-leise: #bfae9c;
+    --linie: #3a2f27;
+    --meer: #9fcbe4;
+    --lagune: #7bbad9;
+    --aprikose: #a8693f;
+    --ziegel: #ef8c63;
+    --ziegel-hell: #3d2419;
+    --gold: #f0bf5c;
     --schatten: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.6);
     color-scheme: dark;
   }
@@ -57,7 +57,7 @@ body {
 
 img { max-width: 100%; height: auto; display: block; }
 
-a { color: var(--moos); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+a { color: var(--lagune); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 a:hover { color: var(--ziegel); }
 
 h1, h2, h3 {
@@ -65,7 +65,7 @@ h1, h2, h3 {
   font-optical-sizing: auto;
   line-height: 1.1;
   letter-spacing: -0.015em;
-  color: var(--wald);
+  color: var(--meer);
   margin: 0 0 0.5em;
   text-wrap: balance;
   hyphens: auto;
@@ -107,7 +107,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   gap: 0.5rem;
   padding: 0.7rem 1.2rem;
   border-radius: 999px;
-  background: var(--wald);
+  background: var(--meer);
   color: var(--bg);
   font-weight: 600;
   font-size: 0.95rem;
@@ -117,7 +117,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   transition: transform 0.15s ease, background 0.15s ease;
 }
 .knopf:hover { background: var(--ziegel); color: #fff; transform: translateY(-1px); }
-.knopf--leise { background: transparent; color: var(--wald); box-shadow: inset 0 0 0 1.5px var(--linie); }
+.knopf--leise { background: transparent; color: var(--meer); box-shadow: inset 0 0 0 1.5px var(--linie); }
 .knopf--leise:hover { background: var(--flaeche); color: var(--ziegel); }
 
 .karte {

@@ -20,7 +20,7 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{seitentitel}</title>
     <meta name="description" content={beschreibung} />
-    <meta name="theme-color" content="#1f3d2c" />
+    <meta name="theme-color" content="#1d4e6e" />
     <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
     <link rel="alternate" type="text/calendar" title="Termine Stockhausen" href={url('termine.ics')} />
     <meta property="og:title" content={seitentitel} />
@@ -100,7 +100,7 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     position: absolute;
     left: -999px;
     top: 0.5rem;
-    background: var(--wald);
+    background: var(--meer);
     color: var(--bg);
     padding: 0.5rem 1rem;
     border-radius: 8px;
@@ -122,7 +122,7 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
 
   .marke { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--text); }
   .marke span { display: flex; flex-direction: column; line-height: 1.15; }
-  .marke strong { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--wald); }
+  .marke strong { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--meer); }
   .marke small { font-size: 0.75rem; color: var(--text-leise); letter-spacing: 0.04em; }
 
   .menue { display: flex; gap: 0.25rem; }
@@ -135,7 +135,7 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     font-size: 0.95rem;
   }
   .menue a:hover { background: var(--flaeche); color: var(--ziegel); }
-  .menue a[aria-current='page'] { background: var(--wald); color: var(--bg); }
+  .menue a[aria-current='page'] { background: var(--meer); color: var(--bg); }
 
   .menue-knopf { display: none; }
 
@@ -183,7 +183,7 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     .menue a { padding: 0.8rem 1rem; font-size: 1.05rem; }
   }
 
-  .fuss { background: var(--wald); color: #dfe8df; margin-top: 0; }
+  .fuss { background: var(--meer); color: #e6eef3; margin-top: 0; }
   @media (prefers-color-scheme: dark) { .fuss { background: var(--bg-tief); border-top: 1px solid var(--linie); } }
   .fuss__innen {
     display: grid;
@@ -192,11 +192,11 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     padding-block: 3.5rem 2.5rem;
   }
   .fuss .marke strong { color: #fff; }
-  .fuss .marke small { color: #b9c8bb; }
-  .fuss__text { margin-top: 1rem; max-width: 38ch; color: #b9c8bb; font-size: 0.95rem; }
+  .fuss .marke small { color: #b7cbd8; }
+  .fuss__text { margin-top: 1rem; max-width: 38ch; color: #b7cbd8; font-size: 0.95rem; }
   .fuss nav { display: flex; flex-direction: column; gap: 0.45rem; }
   .fuss h2 { font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
-  .fuss nav a { color: #dfe8df; text-decoration: none; }
+  .fuss nav a { color: #e6eef3; text-decoration: none; }
   .fuss nav a:hover { color: #fff; text-decoration: underline; }
   .fuss__zeile {
     display: flex;
@@ -206,7 +206,7 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     padding-block: 1.25rem 2rem;
     border-top: 1px solid rgb(255 255 255 / 0.12);
     font-size: 0.85rem;
-    color: #9fb2a3;
+    color: #9db6c6;
   }
   @media (max-width: 760px) { .fuss__innen { grid-template-columns: 1fr 1fr; } .fuss__innen > div { grid-column: 1 / -1; } }
 </style>
