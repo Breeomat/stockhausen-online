@@ -20,10 +20,12 @@ const daten = [
 
 const zeitstrahl = [
   { jahr: 'Vorzeit', text: 'Zahlreiche Hügelgräber ringsum und in der Gemarkung zeugen von jahrtausendealter Besiedlung. In geöffneten Gräbern fand man zwei Lanzenspitzen, eine Dolchklinge, zwei Spiralnadeln, eine Nadel, ein Diadem und einen Schlüssel.' },
-  { jahr: '1274', text: 'Erste Erwähnung von Bedelsburg als „Beiteler Stoghusen“ – Bettler-Stockhausen. Aus diesem Namen wird später „Bedelsburg“.' },
+  { jahr: '1274', text: 'Erste Erwähnung des Nachbardorfs „Bettelenstokhusen“ – Bettler-Stockhausen, im Unterschied zu Kirchstockhausen, dem heutigen Stockhausen. Später wird daraus „Bedelsdorf“ (an anderer Stelle auch „Bedelsburg“).' },
   { jahr: '1287', text: 'Älteste urkundliche Erwähnung: Als „Stochusen“ wird der Ort genannt, als zur Gründung des Klosters Blankenau Güter und Einkünfte in Stockhausen gestiftet werden.' },
   { jahr: '1324', text: 'Eine Urkunde im Archiv in Lauterbach nennt den Ort „Kirchststoghußen“ – zur Unterscheidung vom benachbarten Bettler-Stockhausen.' },
   { jahr: '1428', text: 'Stockhausen ist alter Sitz eines Hoch- oder Blutgerichts. Die Junker Riedesel übernehmen das Gericht Stockhausen.' },
+  { jahr: '1465', text: 'In der Fuldisch-Riedeselschen Fehde, auch Steinsche Fehde genannt, werden Stockhausen und Schadges für neutral erklärt – Kloster Blankenau und die Riedesel haben hier beide Besitz. Die meisten anderen Orte des Stockhäuser Gerichts werden zerstört. Wer nach Stockhausen geflohen ist, muss bleiben und dort bauen; das Dorf wächst.' },
+  { jahr: '1534', text: 'Die zerstörten Dörfer liegen noch immer wüst. Der Propst von Blankenau beschwert sich über die Riedesel, die dem Kloster Abgaben und Frondienste entzogen haben.' },
   { jahr: '16. Jh.', text: 'Adolph Hermann Riedesel lässt die Hermannsburg erbauen, den Vorgängerbau des heutigen Schlosses.' },
   { jahr: '1603', text: 'Gründung der Freischule.' },
   { jahr: '1680', text: 'Die Riedesel werden in den Freiherrenstand erhoben.' },
@@ -41,6 +43,34 @@ const zeitstrahl = [
   { jahr: '1946', text: 'Neugründung des Sportvereins Stockhausen.' },
   { jahr: '1972', text: 'Am 1. August wird Stockhausen im Zuge der hessischen Gebietsreform Ortsteil der Stadt Herbstein.' },
   { jahr: '1981', text: 'Stockhausen gehört nun zum Regierungsbezirk Gießen.' },
+];
+
+const wuestungen = [
+  {
+    name: 'Dankenrod',
+    text: 'Lag im engen Altefeldtal zwischen Stockhausen und Schlechtenwegen, nahe dem mittelalterlichen Ortesweg. Ein künstlicher Hügel (351 m) deutet auf einen befestigten Hof – im Volk erzählt man von einer Burg der Herren von Dankenrod. Scherben, Hüttenlehm und Eisenschlacken zeugen von drei weiteren Gebäuden und einer Eisenschmelze. Die Flur wird bis heute von Schlechtenwegen und Stockhausen aus bestellt.',
+    jahre: 'erwähnt ab 1324, 1556 als Wüstung',
+  },
+  {
+    name: 'Rissbach',
+    text: 'Lag unterhalb von Dankenrod am Prinzenbach. 1312 schenkte Mechthildis, Witwe Trabothos von Eisenbach, das Dorf dem Kloster Blankenau. Die Flurnamen „in der Risswich“ und „am Forellenteich“ erinnern noch daran; 1848 kannte man den Namen „Rissbach“ noch.',
+    jahre: '1312–1502 belegt',
+  },
+  {
+    name: 'Gersdorf (Gerwigesdorf)',
+    text: 'Benannt nach einem Mann namens Gerwig. Die Flur „am Gersters“ am Fuß des Kirchbergs ist der letzte Rest des Dorfes; seine terrassierten Äcker gehören heute zum engsten Stockhäuser Ackerland.',
+    jahre: '1323 erstmals genannt',
+  },
+  {
+    name: 'Bedelsdorf (Bettelenstokhusen)',
+    text: 'Das „Bettler-Stockhausen“. Wo es lag, ist nicht überliefert. Infrage kommt ein wüster Ortsplatz auf der erhöhten „Hauswiese“ in einer Schleife der Altefeld unterhalb des Dorfes, gleich neben den „Stockackerwiesen“.',
+    jahre: '1274 erwähnt',
+  },
+  {
+    name: 'Niederndorf („Nindorf“)',
+    text: 'Lag am Eulrichsborn unterhalb des Landenhäuser Steins und wurde in der Fehde zerstört. Später entstand dort wieder ein Hof, der heute noch steht. Der Name Eulrich (Euler = Töpfer) spricht für eine Töpferei. Laut Wikipedia leben dort heute drei Menschen.',
+    jahre: 'heute ein Hof',
+  },
 ];
 
 const verwaltung = [
@@ -156,6 +186,20 @@ const entfernungen = [
       </aside>
     </div>
 
+    <div class="wuest">
+      <div class="wuest__kopf">
+        <span class="kicker">Rund ums Dorf</span>
+        <h2>Gute Böden und verschwundene Dörfer</h2>
+        <p>Stockhausen liegt im Ostvorland des Vogelsbergs, zum Teil auf Buntsandstein. Im Tal wurden mit die besten Böden der Gegend ermittelt, die Vegetationszeit ist länger als im eigentlichen Vogelsberg – deshalb wachsen hier in geschützter Lage reichlich Obstbäume. Schon im Mittelalter war Stockhausen der größte Ort des Gerichts.</p>
+        <p>Kloster Blankenau besaß im Gericht Stockhausen acht Dörfer und Wüstungen: Niederndorf, Bedelsdorf, Gensdorf, Stockhausen, Schadges, Rixdorf (Rixfeld), Reichlos und Rippach. Nach der Fehde von 1465 blieben viele davon wüst; ihre Bewohner wurden in Stockhausen angesiedelt. Einige dieser Orte lassen sich noch in Flurnamen und im Boden finden.</p>
+      </div>
+      <div class="wuest__raster">
+        {wuestungen.map(({ name, text, jahre }) => (
+          <article class="karte"><span class="wuest__jahre">{jahre}</span><h3>{name}</h3><p>{text}</p></article>
+        ))}
+      </div>
+    </div>
+
     <details class="karte mehr">
       <summary><span class="kicker">Zum Nachlesen</span><h2>Verwaltung und Gerichte im Wandel</h2></summary>
       <div class="mehr__inhalt">
@@ -250,5 +294,12 @@ const entfernungen = [
   .liste dt { font-weight: 600; color: var(--ziegel); font-variant-numeric: tabular-nums; }
   .liste dd { margin: 0; }
   @media (max-width: 560px) { .liste { grid-template-columns: 1fr; gap: 0.1rem; } .liste dd { margin-bottom: 0.6rem; } }
+  .wuest__kopf { max-width: 72ch; }
+  .wuest__kopf p { color: var(--text-leise); }
+  .wuest__raster { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .wuest__raster article { padding: 1.5rem; }
+  .wuest__raster h3 { margin: 0.35rem 0 0.5rem; }
+  .wuest__raster p { margin: 0; color: var(--text-leise); }
+  .wuest__jahre { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ziegel); }
   .quelle { font-size: 0.85rem; color: var(--text-leise); margin: 0; }
 </style>
