@@ -65,9 +65,30 @@
     25 € pro Person (Vereinsmitglieder), inklusive Getränke und Frühstück auf der Fahrt.
     Anmeldung bei Michael Eidmann, 0151 23475683.
   plakat: sv-weihnachtsmarkt-erfurt-2026
+- id: 2026-10-16-tante-enso-sprechzeit
+  titel: "Tante Enso: Sprechzeit der Paten"
+  datum: 2026-10-16
+  beginn: "16:00"
+  ende: "18:00"
+  ort: Altfellhalle
+  text: >-
+    Hilfe bei der Anmeldung als Teilhaber und beim Beantragen der Tante-Enso-Karte,
+    auch ohne Computerkenntnisse. Einfach vorbeikommen. Vor Ort: Nadine.
+- id: 2026-10-17-tante-enso-sprechzeit
+  titel: "Tante Enso: Sprechzeit der Paten"
+  datum: 2026-10-17
+  beginn: "10:00"
+  ende: "12:00"
+  ort: Lädchen
+  text: >-
+    Hilfe bei der Anmeldung als Teilhaber und beim Beantragen der Tante-Enso-Karte,
+    auch ohne Computerkenntnisse. Einfach vorbeikommen. Vor Ort: Judith.
 - id: 2026-10-19-tante-enso-sprechzeit
   titel: "Tante Enso: Sprechzeit der Paten"
   datum: 2026-10-19
   beginn: "18:00"
   ende: "20:00"
-  text: Hilfe beim Zeichnen der Anteile fürs Lädchen und beim Beantragen der Tante-Enso-Karte.
+  ort: Altfellhalle
+  text: >-
+    Hilfe bei der Anmeldung als Teilhaber und beim Beantragen der Tante-Enso-Karte,
+    auch ohne Computerkenntnisse. Einfach vorbeikommen. Vor Ort: Jonas.

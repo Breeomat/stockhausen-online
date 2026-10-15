@@ -2,9 +2,11 @@
 import Basis from '../../layouts/Basis.astro';
 import { Image, getImage } from 'astro:assets';
 import { aktion, aktionLaeuft } from '../../lib/enso';
+import { kommendeTermine, datumLang, zeitraum } from '../../lib/termine';
 import patenPlakat from '../../assets/fotos/tante-enso-paten.jpg';
 
 const laeuft = aktionLaeuft();
+const sprechzeiten = (await kommendeTermine()).filter((t) => t.id.endsWith('tante-enso-sprechzeit'));
 // Paten laut Aushang „Unsere Paten – Hilfe bei der Anmeldung“
 const patenGross = await getImage({ src: patenPlakat, width: 900 });
 const paten = ['Jonas Domaschka', 'Nadine Wahl', 'Judith Dörr', 'Kirsten Antritter', 'Markus Dörr', 'Paul Miller', 'Christoph Schell', 'Jasmin Fritz', 'Marc Ahne'];
@@ -78,10 +80,18 @@ const quellen = [
       </div>
       <div class="karte vor-ort">
         <h2>Hilfe beim Zeichnen</h2>
-        <p>Neun Paten aus dem Dorf helfen bei Fragen zu Tante Enso, beim Zeichnen der Anteile im Internet und beim Beantragen der Karte. Sprechzeiten gibt es bis zum 19. Oktober in der Altfellhalle (Bleichstraße 19) und im Lädchen (Welzgasse 1).</p>
+        <p>Neun Paten aus dem Dorf helfen bei Fragen zu Tante Enso, beim Zeichnen der Anteile im Internet und beim Beantragen der Karte, auch ohne Computerkenntnisse. Sprechzeiten gibt es bis zum 19. Oktober in der Altfellhalle (Bleichstraße 19) und im Lädchen (Welzgasse 1).</p>
         <dl>
-          <dt>Nächste Sprechzeit</dt>
-          <dd>Montag, 19. Oktober 2026, 18–20 Uhr<br /><span class="fehlt">[fehlt: Ort – Altfellhalle oder Lädchen]</span></dd>
+          {sprechzeiten.length > 0 && (
+            <>
+              <dt>Sprechzeiten</dt>
+              <dd>
+                <ul class="sprechzeiten">
+                  {sprechzeiten.map((t) => <li>{datumLang(t.data.datum)}, {zeitraum(t)} · {t.data.ort}</li>)}
+                </ul>
+              </dd>
+            </>
+          )}
           <dt>Paten</dt>
           <dd>{paten.join(', ')}</dd>
           <dt>Tante Enso</dt>
@@ -165,6 +175,7 @@ const quellen = [
   @media (max-width: 640px) { .vor-ort dl { grid-template-columns: 1fr; gap: 0.2rem; } .vor-ort dd { margin-bottom: 0.8rem; } }
   .paten-plakat { display: block; margin-top: 1.5rem; max-width: 420px; border-radius: 12px; overflow: hidden; border: 1px solid var(--linie); }
   .paten-plakat img { width: 100%; }
+  .sprechzeiten { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.3rem; }
   .quellen { font-size: 0.9rem; color: var(--text-leise); }
   .quellen h2 { font-size: 1.1rem; }
   .quellen ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.3rem; }
