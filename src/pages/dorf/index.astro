@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Basis from '../../layouts/Basis.astro';
 import luftbild from '../../assets/fotos/stockhausen-luftbild.jpg';
 import kirche from '../../assets/fotos/stockhausen-kirche.jpg';
+import schloss from '../../assets/fotos/stockhausen-schloss.jpg';
 
 const steckbrief = [
   { wert: '797', text: 'Einwohner (30. Juni 2021)' },
@@ -112,7 +113,11 @@ const einwohner = [
 ];
 
 const sehenswert = [
-  { titel: 'Schloss Stockhausen', text: 'Barockes Schloss der Riedesel, ab 1770 auf den Mauern der Hermannsburg errichtet und 1807 vollendet. Heute nutzt die Gemeinschaft Altenschlirf die Anlage.' },
+  {
+    titel: 'Schloss Stockhausen',
+    text: 'Barockes Schloss der Riedesel, ab 1770 auf den Mauern der Hermannsburg errichtet und 1807 vollendet. Heute nutzt die Gemeinschaft Altenschlirf die Anlage.',
+    bild: { src: schloss, alt: 'Schloss Stockhausen: langgestreckter Barockbau mit Torbogen und Uhrturm hinter einer Rasenfläche mit Teich', foto: 'Marc Ahne' },
+  },
   {
     titel: 'Evangelische Kirche',
     text: 'Neuromanische Saalkirche, 1849 eingeweiht, ein Kulturdenkmal.',
@@ -295,11 +300,14 @@ const entfernungen = [
   .sehenswert p { max-width: 68ch; }
   .sehenswert article { padding: 1.5rem; }
   .sehenswert p { margin: 0; color: var(--text-leise); }
-  .mit-bild { order: -1; display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: center; padding: 0 2rem 0 0 !important; overflow: hidden; }
+  .mit-bild:nth-child(even) { grid-template-columns: 1fr 1.3fr; padding: 0 0 0 2rem !important; }
+  .mit-bild:nth-child(even) .sehenswert__bild { order: 2; }
+  .mit-bild { display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: center; padding: 0 2rem 0 0 !important; overflow: hidden; }
   .sehenswert__bild { margin: 0; position: relative; }
   .sehenswert__bild img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
   @media (max-width: 760px) {
-    .mit-bild { grid-template-columns: 1fr; gap: 1.25rem; padding: 0 0 1.5rem !important; }
+    .mit-bild, .mit-bild:nth-child(even) { grid-template-columns: 1fr; gap: 1.25rem; padding: 0 0 1.5rem !important; }
+    .mit-bild:nth-child(even) .sehenswert__bild { order: 0; }
     .mit-bild > div { padding-inline: 1.5rem; }
   }
   .sehenswert__bild figcaption { position: absolute; right: 0.6rem; bottom: 0.4rem; font-size: 0.72rem; color: rgb(255 255 255 / 0.9); text-shadow: 0 1px 4px rgb(0 0 0 / 0.7); }
