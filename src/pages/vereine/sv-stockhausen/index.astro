@@ -5,6 +5,7 @@ import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 import wappen from '../../../assets/fotos/sv-stockhausen-wappen.png';
+import beachFoto from '../../../assets/fotos/sv-beachvolleyball.jpg';
 
 const termine = (await kommendeTermine()).filter((t) => t.data.verein === 'SV Stockhausen');
 
@@ -45,6 +46,11 @@ const erweitert = [
   </section>
 
   <section class="huelle sv">
+    <figure class="sv-foto">
+      <Image src={beachFoto} alt="Beachvolleyball-Spiel im Sand am Sportplatz, ringsum viele Zuschauer, im Hintergrund das Fußballfeld und eine Pappelreihe" widths={[640, 1024, 1600]} sizes="(max-width: 1192px) calc(100vw - 32px), 1160px" loading="eager" />
+      <figcaption>Beachvolleyball am Sportplatz · Foto: Marc Ahne</figcaption>
+    </figure>
+
     <div>
       <span class="kicker">Was uns ausmacht</span>
       <h2>Sport und Kultur für Jung und Alt</h2>
@@ -94,6 +100,9 @@ const erweitert = [
   @media (max-width: 640px) { .sv-kopf { grid-template-columns: 1fr; } .sv-kopf__wappen { order: -1; width: 110px; } }
 
   .sv { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .sv-foto { margin: 0; }
+  .sv-foto img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 60%; border-radius: var(--radius); box-shadow: var(--schatten); }
+  .sv-foto figcaption { margin-top: 0.6rem; font-size: 0.85rem; color: var(--text-leise); }
   .einleitung { max-width: 62ch; color: var(--text-leise); }
   .abteilungen { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
   .abteilungen li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
