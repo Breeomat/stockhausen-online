@@ -9,6 +9,7 @@ import beachFoto from '../../../assets/fotos/sv-beachvolleyball.jpg';
 import turnFoto from '../../../assets/fotos/sv-turnkinder-nikolaus.jpg';
 import sportplatzFoto from '../../../assets/fotos/sv-sportplatz-luftbild.jpg';
 import fussballFoto from '../../../assets/fotos/sv-fussball.jpg';
+import faschingFoto from '../../../assets/fotos/sv-fasching.jpg';
 
 const termine = (await kommendeTermine()).filter((t) => t.data.verein === 'SV Stockhausen');
 
@@ -72,6 +73,10 @@ const erweitert = [
           <Image src={turnFoto} alt="Die Turnkinder in roten SV-Trikots auf Bänken in der Halle, daneben das Trainerteam" widths={[640, 1024]} sizes="(max-width: 760px) calc(100vw - 32px), 572px" />
           <figcaption>Die Turnkinder mit dem Trainerteam am Nikolausabend · Foto: Marc Ahne</figcaption>
         </figure>
+        <figure class="sv-foto galerie__breit">
+          <Image src={faschingFoto} alt="Faschingsauftritt auf der Bühne: Männergruppe als Rettungsschwimmer in gelben Shirts und roten Shorts vor dem bunten Schriftzug „Stockhausen Helau“, vorne ein Schild „Flamingos Reloaded“" widths={[640, 1024, 1600]} sizes="(max-width: 1192px) calc(100vw - 32px), 1160px" />
+          <figcaption>Auch Fasching gehört zum Sportverein: Auftritt der „Flamingos Reloaded“ · Foto: Marc Ahne</figcaption>
+        </figure>
       </div>
     </div>
 
@@ -130,6 +135,8 @@ const erweitert = [
   .sv-foto figcaption { margin-top: 0.6rem; font-size: 0.85rem; color: var(--text-leise); }
   .galerie { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
   .galerie img { aspect-ratio: 4 / 3; object-position: 50% 60%; }
+  .galerie .galerie__breit { grid-column: 1 / -1; }
+  .galerie .galerie__breit img { aspect-ratio: 16 / 9; object-position: 50% 50%; }
   @media (max-width: 760px) { .galerie { grid-template-columns: 1fr; } }
   .anlage { display: grid; grid-template-columns: 1fr 1.6fr; gap: 2.5rem; align-items: center; }
   .anlage .sv-foto img { aspect-ratio: 4 / 3; }
