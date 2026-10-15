@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Basis from '../../layouts/Basis.astro';
+import luftbild from '../../assets/fotos/stockhausen-luftbild.jpg';
 
 const steckbrief = [
   { wert: '797', text: 'Einwohner (30. Juni 2021)' },
@@ -132,6 +134,11 @@ const entfernungen = [
   </section>
 
   <section class="huelle dorf">
+    <figure class="luftbild">
+      <Image src={luftbild} alt="Luftbild von Stockhausen: das Dorf mit roten Dächern inmitten von Wiesen und Feldern, im Hintergrund bewaldete Hügel" widths={[640, 1024, 1600]} sizes="(max-width: 1192px) calc(100vw - 32px), 1160px" loading="eager" />
+      <figcaption>Stockhausen aus der Luft im Frühling</figcaption>
+    </figure>
+
     <ul class="steckbrief">
       {steckbrief.map(({ wert, text }) => (
         <li class="karte"><strong>{wert}</strong><span>{text}</span></li>
@@ -301,5 +308,8 @@ const entfernungen = [
   .wuest__raster h3 { margin: 0.35rem 0 0.5rem; }
   .wuest__raster p { margin: 0; color: var(--text-leise); }
   .wuest__jahre { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ziegel); }
+  .luftbild { margin: 0; }
+  .luftbild img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); box-shadow: var(--schatten); }
+  .luftbild figcaption { margin-top: 0.6rem; font-size: 0.85rem; color: var(--text-leise); }
   .quelle { font-size: 0.85rem; color: var(--text-leise); margin: 0; }
 </style>
