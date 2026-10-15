@@ -7,6 +7,7 @@ import { url } from '../../../lib/site';
 import wappen from '../../../assets/fotos/sv-stockhausen-wappen.png';
 import beachFoto from '../../../assets/fotos/sv-beachvolleyball.jpg';
 import turnFoto from '../../../assets/fotos/sv-turnkinder-nikolaus.jpg';
+import sportplatzFoto from '../../../assets/fotos/sv-sportplatz-luftbild.jpg';
 
 const termine = (await kommendeTermine()).filter((t) => t.data.verein === 'SV Stockhausen');
 
@@ -67,6 +68,18 @@ const erweitert = [
       </figure>
     </div>
 
+    <div class="anlage">
+      <div class="anlage__text">
+        <span class="kicker">Unsere Sportanlage</span>
+        <h2>Sportplatz, Altfellhalle und Sportlerheim</h2>
+        <p>Rund um den Rasenplatz liegt alles beieinander: die Laufbahn, das Beachvolleyballfeld, die Turnhalle – die Altfellhalle – und das Sportlerheim.</p>
+      </div>
+      <figure class="sv-foto">
+        <Image src={sportplatzFoto} alt="Luftbild der Sportanlage: Rasenplatz mit Laufbahn, links das Beachvolleyballfeld, oben die Altfellhalle mit rotem Dach und das Sportlerheim" widths={[640, 1024, 1600]} sizes="(max-width: 900px) calc(100vw - 32px), 700px" />
+        <figcaption>Die Sportanlage von oben · Foto: Marc Ahne</figcaption>
+      </figure>
+    </div>
+
     {termine.length > 0 && (
       <div>
         <span class="kicker">Termine</span>
@@ -110,6 +123,10 @@ const erweitert = [
   .sv-foto figcaption { margin-top: 0.6rem; font-size: 0.85rem; color: var(--text-leise); }
   .sv-foto--turnen { margin-top: 1.5rem; }
   .sv-foto--turnen img { object-position: 50% 62%; }
+  .anlage { display: grid; grid-template-columns: 1fr 1.6fr; gap: 2.5rem; align-items: center; }
+  .anlage .sv-foto img { aspect-ratio: 4 / 3; }
+  .anlage__text p { color: var(--text-leise); }
+  @media (max-width: 900px) { .anlage { grid-template-columns: 1fr; gap: 1.25rem; } }
   .einleitung { max-width: 62ch; color: var(--text-leise); }
   .abteilungen { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
   .abteilungen li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
