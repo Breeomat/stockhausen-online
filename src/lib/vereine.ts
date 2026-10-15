@@ -1,4 +1,5 @@
 import { kommendeTermine } from './termine';
+import feuerwehrFoto from '../assets/fotos/feuerwehr-einsatzabteilung.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
 export const vereinsseiten = [
@@ -8,6 +9,7 @@ export const vereinsseiten = [
     seit: 'seit 1874',
     text: '57 Aktive, 183 Mitglieder und 150 Jahre Geschichte – von der Spritzenmannschaft bis zum LF 10.',
     href: 'vereine/feuerwehr/',
+    bild: { src: feuerwehrFoto, nachweis: 'Foto: Christian Heuser' },
   },
 ];
 
