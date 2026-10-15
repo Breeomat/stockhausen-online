@@ -1,6 +1,7 @@
 import { kommendeTermine } from './termine';
 import feuerwehrFoto from '../assets/fotos/feuerwehr-einsatzabteilung.jpg';
 import svWappen from '../assets/fotos/sv-stockhausen-wappen.png';
+import sportplatzFoto from '../assets/fotos/sv-sportplatz-luftbild.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
 export const vereinsseiten = [
@@ -19,6 +20,7 @@ export const vereinsseiten = [
     text: 'Fußball, Leichtathletik, Tischtennis, Volleyball, Gymnastik und eine Theatergruppe – Sport und Kultur für Jung und Alt.',
     href: 'vereine/sv-stockhausen/',
     wappen: svWappen,
+    bild: { src: sportplatzFoto, nachweis: 'Foto: Marc Ahne' },
   },
 ];
 
