@@ -5,41 +5,82 @@ const steckbrief = [
   { wert: '797', text: 'Einwohner (30. Juni 2021)' },
   { wert: '1287', text: 'erste urkundliche Erwähnung' },
   { wert: '1972', text: 'Ortsteil von Herbstein' },
+  { wert: '17,72 km²', text: 'Fläche der Gemarkung' },
+  { wert: '302 m', text: 'Höhe über Normalhöhennull' },
+  { wert: '1841', text: 'ältester Dorfkindergarten im Großherzogtum Hessen' },
+];
+
+const daten = [
+  ['Postleitzahl', '36358'],
+  ['Vorwahl', '06647'],
+  ['Koordinaten', '50° 34′ N, 9° 27′ O'],
+  ['Einwohner je km²', '45'],
+  ['Eingemeindung', '1. August 1972'],
 ];
 
 const zeitstrahl = [
+  { jahr: 'Vorzeit', text: 'Zahlreiche Hügelgräber ringsum und in der Gemarkung zeugen von jahrtausendealter Besiedlung. In geöffneten Gräbern fand man zwei Lanzenspitzen, eine Dolchklinge, zwei Spiralnadeln, eine Nadel, ein Diadem und einen Schlüssel.' },
+  { jahr: '1274', text: 'Erste Erwähnung von Bedelsburg als „Beiteler Stoghusen“ – Bettler-Stockhausen. Aus diesem Namen wird später „Bedelsburg“.' },
   { jahr: '1287', text: 'Älteste urkundliche Erwähnung: Als „Stochusen“ wird der Ort genannt, als zur Gründung des Klosters Blankenau Güter und Einkünfte in Stockhausen gestiftet werden.' },
-  { jahr: '1428', text: 'Die Junker Riedesel übernehmen das Gericht Stockhausen.' },
+  { jahr: '1324', text: 'Eine Urkunde im Archiv in Lauterbach nennt den Ort „Kirchststoghußen“ – zur Unterscheidung vom benachbarten Bettler-Stockhausen.' },
+  { jahr: '1428', text: 'Stockhausen ist alter Sitz eines Hoch- oder Blutgerichts. Die Junker Riedesel übernehmen das Gericht Stockhausen.' },
   { jahr: '16. Jh.', text: 'Adolph Hermann Riedesel lässt die Hermannsburg erbauen, den Vorgängerbau des heutigen Schlosses.' },
+  { jahr: '1603', text: 'Gründung der Freischule.' },
   { jahr: '1680', text: 'Die Riedesel werden in den Freiherrenstand erhoben.' },
   { jahr: '1770', text: 'Baubeginn des barocken Schlosses auf den Mauern der Hermannsburg, unter Baumeister Georg Koch für Friedrich Georg Riedesel.' },
   { jahr: '1801–1807', text: 'Das Schloss wird mit weiteren Umbauten fertiggestellt.' },
-  { jahr: '1847–1849', text: 'Bau der evangelischen Kirche als neuromanische Saalkirche anstelle eines Vorgängerbaus; Einweihung 1849.' },
+  { jahr: '1841', text: 'Gründung des ersten Kindergartens im damaligen Großherzogtum Hessen – des ältesten Dorfkindergartens dort.' },
+  { jahr: '1846–1849', text: 'Neubau der evangelischen Kirche als neuromanische Saalkirche anstelle eines älteren Gotteshauses; Einweihung 1849. (Zum Baubeginn nennen die Quellen 1846 oder 1847.)' },
   { jahr: '1852', text: 'Stockhausen gehört nun zum Kreis Lauterbach in der Provinz Oberhessen.' },
   { jahr: '1874', text: 'Gründung der Freiwilligen Feuerwehr Stockhausen.' },
   { jahr: '1880', text: 'Gründung der Spar- und Darlehenskasse Stockhausen.' },
   { jahr: '1894', text: 'Gründung des Gesangvereins „Germania“ als Männergesangverein.' },
-  { jahr: '1899', text: 'Gründung des Obst- und Gartenbauvereins Stockhausen.' },
-  { jahr: '1900', text: 'Gründung des gemischten Chores „Germania“.' },
+  { jahr: '1899', text: 'Ein Großbrand zerstört im Nordosten des Dorfes 22 Wohn- und 33 Nebengebäude. Im selben Jahr wird der Obst- und Gartenbauverein Stockhausen gegründet.' },
+  { jahr: '1900', text: 'Gründung des gemischten Chores „Germania“. Das Bürgerliche Gesetzbuch löst die Riedesel’schen Verordnungen ab, die bis dahin als Sonderrecht galten.' },
   { jahr: '1920', text: 'Gründung des Sportvereins Stockhausen.' },
   { jahr: '1946', text: 'Neugründung des Sportvereins Stockhausen.' },
   { jahr: '1972', text: 'Am 1. August wird Stockhausen im Zuge der hessischen Gebietsreform Ortsteil der Stadt Herbstein.' },
+  { jahr: '1981', text: 'Stockhausen gehört nun zum Regierungsbezirk Gießen.' },
+];
+
+const verwaltung = [
+  ['vor 1803', 'Heiliges Römisches Reich, Gericht Stockhausen der Riedesel zu Eisenbach (Mannlehen des Fürstbistums Fulda)'],
+  ['ab 1806', 'Großherzogtum Hessen (Souveränitätslande), Fürstentum Starkenburg, Gericht Stockhausen'],
+  ['ab 1815', 'Großherzogtum Hessen (Souveränitätslande), Provinz Oberhessen, Amt Altenschlirf'],
+  ['ab 1821', 'Großherzogtum Hessen, Provinz Oberhessen, Landratsbezirk Herbstein'],
+  ['ab 1825', 'Großherzogtum Hessen, Provinz Oberhessen, Landratsbezirk Lauterbach'],
+  ['ab 1848', 'Großherzogtum Hessen, Regierungsbezirk Alsfeld'],
+  ['ab 1852', 'Großherzogtum Hessen, Provinz Oberhessen, Kreis Lauterbach'],
+  ['ab 1867', 'Norddeutscher Bund, Großherzogtum Hessen, Provinz Oberhessen, Kreis Lauterbach'],
+  ['ab 1871', 'Deutsches Reich, Großherzogtum Hessen, Provinz Oberhessen, Kreis Lauterbach'],
+  ['ab 1918', 'Deutsches Reich, Volksstaat Hessen, Provinz Oberhessen, Kreis Lauterbach'],
+  ['ab 1938', 'Deutsches Reich, Volksstaat Hessen, Kreis Lauterbach'],
+  ['ab 1945', 'Amerikanische Besatzungszone, Groß-Hessen, Regierungsbezirk Darmstadt, Kreis Lauterbach'],
+  ['ab 1946', 'Amerikanische Besatzungszone, Hessen, Regierungsbezirk Darmstadt, Kreis Lauterbach'],
+  ['ab 1949', 'Bundesrepublik Deutschland, Hessen, Regierungsbezirk Darmstadt, Kreis Lauterbach'],
+  ['ab 1972', 'Bundesrepublik Deutschland, Hessen, Regierungsbezirk Darmstadt, Vogelsbergkreis, Stadt Herbstein'],
+  ['ab 1981', 'Bundesrepublik Deutschland, Hessen, Regierungsbezirk Gießen, Vogelsbergkreis, Stadt Herbstein'],
+];
+
+const gerichte = [
+  ['ab 1806', 'Riedeselsches Patrimonialgericht Altenschlirf, zweite Instanz Hofgericht Gießen'],
+  ['1821–1853', 'Landgericht Altenschlirf'],
+  ['ab 1853', 'Landgericht Herbstein'],
+  ['ab 1879', 'Amtsgericht Herbstein (Bezirk des Landgerichts Gießen)'],
+  ['ab 1943', 'nur noch Zweigstelle des Amtsgerichts Lauterbach'],
+  ['ab 1968', 'Amtsgericht Lauterbach'],
 ];
 
 const einwohner = [
-  ['1834', '836'],
-  ['1840', '892'],
-  ['1871', '888'],
-  ['1939', '715'],
-  ['1946', '1.037'],
-  ['1961', '875'],
-  ['1967', '859'],
-  ['2021', '797'],
+  ['1834', '836'], ['1840', '892'], ['1846', '935'], ['1852', '886'], ['1858', '867'],
+  ['1864', '891'], ['1871', '888'], ['1875', '883'], ['1885', '912'], ['1895', '871'],
+  ['1905', '834'], ['1910', '848'], ['1925', '776'], ['1939', '715'], ['1946', '1.037'],
+  ['1950', '986'], ['1956', '883'], ['1961', '875'], ['1967', '859'], ['2021', '797'],
 ];
 
 const sehenswert = [
   { titel: 'Schloss Stockhausen', text: 'Barockes Schloss der Riedesel, ab 1770 auf den Mauern der Hermannsburg errichtet und 1807 vollendet. Heute nutzt die Gemeinschaft Altenschlirf die Anlage.' },
-  { titel: 'Evangelische Kirche', text: 'Neuromanische Saalkirche von 1847–1849, ein Kulturdenkmal.' },
+  { titel: 'Evangelische Kirche', text: 'Neuromanische Saalkirche, 1849 eingeweiht, ein Kulturdenkmal.' },
   { titel: 'Alte Eiche', text: 'Naturdenkmal mit einem Stammumfang von 6,92 Metern in Brusthöhe (gemessen 2015).' },
 ];
 
@@ -57,7 +98,7 @@ const entfernungen = [
   <section class="huelle seitenkopf">
     <span class="kicker">Unser Dorf</span>
     <h1>Stockhausen im Vogelsberg</h1>
-    <p>Der größte Ortsteil von Herbstein liegt am Nordostrand des Vogelsbergs und zieht sich entlang der Altefeld. Der Name geht vermutlich auf die Baumstümpfe zurück, die nach einer Rodung stehen blieben.</p>
+    <p>Der größte Ortsteil von Herbstein liegt am Nordostrand des Vogelsbergs und zieht sich entlang der Altefeld. Der Name leitet sich von den Wurzelstöcken und Baumstümpfen ab, die nach einer Rodung stehen blieben. Hier wurde 1841 der älteste Dorfkindergarten im damaligen Großherzogtum Hessen eingerichtet.</p>
   </section>
 
   <section class="huelle dorf">
@@ -86,7 +127,15 @@ const entfernungen = [
               {einwohner.map(([jahr, zahl]) => <tr><th scope="row">{jahr}</th><td>{zahl}</td></tr>)}
             </tbody>
           </table>
-          <p class="klein">1961: 749 evangelische und 125 katholische Einwohner.</p>
+          <p class="klein">1961: 749 evangelische und 125 katholische Einwohner. Quelle bis 1967: Historisches Gemeindeverzeichnis für Hessen, Hessisches Statistisches Landesamt 1968.</p>
+        </div>
+        <div class="karte kasten">
+          <h3>Daten</h3>
+          <table>
+            <tbody>
+              {daten.map(([was, wert]) => <tr><th scope="row">{was}</th><td>{wert}</td></tr>)}
+            </tbody>
+          </table>
         </div>
         <div class="karte kasten">
           <h3>Ortsbeirat</h3>
@@ -106,6 +155,22 @@ const entfernungen = [
         </div>
       </aside>
     </div>
+
+    <details class="karte mehr">
+      <summary><span class="kicker">Zum Nachlesen</span><h2>Verwaltung und Gerichte im Wandel</h2></summary>
+      <div class="mehr__inhalt">
+        <h3>Zu welchem Staat und Kreis Stockhausen gehörte</h3>
+        <dl class="liste">
+          {verwaltung.map(([zeit, was]) => <><dt>{zeit}</dt><dd>{was}</dd></>)}
+        </dl>
+        <h3>Zuständige Gerichte seit 1806</h3>
+        <dl class="liste">
+          {gerichte.map(([zeit, was]) => <><dt>{zeit}</dt><dd>{was}</dd></>)}
+        </dl>
+        <h3>Eigenes Recht</h3>
+        <p>In Stockhausen galten die Riedesel’schen Verordnungen als Sonderrecht; das allgemeine „Gemeine Recht“ nur dort, wo sie nichts regelten. Formal blieb das auch im Großherzogtum Hessen so, vor Gericht wurden im 19. Jahrhundert aber nur noch einzelne Bestimmungen angewandt. Am 1. Januar 1900 löste das Bürgerliche Gesetzbuch das Sonderrecht ab.</p>
+      </div>
+    </details>
 
     <div>
       <span class="kicker">Sehenswert</span>
@@ -128,11 +193,10 @@ const entfernungen = [
 
 <style>
   .dorf { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
-  .steckbrief { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .steckbrief { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
   .steckbrief li { padding: 1.5rem; display: flex; flex-direction: column; }
   .steckbrief strong { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--ziegel); font-weight: 600; line-height: 1; }
   .steckbrief span { color: var(--text-leise); margin-top: 0.4rem; }
-  @media (max-width: 640px) { .steckbrief { grid-template-columns: 1fr; } }
 
   .spalten { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: start; }
   @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
@@ -168,5 +232,23 @@ const entfernungen = [
   .sehenswert article { padding: 1.5rem; }
   .sehenswert p { margin: 0; color: var(--text-leise); }
 
+  .steckbrief { grid-template-columns: repeat(3, 1fr); }
+  .steckbrief strong { white-space: nowrap; }
+  @media (max-width: 760px) { .steckbrief { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 420px) { .steckbrief { grid-template-columns: 1fr; } }
+  .mehr { padding: clamp(1.25rem, 3vw, 2rem); }
+  .mehr summary { cursor: pointer; list-style: none; }
+  .mehr summary::-webkit-details-marker { display: none; }
+  .mehr summary h2 { margin: 0; font-size: clamp(1.4rem, 3vw, 1.9rem); }
+  .mehr summary h2::after { content: ' +'; color: var(--ziegel); }
+  .mehr[open] summary h2::after { content: ' −'; }
+  .mehr__inhalt { margin-top: 1.5rem; }
+  .mehr__inhalt h3 { margin-top: 1.75rem; }
+  .mehr__inhalt h3:first-child { margin-top: 0; }
+  .mehr__inhalt p { max-width: 68ch; }
+  .liste { display: grid; grid-template-columns: 7rem 1fr; gap: 0.5rem 1.25rem; margin: 0.75rem 0 0; }
+  .liste dt { font-weight: 600; color: var(--ziegel); font-variant-numeric: tabular-nums; }
+  .liste dd { margin: 0; }
+  @media (max-width: 560px) { .liste { grid-template-columns: 1fr; gap: 0.1rem; } .liste dd { margin-bottom: 0.6rem; } }
   .quelle { font-size: 0.85rem; color: var(--text-leise); margin: 0; }
 </style>
