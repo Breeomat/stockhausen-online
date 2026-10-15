@@ -6,6 +6,7 @@ import PlakatRaster from '../components/PlakatRaster.astro';
 import { kommendeTermine } from '../lib/termine';
 import { plakate } from '../lib/plakate';
 import { url } from '../lib/site';
+import { aktion, aktionLaeuft } from '../lib/enso';
 
 const naechste = (await kommendeTermine()).slice(0, 4);
 const { aktuell } = await plakate();
@@ -30,6 +31,15 @@ const demnaechst = [
     </div>
     <Landschaft />
   </section>
+
+  {aktionLaeuft() && (
+    <div class="huelle">
+      <a class="hinweis" href={url('tante-enso/')}>
+        <span class="hinweis__marke">Lädchen</span>
+        <span><strong>Bis {aktion.fristText} braucht das Lädchen {aktion.ziel} Anteile.</strong> Jetzt für Tante Enso mitmachen →</span>
+      </a>
+    </div>
+  )}
 
   <section class="abschnitt abschnitt--direkt">
     <div class="huelle">
@@ -78,7 +88,7 @@ const demnaechst = [
       <a class="karte enso" href={url('tante-enso/')}>
         <span class="kicker">Einkaufen im Dorf</span>
         <h2>Tante Enso</h2>
-        <p>Ein Dorfladen, in dem man mit Kundenkarte rund um die Uhr einkaufen kann. Hier gibt es alles zum Stand in Stockhausen und wie man mitmacht.</p>
+        <p>Das Lädchen in der Welzgasse soll ein Tante-Enso-Laden werden: mit Karte rund um die Uhr einkaufen, getragen von Anteilen aus dem Dorf. Alles zum Stand und zum Mitmachen.</p>
         <span class="enso__pfeil">Mehr erfahren →</span>
       </a>
       <div class="karte wissen">
@@ -126,6 +136,31 @@ const demnaechst = [
   .held__text { font-size: clamp(1.1rem, 1.8vw, 1.3rem); max-width: 46ch; color: var(--text-leise); }
   .held__knoepfe { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
   .abschnitt--direkt { padding-top: 1rem; }
+  .hinweis {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    padding: 0.9rem 1.25rem;
+    border-radius: var(--radius);
+    background: var(--ziegel-hell);
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid color-mix(in srgb, var(--ziegel) 30%, transparent);
+  }
+  .hinweis:hover { color: var(--ziegel); }
+  .hinweis__marke {
+    flex: none;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: var(--ziegel);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  @media (max-width: 520px) { .hinweis { flex-direction: column; align-items: flex-start; gap: 0.5rem; } }
 
   .raster-termine { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1rem; }
 

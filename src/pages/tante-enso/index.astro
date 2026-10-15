@@ -1,52 +1,127 @@
 ---
 import Basis from '../../layouts/Basis.astro';
+import { aktion, aktionLaeuft } from '../../lib/enso';
+
+const laeuft = aktionLaeuft();
+const quellen = [
+  { titel: 'Lauterbacher Anzeiger: 222 Anteile schon gezeichnet – Tante Enso soll das „Lädchen“ in Stockhausen retten', href: 'https://www.lauterbacher-anzeiger.de/vogelsbergkreis/herbstein/222-anteile-schon-gezeichnet-tante-enso-soll-das-laedchen-in-stockhausen-retten-94509284.html' },
+  { titel: 'Osthessen|News: Stockhausen kämpft um Erhalt seines „Lädchens“ – Tante Enso als Rettungsanker', href: 'https://osthessen-news.de/n11800665/rettung-fuer-das-ladchen-stockhausen-kampft-um-seine-nahversorgung.html' },
+  { titel: 'Lauterbacher Anzeiger: Tante Enso übernimmt tegut-Läden in Freiensteinau und Stockhausen', href: 'https://www.lauterbacher-anzeiger.de/vogelsbergkreis/herbstein/tante-enso-uebernimmt-tegut-laeden-in-freiensteinau-und-stockhausen-94348982.html' },
+  { titel: 'hessenschau: Diese 16 tegut-Filialen werden in Hessen zu Tante-Enso-Läden', href: 'https://www.hessenschau.de/wirtschaft/diese-16-tegut-filialen-werden-in-hessen-zu-tante-enso-laeden-v1,tante-enso-104.html' },
+];
 ---
-<Basis titel="Tante Enso" beschreibung="Tante Enso in Stockhausen: Einkaufen rund um die Uhr im Dorf.">
+<Basis titel="Tante Enso" beschreibung="Das Lädchen in Stockhausen soll ein Tante-Enso-Laden werden. Alles zu Anteilen, Fristen und Hilfe beim Zeichnen.">
   <section class="huelle seitenkopf">
     <span class="kicker">Einkaufen im Dorf</span>
-    <h1>Tante Enso</h1>
-    <p>Lebensmittel und Dinge des täglichen Bedarfs direkt im Ort – mit Kundenkarte rund um die Uhr, zu festen Servicezeiten auch mit Personal.</p>
+    <h1>Tante Enso fürs Lädchen</h1>
+    <p>Nach dem Rückzug von tegut soll das Lädchen in der Welzgasse ein Tante-Enso-Laden werden. Dafür braucht es genug Menschen aus Stockhausen und Umgebung, die Anteile zeichnen.</p>
   </section>
 
   <section class="huelle enso-seite">
+    {laeuft && (
+      <div class="karte aktion">
+        <div class="aktion__zahl">
+          <strong>{aktion.ziel}</strong>
+          <span>Anteile à {aktion.preis} €</span>
+        </div>
+        <div>
+          <span class="kicker">Jetzt mitmachen</span>
+          <h2>Bis {aktion.fristText} müssen {aktion.ziel} Anteile gezeichnet sein</h2>
+          <p>Sonst ist das Lädchen weg. Ende September waren laut Presse {aktion.stand} Anteile gezeichnet. Mitmachen können auch Menschen aus den Nachbarorten.</p>
+          <a class="knopf" href={aktion.link} rel="noopener">Anteile online zeichnen</a>
+        </div>
+      </div>
+    )}
+
     <div class="schritte">
       <article class="karte">
         <span class="schritte__nr">1</span>
-        <h2>Rund um die Uhr</h2>
-        <p>Mit der Tante-Enso-Kundenkarte öffnet sich die Tür auch außerhalb der Servicezeiten. Bezahlt wird an der Selbstbedienungskasse.</p>
+        <h2>Anteil zeichnen</h2>
+        <p>Ein Anteil kostet {aktion.preis} €, mehrere sind möglich. Anteile werden mindestens ein Jahr gehalten. Laut Presse gibt es dafür jährlich 5 € Einkaufsguthaben und eine Rückvergütung auf Einkäufe.</p>
       </article>
       <article class="karte">
         <span class="schritte__nr">2</span>
-        <h2>Mit Personal</h2>
-        <p>Zu den Servicezeiten ist der Laden mit Personal besetzt und für alle offen – auch ohne Karte.</p>
+        <h2>Karte erhalten</h2>
+        <p>Mit der Tante-Enso-Karte öffnet sich die Tür rund um die Uhr. Bezahlt wird an der Selbstbedienungskasse.</p>
       </article>
       <article class="karte">
         <span class="schritte__nr">3</span>
-        <h2>Gemeinsam getragen</h2>
-        <p>Tante Enso lebt davon, dass Menschen aus dem Ort Anteile zeichnen und so den Laden mittragen.</p>
+        <h2>Einkaufen</h2>
+        <p>Zu den Servicezeiten ist Personal im Laden, und alle können einkaufen – auch ohne Karte. Geplant ist ein Sortiment mit mindestens 3.000 Artikeln, darunter regionale Produkte.</p>
       </article>
     </div>
 
-    <div class="karte vor-ort">
-      <h2>Tante Enso in Stockhausen</h2>
-      <dl>
-        <dt>Stand</dt>
-        <dd><span class="fehlt">[fehlt: aktueller Stand – geöffnet, im Aufbau oder geplant]</span></dd>
-        <dt>Adresse</dt>
-        <dd><span class="fehlt">[fehlt: Adresse]</span></dd>
-        <dt>Servicezeiten</dt>
-        <dd><span class="fehlt">[fehlt: Servicezeiten mit Personal]</span></dd>
-        <dt>Kundenkarte &amp; Anteile</dt>
-        <dd><span class="fehlt">[fehlt: wo und wie man Karte bzw. Anteile bekommt]</span></dd>
-        <dt>Ansprechpartner</dt>
-        <dd><span class="fehlt">[fehlt: Kontakt vor Ort]</span></dd>
-      </dl>
+    <div class="zweier">
+      <div class="karte vor-ort">
+        <h2>Stand in Stockhausen</h2>
+        <dl>
+          <dt>Laden</dt>
+          <dd>„Lädchen für alles“, Welzgasse 1, 36358 Herbstein-Stockhausen</dd>
+          <dt>Bisher</dt>
+          <dd>Betrieben von der Gemeinschaft Altenschlirf, beliefert von tegut. tegut hat die Filiale zum 12. Oktober 2026 geschlossen.</dd>
+          <dt>Übergang</dt>
+          <dd>Tante Enso hat angekündigt, schon vor Ende der Anteilsaktion einzusteigen und den Laden zu beliefern.</dd>
+          <dt>Umbau</dt>
+          <dd>Die Umstellung der ehemaligen tegut-Läden auf Tante Enso ist von November 2026 bis April 2027 geplant. Ein Termin für Stockhausen steht noch nicht fest.</dd>
+          <dt>Öffnungszeiten</dt>
+          <dd><span class="fehlt">[fehlt: aktuelle Öffnungszeiten – die Angaben im Netz widersprechen sich]</span></dd>
+        </dl>
+      </div>
+      <div class="karte vor-ort">
+        <h2>Hilfe beim Zeichnen</h2>
+        <p>Neun Paten aus dem Dorf helfen bei Fragen zu Tante Enso, beim Zeichnen der Anteile im Internet und beim Beantragen der Karte. Sprechzeiten gibt es bis zum 19. Oktober in der Halle und im Lädchen.</p>
+        <dl>
+          <dt>Nächste Sprechzeit</dt>
+          <dd>Montag, 19. Oktober 2026, 18–20 Uhr</dd>
+          <dt>Ansprechpartner</dt>
+          <dd><span class="fehlt">[fehlt: Namen oder Kontakt der Paten]</span></dd>
+        </dl>
+      </div>
     </div>
+
+    <aside class="quellen">
+      <h2>Quellen</h2>
+      <ul>
+        {quellen.map((q) => <li><a href={q.href} rel="noopener">{q.titel}</a></li>)}
+        <li><a href={aktion.link} rel="noopener">Tante Enso: Teilhaberschaft</a></li>
+      </ul>
+    </aside>
   </section>
 </Basis>
 
 <style>
   .enso-seite { padding-block: 1rem 5rem; display: grid; gap: 2rem; }
+  .aktion {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    color: #f4efe3;
+    border: 0;
+    background:
+      radial-gradient(500px 300px at 100% 100%, color-mix(in srgb, var(--gold) 35%, transparent), transparent 70%),
+      linear-gradient(140deg, #1f3d2c, #2f5a3c);
+  }
+  .aktion .kicker { color: var(--gold); }
+  .aktion h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .aktion p { color: #d8e2d8; max-width: 52ch; }
+  .aktion .knopf { background: var(--gold); color: #1e2a22; }
+  .aktion .knopf:hover { background: #fff; color: #1e2a22; }
+  .aktion__zahl {
+    display: grid;
+    place-items: center;
+    width: clamp(8rem, 18vw, 11rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid color-mix(in srgb, var(--gold) 70%, transparent);
+    text-align: center;
+    line-height: 1.1;
+  }
+  .aktion__zahl strong { font-family: var(--serif); font-size: clamp(2.6rem, 6vw, 3.6rem); color: #fff; display: block; }
+  .aktion__zahl span { font-size: 0.85rem; color: var(--gold); }
+  @media (max-width: 640px) { .aktion { grid-template-columns: 1fr; } }
+
   .schritte { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1rem; }
   .schritte article { padding: 1.75rem; }
   .schritte h2 { font-size: 1.4rem; margin-top: 1rem; }
@@ -63,9 +138,15 @@ import Basis from '../../layouts/Basis.astro';
     font-weight: 600;
     font-size: 1.2rem;
   }
-  .vor-ort { padding: clamp(1.75rem, 4vw, 2.75rem); }
-  .vor-ort dl { display: grid; grid-template-columns: 12rem 1fr; gap: 0.9rem 1.5rem; margin: 1.5rem 0 0; }
+  .zweier { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 860px) { .zweier { grid-template-columns: 1fr; } }
+  .vor-ort { padding: clamp(1.5rem, 4vw, 2.25rem); }
+  .vor-ort h2 { font-size: 1.5rem; }
+  .vor-ort dl { display: grid; grid-template-columns: 9rem 1fr; gap: 0.8rem 1.25rem; margin: 1.25rem 0 0; }
   .vor-ort dt { font-weight: 600; }
   .vor-ort dd { margin: 0; }
   @media (max-width: 640px) { .vor-ort dl { grid-template-columns: 1fr; gap: 0.2rem; } .vor-ort dd { margin-bottom: 0.8rem; } }
+  .quellen { font-size: 0.9rem; color: var(--text-leise); }
+  .quellen h2 { font-size: 1.1rem; }
+  .quellen ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.3rem; }
 </style>
