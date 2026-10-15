@@ -1,0 +1,118 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+import wappen from '../../../assets/fotos/sv-stockhausen-wappen.png';
+
+const termine = (await kommendeTermine()).filter((t) => t.data.verein === 'SV Stockhausen');
+
+const abteilungen = [
+  { name: 'Fußball', text: 'Jugend- und Seniorenmannschaften' },
+  { name: 'Leichtathletik und Turnen', text: 'Vom Nachwuchs bis zum Sportabzeichen' },
+  { name: 'Tischtennis', text: 'Hobby- und Mannschaftsbetrieb' },
+  { name: 'Volleyball', text: 'Damen' },
+  { name: 'Damengymnastik', text: '' },
+  { name: 'Theatergruppe', text: 'Das kulturelle Highlight im Verein' },
+];
+
+const vorstand = [
+  ['1. Vorsitzender', 'Michael Eidmann'],
+  ['2. Vorsitzender', 'Max Wahl'],
+  ['Rechnerin', 'Lena Biermann'],
+  ['Schriftführer', 'Michael Roth'],
+];
+
+const erweitert = [
+  ['Fußball Senioren', 'Jakob Christen'],
+  ['Leichtathletik und Turnen', 'Christian Lips'],
+  ['Tischtennis', 'Felix Mertin'],
+  ['Volleyball Damen', 'Katrin Eidmann'],
+  ['Damengymnastik', 'Anneli Jäger'],
+  ['Veranstaltungen', 'Moritz Mertin, Helene Kimpel, Nils Eidmann, Johannes Kimpel'],
+];
+---
+<Basis titel="SV Stockhausen" beschreibung="SV Stockhausen e.V.: Fußball, Leichtathletik, Tischtennis, Volleyball, Gymnastik und Theater – Vorstand, Abteilungen und Termine.">
+  <section class="huelle seitenkopf sv-kopf">
+    <div>
+      <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+      <span class="kicker">Verein · seit 1946</span>
+      <h1>SV Stockhausen e.V.</h1>
+      <p>Der Sportverein steht für Bewegung, Gemeinschaft und Engagement im Dorfleben. Hier treffen sportliche Tradition und moderne Vereinsarbeit aufeinander.</p>
+    </div>
+    <Image class="sv-kopf__wappen" src={wappen} alt="Vereinswappen des SV Stockhausen e.V." width={220} />
+  </section>
+
+  <section class="huelle sv">
+    <div>
+      <span class="kicker">Was uns ausmacht</span>
+      <h2>Sport und Kultur für Jung und Alt</h2>
+      <p class="einleitung">Der Verein bietet ein vielfältiges Sport- und Freizeitangebot. Großen Wert legt er auf ein lebendiges Vereinsleben, Teamgeist und gemeinsame Erlebnisse.</p>
+      <ul class="abteilungen">
+        {abteilungen.map(({ name, text }) => (
+          <li class="karte"><h3>{name}</h3>{text && <p>{text}</p>}</li>
+        ))}
+      </ul>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst beim SV</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+
+    <div class="spalten">
+      <div class="karte kasten">
+        <h3>Geschäftsführender Vorstand</h3>
+        <dl class="liste">
+          {vorstand.map(([amt, name]) => <div><dt>{amt}</dt><dd>{name}</dd></div>)}
+        </dl>
+      </div>
+      <div class="karte kasten">
+        <h3>Abteilungsleitungen und Veranstaltungen</h3>
+        <dl class="liste">
+          {erweitert.map(([amt, name]) => <div><dt>{amt}</dt><dd>{name}</dd></div>)}
+        </dl>
+      </div>
+    </div>
+
+    <div class="karte mitmachen">
+      <span class="kicker">Mach mit!</span>
+      <h2>Werde Teil des SV Stockhausen</h2>
+      <p>Egal ob Sport, Kultur oder Ehrenamt – der Verein freut sich über jede Person, die ihn bereichert. Schau vorbei und lerne uns kennen.</p>
+    </div>
+  </section>
+</Basis>
+
+<style>
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .sv-kopf { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+  .sv-kopf__wappen { width: clamp(120px, 18vw, 220px); height: auto; filter: drop-shadow(0 8px 18px rgb(0 0 0 / 0.15)); }
+  @media (max-width: 640px) { .sv-kopf { grid-template-columns: 1fr; } .sv-kopf__wappen { order: -1; width: 110px; } }
+
+  .sv { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .einleitung { max-width: 62ch; color: var(--text-leise); }
+  .abteilungen { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
+  .abteilungen li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
+  .abteilungen h3 { margin: 0; font-size: 1.2rem; }
+  .abteilungen p { margin: 0.3rem 0 0; color: var(--text-leise); }
+
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+
+  .spalten { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+  @media (max-width: 760px) { .spalten { grid-template-columns: 1fr; } }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin-bottom: 0.75rem; }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; }
+
+  .mitmachen { padding: clamp(1.75rem, 4vw, 2.5rem); background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 25%, transparent); }
+  .mitmachen h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+  .mitmachen p { margin: 0; max-width: 60ch; }
+</style>

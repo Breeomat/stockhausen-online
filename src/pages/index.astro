@@ -77,7 +77,8 @@ const demnaechst = [
       </div>
       <div class="vereine-raster">
         {vereinsseiten.map((v) => (
-          <a class="karte verein-gross" href={url(v.href)}>
+          <a class:list={['karte verein-gross', { 'verein-gross--hell': !v.bild }]} href={url(v.href)}>
+            {v.wappen && <Image class="verein-gross__wappen" src={v.wappen} alt="" width={120} />}
             {v.bild && <Image class="verein-gross__bild" src={v.bild.src} alt="" widths={[640, 1024]} sizes="(max-width: 860px) 100vw, 640px" />}
             {v.bild && <span class="verein-gross__foto">{v.bild.nachweis}</span>}
             <span class="kicker">{v.seit}</span>
@@ -248,8 +249,9 @@ const demnaechst = [
   .enso__pfeil { margin-top: auto; font-weight: 600; color: var(--gold); }
 
   .vereine-start { padding-top: 0; }
-  .vereine-raster { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; }
-  @media (max-width: 860px) { .vereine-raster { grid-template-columns: 1fr; } }
+  .vereine-raster { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media (max-width: 1000px) { .vereine-raster { grid-template-columns: 1fr 1fr; } .verein-liste { grid-column: 1 / -1; } }
+  @media (max-width: 640px) { .vereine-raster { grid-template-columns: 1fr; } }
   .verein-gross {
     position: relative;
     isolation: isolate;
@@ -276,9 +278,16 @@ const demnaechst = [
     background: linear-gradient(100deg, rgb(12 18 24 / 0.82) 0%, rgb(12 18 24 / 0.55) 50%, rgb(12 18 24 / 0.1) 100%);
   }
   .verein-gross:has(.verein-gross__bild) :is(h3, p, .kicker, .verein-gross__pfeil) { text-shadow: 0 1px 8px rgb(0 0 0 / 0.6); }
+  .verein-gross.verein-gross--hell { background: var(--flaeche); color: var(--text); border: 1px solid var(--linie); }
+  .verein-gross.verein-gross--hell:hover { color: var(--text); }
+  .verein-gross.verein-gross--hell .kicker { color: var(--ziegel); }
+  .verein-gross.verein-gross--hell h3 { color: var(--meer); padding-right: 4.5rem; }
+  .verein-gross.verein-gross--hell p { color: var(--text-leise); }
+  .verein-gross.verein-gross--hell .verein-gross__pfeil { color: var(--lagune); }
+  .verein-gross__wappen { position: absolute; top: 1.25rem; right: 1.25rem; width: 72px; height: auto; }
   .verein-gross__foto { position: absolute; right: 0.8rem; bottom: 0.5rem; font-size: 0.72rem; color: rgb(255 255 255 / 0.85); }
   .verein-gross .kicker { color: #ffd98a; }
-  .verein-gross h3 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .verein-gross h3 { color: #fff; font-size: clamp(1.4rem, 2.2vw, 1.8rem); }
   .verein-gross p { color: #fbe6dc; max-width: 42ch; }
   .verein-gross__pfeil { margin-top: auto; font-weight: 600; color: #ffd98a; }
   .verein-liste { padding: 1.5rem 1.75rem; }

@@ -1,5 +1,6 @@
 import { kommendeTermine } from './termine';
 import feuerwehrFoto from '../assets/fotos/feuerwehr-einsatzabteilung.jpg';
+import svWappen from '../assets/fotos/sv-stockhausen-wappen.png';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
 export const vereinsseiten = [
@@ -10,6 +11,14 @@ export const vereinsseiten = [
     text: '57 Aktive, 183 Mitglieder und 150 Jahre Geschichte – von der Spritzenmannschaft bis zum LF 10.',
     href: 'vereine/feuerwehr/',
     bild: { src: feuerwehrFoto, nachweis: 'Foto: Christian Heuser' },
+  },
+  {
+    name: 'SV Stockhausen e.V.',
+    kurz: 'SV Stockhausen',
+    seit: 'seit 1946',
+    text: 'Fußball, Leichtathletik, Tischtennis, Volleyball, Gymnastik und eine Theatergruppe – Sport und Kultur für Jung und Alt.',
+    href: 'vereine/sv-stockhausen/',
+    wappen: svWappen,
   },
 ];
 
