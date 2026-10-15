@@ -125,6 +125,16 @@ const sehenswert = [
   },
 ];
 
+const ortsbeirat = {
+  aemter: [
+    ['Ortsvorsteher', 'Jonas Domaschka'],
+    ['Stellvertretender Ortsvorsteher', 'Christoph Schell'],
+    ['Schriftführer', 'Marc Ahne'],
+    ['Stellvertretender Schriftführer', 'Cornelius Tietz'],
+  ],
+  weitere: ['Kirsten Antritter', 'Markus Fischer', 'Cornelius Osthaus', 'Friedrich‑Wilhelm Picker', 'Nadine Wahl'],
+};
+
 const entfernungen = [
   ['Schadges', '2 km'],
   ['Hosenfeld-Blankenau', '2 km'],
@@ -185,11 +195,10 @@ const entfernungen = [
         </div>
         <div class="karte kasten">
           <h3>Ortsbeirat</h3>
-          <table>
-            <tbody>
-              <tr><th scope="row">Ortsvorsteher</th><td>Jonas Domaschka</td></tr>
-            </tbody>
-          </table>
+          <dl class="beirat">
+            {ortsbeirat.aemter.map(([amt, name]) => <div><dt>{amt}</dt><dd>{name}</dd></div>)}
+            <div><dt>Weitere Mitglieder</dt><dd class="beirat__weitere">{ortsbeirat.weitere.join(', ')}</dd></div>
+          </dl>
         </div>
         <div class="karte kasten">
           <h3>Nachbarorte</h3>
@@ -294,6 +303,12 @@ const entfernungen = [
   .kasten th, .kasten td { padding: 0.4rem 0; border-bottom: 1px solid var(--linie); }
   .kasten th { text-align: left; font-weight: 500; color: var(--text-leise); }
   .kasten td { text-align: right; font-weight: 600; }
+  .beirat { margin: 0; display: grid; }
+  .beirat div { padding: 0.5rem 0; border-bottom: 1px solid var(--linie); }
+  .beirat div:last-child { border-bottom: 0; }
+  .beirat dt { font-size: 0.8rem; color: var(--text-leise); }
+  .beirat dd { margin: 0; font-weight: 600; }
+  .beirat__weitere { font-weight: 500 !important; line-height: 1.5; }
   .klein { font-size: 0.85rem; color: var(--text-leise); margin: 0.75rem 0 0; }
 
   .sehenswert { display: grid; gap: 1rem; margin-top: 1.5rem; }
