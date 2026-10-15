@@ -1,0 +1,40 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import { url } from '../../lib/site';
+
+const vereine = [
+  {
+    name: 'Freiwillige Feuerwehr Stockhausen e.V.',
+    seit: 'seit 1874',
+    text: 'Einsatzabteilung, Feuerwehrverein und 150 Jahre Geschichte – von der Spritzenmannschaft bis zum LF 10.',
+    href: 'vereine/feuerwehr/',
+  },
+];
+---
+<Basis titel="Vereine" beschreibung="Die Vereine in Stockhausen: Ansprechpartner, Geschichte und Termine.">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Vereine</span>
+    <h1>Vereine in Stockhausen</h1>
+    <p>Hier stellen sich die Vereine aus dem Dorf vor. Weitere Vereinsseiten folgen nach und nach.</p>
+  </section>
+
+  <section class="huelle vereine">
+    {vereine.map(({ name, seit, text, href }) => (
+      <a class="karte verein" href={url(href)}>
+        <span class="kicker">{seit}</span>
+        <h2>{name}</h2>
+        <p>{text}</p>
+        <span class="verein__mehr">Zur Vereinsseite →</span>
+      </a>
+    ))}
+  </section>
+</Basis>
+
+<style>
+  .vereine { padding-block: 1rem 5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 1rem; }
+  .verein { padding: 1.75rem; text-decoration: none; color: var(--text); display: flex; flex-direction: column; transition: transform 0.15s ease; }
+  .verein:hover { transform: translateY(-2px); }
+  .verein h2 { font-size: 1.5rem; }
+  .verein p { color: var(--text-leise); }
+  .verein__mehr { margin-top: auto; font-weight: 600; color: var(--lagune); }
+</style>

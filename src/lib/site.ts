@@ -5,5 +5,6 @@ export const navigation = [
   { href: 'termine/', label: 'Termine' },
   { href: 'plakate/', label: 'Plakatwand' },
   { href: 'tante-enso/', label: 'Tante Enso' },
+  { href: 'vereine/', label: 'Vereine' },
   { href: 'dorf/', label: 'Unser Dorf' },
 ];

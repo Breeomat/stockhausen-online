@@ -1,0 +1,162 @@
+---
+import Basis from '../../../layouts/Basis.astro';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+
+// Quelle: Chronik „150 Jahre Freiwillige Feuerwehr Stockhausen e.V. 1874–2024“ (Mai 2024)
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Feuerwehr'));
+
+const zahlen = [
+  { wert: '1874', text: 'gegründet am 15. Februar' },
+  { wert: '57', text: 'Aktive in der Einsatzabteilung (2024)' },
+  { wert: '183', text: 'Mitglieder im Feuerwehrverein (2024)' },
+];
+
+const wehrfuehrer = [
+  ['1874–1879', 'Johannes Östreich V. (Greulichs)'],
+  ['1879–1882', 'Konrad Wienold (Duchets)'],
+  ['1882–1890', 'Heinrich Östreich (Ingerscholzes)'],
+  ['1890–1910', 'Johann Heinrich Eichenauer (Foeschleifesch)'],
+  ['1910–1936', 'Georg Häuser (Heusesch)'],
+  ['1936–1957', 'Johannes Spahn (Spehjes)'],
+  ['1957–1961', 'Heinrich Eurich (Dierings)'],
+  ['1961–1971', 'Johannes Häuser (Heusesch)'],
+  ['1971–1985', 'Willi Ahlbrand (Breggewänesch)'],
+  ['1985–2001', 'Jürgen Möller (Hohlschneijderjes)'],
+  ['2001–2020', 'Ottmar Günther (Bockels)'],
+  ['seit 2020', 'Oliver Sander'],
+];
+
+const vorstand = ['O. Sander', 'K. H. Renker', 'C. Schwarz', 'B. Heinemann', 'C. Leipold', 'Ph. Ortwein', 'M. Ahne', 'Ch. Krömmelbein'];
+
+const chronik = [
+  { jahr: '1874', text: 'Am 15. Februar wird beim Gastwirt Heinrich Eidmann die Freiwillige Feuerwehr gegründet und der Vorstand gewählt. Heinrich Eidmann wird stellvertretender Kommandant und Schriftführer.' },
+  { jahr: '1880', text: 'Eine „Instruction für das Feuerwehr-Corps zu Stockhausen“ regelt den Dienst: Die Kompanie unter einem Hauptmann gliedert sich in Steiger, Spritzenmannschaft und Wachtmannschaft, dazu Signalisten und eine Rettungsmannschaft. Geübt wird von April bis September monatlich, sonst alle zwei Monate.' },
+  { jahr: '1894', text: 'Satzung vom 16. März: Die Wehr soll aus 70 Mitgliedern bestehen – mit Steigern, Spritzenmannschaft, Ordnungsmannschaft und Signalisten. Mitglied werden kann, wer mindestens 21 Jahre alt ist und im Ort wohnt und arbeitet.' },
+  { jahr: '1899', text: 'Großfeuer am 29. März: Gegen halb zehn bricht in einer Bäckerei Feuer aus. Starker Wind treibt die Flammen weiter, in kaum drei Stunden stehen 22 Hofreiten in Flammen, darunter die Gastwirtschaft mit der Post und die Riedesel’sche Oberförsterei. Neben der Stockhäuser Wehr kommen Feuerwehren aus Altenschlirf, Frischborn, Lauterbach, Rixfeld und Schlechtenwegen. Rund 56 Gebäude brennen nieder.' },
+  { jahr: '1900', text: 'Die Wehr wird neu uniformiert und feiert ihr 25-jähriges Bestehen auf der Ochsenwiese. Kommandant Eichenauer und Spritzenmeister Heinrich Roth erhalten das Ehrenzeichen.' },
+  { jahr: '1910', text: 'Am 11. April wird der Kommandant erstmals per Stimmzettel gewählt: Georg Häuser erhält 23 Stimmen.' },
+  { jahr: '1913', text: 'Stockhausen bekommt eine Wasserleitung mit Hochbehälter und 34 Hydranten. Dafür gründet die Wehr eine eigene Hydrantenmannschaft. Am 21. September wird erstmals mit einem Hydrantenwagen geübt.' },
+  { jahr: '1924', text: '50-jähriges Jubiläum mit Feuerwehrfest.' },
+  { jahr: '1952', text: 'Feuerwehrfest in Stockhausen.' },
+  { jahr: '1974', text: 'Vom 19. bis 21. Juli feiert die Wehr ihr 100-jähriges Jubiläum zusammen mit dem ersten Kreisfeuerwehrtag des neuen Vogelsbergkreises. 188 Wehren haben zugesagt, im Festzug marschieren 2.500 bis 3.000 Feuerwehrleute.' },
+  { jahr: '1999', text: '125 Jahre: Im Jubiläumsjahr gibt es keinen Einsatz. Die Wehr erhält eine neue Tragkraftspritze TS 8/8, das Fest mit Kreisfeuerwehrtag wird ein voller Erfolg.' },
+  { jahr: '2000', text: 'Antrag auf Neu- bzw. Umbau des Feuerwehrgerätehauses; ein gebrauchter Schlauchwagen wird angeschafft.' },
+  { jahr: '2001', text: 'Ottmar Günther löst Jürgen Möller als Wehrführer ab, Klaus Borrmann wird Stellvertreter. Marc Ahne übernimmt das Amt des Rechners von Helmut Häuser. Jürgen Möller wird Ehrenvorsitzender, Helmut Häuser Ehrenmitglied.' },
+  { jahr: '2002', text: 'Drei Kameraden helfen beim Hochwasser in Dessau. Die Feuerwehr bekommt eine eigene Homepage.' },
+  { jahr: '2003', text: 'Wegen anhaltender Trockenheit wird die Altefeld an zwei Stellen zum Brandschutz gestaut.' },
+  { jahr: '2005', text: 'Übergangsweise zieht die Wehr in die alte Schmiede von Klaus Möller. Am 21. Oktober ist Richtfest für das neue Gerätehaus.' },
+  { jahr: '2006', text: 'Am 21. Oktober zieht die Feuerwehr in ihr neues Feuerwehrhaus.' },
+  { jahr: '2007', text: 'Rettung einer Person aus dem Hochwasser im Januar. Vom 24. bis 26. August wird das neue Gerätehaus eingeweiht.' },
+  { jahr: '2010', text: 'Großbrand im Betonwerk in Herbstein. Neu gegründet wird ein Katastrophenschutz-Zug unter Oliver Sander und Carsten Schwarz.' },
+  { jahr: '2011', text: 'Stadtfeuerwehrtag in Stockhausen mit Großübung im Schloss und neuer Standarte.' },
+  { jahr: '2013', text: 'Die Alarmierung per Handy wird eingeführt.' },
+  { jahr: '2017', text: 'Mit 21 Einsätzen das einsatzreichste Jahr der Geschichte. Am 6. April erhält die Wehr das neue Einsatzfahrzeug LF 10 KatS.' },
+  { jahr: '2019', text: '145 Jahre, 188 Mitglieder, davon 60 Aktive. Stadtfeuerwehrtag mit Großübung in Stockhausen.' },
+  { jahr: '2020', text: 'Oliver Sander löst Ottmar Günther als Wehrführer ab; Ottmar Günther wird Ehrenvorsitzender. Ab dem Frühjahr bremst Corona den Übungsbetrieb.' },
+  { jahr: '2023', text: '21 Einsätze, darunter Kleinbrände und technische Hilfeleistungen, und 15 Übungen. Im November das eigene Schlachtfest mit Blaulichtabend.' },
+  { jahr: '2024', text: '150 Jahre Freiwillige Feuerwehr Stockhausen – gefeiert vom 24. bis 26. Mai.' },
+];
+---
+<Basis titel="Freiwillige Feuerwehr" beschreibung="Freiwillige Feuerwehr Stockhausen e.V.: seit 1874 im Einsatz – Wehrführer, Vorstand und 150 Jahre Chronik.">
+  <section class="huelle seitenkopf">
+    <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+    <span class="kicker">Verein · seit 1874</span>
+    <h1>Freiwillige Feuerwehr Stockhausen e.V.</h1>
+    <p>Seit 150 Jahren leistet die Feuerwehr Menschen in Not Hilfe – getragen von der Einsatzabteilung und dem Feuerwehrverein. Wehrführer und Erster Vorsitzender ist Oliver Sander.</p>
+  </section>
+
+  <section class="huelle wehr">
+    <ul class="zahlen">
+      {zahlen.map(({ wert, text }) => <li class="karte"><strong>{wert}</strong><span>{text}</span></li>)}
+    </ul>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+
+    <div class="spalten">
+      <div>
+        <span class="kicker">Chronik</span>
+        <h2>150 Jahre in Stichworten</h2>
+        <ol class="zeitstrahl">
+          {chronik.map(({ jahr, text }) => <li><span class="zeitstrahl__jahr">{jahr}</span><p>{text}</p></li>)}
+        </ol>
+      </div>
+
+      <aside class="seitenleiste">
+        <div class="karte kasten">
+          <h3>Kontakt</h3>
+          <dl class="liste">
+            <div><dt>Wehrführer und 1. Vorsitzender</dt><dd>Oliver Sander</dd></div>
+            <div><dt>Kontakt</dt><dd><span class="fehlt">[fehlt: Telefon oder E-Mail]</span></dd></div>
+            <div><dt>Übungsabende</dt><dd><span class="fehlt">[fehlt: Tag und Uhrzeit]</span></dd></div>
+          </dl>
+        </div>
+        <div class="karte kasten">
+          <h3>Vorstand im Jubiläumsjahr 2024</h3>
+          <p class="namen">{vorstand.join(', ')}</p>
+        </div>
+        <div class="karte kasten">
+          <h3>Kommandanten und Wehrführer</h3>
+          <dl class="liste">
+            {wehrfuehrer.map(([zeit, name]) => <div><dt>{zeit}</dt><dd>{name}</dd></div>)}
+          </dl>
+          <p class="klein">In Klammern der Hausname.</p>
+        </div>
+      </aside>
+    </div>
+
+    <p class="quelle">Quelle: Chronik „150 Jahre Freiwillige Feuerwehr Stockhausen e.V. 1874–2024“, Mai 2024.</p>
+  </section>
+</Basis>
+
+<style>
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .wehr { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+
+  .zahlen { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .zahlen li { padding: 1.5rem; display: flex; flex-direction: column; }
+  .zahlen strong { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--ziegel); font-weight: 600; line-height: 1; }
+  .zahlen span { color: var(--text-leise); margin-top: 0.4rem; }
+  @media (max-width: 640px) { .zahlen { grid-template-columns: 1fr; } }
+
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+
+  .spalten { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
+
+  .zeitstrahl { list-style: none; margin: 1.5rem 0 0; padding: 0; position: relative; }
+  .zeitstrahl::before { content: ''; position: absolute; left: 0.45rem; top: 0.5rem; bottom: 0.5rem; width: 2px; background: var(--linie); }
+  .zeitstrahl li { position: relative; padding: 0 0 1.4rem 2.25rem; }
+  .zeitstrahl li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.35rem;
+    width: 0.95rem;
+    height: 0.95rem;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 3px solid var(--ziegel);
+  }
+  .zeitstrahl__jahr { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; color: var(--ziegel); }
+  .zeitstrahl p { margin: 0.15rem 0 0; }
+
+  .seitenleiste { display: grid; gap: 1rem; }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin-bottom: 0.75rem; }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); font-variant-numeric: tabular-nums; }
+  .liste dd { margin: 0; font-weight: 600; }
+  .namen { margin: 0; line-height: 1.6; }
+  .klein { font-size: 0.85rem; color: var(--text-leise); margin: 0.75rem 0 0; }
+  .quelle { font-size: 0.85rem; color: var(--text-leise); margin: 0; }
+</style>
