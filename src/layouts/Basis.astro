@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import Zeichen from '../components/Zeichen.astro';
+import Ortsschild from '../components/Ortsschild.astro';
 import { url, navigation } from '../lib/site';
 
 interface Props {
@@ -31,12 +31,8 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     <a class="springen" href="#inhalt">Zum Inhalt springen</a>
     <header class="kopf">
       <div class="huelle kopf__innen">
-        <a class="marke" href={url('')}>
-          <Zeichen />
-          <span>
-            <strong>Stockhausen</strong>
-            <small>Herbstein · Vogelsberg</small>
-          </span>
+        <a class="marke" href={url('')} aria-label="Stockhausen, Stadt Herbstein – zur Startseite">
+          <Ortsschild />
         </a>
         <button class="menue-knopf" aria-expanded="false" aria-controls="hauptmenue">
           <span class="menue-knopf__striche" aria-hidden="true"></span>
@@ -57,12 +53,8 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     <footer class="fuss">
       <div class="huelle fuss__innen">
         <div>
-          <a class="marke marke--fuss" href={url('')}>
-            <Zeichen groesse={44} />
-            <span>
-              <strong>Stockhausen</strong>
-              <small>36358 Herbstein</small>
-            </span>
+          <a class="marke marke--fuss" href={url('')} aria-label="Stockhausen, Stadt Herbstein, Vogelsbergkreis – zur Startseite">
+            <Ortsschild voll />
           </a>
           <p class="fuss__text">Die Dorfseite für Stockhausen im Vogelsberg – mit Terminen aller Vereine, Plakaten und Geschichten aus dem Ort.</p>
         </div>
@@ -121,9 +113,6 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
   .kopf__innen { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 68px; }
 
   .marke { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--text); }
-  .marke span { display: flex; flex-direction: column; line-height: 1.15; }
-  .marke strong { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--meer); }
-  .marke small { font-size: 0.75rem; color: var(--text-leise); letter-spacing: 0.04em; }
 
   .menue { display: flex; gap: 0.25rem; }
   .menue a {
@@ -191,8 +180,6 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     gap: 2.5rem;
     padding-block: 3.5rem 2.5rem;
   }
-  .fuss .marke strong { color: #fff; }
-  .fuss .marke small { color: #b7cbd8; }
   .fuss__text { margin-top: 1rem; max-width: 38ch; color: #b7cbd8; font-size: 0.95rem; }
   .fuss nav { display: flex; flex-direction: column; gap: 0.45rem; }
   .fuss h2 { font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
