@@ -14,7 +14,8 @@ const quellen = [
   <section class="huelle seitenkopf">
     <span class="kicker">Einkaufen im Dorf</span>
     <h1>Tante Enso fürs Lädchen</h1>
-    <p>Nach dem Rückzug von tegut soll das Lädchen in der Welzgasse ein Tante-Enso-Laden werden. Dafür braucht es genug Menschen aus Stockhausen und Umgebung, die Anteile zeichnen.</p>
+    <p>Nach dem Rückzug von tegut soll das Lädchen in der Welzgasse ein Tante-Enso-Laden werden. Betreiber bleibt die Gemeinschaft Altenschlirf. Dafür braucht es genug Menschen aus Stockhausen und Umgebung, die Anteile zeichnen.</p>
+    <p><a class="knopf knopf--leise" href={aktion.standort} rel="noopener">Tante Enso Stockhausen auf tanteenso.de</a></p>
   </section>
 
   <section class="huelle enso-seite">
@@ -37,12 +38,12 @@ const quellen = [
       <article class="karte">
         <span class="schritte__nr">1</span>
         <h2>Anteil zeichnen</h2>
-        <p>Ein Anteil kostet {aktion.preis} €, mehrere sind möglich. Anteile werden mindestens ein Jahr gehalten. Laut Presse gibt es dafür jährlich 5 € Einkaufsguthaben und eine Rückvergütung auf Einkäufe.</p>
+        <p>Ein Anteil kostet {aktion.preis} €, mehrere sind möglich. Auf jeden Anteil gibt es jährlich 5 % Guthaben, also 5 € zum Einkaufen. Anteile sind jährlich kündbar.</p>
       </article>
       <article class="karte">
         <span class="schritte__nr">2</span>
         <h2>Karte erhalten</h2>
-        <p>Mit der Tante-Enso-Karte öffnet sich die Tür rund um die Uhr. Bezahlt wird an der Selbstbedienungskasse.</p>
+        <p>Mit der Tante-Enso-Karte öffnet sich die Tür rund um die Uhr – auch in jedem anderen Tante-Enso-Laden in Deutschland. Bezahlt wird an der Selbstbedienungskasse.</p>
       </article>
       <article class="karte">
         <span class="schritte__nr">3</span>
@@ -58,7 +59,9 @@ const quellen = [
           <dt>Laden</dt>
           <dd>„Lädchen für alles“, Welzgasse 1, 36358 Herbstein-Stockhausen</dd>
           <dt>Bisher</dt>
-          <dd>Betrieben von der Gemeinschaft Altenschlirf, beliefert von tegut. tegut hat die Filiale zum 12. Oktober 2026 geschlossen.</dd>
+          <dd>Betrieben von der Gemeinschaft Altenschlirf, beliefert von tegut. tegut hat die Belieferung zum 12. Oktober 2026 beendet.</dd>
+          <dt>Betreiber</dt>
+          <dd>Die Gemeinschaft Altenschlirf bleibt Betreiberin des Lädchens, Tante Enso kommt als Partner dazu.</dd>
           <dt>Übergang</dt>
           <dd>Tante Enso hat angekündigt, schon vor Ende der Anteilsaktion einzusteigen und den Laden zu beliefern.</dd>
           <dt>Umbau</dt>
@@ -83,7 +86,9 @@ const quellen = [
       <h2>Quellen</h2>
       <ul>
         {quellen.map((q) => <li><a href={q.href} rel="noopener">{q.titel}</a></li>)}
+        <li><a href={aktion.standort} rel="noopener">Tante Enso: Standort Stockhausen</a></li>
         <li><a href={aktion.link} rel="noopener">Tante Enso: Teilhaberschaft</a></li>
+        <li><a href="https://www.tanteenso.de/content/tanteenso/tante-enso-karte" rel="noopener">Tante Enso: Tante-Enso-Karte</a></li>
       </ul>
     </aside>
   </section>

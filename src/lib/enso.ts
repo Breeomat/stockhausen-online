@@ -8,6 +8,7 @@ export const aktion = {
   frist: '2026-10-21',
   fristText: 'Mittwoch, 21. Oktober',
   link: 'https://www.tanteenso.de/content/teilhaberschaft',
+  standort: 'https://www.tanteenso.de/content/tanteenso/standorte/stockhausen',
 };
 
 export const aktionLaeuft = () => heute() <= aktion.frist;
