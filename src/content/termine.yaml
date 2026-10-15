@@ -9,4 +9,14 @@
 #   ort: Kirche
 #   verein: Kindergarten
 #   text: Anschließend Martinsfeuer und Weckmänner.
-[]
+- id: 2026-10-18-erntedank
+  titel: Erntedankgottesdienst
+  datum: 2026-10-18
+  beginn: "10:40"
+  ort: Lange Walter Stall
+  verein: Ev. Kirchengemeinde Stockhausen-Rixfeld
+  text: >-
+    Gottesdienst mit den Kindern des Ev. Kindergartens Storchennest.
+    Im Anschluss gemütliches Beisammensein mit Kartoffelfeuer, Fingerfood und Getränken.
+    Fingerfood darf mitgebracht werden.
+  plakat: erntedank-2026

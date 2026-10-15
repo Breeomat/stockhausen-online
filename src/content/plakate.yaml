@@ -6,4 +6,8 @@
 #   bild: kirmes-2026.jpg
 #   verein: Burschenschaft
 #   gueltig_bis: 2026-11-15
-[]
+- id: erntedank-2026
+  titel: Erntedankgottesdienst
+  bild: erntedank-2026.jpg
+  verein: Ev. Kirchengemeinde & Kindergarten Storchennest
+  gueltig_bis: 2026-10-18
