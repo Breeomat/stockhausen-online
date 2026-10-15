@@ -6,6 +6,7 @@ import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 import wappen from '../../../assets/fotos/sv-stockhausen-wappen.png';
 import beachFoto from '../../../assets/fotos/sv-beachvolleyball.jpg';
+import turnFoto from '../../../assets/fotos/sv-turnkinder-nikolaus.jpg';
 
 const termine = (await kommendeTermine()).filter((t) => t.data.verein === 'SV Stockhausen');
 
@@ -60,6 +61,10 @@ const erweitert = [
           <li class="karte"><h3>{name}</h3>{text && <p>{text}</p>}</li>
         ))}
       </ul>
+      <figure class="sv-foto sv-foto--turnen">
+        <Image src={turnFoto} alt="Die Turnkinder in roten SV-Trikots auf Bänken in der Halle, daneben das Trainerteam" widths={[640, 1024, 1600]} sizes="(max-width: 1192px) calc(100vw - 32px), 1160px" />
+        <figcaption>Die Turnkinder mit dem Trainerteam am Nikolausabend · Foto: Marc Ahne</figcaption>
+      </figure>
     </div>
 
     {termine.length > 0 && (
@@ -103,6 +108,8 @@ const erweitert = [
   .sv-foto { margin: 0; }
   .sv-foto img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 60%; border-radius: var(--radius); box-shadow: var(--schatten); }
   .sv-foto figcaption { margin-top: 0.6rem; font-size: 0.85rem; color: var(--text-leise); }
+  .sv-foto--turnen { margin-top: 1.5rem; }
+  .sv-foto--turnen img { object-position: 50% 62%; }
   .einleitung { max-width: 62ch; color: var(--text-leise); }
   .abteilungen { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
   .abteilungen li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
