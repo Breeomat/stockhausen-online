@@ -1,9 +1,12 @@
 ---
 import Basis from '../../layouts/Basis.astro';
+import { Image, getImage } from 'astro:assets';
 import { aktion, aktionLaeuft } from '../../lib/enso';
+import patenPlakat from '../../assets/fotos/tante-enso-paten.jpg';
 
 const laeuft = aktionLaeuft();
 // Paten laut Aushang „Unsere Paten – Hilfe bei der Anmeldung“
+const patenGross = await getImage({ src: patenPlakat, width: 900 });
 const paten = ['Jonas Domaschka', 'Nadine Wahl', 'Judith Dörr', 'Kirsten Antritter', 'Markus Dörr', 'Paul Miller', 'Christoph Schell', 'Jasmin Fritz', 'Marc Ahne'];
 const quellen = [
   { titel: 'Lauterbacher Anzeiger: 222 Anteile schon gezeichnet – Tante Enso soll das „Lädchen“ in Stockhausen retten', href: 'https://www.lauterbacher-anzeiger.de/vogelsbergkreis/herbstein/222-anteile-schon-gezeichnet-tante-enso-soll-das-laedchen-in-stockhausen-retten-94509284.html' },
@@ -84,6 +87,9 @@ const quellen = [
           <dt>Tante Enso</dt>
           <dd>Fragen zum Anteilskauf beantwortet Tante Enso über das Kontaktformular auf <a href={aktion.standort} rel="noopener">tanteenso.de</a>. Dort gibt es auch ein Erklärvideo zum Zeichnen und zur Karte.</dd>
         </dl>
+        <a class="paten-plakat" href={patenGross.src} title="Plakat in voller Größe öffnen">
+          <Image src={patenPlakat} alt={`Plakat „Unsere Paten – Hilfe bei der Anmeldung“ mit Fotos von ${paten.join(', ')}`} widths={[360, 560, 800]} sizes="(max-width: 860px) 90vw, 420px" />
+        </a>
       </div>
     </div>
 
@@ -157,6 +163,8 @@ const quellen = [
   .vor-ort dt { font-weight: 600; }
   .vor-ort dd { margin: 0; }
   @media (max-width: 640px) { .vor-ort dl { grid-template-columns: 1fr; gap: 0.2rem; } .vor-ort dd { margin-bottom: 0.8rem; } }
+  .paten-plakat { display: block; margin-top: 1.5rem; max-width: 420px; border-radius: 12px; overflow: hidden; border: 1px solid var(--linie); }
+  .paten-plakat img { width: 100%; }
   .quellen { font-size: 0.9rem; color: var(--text-leise); }
   .quellen h2 { font-size: 1.1rem; }
   .quellen ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.3rem; }
