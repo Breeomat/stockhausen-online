@@ -40,7 +40,9 @@ const erweitert = [
 ];
 ---
 <Basis titel="SV Stockhausen" beschreibung="SV Stockhausen e.V.: Fußball, Leichtathletik, Tischtennis, Volleyball, Gymnastik und Theater – Vorstand, Abteilungen und Termine.">
-  <section class="huelle seitenkopf sv-kopf">
+  <section class="sv-held">
+    <Image class="sv-held__bild" src={sportplatzFoto} alt="" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="huelle sv-kopf">
     <div>
       <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
       <span class="kicker">Verein · seit 1946</span>
@@ -48,6 +50,8 @@ const erweitert = [
       <p>Der Sportverein steht für Bewegung, Gemeinschaft und Engagement im Dorfleben. Hier treffen sportliche Tradition und moderne Vereinsarbeit aufeinander.</p>
     </div>
     <Image class="sv-kopf__wappen" src={wappen} alt="Vereinswappen des SV Stockhausen e.V." width={220} />
+    </div>
+    <span class="sv-held__foto">Luftbild: Marc Ahne</span>
   </section>
 
   <section class="huelle sv">
@@ -139,9 +143,23 @@ const erweitert = [
 
 <style>
   .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
-  .sv-kopf { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
-  .sv-kopf__wappen { width: clamp(120px, 18vw, 220px); height: auto; filter: drop-shadow(0 8px 18px rgb(0 0 0 / 0.15)); }
-  @media (max-width: 640px) { .sv-kopf { grid-template-columns: 1fr; } .sv-kopf__wappen { order: -1; width: 110px; } }
+  .sv-held { position: relative; isolation: isolate; overflow: hidden; margin-bottom: 2.5rem; color: #fff; }
+  .sv-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; z-index: -2; }
+  .sv-held::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgb(12 18 24 / 0.82) 0%, rgb(12 18 24 / 0.55) 55%, rgb(12 18 24 / 0.2) 100%);
+  }
+  .sv-held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
+  .sv-kopf { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .sv-kopf h1 { color: #fff; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
+  .sv-kopf p { font-size: 1.15rem; max-width: 60ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
+  .sv-kopf .kicker { color: var(--gold); }
+  .sv-kopf .zurueck { color: #fff; }
+  .sv-kopf__wappen { width: clamp(120px, 18vw, 220px); height: auto; filter: drop-shadow(0 8px 18px rgb(0 0 0 / 0.35)); }
+  @media (max-width: 640px) { .sv-kopf { grid-template-columns: 1fr; gap: 1.25rem; } .sv-kopf__wappen { width: 96px; } }
 
   .sv { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
   .sv-foto { margin: 0; }
