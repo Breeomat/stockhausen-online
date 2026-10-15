@@ -11,3 +11,17 @@
   bild: erntedank-2026.jpg
   verein: Ev. Kirchengemeinde & Kindergarten Storchennest
   gueltig_bis: 2026-10-18
+- id: sv-kirmesantrinken-2026
+  titel: Kirmesantrinken
+  bild: sv-kirmesantrinken-2026.jpg
+  verein: SV Stockhausen
+  gueltig_bis: 2026-10-21
+- id: kirmes-2026
+  titel: Stockhäuser Kirmes
+  bild: kirmes-2026.jpg
+  gueltig_bis: 2026-10-24
+- id: sv-weihnachtsmarkt-erfurt-2026
+  titel: Fahrt zum Weihnachtsmarkt Erfurt
+  bild: sv-weihnachtsmarkt-erfurt-2026.jpg
+  verein: SV Stockhausen
+  gueltig_bis: 2026-11-28

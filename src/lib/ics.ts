@@ -60,7 +60,7 @@ function ereignis(t: Termin, seite: string): string[] {
   }
   zeilen.push(`SUMMARY:${escape(titel)}`);
   if (ort) zeilen.push(`LOCATION:${escape(`${ort}, Stockhausen, 36358 Herbstein`)}`);
-  zeilen.push(`DESCRIPTION:${escape([text, `Veranstalter: ${verein}`].filter(Boolean).join('\n'))}`);
+  zeilen.push(`DESCRIPTION:${escape([text, verein && `Veranstalter: ${verein}`].filter(Boolean).join('\n'))}`);
   zeilen.push(`URL:${seite}`);
   zeilen.push('END:VEVENT');
   return zeilen;

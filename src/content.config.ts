@@ -17,7 +17,7 @@ const termine = defineCollection({
     beginn: uhrzeit.optional(),
     ende: uhrzeit.optional(),
     ort: z.string().optional(),
-    verein: z.string(),
+    verein: z.string().optional(),
     text: z.string().optional(),
     plakat: z.string().optional(),
     link: z.string().url().optional(),

@@ -5,7 +5,7 @@ import { kommendeTermine, gruppiertNachMonat } from '../../lib/termine';
 import { url } from '../../lib/site';
 
 const termine = await kommendeTermine();
-const vereine = [...new Set(termine.map((t) => t.data.verein))].sort((a, b) => a.localeCompare(b, 'de'));
+const vereine = [...new Set(termine.flatMap((t) => (t.data.verein ? [t.data.verein] : [])))].sort((a, b) => a.localeCompare(b, 'de'));
 const monate = gruppiertNachMonat(termine);
 const feed = new URL(url('termine.ics'), Astro.site);
 const webcal = feed.href.replace(/^https?:/, 'webcal:');
