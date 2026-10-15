@@ -12,6 +12,9 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
   Nach dem Einbau Bilder für das Web verkleinern (max. ca. 1600 px, JPG).
 - Nichts erfinden. Fehlende Angaben als `<span class="fehlt">[fehlt: …]</span>` markieren.
 - Personenfotos nur Gruppen oder mit Einwilligung.
+- Neue Plakate: Eine geplante Aufgabe prüft täglich um ca. 20 Uhr den Drive-Ordner „Plakate“, liest neue Dateien ein
+  (Bild verkleinern, Eintrag in `plakate.yaml` und `termine.yaml`) und veröffentlicht direkt.
+  Verarbeitete Dateien stehen in `src/content/plakate-eingelesen.txt` – nur Dateien, deren ID dort fehlt, sind neu.
 
 ## Technik
 - Links immer über `url()` aus `src/lib/site.ts` (Basis-Pfad).
