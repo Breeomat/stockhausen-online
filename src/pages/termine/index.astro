@@ -1,0 +1,112 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import TerminKarte from '../../components/TerminKarte.astro';
+import { kommendeTermine, gruppiertNachMonat } from '../../lib/termine';
+import { url } from '../../lib/site';
+
+const termine = await kommendeTermine();
+const vereine = [...new Set(termine.map((t) => t.data.verein))].sort((a, b) => a.localeCompare(b, 'de'));
+const monate = gruppiertNachMonat(termine);
+const feed = new URL(url('termine.ics'), Astro.site);
+const webcal = feed.href.replace(/^https?:/, 'webcal:');
+---
+<Basis titel="Termine" beschreibung="Alle Termine der Vereine in Stockhausen – mit Kalender-Abo fürs Handy.">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Termine</span>
+    <h1>Was ist los in Stockhausen?</h1>
+    <p>Alle Veranstaltungen der Vereine und Gruppen im Dorf. Vergangene Termine verschwinden automatisch.</p>
+  </section>
+
+  <section class="huelle termine-seite">
+    {vereine.length > 1 && (
+      <div class="filter" role="group" aria-label="Nach Verein filtern">
+        <button class="filter__chip" aria-pressed="true" data-filter="">Alle</button>
+        {vereine.map((v) => <button class="filter__chip" aria-pressed="false" data-filter={v}>{v}</button>)}
+      </div>
+    )}
+
+    {monate.length > 0 ? (
+      monate.map(([monat, liste]) => (
+        <section class="monat">
+          <h2>{monat}</h2>
+          <div class="monat__liste">{liste.map((t) => <TerminKarte termin={t} />)}</div>
+        </section>
+      ))
+    ) : (
+      <div class="leer">
+        <strong>Der Kalender füllt sich gerade.</strong>
+        Die ersten Termine der Vereine werden in Kürze eingetragen.
+      </div>
+    )}
+
+    <aside id="abo" class="karte abo">
+      <div>
+        <span class="kicker">Nie wieder etwas verpassen</span>
+        <h2>Termine aufs Handy</h2>
+        <p>Einmal abonnieren, und alle Termine aus Stockhausen erscheinen in Ihrem Kalender – neue Termine kommen automatisch dazu.</p>
+      </div>
+      <div class="abo__knoepfe">
+        <a class="knopf" href={webcal}>Kalender abonnieren</a>
+        <a class="knopf knopf--leise" href={url('termine.ics')} download>Als Datei laden</a>
+        <small>Funktioniert mit iPhone, Android (Google Kalender) und Outlook.</small>
+      </div>
+    </aside>
+  </section>
+</Basis>
+
+<script>
+  const heute = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Berlin' }).format(new Date());
+  document.querySelectorAll<HTMLElement>('.termin').forEach((t) => {
+    if ((t.dataset.ende ?? '') < heute) t.remove();
+  });
+
+  const chips = document.querySelectorAll<HTMLButtonElement>('.filter__chip');
+  chips.forEach((chip) =>
+    chip.addEventListener('click', () => {
+      const wahl = chip.dataset.filter;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      document.querySelectorAll<HTMLElement>('.termin').forEach((t) => {
+        t.hidden = Boolean(wahl) && t.dataset.verein !== wahl;
+      });
+      document.querySelectorAll<HTMLElement>('.monat').forEach((m) => {
+        m.hidden = !m.querySelector('.termin:not([hidden])');
+      });
+    }),
+  );
+  document.querySelectorAll<HTMLElement>('.monat').forEach((m) => {
+    if (!m.querySelector('.termin')) m.remove();
+  });
+</script>
+
+<style>
+  .termine-seite { padding-bottom: 5rem; }
+  .filter { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 2rem; }
+  .filter__chip {
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--linie);
+    background: var(--flaeche);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .filter__chip[aria-pressed='true'] { background: var(--wald); color: var(--bg); border-color: var(--wald); }
+  .monat { margin-top: 2.5rem; }
+  .monat h2 { font-size: 1.5rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--linie); margin-bottom: 1.25rem; }
+  .monat__liste { display: grid; gap: 1rem; }
+  .abo {
+    margin-top: 4rem;
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  .abo h2 { font-size: 1.9rem; }
+  .abo p { margin: 0; color: var(--text-leise); }
+  .abo__knoepfe { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .abo__knoepfe small { color: var(--text-leise); }
+  @media (max-width: 760px) { .abo { grid-template-columns: 1fr; } }
+</style>

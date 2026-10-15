@@ -1,0 +1,67 @@
+---
+import { type Termin, wochentagKurz, tag, monatKurz, zeitraum, letzterTag } from '../lib/termine';
+import { url } from '../lib/site';
+
+interface Props { termin: Termin; kompakt?: boolean }
+const { termin, kompakt = false } = Astro.props;
+const { titel, datum, ort, verein, text, link } = termin.data;
+const zeit = zeitraum(termin);
+---
+<article class="termin" data-verein={verein} data-ende={letzterTag(termin)}>
+  <div class="termin__datum" aria-hidden="true">
+    <span class="termin__wt">{wochentagKurz(datum)}</span>
+    <span class="termin__tag">{tag(datum)}</span>
+    <span class="termin__monat">{monatKurz(datum)}</span>
+  </div>
+  <div class="termin__inhalt">
+    <span class="termin__verein">{verein}</span>
+    <h3>{titel}</h3>
+    <p class="termin__meta">
+      <time datetime={datum}>{new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${datum}T12:00:00`))}</time>
+      {[zeit, ort].filter(Boolean).map((teil) => <span>{teil}</span>)}
+    </p>
+    {!kompakt && text && <p class="termin__text">{text}</p>}
+    {!kompakt && (
+      <p class="termin__aktionen">
+        <a href={url(`termine/${termin.id}.ics`)} download>In meinen Kalender</a>
+        {link && <a href={link} rel="noopener">Mehr erfahren</a>}
+      </p>
+    )}
+  </div>
+</article>
+
+<style>
+  .termin {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    background: var(--flaeche);
+    border: 1px solid var(--linie);
+    border-radius: var(--radius);
+    box-shadow: var(--schatten);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .termin:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--ziegel) 40%, var(--linie)); }
+  .termin__datum {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--ziegel-hell);
+    color: var(--ziegel);
+    border-radius: 14px;
+    padding: 0.6rem 0;
+    line-height: 1;
+    align-self: start;
+  }
+  .termin__wt, .termin__monat { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+  .termin__tag { font-family: var(--serif); font-size: 2rem; font-weight: 600; margin: 0.2rem 0; }
+  .termin__verein { font-size: 0.78rem; font-weight: 600; color: var(--moos); letter-spacing: 0.04em; }
+  .termin__inhalt { min-width: 0; }
+  .termin h3 { margin: 0.15rem 0 0.35rem; font-size: 1.25rem; hyphens: auto; overflow-wrap: break-word; }
+  .termin__meta { color: var(--text-leise); font-size: 0.92rem; margin: 0; }
+  .termin__meta > * + *::before { content: ' · '; }
+  .termin__text { margin: 0.75rem 0 0; }
+  .termin__aktionen { display: flex; gap: 1.25rem; margin: 0.85rem 0 0; font-size: 0.9rem; font-weight: 600; }
+</style>

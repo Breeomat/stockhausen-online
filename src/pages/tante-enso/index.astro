@@ -1,0 +1,71 @@
+---
+import Basis from '../../layouts/Basis.astro';
+---
+<Basis titel="Tante Enso" beschreibung="Tante Enso in Stockhausen: Einkaufen rund um die Uhr im Dorf.">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Einkaufen im Dorf</span>
+    <h1>Tante Enso</h1>
+    <p>Lebensmittel und Dinge des täglichen Bedarfs direkt im Ort – mit Kundenkarte rund um die Uhr, zu festen Servicezeiten auch mit Personal.</p>
+  </section>
+
+  <section class="huelle enso-seite">
+    <div class="schritte">
+      <article class="karte">
+        <span class="schritte__nr">1</span>
+        <h2>Rund um die Uhr</h2>
+        <p>Mit der Tante-Enso-Kundenkarte öffnet sich die Tür auch außerhalb der Servicezeiten. Bezahlt wird an der Selbstbedienungskasse.</p>
+      </article>
+      <article class="karte">
+        <span class="schritte__nr">2</span>
+        <h2>Mit Personal</h2>
+        <p>Zu den Servicezeiten ist der Laden mit Personal besetzt und für alle offen – auch ohne Karte.</p>
+      </article>
+      <article class="karte">
+        <span class="schritte__nr">3</span>
+        <h2>Gemeinsam getragen</h2>
+        <p>Tante Enso lebt davon, dass Menschen aus dem Ort Anteile zeichnen und so den Laden mittragen.</p>
+      </article>
+    </div>
+
+    <div class="karte vor-ort">
+      <h2>Tante Enso in Stockhausen</h2>
+      <dl>
+        <dt>Stand</dt>
+        <dd><span class="fehlt">[fehlt: aktueller Stand – geöffnet, im Aufbau oder geplant]</span></dd>
+        <dt>Adresse</dt>
+        <dd><span class="fehlt">[fehlt: Adresse]</span></dd>
+        <dt>Servicezeiten</dt>
+        <dd><span class="fehlt">[fehlt: Servicezeiten mit Personal]</span></dd>
+        <dt>Kundenkarte &amp; Anteile</dt>
+        <dd><span class="fehlt">[fehlt: wo und wie man Karte bzw. Anteile bekommt]</span></dd>
+        <dt>Ansprechpartner</dt>
+        <dd><span class="fehlt">[fehlt: Kontakt vor Ort]</span></dd>
+      </dl>
+    </div>
+  </section>
+</Basis>
+
+<style>
+  .enso-seite { padding-block: 1rem 5rem; display: grid; gap: 2rem; }
+  .schritte { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1rem; }
+  .schritte article { padding: 1.75rem; }
+  .schritte h2 { font-size: 1.4rem; margin-top: 1rem; }
+  .schritte p { margin: 0; color: var(--text-leise); }
+  .schritte__nr {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--ziegel-hell);
+    color: var(--ziegel);
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  .vor-ort { padding: clamp(1.75rem, 4vw, 2.75rem); }
+  .vor-ort dl { display: grid; grid-template-columns: 12rem 1fr; gap: 0.9rem 1.5rem; margin: 1.5rem 0 0; }
+  .vor-ort dt { font-weight: 600; }
+  .vor-ort dd { margin: 0; }
+  @media (max-width: 640px) { .vor-ort dl { grid-template-columns: 1fr; gap: 0.2rem; } .vor-ort dd { margin-bottom: 0.8rem; } }
+</style>

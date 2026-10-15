@@ -1,0 +1,161 @@
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/inter';
+
+:root {
+  --bg: #f7f3ea;
+  --bg-tief: #efe8d9;
+  --flaeche: #fffdf8;
+  --text: #1e2a22;
+  --text-leise: #5a6a5e;
+  --linie: #e0d8c6;
+  --wald: #1f3d2c;
+  --moos: #3f6b45;
+  --wiese: #8fb069;
+  --ziegel: #b8502a;
+  --ziegel-hell: #f4ddd0;
+  --gold: #d9a441;
+  --schatten: 0 1px 2px rgb(30 42 34 / 0.06), 0 8px 24px -12px rgb(30 42 34 / 0.18);
+  --radius: 18px;
+  --serif: 'Fraunces Variable', Georgia, serif;
+  --sans: 'Inter Variable', system-ui, sans-serif;
+  --breite: 1160px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121a15;
+    --bg-tief: #0d1410;
+    --flaeche: #1a241e;
+    --text: #ecebe4;
+    --text-leise: #a3b0a6;
+    --linie: #2c3a31;
+    --wald: #a9cf9a;
+    --moos: #8fbf86;
+    --wiese: #6f9150;
+    --ziegel: #ec8a62;
+    --ziegel-hell: #3a2419;
+    --gold: #e6b860;
+    --schatten: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--moos); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+a:hover { color: var(--ziegel); }
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-optical-sizing: auto;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--wald);
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 600; }
+h2 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 600; }
+h3 { font-size: 1.3rem; font-weight: 600; }
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+.huelle { width: min(100% - 32px, var(--breite)); margin-inline: auto; }
+
+.abschnitt { padding-block: clamp(3rem, 7vw, 5.5rem); }
+.abschnitt--tief { background: var(--bg-tief); }
+
+.kicker {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ziegel);
+  margin-bottom: 0.75rem;
+}
+
+.kopf-abschnitt {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.kopf-abschnitt h2 { margin: 0; }
+
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  background: var(--wald);
+  color: var(--bg);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.knopf:hover { background: var(--ziegel); color: #fff; transform: translateY(-1px); }
+.knopf--leise { background: transparent; color: var(--wald); box-shadow: inset 0 0 0 1.5px var(--linie); }
+.knopf--leise:hover { background: var(--flaeche); color: var(--ziegel); }
+
+.karte {
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  box-shadow: var(--schatten);
+}
+
+.leer {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  color: var(--text-leise);
+  border: 1.5px dashed var(--linie);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--flaeche) 50%, transparent);
+}
+.leer strong { display: block; font-family: var(--serif); font-size: 1.25rem; color: var(--text); margin-bottom: 0.25rem; }
+
+.fehlt {
+  background: var(--ziegel-hell);
+  color: var(--ziegel);
+  padding: 0.05em 0.4em;
+  border-radius: 6px;
+  font-size: 0.92em;
+  font-weight: 500;
+}
+
+.seitenkopf { padding-block: clamp(2.5rem, 6vw, 4.5rem) 1rem; }
+.seitenkopf p { font-size: 1.15rem; color: var(--text-leise); max-width: 60ch; }
+
+.fliesstext { max-width: 68ch; }
+.fliesstext h2 { font-size: 1.6rem; margin-top: 2.2rem; }
+.fliesstext h3 { margin-top: 1.6rem; }
+
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

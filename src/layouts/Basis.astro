@@ -1,0 +1,212 @@
+---
+import '../styles/global.css';
+import Zeichen from '../components/Zeichen.astro';
+import { url, navigation } from '../lib/site';
+
+interface Props {
+  titel?: string;
+  beschreibung?: string;
+}
+
+const { titel, beschreibung = 'Neuigkeiten, Termine, Plakate und Geschichten aus Stockhausen, Ortsteil von Herbstein im Vogelsberg.' } = Astro.props;
+const seitentitel = titel ? `${titel} · Stockhausen` : 'Stockhausen · Ortsteil von Herbstein';
+const aktuell = Astro.url.pathname;
+const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.startsWith(url(href)));
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{seitentitel}</title>
+    <meta name="description" content={beschreibung} />
+    <meta name="theme-color" content="#1f3d2c" />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <link rel="alternate" type="text/calendar" title="Termine Stockhausen" href={url('termine.ics')} />
+    <meta property="og:title" content={seitentitel} />
+    <meta property="og:description" content={beschreibung} />
+    <meta property="og:locale" content="de_DE" />
+  </head>
+  <body>
+    <a class="springen" href="#inhalt">Zum Inhalt springen</a>
+    <header class="kopf">
+      <div class="huelle kopf__innen">
+        <a class="marke" href={url('')}>
+          <Zeichen />
+          <span>
+            <strong>Stockhausen</strong>
+            <small>Herbstein · Vogelsberg</small>
+          </span>
+        </a>
+        <button class="menue-knopf" aria-expanded="false" aria-controls="hauptmenue">
+          <span class="menue-knopf__striche" aria-hidden="true"></span>
+          <span class="sr">Menü</span>
+        </button>
+        <nav id="hauptmenue" class="menue" aria-label="Hauptmenü">
+          {navigation.map(({ href, label }) => (
+            <a href={url(href)} aria-current={istAktiv(href) ? 'page' : undefined}>{label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main id="inhalt">
+      <slot />
+    </main>
+
+    <footer class="fuss">
+      <div class="huelle fuss__innen">
+        <div>
+          <a class="marke marke--fuss" href={url('')}>
+            <Zeichen groesse={44} />
+            <span>
+              <strong>Stockhausen</strong>
+              <small>36358 Herbstein</small>
+            </span>
+          </a>
+          <p class="fuss__text">Die Dorfseite für Stockhausen im Vogelsberg – mit Terminen aller Vereine, Plakaten und Geschichten aus dem Ort.</p>
+        </div>
+        <nav aria-label="Seiten">
+          <h2>Seiten</h2>
+          {navigation.map(({ href, label }) => <a href={url(href)}>{label}</a>)}
+        </nav>
+        <nav aria-label="Service">
+          <h2>Service</h2>
+          <a href={url('termine/#abo')}>Kalender abonnieren</a>
+          <a href={url('impressum/')}>Impressum</a>
+          <a href={url('datenschutz/')}>Datenschutz</a>
+        </nav>
+      </div>
+      <div class="huelle fuss__zeile">
+        <span>© {new Date().getFullYear()} stockhausen-online.de</span>
+        <span>Ohne Cookies, ohne Tracking.</span>
+      </div>
+    </footer>
+
+    <script>
+      const knopf = document.querySelector<HTMLButtonElement>('.menue-knopf');
+      const menue = document.getElementById('hauptmenue');
+      knopf?.addEventListener('click', () => {
+        const offen = knopf.getAttribute('aria-expanded') === 'true';
+        knopf.setAttribute('aria-expanded', String(!offen));
+        menue?.classList.toggle('offen', !offen);
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  .springen {
+    position: absolute;
+    left: -999px;
+    top: 0.5rem;
+    background: var(--wald);
+    color: var(--bg);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    z-index: 100;
+  }
+  .springen:focus { left: 1rem; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+  .kopf {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: saturate(1.4) blur(14px);
+    -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    border-bottom: 1px solid color-mix(in srgb, var(--linie) 70%, transparent);
+  }
+  .kopf__innen { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 68px; }
+
+  .marke { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--text); }
+  .marke span { display: flex; flex-direction: column; line-height: 1.15; }
+  .marke strong { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--wald); }
+  .marke small { font-size: 0.75rem; color: var(--text-leise); letter-spacing: 0.04em; }
+
+  .menue { display: flex; gap: 0.25rem; }
+  .menue a {
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  .menue a:hover { background: var(--flaeche); color: var(--ziegel); }
+  .menue a[aria-current='page'] { background: var(--wald); color: var(--bg); }
+
+  .menue-knopf { display: none; }
+
+  @media (max-width: 760px) {
+    .menue-knopf {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--flaeche);
+      box-shadow: inset 0 0 0 1px var(--linie);
+      cursor: pointer;
+    }
+    .menue-knopf__striche, .menue-knopf__striche::before, .menue-knopf__striche::after {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+    .menue-knopf__striche::before, .menue-knopf__striche::after { content: ''; position: absolute; left: 0; }
+    .menue-knopf__striche::before { top: -6px; }
+    .menue-knopf__striche::after { top: 6px; }
+    .menue-knopf[aria-expanded='true'] .menue-knopf__striche { background: transparent; }
+    .menue-knopf[aria-expanded='true'] .menue-knopf__striche::before { transform: translateY(6px) rotate(45deg); }
+    .menue-knopf[aria-expanded='true'] .menue-knopf__striche::after { transform: translateY(-6px) rotate(-45deg); }
+
+    .menue {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      flex-direction: column;
+      padding: 0.75rem 16px 1.25rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--linie);
+      box-shadow: var(--schatten);
+    }
+    .menue.offen { display: flex; }
+    .menue a { padding: 0.8rem 1rem; font-size: 1.05rem; }
+  }
+
+  .fuss { background: var(--wald); color: #dfe8df; margin-top: 0; }
+  @media (prefers-color-scheme: dark) { .fuss { background: var(--bg-tief); border-top: 1px solid var(--linie); } }
+  .fuss__innen {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2.5rem;
+    padding-block: 3.5rem 2.5rem;
+  }
+  .fuss .marke strong { color: #fff; }
+  .fuss .marke small { color: #b9c8bb; }
+  .fuss__text { margin-top: 1rem; max-width: 38ch; color: #b9c8bb; font-size: 0.95rem; }
+  .fuss nav { display: flex; flex-direction: column; gap: 0.45rem; }
+  .fuss h2 { font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+  .fuss nav a { color: #dfe8df; text-decoration: none; }
+  .fuss nav a:hover { color: #fff; text-decoration: underline; }
+  .fuss__zeile {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    padding-block: 1.25rem 2rem;
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+    font-size: 0.85rem;
+    color: #9fb2a3;
+  }
+  @media (max-width: 760px) { .fuss__innen { grid-template-columns: 1fr 1fr; } .fuss__innen > div { grid-column: 1 / -1; } }
+</style>

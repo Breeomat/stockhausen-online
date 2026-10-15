@@ -1,0 +1,9 @@
+# Plakate. Bilddatei nach src/assets/plakate/ legen, hier eintragen.
+# Nach "gueltig_bis" wandert das Plakat automatisch ins Archiv.
+#
+# - id: kirmes-2026
+#   titel: Kirmes 2026
+#   bild: kirmes-2026.jpg
+#   verein: Burschenschaft
+#   gueltig_bis: 2026-11-15
+[]

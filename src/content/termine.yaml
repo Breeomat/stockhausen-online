@@ -1,0 +1,12 @@
+# Termine aller Vereine. Ein Eintrag je Termin, Reihenfolge egal.
+# Pflicht: id (eindeutig, z. B. 2026-11-kirmes), titel, datum, verein
+# Optional: bis (mehrtägig), beginn, ende, ort, text, plakat (id aus plakate.yaml), link
+#
+# - id: 2026-11-14-martinsumzug
+#   titel: Martinsumzug
+#   datum: 2026-11-14
+#   beginn: "17:30"
+#   ort: Kirche
+#   verein: Kindergarten
+#   text: Anschließend Martinsfeuer und Weckmänner.
+[]

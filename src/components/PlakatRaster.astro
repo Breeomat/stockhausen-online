@@ -1,0 +1,98 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { Plakat } from '../lib/plakate';
+
+interface Props { liste: Plakat[]; archiv?: boolean }
+const { liste, archiv = false } = Astro.props;
+const gross = await Promise.all(liste.map((p) => getImage({ src: p.bild, width: Math.min(p.bild.width, 1400), format: 'webp' })));
+const bis = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long' }).format(new Date(`${iso}T12:00:00`));
+---
+<ul class:list={['plakate', { 'plakate--archiv': archiv }]}>
+  {liste.map((p, i) => (
+    <li>
+      <button class="plakat" data-gross={gross[i].src} data-titel={p.data.titel}>
+        <Image src={p.bild} alt={`Plakat: ${p.data.titel}`} widths={[320, 480, 720]} sizes="(max-width: 640px) 50vw, 280px" />
+      </button>
+      <p class="plakat__unter">
+        <strong>{p.data.titel}</strong>
+        <span>{[p.data.verein, archiv ? null : `bis ${bis(p.data.gueltig_bis)}`].filter(Boolean).join(' · ')}</span>
+      </p>
+    </li>
+  ))}
+</ul>
+
+<dialog class="leuchtkasten" aria-label="Plakat in groß">
+  <form method="dialog"><button class="leuchtkasten__zu" aria-label="Schließen">×</button></form>
+  <img alt="" />
+</dialog>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.plakat').forEach((knopf) => {
+    knopf.addEventListener('click', () => {
+      const kasten = knopf.closest('ul')?.nextElementSibling as HTMLDialogElement | null;
+      const bild = kasten?.querySelector('img');
+      if (!kasten || !bild) return;
+      bild.src = knopf.dataset.gross ?? '';
+      bild.alt = `Plakat: ${knopf.dataset.titel}`;
+      kasten.showModal();
+    });
+  });
+  document.querySelectorAll<HTMLDialogElement>('.leuchtkasten').forEach((kasten) => {
+    kasten.addEventListener('click', (e) => { if (e.target === kasten) kasten.close(); });
+  });
+</script>
+
+<style>
+  .plakate {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: 2rem 1.5rem;
+  }
+  @media (max-width: 520px) { .plakate { grid-template-columns: 1fr 1fr; gap: 1.5rem 1rem; } }
+  .plakat {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: var(--flaeche);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: zoom-in;
+    box-shadow: var(--schatten);
+    transform: rotate(-0.6deg);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .plakate li:nth-child(even) .plakat { transform: rotate(0.7deg); }
+  .plakat:hover, .plakate li:nth-child(even) .plakat:hover { transform: rotate(0) scale(1.02); }
+  .plakat img { width: 100%; aspect-ratio: 1 / 1.414; object-fit: cover; }
+  .plakate--archiv .plakat { filter: grayscale(0.6); opacity: 0.85; }
+  .plakat__unter { margin: 0.75rem 0 0; display: flex; flex-direction: column; font-size: 0.92rem; line-height: 1.35; }
+  .plakat__unter span { color: var(--text-leise); font-size: 0.85rem; }
+
+  .leuchtkasten {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    max-width: min(92vw, 820px);
+    max-height: 92vh;
+  }
+  .leuchtkasten::backdrop { background: rgb(10 16 12 / 0.82); backdrop-filter: blur(4px); }
+  .leuchtkasten img { max-height: 88vh; width: auto; margin-inline: auto; border-radius: 8px; }
+  .leuchtkasten__zu {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 0;
+    background: #fff;
+    color: #1e2a22;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+</style>

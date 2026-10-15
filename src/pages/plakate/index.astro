@@ -1,0 +1,47 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import PlakatRaster from '../../components/PlakatRaster.astro';
+import { plakate } from '../../lib/plakate';
+
+const { aktuell, archiv } = await plakate();
+---
+<Basis titel="Plakatwand" beschreibung="Aktuelle Plakate der Vereine aus Stockhausen.">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Plakatwand</span>
+    <h1>Aktuell ausgehängt</h1>
+    <p>Die Plakate der Vereine – zum Vergrößern antippen. Nach der Veranstaltung wandern sie ins Archiv.</p>
+  </section>
+
+  <section class="huelle plakat-seite">
+    {aktuell.length > 0 ? (
+      <PlakatRaster liste={aktuell} />
+    ) : (
+      <div class="leer">
+        <strong>Noch keine Plakate ausgehängt.</strong>
+        Hier erscheinen bald die Plakate der Vereine.
+      </div>
+    )}
+
+    {archiv.length > 0 && (
+      <details class="archiv">
+        <summary>Archiv ({archiv.length})</summary>
+        <PlakatRaster liste={archiv} archiv />
+      </details>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .plakat-seite { padding-block: 1rem 5rem; }
+  .archiv { margin-top: 4rem; }
+  .archiv summary {
+    cursor: pointer;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--wald);
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--linie);
+    margin-bottom: 2rem;
+  }
+</style>
