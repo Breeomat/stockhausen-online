@@ -1,6 +1,7 @@
 ---
 import Basis from '../layouts/Basis.astro';
-import Landschaft from '../components/Landschaft.astro';
+import { Image } from 'astro:assets';
+import luftbild from '../assets/fotos/stockhausen-luftbild.jpg';
 import TerminKarte from '../components/TerminKarte.astro';
 import PlakatRaster from '../components/PlakatRaster.astro';
 import { kommendeTermine } from '../lib/termine';
@@ -20,6 +21,7 @@ const demnaechst = [
 ---
 <Basis>
   <section class="held">
+    <Image class="held__bild" src={luftbild} alt="" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
     <div class="huelle held__innen">
       <span class="kicker">36358 Herbstein · Vogelsberg</span>
       <h1>Willkommen in <em>Stockhausen</em></h1>
@@ -29,7 +31,7 @@ const demnaechst = [
         <a class="knopf knopf--leise" href={url('plakate/')}>Zur Plakatwand</a>
       </div>
     </div>
-    <Landschaft />
+    <span class="held__foto">Luftbild: Marc Ahne</span>
   </section>
 
   {aktionLaeuft() && (
@@ -126,16 +128,39 @@ const demnaechst = [
 
 <style>
   .held {
-    background:
-      radial-gradient(1200px 500px at 85% -10%, color-mix(in srgb, var(--gold) 22%, transparent), transparent 60%),
-      radial-gradient(900px 500px at 0% 0%, color-mix(in srgb, var(--aprikose) 25%, transparent), transparent 60%),
-      var(--bg);
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: clamp(480px, 78vh, 760px);
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+    color: #fff;
   }
-  .held__innen { padding-top: clamp(3rem, 9vw, 7rem); }
-  .held h1 { max-width: 14ch; margin-bottom: 1.25rem; }
-  .held h1 em { font-style: italic; font-weight: 500; color: var(--ziegel); }
-  .held__text { font-size: clamp(1.1rem, 1.8vw, 1.3rem); max-width: 46ch; color: var(--text-leise); }
+  .held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; z-index: -2; }
+  .held::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(90deg, rgb(14 32 48 / 0.78) 0%, rgb(14 32 48 / 0.5) 45%, rgb(14 32 48 / 0.05) 80%),
+      linear-gradient(0deg, rgb(14 32 48 / 0.35), transparent 40%);
+  }
+  .held__innen { padding-block: clamp(3rem, 8vw, 6rem); }
+  .held .kicker { color: var(--gold); text-shadow: 0 1px 8px rgb(0 0 0 / 0.4); }
+  .held h1 { max-width: 14ch; margin-bottom: 1.25rem; color: #fff; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
+  .held h1 em { font-style: italic; font-weight: 500; color: #ffc89e; }
+  .held__text { font-size: clamp(1.1rem, 1.8vw, 1.3rem); max-width: 46ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
   .held__knoepfe { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+  .held .knopf { background: var(--gold); color: #2a211c; }
+  .held .knopf:hover { background: #fff; color: #2a211c; }
+  .held .knopf--leise { background: rgb(255 255 255 / 0.12); color: #fff; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.6); backdrop-filter: blur(4px); }
+  .held .knopf--leise:hover { background: #fff; color: #2a211c; }
+  .held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
+  @media (max-width: 640px) {
+    .held::before { background: linear-gradient(180deg, rgb(14 32 48 / 0.7), rgb(14 32 48 / 0.55)); }
+  }
   .abschnitt--direkt { padding-top: 1rem; }
   .hinweis {
     display: flex;
