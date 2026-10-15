@@ -31,8 +31,8 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     <a class="springen" href="#inhalt">Zum Inhalt springen</a>
     <header class="kopf">
       <div class="huelle kopf__innen">
-        <a class="marke" href={url('')} aria-label="Stockhausen, Stadt Herbstein – zur Startseite">
-          <Ortsschild />
+        <a class="marke" href={url('')} aria-label="Stockhausen, Stadt Herbstein, Vogelsbergkreis – zur Startseite">
+          <Ortsschild groesse={0.7} />
         </a>
         <button class="menue-knopf" aria-expanded="false" aria-controls="hauptmenue">
           <span class="menue-knopf__striche" aria-hidden="true"></span>
@@ -54,7 +54,7 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
       <div class="huelle fuss__innen">
         <div>
           <a class="marke marke--fuss" href={url('')} aria-label="Stockhausen, Stadt Herbstein, Vogelsbergkreis – zur Startseite">
-            <Ortsschild voll />
+            <Ortsschild />
           </a>
           <p class="fuss__text">Die Dorfseite für Stockhausen im Vogelsberg – mit Terminen aller Vereine, Plakaten und Geschichten aus dem Ort.</p>
         </div>
@@ -110,7 +110,7 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     -webkit-backdrop-filter: saturate(1.4) blur(14px);
     border-bottom: 1px solid color-mix(in srgb, var(--linie) 70%, transparent);
   }
-  .kopf__innen { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 68px; }
+  .kopf__innen { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 68px; padding-block: 0.45rem; }
 
   .marke { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--text); }
 
