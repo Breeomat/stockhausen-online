@@ -1,13 +1,14 @@
+import type { ImageMetadata } from 'astro';
 import { kommendeTermine } from './termine';
 import feuerwehrFoto from '../assets/fotos/feuerwehr-einsatzabteilung.jpg';
 import svWappen from '../assets/fotos/sv-stockhausen-wappen.png';
 import sportplatzFoto from '../assets/fotos/sv-sportplatz-luftbild.jpg';
 import kircheFoto from '../assets/fotos/stockhausen-kirche.jpg';
 import schlossFoto from '../assets/fotos/stockhausen-schloss.jpg';
-import luftbildFoto from '../assets/fotos/stockhausen-luftbild.jpg';
 import chorFoto from '../assets/fotos/posaunenchor.jpg';
 import gefrierFoto from '../assets/fotos/gefrierhaus-fest.jpg';
 import maibaumFoto from '../assets/fotos/ogv-maibaum.jpg';
+import kirchgemeindeFoto from '../assets/fotos/kirche-stockhausen-aussen.jpg';
 import kirmesFoto from '../assets/fotos/kirmesburschen-gruppe.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
@@ -76,12 +77,18 @@ export const vereinsseiten = [
     href: 'vereine/kirmesburschen/',
     bild: { src: kirmesFoto, nachweis: 'Foto: Kirmesburschen Stockhausen', position: '50% 45%' },
   },
+  {
+    name: 'Ev. Kirchengemeinde Stockhausen-Rixfeld',
+    kurz: 'Kirchengemeinde',
+    seit: 'EKHN · Dekanat Vogelsberg',
+    text: 'Zwei Kirchen, ein Gemeindeleben: Gottesdienste in Stockhausen und Rixfeld, Kirchenmusik, Kinder-, Frauen- und Seniorenarbeit.',
+    href: 'vereine/kirchengemeinde/',
+    bild: { src: kirchgemeindeFoto, nachweis: '', position: '50% 30%' },
+  },
 ];
 
 // Hintergrundbilder für Vereine ohne eigene Seite (Teil des Vereinsnamens → Bild)
-const weitereBilder = [
-  { teil: 'Kirchengemeinde', bild: { src: luftbildFoto, nachweis: 'Foto: Marc Ahne', position: '50% 50%' } },
-];
+const weitereBilder: { teil: string; bild: { src: ImageMetadata; nachweis: string; position?: string } }[] = [];
 export const bildFuer = (name: string) => weitereBilder.find((b) => name.includes(b.teil))?.bild;
 
 const hatSeite = (name: string) => vereinsseiten.some((v) => name.includes(v.kurz));

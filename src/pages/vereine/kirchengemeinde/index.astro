@@ -1,0 +1,159 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import aussenFoto from '../../../assets/fotos/kirche-stockhausen-aussen.jpg';
+import innenFoto from '../../../assets/fotos/kirche-rixfeld-innen.jpg';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+
+// Quelle: Gemeindeprofil „Ev. Kirchengemeinde Stockhausen-Rixfeld“ (Drive, Oktober 2026)
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Kirchengemeinde'));
+
+const gemeindeleben = [
+  { titel: 'Gottesdienste', text: 'Sonntags im Wechsel zwischen Stockhausen und Rixfeld, dazu Festgottesdienste an Ostern, zur Konfirmation, an Erntedank und Weihnachten.' },
+  { titel: 'Kirchenmusik', text: 'Der Ev. Posaunenchor Stockhausen begleitet die Gottesdienste, dazu kommen Gastchöre und Ensembles.', link: { href: 'vereine/posaunenchor/', text: 'Zum Posaunenchor' } },
+  { titel: 'Kinder und Jugend', text: 'Enge Verbindung zur Kindertagesstätte im Dorf, wo 1841 der älteste Dorfkindergarten im Großherzogtum Hessen entstand. Konfirmandenunterricht gemeinsam im Nachbarschaftsraum.' },
+  { titel: 'Gemeinschaft', text: 'Frauenkreis und Frauenhilfe, Seniorennachmittage und Besuchsdienst zu Jubiläen.' },
+];
+
+const team = [
+  'Pfarrer Johannes Cunradi',
+  'Pfarrerin Heidi Kuhfus-Pithan',
+  'Pfarrer Daniel Meyer',
+  'Pfarrerin Susanne Weide',
+  'Gemeindepädagogin Maria Hoyer',
+  'Gemeindepädagogin Ruth Martin-Weigang',
+];
+---
+<Basis titel="Ev. Kirchengemeinde Stockhausen-Rixfeld" beschreibung="Evangelische Kirchengemeinde Stockhausen-Rixfeld: zwei Kirchen, Gottesdienste, Kirchenmusik und Gemeindeleben im Nachbarschaftsraum Hoher Vogelsberg.">
+  <section class="kg-held">
+    <Image class="kg-held__bild" src={innenFoto} alt="" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="huelle kg-kopf">
+      <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+      <span class="kicker">Evangelische Kirche in Hessen und Nassau · Dekanat Vogelsberg</span>
+      <h1>Ev. Kirchengemeinde Stockhausen-Rixfeld</h1>
+      <p>Gemeinschaft im Glauben – mitten im Hohen Vogelsberg. Die beiden Kirchen in Stockhausen und Rixfeld sind Orte des Gebets, der Besinnung und der Begegnung.</p>
+    </div>
+    <span class="kg-held__foto">Gottesdienst in der Kirche Rixfeld · Foto: <span class="fehlt">[fehlt: Fotograf]</span></span>
+  </section>
+
+  <section class="huelle kg">
+    <div class="spalten">
+      <div class="text">
+        <span class="kicker">Gemeinde</span>
+        <h2>Gemeindeleben über Generationen</h2>
+        <p>Eingebunden in den Nachbarschaftsraum Hoher Vogelsberg gestaltet die Gemeinde ein vielseitiges Gemeindeleben: von festlichen Gottesdiensten und der Bläsermusik des Posaunenchors über Angebote für Familien und Kinder bis zu geselligen Seniorennachmittagen.</p>
+        <p>Die Gemeinde lädt herzlich ein, die Gottesdienste zu besuchen, die historischen Kirchenräume zu entdecken und Teil der dörflichen Gemeinschaft zu sein.</p>
+        <ul class="leben">
+          {gemeindeleben.map(({ titel, text, link }) => (
+            <li class="karte">
+              <h3>{titel}</h3>
+              <p>{text}</p>
+              {link && <a href={url(link.href)}>{link.text} →</a>}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <aside class="seitenleiste">
+        <div class="karte kasten">
+          <h3>Gemeindebüro Stockhausen</h3>
+          <dl class="liste">
+            <div><dt>Adresse</dt><dd>Am Bockelberg 2, 36358 Herbstein-Stockhausen</dd></div>
+            <div><dt>Telefon</dt><dd><a href="tel:+496647217">06647 217</a></dd></div>
+            <div><dt>E-Mail</dt><dd><a href="mailto:kirchengemeinde.stockhausen@ekhn.de">kirchengemeinde.stockhausen@ekhn.de</a></dd></div>
+            <div><dt>Website</dt><dd><a href="https://kirchen-stockhausen-rixfeld.ekhn.de" rel="noopener">kirchen-stockhausen-rixfeld.ekhn.de</a></dd></div>
+          </dl>
+        </div>
+        <div class="karte kasten">
+          <h3>Kooperationsbüro Nachbarschaftsraum</h3>
+          <dl class="liste">
+            <div><dt>Adresse</dt><dd>Wallweg 1, 36358 Herbstein</dd></div>
+            <div><dt>Telefon</dt><dd><a href="tel:+4966438044">06643 8044</a></dd></div>
+            <div><dt>Pfarramtssekretärin</dt><dd>Ilona Jöckel</dd></div>
+          </dl>
+        </div>
+        <div class="karte kasten">
+          <h3>Pfarr- und Seelsorgeteam</h3>
+          <ul class="namen">{team.map((n) => <li>{n}</li>)}</ul>
+        </div>
+      </aside>
+    </div>
+
+    <div>
+      <span class="kicker">Zwei Gotteshäuser</span>
+      <h2>Die Kirchen</h2>
+      <div class="kirchen">
+        <article class="karte kirche">
+          <Image src={aussenFoto} alt="Evangelische Kirche Stockhausen aus rotem Sandstein mit Frontturm, davor das Ehrenmal" widths={[480, 800]} sizes="(max-width: 860px) 100vw, 560px" />
+          <div class="kirche__text">
+            <span class="kicker">Am Bockelberg 4</span>
+            <h3>Evangelische Kirche Stockhausen</h3>
+            <p>Neuromanische Saalkirche aus heimischem Sandsteinquader-Mauerwerk, erbaut 1847–1849 anstelle des baufälligen Vorgängerbaus und am 1. November 1849 eingeweiht. Helles Kirchenschiff mit dreiseitiger Holzempore und Orgel der Orgelbauwerkstatt Förster & Nicolaus.</p>
+            <p class="kirche__foto">Foto: <span class="fehlt">[fehlt: Fotograf]</span></p>
+          </div>
+        </article>
+        <article class="karte kirche">
+          <Image src={innenFoto} alt="Innenraum der Kirche Rixfeld mit Holzdecke, Empore und Orgel während eines Gottesdienstes" widths={[480, 800]} sizes="(max-width: 860px) 100vw, 560px" />
+          <div class="kirche__text">
+            <span class="kicker">Vogelsbergstraße 30, Rixfeld</span>
+            <h3>Evangelische Kirche Rixfeld</h3>
+            <p>Denkmalgeschützte Dorfkirche im historischen Ortskern von Rixfeld mit holzgetäfelter Decke und warmer Akustik. Hier finden traditionsreiche Fest- und Gedenkgottesdienste statt, etwa am alljährlichen „Verlobten Tag“.</p>
+            <p class="kirche__foto">Foto: <span class="fehlt">[fehlt: Fotograf]</span></p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .kg-held { position: relative; isolation: isolate; overflow: hidden; margin-bottom: 2.5rem; color: #fff; }
+  .kg-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; z-index: -2; }
+  .kg-held::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(12 18 24 / 0.85) 0%, rgb(12 18 24 / 0.6) 55%, rgb(12 18 24 / 0.25) 100%); }
+  .kg-held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
+  .kg-kopf { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .kg-kopf h1 { color: #fff; max-width: 20ch; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
+  .kg-kopf p { font-size: 1.15rem; max-width: 60ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
+  .kg-kopf .kicker { color: var(--gold); }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; color: #fff; }
+
+  .kg { padding-block: 0 5rem; display: grid; gap: 3.5rem; }
+  .spalten { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
+  .text p { max-width: 68ch; }
+  .leben { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
+  .leben li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
+  .leben h3 { margin: 0 0 0.4rem; font-size: 1.2rem; }
+  .leben p { margin: 0 0 0.5rem; color: var(--text-leise); }
+  .leben a { font-size: 0.9rem; font-weight: 600; }
+
+  .seitenleiste { display: grid; gap: 1rem; }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin: 0 0 0.75rem; }
+  .liste { margin: 0; display: grid; }
+  .liste div, .namen li { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child, .namen li:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+  .namen { list-style: none; margin: 0; padding: 0; font-weight: 600; }
+
+  .kirchen { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .kirche { overflow: hidden; padding: 0; display: flex; flex-direction: column; }
+  .kirche img { width: 100%; height: 320px; object-fit: cover; }
+  .kirche:first-child img { object-position: 50% 30%; }
+  .kirche__text { padding: 1.25rem 1.5rem 1.5rem; }
+  .kirche__text h3 { margin: 0.3rem 0 0.5rem; font-size: 1.3rem; }
+  .kirche__text p { margin: 0; color: var(--text-leise); }
+  .kirche__text .kirche__foto { margin-top: 0.75rem; font-size: 0.8rem; }
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+</style>
