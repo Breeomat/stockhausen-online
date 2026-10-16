@@ -8,14 +8,18 @@ import { kommendeTermine } from '../lib/termine';
 import { plakate } from '../lib/plakate';
 import { url } from '../lib/site';
 import { aktion, aktionLaeuft, baustelle, baustelleAktiv } from '../lib/enso';
-import { vereinsseiten, weitereVereine } from '../lib/vereine';
+import { vereinsseiten } from '../lib/vereine';
 import VereinKarte from '../components/VereinKarte.astro';
 import BereichSymbol from '../components/BereichSymbol.astro';
 import { getCollection } from 'astro:content';
 
 const naechste = (await kommendeTermine()).slice(0, 4);
 const { aktuell } = await plakate();
-const weitere = await weitereVereine();
+// Vereine auf der Startseite: vier Stück, im Browser bei jedem Besuch zufällig gewählt.
+// Ohne JavaScript (und bis das Skript läuft) wechselt die Auswahl täglich mit dem nächtlichen Neubau.
+const VEREINE_START = 4;
+const tag = Math.floor(Date.now() / 86_400_000);
+const startAuswahl = Array.from({ length: Math.min(VEREINE_START, vereinsseiten.length) }, (_, k) => (tag * VEREINE_START + k) % vereinsseiten.length);
 const bereichNamen = { Einkaufen: 'Einkaufen', Gastronomie: 'Essen und Trinken', Handwerk: 'Handwerk', Landwirtschaft: 'Landwirtschaft', Dienstleistung: 'Dienstleistungen', Einrichtung: 'Einrichtungen' } as const;
 const verzeichnis = await getCollection('verzeichnis');
 const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
@@ -86,21 +90,14 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
         </div>
         <a class="knopf knopf--leise" href={url('vereine/')}>Alle Vereine</a>
       </div>
-      <div class="vereine-raster">
-        {vereinsseiten.map((v) => (
-          <VereinKarte name={v.name} kicker={v.seit} text={v.text} href={url(v.href)} linkText="Zur Vereinsseite" bild={v.bild} wappen={v.wappen} />
-        ))}
-        {weitere.length > 0 && (
-          <div class="karte verein-liste">
-            <h3>Weitere Vereine</h3>
-            <ul>
-            {weitere.map((name) => (
-              <li><a href={`${url('termine/')}?verein=${encodeURIComponent(name)}`}><span>{name}</span><small>Termine →</small></a></li>
-            ))}
-            </ul>
+      <div class="vereine-raster" data-anzahl={VEREINE_START}>
+        {vereinsseiten.map((v, i) => (
+          <div class="verein-platz" hidden={!startAuswahl.includes(i)}>
+            <VereinKarte name={v.name} kicker={v.seit} text={v.text} href={url(v.href)} linkText="Zur Vereinsseite" bild={v.bild} wappen={v.wappen} />
           </div>
-        )}
+        ))}
       </div>
+      <p class="vereine-mehr">{vereinsseiten.length} Vereine stellen sich vor – bei jedem Besuch erscheinen hier vier andere. <a href={url('vereine/')}>Alle Vereine ansehen →</a></p>
     </div>
   </section>
 
@@ -163,6 +160,19 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
     </div>
   </section>
 </Basis>
+
+<script>
+  // Bei jedem Besuch vier zufällige Vereine zeigen
+  const raster = document.querySelector<HTMLElement>('.vereine-raster');
+  if (raster) {
+    const plaetze = [...raster.querySelectorAll<HTMLElement>('.verein-platz')];
+    const anzahl = Number(raster.dataset.anzahl) || 4;
+    const gemischt = plaetze.map((p) => ({ p, r: Math.random() })).sort((a, b) => a.r - b.r).map(({ p }) => p);
+    const auswahl = new Set(gemischt.slice(0, anzahl));
+    plaetze.forEach((p) => (p.hidden = !auswahl.has(p)));
+    gemischt.slice(0, anzahl).forEach((p) => raster.append(p));
+  }
+</script>
 
 <style>
   .held {
@@ -271,19 +281,12 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
   .wmw__bereiche .wmw__alle:hover { background: var(--lagune); color: var(--bg); }
   @media (max-width: 860px) { .wmw { grid-template-columns: auto 1fr; } .wmw__bereiche { grid-column: 1 / -1; min-width: 0; } }
   @media (max-width: 520px) { .wmw { grid-template-columns: 1fr; } .wmw__symbol { width: 84px; height: 84px; } }
-  .vereine-raster { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  @media (max-width: 1000px) { .vereine-raster { grid-template-columns: 1fr 1fr; } .verein-liste { grid-column: 1 / -1 !important; } }
+  .vereine-raster { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .verein-platz { display: grid; }
+  .verein-platz[hidden] { display: none; }
+  .vereine-mehr { margin: 1.25rem 0 0; color: var(--text-leise); font-size: 0.95rem; }
+  .vereine-mehr a { font-weight: 600; }
   @media (max-width: 640px) { .vereine-raster { grid-template-columns: 1fr; } }
-  .verein-liste { padding: 1.5rem 1.75rem; }
-  /* Beginnt die Liste eine neue Reihe, nimmt sie die ganze Breite ein */
-  .verein-liste:nth-child(3n + 1) { grid-column: 1 / -1; }
-  .verein-liste:nth-child(3n + 2) { grid-column: span 2; }
-  .verein-liste h3 { margin-bottom: 0.5rem; }
-  .verein-liste ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); column-gap: 2.5rem; }
-  .verein-liste li { border-top: 1px solid var(--linie); }
-  .verein-liste a { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.9rem 0; text-decoration: none; color: var(--text); font-weight: 500; }
-  .verein-liste a:hover { color: var(--ziegel); }
-  .verein-liste small { color: var(--lagune); font-weight: 600; white-space: nowrap; }
   .wissen { padding: clamp(1.75rem, 4vw, 2.5rem); }
   .wissen ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
   .wissen li { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; align-items: baseline; }
