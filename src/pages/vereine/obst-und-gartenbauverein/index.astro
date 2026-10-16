@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
+import maibaumFoto from '../../../assets/fotos/ogv-maibaum.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
@@ -15,11 +17,15 @@ const jahreslauf = [
 ];
 ---
 <Basis titel="Obst- und Gartenbauverein" beschreibung="Obst- und Gartenbauverein Stockhausen 1899: Streuobstwiesen, Baumschnitt, Keltern und Dorfverschönerung.">
-  <section class="huelle seitenkopf">
+  <section class="ogv-held">
+    <Image class="ogv-held__bild" src={maibaumFoto} alt="" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="huelle ogv-kopf">
     <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
     <span class="kicker">Verein · seit 1899</span>
     <h1>Obst- und Gartenbauverein Stockhausen 1899</h1>
     <p>Frisches Obst von heimischen Wiesen, artenreiche Hausgärten und ein grünes Dorfbild: Ob Obstbaumschnitt, Tipps für den Gemüsegarten oder gemeinsames Keltern zur Erntezeit – hier packen Jung und Alt gemeinsam an.</p>
+    </div>
+    <span class="ogv-held__foto">Maibaum-Aufstellen · Foto: <span class="fehlt">[fehlt: Fotograf]</span></span>
   </section>
 
   <section class="huelle ogv">
@@ -57,8 +63,16 @@ const jahreslauf = [
 </Basis>
 
 <style>
-  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
-  .ogv { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .ogv-held { position: relative; isolation: isolate; overflow: hidden; margin-bottom: 2.5rem; color: #fff; }
+  .ogv-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; z-index: -2; }
+  .ogv-held::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(12 18 24 / 0.82) 0%, rgb(12 18 24 / 0.55) 55%, rgb(12 18 24 / 0.2) 100%); }
+  .ogv-held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
+  .ogv-kopf { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .ogv-kopf h1 { color: #fff; max-width: 20ch; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
+  .ogv-kopf p { font-size: 1.15rem; max-width: 60ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
+  .ogv-kopf .kicker { color: var(--gold); }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; color: #fff; }
+  .ogv { padding-block: 0 5rem; display: grid; gap: 3.5rem; }
   .text p { max-width: 68ch; }
   .jahreslauf { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
   .jahreslauf li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }

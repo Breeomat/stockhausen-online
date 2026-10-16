@@ -7,6 +7,7 @@ import schlossFoto from '../assets/fotos/stockhausen-schloss.jpg';
 import luftbildFoto from '../assets/fotos/stockhausen-luftbild.jpg';
 import chorFoto from '../assets/fotos/posaunenchor.jpg';
 import gefrierFoto from '../assets/fotos/gefrierhaus-fest.jpg';
+import maibaumFoto from '../assets/fotos/ogv-maibaum.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
 export const vereinsseiten = [
@@ -64,6 +65,7 @@ export const vereinsseiten = [
     seit: 'seit 1899',
     text: 'Streuobstwiesen, Baumschnittkurse, Keltern im Herbst und ein grünes Dorfbild.',
     href: 'vereine/obst-und-gartenbauverein/',
+    bild: { src: maibaumFoto, nachweis: '', position: '50% 30%' },
   },
 ];
 
