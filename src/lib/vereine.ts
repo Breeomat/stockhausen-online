@@ -4,6 +4,7 @@ import svWappen from '../assets/fotos/sv-stockhausen-wappen.png';
 import sportplatzFoto from '../assets/fotos/sv-sportplatz-luftbild.jpg';
 import kircheFoto from '../assets/fotos/stockhausen-kirche.jpg';
 import schlossFoto from '../assets/fotos/stockhausen-schloss.jpg';
+import luftbildFoto from '../assets/fotos/stockhausen-luftbild.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
 export const vereinsseiten = [
@@ -24,11 +25,19 @@ export const vereinsseiten = [
     wappen: svWappen,
     bild: { src: sportplatzFoto, nachweis: 'Foto: Marc Ahne' },
   },
+  {
+    name: 'Ev. Posaunenchor Stockhausen',
+    kurz: 'Posaunenchor',
+    seit: 'seit 1905',
+    text: 'Blechbläsermusik in Gottesdiensten, bei Ständchen und Dorffesten – von Barock bis Pop. Nachwuchs ist willkommen.',
+    href: 'vereine/posaunenchor/',
+    bild: { src: kircheFoto, nachweis: 'Foto: Marc Ahne', position: '50% 45%' },
+  },
 ];
 
 // Hintergrundbilder für Vereine ohne eigene Seite (Teil des Vereinsnamens → Bild)
 const weitereBilder = [
-  { teil: 'Kirchengemeinde', bild: { src: kircheFoto, nachweis: 'Foto: Marc Ahne', position: '50% 45%' } },
+  { teil: 'Kirchengemeinde', bild: { src: luftbildFoto, nachweis: 'Foto: Marc Ahne', position: '50% 50%' } },
   { teil: 'Dorfgeschichte', bild: { src: schlossFoto, nachweis: 'Foto: Marc Ahne', position: '50% 40%' } },
 ];
 export const bildFuer = (name: string) => weitereBilder.find((b) => name.includes(b.teil))?.bild;

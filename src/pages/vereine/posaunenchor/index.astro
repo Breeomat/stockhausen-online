@@ -1,0 +1,143 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+import kircheFoto from '../../../assets/fotos/stockhausen-kirche.jpg';
+
+// Quelle: Dossier „Posaunenchor Stockhausen Profil & Webreferenz“ (Drive, Oktober 2026)
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Posaunenchor'));
+
+const steckbrief = [
+  ['Gegründet', '1905'],
+  ['Chorleitung', 'Thomas Borrmann'],
+  ['Förderverein', 'Walter Lang (Vorsitz)'],
+  ['Kirchlicher Verbund', 'Dekanat Vogelsberg (EKHN)'],
+];
+
+const einsaetze = [
+  { anlass: 'Kirchliche Hochfeste', ort: 'Ev. Kirche Stockhausen', text: 'Festgottesdienste zu Ostern, Konfirmation, Erntedank und Heiligabend' },
+  { anlass: 'Gedenkfeiern', ort: 'Ehrenmal Stockhausen', text: 'Choralbegleitung zum Volkstrauertag' },
+  { anlass: 'Dörfliche Jubiläen', ort: 'Im Ort', text: 'Ständchen zu runden Geburtstagen und Ehejubiläen' },
+  { anlass: 'Gemeinschaftskonzerte', ort: 'Vogelsberg-Region', text: 'Dekanatsbläsertage und regionale Bläsertreffen' },
+];
+
+const instrumente = ['Trompete', 'Flügelhorn', 'Posaune', 'Tenorhorn', 'Tuba'];
+---
+<Basis titel="Posaunenchor" beschreibung="Evangelischer Posaunenchor Stockhausen: seit 1905 Blechbläsermusik in Kirche und Dorf – Chorleitung, Geschichte, Einsätze und Nachwuchs.">
+  <section class="pc-held">
+    <Image class="pc-held__bild" src={kircheFoto} alt="" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="huelle pc-kopf">
+      <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+      <span class="kicker">Verein · seit 1905</span>
+      <h1>Evangelischer Posaunenchor Stockhausen</h1>
+      <p>Seit 1905 verbindet der Posaunenchor Generationen durch die Freude an der Blechbläsermusik – in festlichen Gottesdiensten in der Dorfkirche, bei Ständchen und bei Dorfveranstaltungen.</p>
+    </div>
+    <span class="pc-held__foto">Foto: Marc Ahne</span>
+  </section>
+
+  <section class="huelle pc">
+    <dl class="steckbrief">
+      {steckbrief.map(([was, wert]) => <div class="karte"><dt>{was}</dt><dd>{wert}</dd></div>)}
+    </dl>
+
+    <div class="spalten">
+      <div>
+        <span class="kicker">Geschichte</span>
+        <h2>Über 120 Jahre Bläsertradition</h2>
+        <p>Gegründet 1905 von Musikbegeisterten im Dorf, begleitet das Blechbläserensemble seither das kirchliche und gesellschaftliche Leben in Stockhausen – ohne Unterbrechung.</p>
+        <p>Ein Symbol dieser Kontinuität ist das historische Gründungs-Flügelhorn. Das über 115 Jahre alte Instrument wurde über Generationen weitergereicht und war für viele Jugendliche das erste Instrument, auf dem sie gelernt haben.</p>
+        <p>Zum 120-jährigen Bestehen gab es einen Dekanatsposaunentag in der evangelischen Kirche Stockhausen: Über 50 Bläserinnen und Bläser aus dem Dekanat Vogelsberg, unter anderem aus Alsfeld, Schlitz, Wallenrod, Rixfeld und Maar, gestalteten gemeinsam einen Festgottesdienst.</p>
+
+        <h3>Repertoire</h3>
+        <p>Von festlicher Kirchenmusik aus Barock und Klassik – etwa „Brass Fantasia“ oder „Lobe den Herrn, meine Seele“ – über zeitgenössische christliche Bläsermusik und Gospels bis zu Pop- und Swing-Arrangements wie „Viva la Vida“.</p>
+        <ul class="instrumente" aria-label="Instrumente im Chor">
+          {instrumente.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+
+      <aside class="seitenleiste">
+        <div class="karte kasten">
+          <h3>Ansprechpartner</h3>
+          <dl class="liste">
+            <div><dt>Chorleitung</dt><dd>Thomas Borrmann</dd></div>
+            <div><dt>Förderverein</dt><dd>Walter Lang</dd></div>
+            <div><dt>Anschrift</dt><dd>c/o Ev. Kirchengemeinde Stockhausen<br />36358 Herbstein-Stockhausen</dd></div>
+          </dl>
+        </div>
+        <div class="karte kasten">
+          <h3>Nachwuchs und Förderverein</h3>
+          <p>Der Förderverein sorgt für Notenmaterial, Reparaturen und Leihinstrumente für Jungbläser. Neue Mitbläser und Nachwuchsbläser sind jederzeit willkommen.</p>
+        </div>
+      </aside>
+    </div>
+
+    <div>
+      <span class="kicker">Im Jahreskreis</span>
+      <h2>Wann der Posaunenchor spielt</h2>
+      <ul class="einsaetze">
+        {einsaetze.map(({ anlass, ort, text }) => (
+          <li class="karte"><span class="einsaetze__ort">{ort}</span><h3>{anlass}</h3><p>{text}</p></li>
+        ))}
+      </ul>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .pc-held { position: relative; isolation: isolate; overflow: hidden; margin-bottom: 2.5rem; color: #fff; }
+  .pc-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; z-index: -2; }
+  .pc-held::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgb(12 18 24 / 0.82) 0%, rgb(12 18 24 / 0.55) 55%, rgb(12 18 24 / 0.2) 100%);
+  }
+  .pc-held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
+  .pc-kopf { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .pc-kopf h1 { color: #fff; max-width: 18ch; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
+  .pc-kopf p { font-size: 1.15rem; max-width: 60ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
+  .pc-kopf .kicker { color: var(--gold); }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; color: #fff; }
+
+  .pc { padding-block: 0 5rem; display: grid; gap: 3.5rem; }
+  .steckbrief { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 1rem; }
+  .steckbrief div { padding: 1.25rem 1.5rem; }
+  .steckbrief dt { font-size: 0.8rem; color: var(--text-leise); }
+  .steckbrief dd { margin: 0.2rem 0 0; font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--ziegel); }
+
+  .spalten { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
+  .spalten p { max-width: 68ch; }
+  .spalten h3 { margin-top: 2rem; }
+  .instrumente { list-style: none; margin: 1rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .instrumente li { padding: 0.3rem 0.8rem; border-radius: 999px; background: var(--ziegel-hell); color: var(--ziegel); font-size: 0.85rem; font-weight: 600; }
+
+  .seitenleiste { display: grid; gap: 1rem; }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin: 0 0 0.75rem; }
+  .kasten p { margin: 0; color: var(--text-leise); }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; }
+
+  .einsaetze { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
+  .einsaetze li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
+  .einsaetze h3 { margin: 0.3rem 0 0.4rem; font-size: 1.2rem; }
+  .einsaetze p { margin: 0; color: var(--text-leise); }
+  .einsaetze__ort { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ziegel); }
+
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+</style>
