@@ -160,6 +160,7 @@ export const chronik: Abschnitt[] = [
       { jahr: '1880', text: 'Gründung der Spar- und Darlehnskasse.' },
       { jahr: '1881', text: 'Im Juli wird die fahrende Landpost eingerichtet.' },
       { jahr: '1883', text: 'Ein Großbrand zerstört die Anwesen von Langes und die Gastwirtschaft Eidmann.' },
+      { jahr: '15. 5. 1889', text: 'Gründung des Obst- und Gartenbauvereins; erster Vorsitzender ist Johannes Oestreich 6.' },
       { jahr: '1890', text: 'Eine große Reparatur der Kirche wird fällig.' },
       { jahr: '1893', text: 'Für die erste Klasse wird eine zweite Schule gebaut, weil die bisherige von Anfang an zu klein war. Die Anwesen Schusterbeiesch und Kieheiches werden ein Raub der Flammen.' },
       { jahr: '1894', text: 'Am 15. Februar wird das neue Schulhaus eingeweiht. Am 12. Dezember gründet Lehrer Weitzel mit 65 Ortsbürgern den „Männerchor Stockhausen“.' },

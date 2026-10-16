@@ -62,9 +62,9 @@ export const vereinsseiten = [
     bild: { src: gefrierFoto, nachweis: 'Foto: Marc Ahne', position: '50% 55%' },
   },
   {
-    name: 'Obst- und Gartenbauverein Stockhausen 1899',
+    name: 'Obst- und Gartenbauverein Stockhausen 1889',
     kurz: 'Gartenbau',
-    seit: 'seit 1899',
+    seit: 'seit 1889',
     text: 'Streuobstwiesen, Baumschnittkurse, Keltern im Herbst und ein grünes Dorfbild.',
     href: 'vereine/obst-und-gartenbauverein/',
     bild: { src: maibaumFoto, nachweis: 'Foto: Marc Ahne', position: '50% 30%' },

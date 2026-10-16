@@ -6,7 +6,7 @@ import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
-// Quelle: Profil-PDF „Obst- und Gartenbauverein Stockhausen 1899“ (Oktober 2026)
+// Quelle: Profil-PDF „Obst- und Gartenbauverein Stockhausen 1899“ (Oktober 2026); Gründungsdatum laut Ortschronik von Hans-Jürgen Döll
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Gartenbau'));
 
 const jahreslauf = [
@@ -17,13 +17,13 @@ const jahreslauf = [
   { zeit: 'Ganzjährig', titel: 'Vorträge und Beratung', text: 'Kompostierung, biologischer Pflanzenschutz und insektenfreundliche Gärten – in der Altfellhalle.' },
 ];
 ---
-<Basis titel="Obst- und Gartenbauverein" beschreibung="Obst- und Gartenbauverein Stockhausen 1899: Streuobstwiesen, Baumschnitt, Keltern und Dorfverschönerung.">
+<Basis titel="Obst- und Gartenbauverein" beschreibung="Obst- und Gartenbauverein Stockhausen 1889: Streuobstwiesen, Baumschnitt, Keltern und Dorfverschönerung.">
   <section class="ogv-held">
     <Image class="ogv-held__bild" src={maibaumFoto} alt="" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
     <div class="huelle ogv-kopf">
     <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
-    <span class="kicker">Verein · seit 1899</span>
-    <h1>Obst- und Gartenbauverein Stockhausen 1899</h1>
+    <span class="kicker">Verein · seit 1889</span>
+    <h1>Obst- und Gartenbauverein Stockhausen 1889</h1>
     <p>Frisches Obst von heimischen Wiesen, artenreiche Hausgärten und ein grünes Dorfbild: Ob Obstbaumschnitt, Tipps für den Gemüsegarten oder gemeinsames Keltern zur Erntezeit – hier packen Jung und Alt gemeinsam an.</p>
     </div>
     <span class="ogv-held__foto">Maibaum-Aufstellen · Foto: Marc Ahne</span>
@@ -33,7 +33,7 @@ const jahreslauf = [
     <div class="text">
       <span class="kicker">Über 125 Jahre</span>
       <h2>Vom Obstanbau zum Naturschutz</h2>
-      <p>Gegründet 1899, gehört der Verein zu den ältesten im Dorf. Ursprünglich sollte guter Obstanbau mit veredelten Sorten die Ernährung im rauen Vogelsbergklima sichern.</p>
+      <p>Gegründet am 15. Mai 1889, gehört der Verein zu den ältesten im Dorf. Ursprünglich sollte guter Obstanbau mit veredelten Sorten die Ernährung im rauen Vogelsbergklima sichern.</p>
       <p>Heute verbindet der Verein dieses Erbe mit Arten- und Biotopschutz: Die Streuobstwiesen rund um Stockhausen bieten Vögeln, Fledermäusen und Insekten Lebensraum. Alte Apfelsorten wie Rheinischer Bohnapfel, Kaiser Wilhelm oder Graue Herbstrenette trotzen hier Wind und Wetter. Der Verein vermittelt Wissen vom Setzen junger Bäume bis zur naturnahen Pflege der Hausgärten.</p>
     </div>
 
