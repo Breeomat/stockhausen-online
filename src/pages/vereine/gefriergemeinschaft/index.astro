@@ -4,13 +4,13 @@ import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
-// Quelle: „Rückblick auf 60 Jahre Gefriergemeinschaft Stockhausen“ (August 2024); Vorsitz bestätigt Oktober 2026
+// Quelle: „Rückblick auf 60 Jahre Gefriergemeinschaft Stockhausen“ (August 2024); Vorstand und Preis bestätigt Oktober 2026
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Gefrier'));
 
 const zahlen = [
   { wert: '1963', text: 'gegründet, seit Februar 1964 in Betrieb' },
   { wert: '100', text: 'Gefrierfächer (2 × 50), dazu ein Kühlraum' },
-  { wert: '90 €', text: 'pro Fach und Jahr (Stand 2024)' },
+  { wert: '90 €', text: 'pro Fach und Jahr' },
 ];
 
 const chronik = [
