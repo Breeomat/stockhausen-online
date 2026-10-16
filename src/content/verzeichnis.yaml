@@ -58,3 +58,47 @@
   web: https://metzger-guenther.de
   bestellen: https://metzger-guenther.de/bestellformular
   bild: metzgerei-guenther.jpg
+- id: rothguss
+  name: RothGuss GmbH & Co. KG
+  kategorie: Industrie
+  text: Industrie- und Gießereiunternehmen (gegründet 1812) für Leicht- und Schwermetallguss im Sand-, Kokillen- und Druckguss, dazu Formenbau sowie Heiz- und Kühlkomponenten.
+  adresse: Blankenauer Straße 4–6, 36358 Herbstein-Stockhausen
+  telefon: 06647 9609-0
+  email: info@rothguss.de
+- id: fritz-haustechnik
+  name: FRITZ GmbH & Co. KG
+  kategorie: Handwerk
+  text: Fachbetrieb für Haustechnik – Badsanierung mit Badausstellung, Sanitärinstallation, Heizungsbau sowie erneuerbare Energien wie Wärmepumpen und Solartechnik.
+  adresse: Müser Straße 36, 36358 Herbstein-Stockhausen
+  telefon: 06647 919191
+  email: info@sanitaer-fritz.de
+- id: dotzert-steinmetz
+  name: Reiner Dotzert GmbH & Co. KG
+  kategorie: Handwerk
+  text: Meisterbetrieb für Steinmetz- und Bildhauerarbeiten in vierter Generation – Grabanlagen, Treppen, Natursteinböden und individuelle Arbeiten für Haus und Garten.
+  adresse: Kehrweg 16, 36358 Herbstein-Stockhausen
+  telefon: 06647 274
+  email: dotzert@freenet.de
+- id: gasthaus-schmidts
+  name: Gasthaus Schmidts / Festsaal
+  kategorie: Gastronomie
+  text: Historischer Gasthof mit Gaststube, Mittagstisch und Biergarten, dazu ein großer Saal für Familienfeste, Hochzeiten und Vereinsveranstaltungen.
+  adresse: Müser Straße 9, 36358 Herbstein-Stockhausen
+  telefon:
+    - 06647 9606-680 (Mittagstisch)
+    - 0177 2881429 (Saalvermietung)
+  email:
+    - schmidts@gemeinschaft-altenschlirf.de
+    - lennart-kranz@hotmail.de (Saalvermietung)
+- id: kindergarten-storchennest
+  name: Ev. Kindergarten „Storchennest“
+  kategorie: Einrichtung
+  text: Kindertagesstätte in Trägerschaft der Evangelischen Kirche mit Betreuungs- und Förderangeboten für Kleinkinder und Kindergartenkinder aus Stockhausen und Umgebung.
+  adresse: Müser Straße 27, 36358 Herbstein-Stockhausen
+  telefon: 06647 333
+  email: kita.stockhausen@ekhn.de
+- id: ortsbeirat
+  name: Ortsbeirat Stockhausen
+  kategorie: Einrichtung
+  text: Vertritt die Interessen des Stadtteils gegenüber der Stadt Herbstein und kümmert sich um die örtlichen Gemeinschaftseinrichtungen. Die Sitzungen finden in der Altfellhalle statt. Ortsvorsteher ist Jonas Domaschka.
+  seite: dorf/#ortsbeirat

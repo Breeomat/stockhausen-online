@@ -38,12 +38,13 @@ const verzeichnis = defineCollection({
   loader: file('src/content/verzeichnis.yaml'),
   schema: z.object({
     name: z.string(),
-    kategorie: z.enum(['Einkaufen', 'Gastronomie', 'Handwerk', 'Landwirtschaft', 'Dienstleistung', 'Einrichtung']),
+    kategorie: z.enum(['Einkaufen', 'Gastronomie', 'Handwerk', 'Industrie', 'Landwirtschaft', 'Dienstleistung', 'Einrichtung']),
     text: z.string(),
     adresse: z.string().optional(),
-    telefon: z.string().optional(),
+    // eine Angabe oder eine Liste; Hinweis in Klammern möglich, z. B. "0177 1234567 (Saal)"
+    telefon: z.union([z.string(), z.array(z.string())]).optional(),
     fax: z.string().optional(),
-    email: z.string().email().optional(),
+    email: z.union([z.string(), z.array(z.string())]).optional(),
     web: z.string().url().optional(),
     zeiten: z.string().optional(),
     seite: z.string().optional(),

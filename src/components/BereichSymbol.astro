@@ -32,6 +32,13 @@ const { name, groesse = 24, class: klasse } = Astro.props;
       <path d="M13 4.5 15.5 2 22 8.5 19.5 11z" />
     </>
   )}
+  {name === 'Industrie' && (
+    <>
+      <path d="M3 21V11l5 3V11l5 3V11l5 3V4h3v17z" />
+      <path d="M3 21h18" />
+      <path d="M7 17h2M12 17h2M17 17h1" />
+    </>
+  )}
   {name === 'Landwirtschaft' && (
     <>
       <path d="M12 21V10" />

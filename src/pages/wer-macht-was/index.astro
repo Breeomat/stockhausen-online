@@ -6,11 +6,12 @@ import Basis from '../../layouts/Basis.astro';
 import { url } from '../../lib/site';
 import BereichSymbol from '../../components/BereichSymbol.astro';
 
-const reihenfolge = ['Einkaufen', 'Gastronomie', 'Handwerk', 'Landwirtschaft', 'Dienstleistung', 'Einrichtung'] as const;
+const reihenfolge = ['Einkaufen', 'Gastronomie', 'Handwerk', 'Industrie', 'Landwirtschaft', 'Dienstleistung', 'Einrichtung'] as const;
 const ueberschrift: Record<(typeof reihenfolge)[number], string> = {
   Einkaufen: 'Einkaufen',
   Gastronomie: 'Essen und Trinken',
   Handwerk: 'Handwerk',
+  Industrie: 'Industrie und Gewerbe',
   Landwirtschaft: 'Landwirtschaft',
   Dienstleistung: 'Dienstleistungen',
   Einrichtung: 'Einrichtungen',
@@ -26,6 +27,12 @@ const bildFuer = (datei?: string) => {
   const b = bilder[`../../assets/verzeichnis/${datei}`];
   if (!b) throw new Error(`Verzeichnis: Bild src/assets/verzeichnis/${datei} fehlt`);
   return b.default;
+};
+// Telefon/E-Mail: einzeln oder als Liste, optionaler Hinweis in Klammern („06647 1234 (Saal)“)
+const alsListe = (wert?: string | string[]) => (wert === undefined ? [] : Array.isArray(wert) ? wert : [wert]);
+const teile = (eintrag: string) => {
+  const m = eintrag.match(/^(.*?)\s*\(([^)]*)\)\s*$/);
+  return m ? { wert: m[1], hinweis: m[2] } : { wert: eintrag, hinweis: undefined };
 };
 const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^0/, '');
 ---
@@ -56,9 +63,9 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
               <dl class="angaben">
                 {e.adresse && <div><dt>Adresse</dt><dd>{e.adresse}</dd></div>}
                 {e.zeiten && <div><dt>Geöffnet</dt><dd>{e.zeiten}</dd></div>}
-                {e.telefon && <div><dt>Telefon</dt><dd><a href={tel(e.telefon)}>{e.telefon}</a></dd></div>}
+                {e.telefon && <div><dt>Telefon</dt>{alsListe(e.telefon).map(teile).map(({ wert, hinweis }) => <dd><a href={tel(wert)}>{wert}</a>{hinweis && <small> ({hinweis})</small>}</dd>)}</div>}
                 {e.fax && <div><dt>Fax</dt><dd>{e.fax}</dd></div>}
-                {e.email && <div><dt>E-Mail</dt><dd><a href={`mailto:${e.email}`}>{e.email}</a></dd></div>}
+                {e.email && <div><dt>E-Mail</dt>{alsListe(e.email).map(teile).map(({ wert, hinweis }) => <dd><a href={`mailto:${wert}`}>{wert}</a>{hinweis && <small> ({hinweis})</small>}</dd>)}</div>}
                 {e.web && <div><dt>Website</dt><dd><a href={e.web} rel="noopener">{e.web.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a></dd></div>}
               </dl>
               {e.bestellen && <a class="knopf eintrag__bestellen" href={e.bestellen} rel="noopener">Online bestellen</a>}
@@ -124,6 +131,7 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
   .angaben div:last-child { border-bottom: 0; }
   .angaben dt { font-size: 0.75rem; color: var(--text-leise); }
   .angaben dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+  .angaben dd small { font-weight: 400; color: var(--text-leise); }
   .eintrag__mehr { margin-top: auto; font-weight: 600; }
   .eintrag__bestellen { margin-top: auto; align-self: flex-start; }
   .hinweis { margin-top: 3.5rem; padding: clamp(1.5rem, 4vw, 2.25rem); background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 25%, transparent); }
