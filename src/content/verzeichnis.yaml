@@ -13,8 +13,10 @@
 - id: laedchen-fuer-alles
   name: Lädchen für alles
   kategorie: Einkaufen
-  text: Dorfladen der Gemeinschaft Altenschlirf mit Waren für den täglichen Bedarf und Produkten aus den eigenen Werkstätten.
-  seite: dorf/gemeinschaft-altenschlirf/
+  text: Dorfladen der Gemeinschaft Altenschlirf mit Waren für den täglichen Bedarf und Produkten aus den eigenen Werkstätten. Wird ein Tante-Enso-Laden; Betreiber bleibt die Gemeinschaft Altenschlirf.
+  adresse: Welzgasse 1, 36358 Herbstein-Stockhausen
+  zeiten: Mo–Fr 8–18 Uhr, Sa 7–13 Uhr
+  seite: tante-enso/
 - id: demeter-hofladen
   name: Demeter-Hofladen
   kategorie: Einkaufen
