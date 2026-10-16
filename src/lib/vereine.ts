@@ -74,7 +74,7 @@ export const vereinsseiten = [
     seit: 'seit 1848',
     text: 'Die Stockhäuser Kirmes am letzten Oktoberwochenende: Dorfabend, Frühschoppen, Kinderkirmes und Fackelumzug in der Altfellhalle.',
     href: 'vereine/kirmesburschen/',
-    bild: { src: kirmesFoto, nachweis: '', position: '50% 45%' },
+    bild: { src: kirmesFoto, nachweis: 'Foto: Kirmesburschen Stockhausen', position: '50% 45%' },
   },
 ];
 
