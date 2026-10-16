@@ -143,5 +143,6 @@
 - id: 2026-12-04-sv-letzte-turnstunde
   titel: Letzte Turnstunde (Nikolausabend)
   datum: 2026-12-04
+  beginn: "17:30"
   ort: Altfellhalle
   verein: SV Stockhausen
