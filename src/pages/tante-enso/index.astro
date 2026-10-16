@@ -5,6 +5,7 @@ import { Image, getImage } from 'astro:assets';
 import { aktion, aktionLaeuft, baustelle, baustelleAktiv } from '../../lib/enso';
 import { kommendeTermine, datumLang, zeitraum } from '../../lib/termine';
 import patenPlakat from '../../assets/fotos/tante-enso-paten.jpg';
+import ensoLogo from '../../assets/verzeichnis/tante-enso.jpg';
 
 const laeuft = aktionLaeuft();
 const sprechzeiten = (await kommendeTermine()).filter((t) => t.id.endsWith('tante-enso-sprechzeit'));
@@ -21,6 +22,7 @@ const quellen = [
 <Basis titel="Tante Enso" beschreibung="Das Lädchen in Stockhausen wird ein Tante-Enso-Laden. Alles zu Teilhabern, Fristen und Hilfe beim Zeichnen.">
   <section class="huelle seitenkopf">
     <span class="kicker">Einkaufen im Dorf</span>
+    <Image class="enso-logo" src={ensoLogo} alt="Logo Tante Enso" width={300} />
     <h1>Tante Enso fürs Lädchen</h1>
     <p>Nach dem Rückzug von tegut soll das Lädchen in der Welzgasse ein Tante-Enso-Laden werden. Betreiber bleibt die Gemeinschaft Altenschlirf. Dafür mussten mindestens {aktion.ziel} Menschen aus Stockhausen und Umgebung Teilhaber werden. Dieses Ziel ist erreicht: Laut Tante Enso kommt dann eine Filiale in den Ort.</p>
     <p><a class="knopf knopf--leise" href={aktion.standort} rel="noopener">Tante Enso Stockhausen auf tanteenso.de</a></p>
@@ -188,4 +190,5 @@ const quellen = [
   .quellen { font-size: 0.9rem; color: var(--text-leise); }
   .quellen h2 { font-size: 1.1rem; }
   .quellen ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.3rem; }
+  .enso-logo { display: block; width: min(300px, 70vw); height: auto; margin: 0.5rem 0 0.75rem; border-radius: 12px; }
 </style>
