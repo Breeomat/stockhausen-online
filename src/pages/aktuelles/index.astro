@@ -1,0 +1,19 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import AktuellesKarten from '../../components/AktuellesKarten.astro';
+import { aktuelleMeldungen } from '../../lib/aktuelles';
+---
+<Basis titel="Aktuelles" beschreibung="Was gerade wichtig ist in Stockhausen: Baustelle Ortsdurchfahrt, Tante Enso und weitere Neuigkeiten.">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Aktuelles</span>
+    <h1>Was gerade wichtig ist</h1>
+    <p>Neuigkeiten aus dem Dorf auf einen Blick.</p>
+  </section>
+  <section class="huelle aktuelles-seite">
+    {aktuelleMeldungen().length > 0 ? <AktuellesKarten /> : <div class="leer"><strong>Gerade gibt es nichts Neues.</strong> Schauen Sie bald wieder vorbei.</div>}
+  </section>
+</Basis>
+
+<style>
+  .aktuelles-seite { padding-bottom: 5rem; }
+</style>

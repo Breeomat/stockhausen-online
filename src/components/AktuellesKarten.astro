@@ -1,0 +1,35 @@
+---
+// Große Kacheln für „Aktuelles“
+import { aktuelleMeldungen } from '../lib/aktuelles';
+import { url } from '../lib/site';
+const liste = aktuelleMeldungen();
+---
+{liste.length > 0 && (
+  <div class="aktuelles">
+    {liste.map((m) => (
+      <a class:list={['karte meldung', `meldung--${m.ton}`]} href={url(m.href)}>
+        <span class="meldung__marke">{m.marke}</span>
+        <h3>{m.titel}</h3>
+        <p>{m.text}</p>
+        <span class="meldung__pfeil">{m.linkText} →</span>
+      </a>
+    ))}
+  </div>
+)}
+
+<style>
+  .aktuelles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1rem; }
+  .meldung { display: flex; flex-direction: column; gap: 0.6rem; padding: clamp(1.4rem, 3vw, 2rem); text-decoration: none; color: var(--text); transition: transform 0.2s ease; }
+  .meldung:hover { transform: translateY(-3px); color: var(--text); }
+  .meldung h3 { margin: 0; font-size: clamp(1.35rem, 2.4vw, 1.7rem); }
+  .meldung p { margin: 0; color: var(--text-leise); }
+  .meldung__marke { align-self: flex-start; padding: 0.25rem 0.7rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .meldung__pfeil { margin-top: auto; padding-top: 0.4rem; font-weight: 600; }
+  .meldung--warnung { background: var(--warnung); border-color: var(--warnung-rand); }
+  .meldung--warnung .meldung__marke { background: var(--warnung-rand); color: #2a211c; }
+  .meldung--warnung p { color: var(--warnung-text); }
+  .meldung--warnung .meldung__pfeil { color: var(--warnung-text); }
+  .meldung--info { background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 30%, transparent); }
+  .meldung--info .meldung__marke { background: var(--ziegel); color: #fff; }
+  .meldung--info .meldung__pfeil { color: var(--ziegel); }
+</style>

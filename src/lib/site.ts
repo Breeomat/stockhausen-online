@@ -6,6 +6,6 @@ export const navigation = [
   { href: 'vereine/', label: 'Vereine' },
   { href: 'wer-macht-was/', label: 'Wer macht was' },
   { href: 'plakate/', label: 'Plakatwand' },
-  { href: 'tante-enso/', label: 'Tante Enso' },
+  { href: 'aktuelles/', label: 'Aktuelles' },
   { href: 'dorf/', label: 'Unser Dorf' },
 ];

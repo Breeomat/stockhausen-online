@@ -7,7 +7,8 @@ import PlakatRaster from '../components/PlakatRaster.astro';
 import { kommendeTermine } from '../lib/termine';
 import { plakate } from '../lib/plakate';
 import { url } from '../lib/site';
-import { baustelle, baustelleAktiv } from '../lib/enso';
+import AktuellesKarten from '../components/AktuellesKarten.astro';
+import { aktuelleMeldungen } from '../lib/aktuelles';
 import { vereinsseiten } from '../lib/vereine';
 import VereinKarte from '../components/VereinKarte.astro';
 import BereichSymbol from '../components/BereichSymbol.astro';
@@ -50,13 +51,14 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
     <span class="held__foto">Luftbild: Marc Ahne</span>
   </section>
 
-  {baustelleAktiv() && (
-    <div class="huelle">
-      <a class="hinweis hinweis--baustelle" href={url('ortsdurchfahrt/')}>
-        <span class="hinweis__marke">Baustelle</span>
-        <span><strong>{baustelle.text}</strong> Umleitungen und Infos →</span>
-      </a>
-    </div>
+  {aktuelleMeldungen().length > 0 && (
+    <section class="abschnitt aktuelles-start">
+      <div class="huelle">
+        <span class="kicker">Aktuelles</span>
+        <h2>Was gerade wichtig ist</h2>
+        <AktuellesKarten />
+      </div>
+    </section>
   )}
 
   <section class="abschnitt abschnitt--direkt">
@@ -206,51 +208,12 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
     .held::before { background: linear-gradient(180deg, rgb(14 32 48 / 0.7), rgb(14 32 48 / 0.55)); }
   }
   .abschnitt--direkt { padding-top: 1rem; }
-  .hinweis {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 0.5rem;
-    padding: 0.9rem 1.25rem;
-    border-radius: var(--radius);
-    background: var(--ziegel-hell);
-    color: var(--text);
-    text-decoration: none;
-    border: 1px solid color-mix(in srgb, var(--ziegel) 30%, transparent);
-  }
-  .hinweis:hover { color: var(--ziegel); }
-  .hinweis--baustelle { background: var(--warnung); border-color: var(--warnung-rand); color: var(--warnung-text); }
-  .hinweis--baustelle:hover { color: var(--warnung-text); text-decoration: underline; }
-  .hinweis--baustelle .hinweis__marke { background: var(--warnung-rand); color: #2a211c; }
-  .huelle + .huelle .hinweis { margin-top: 0.6rem; }
-  .hinweis__marke {
-    flex: none;
-    padding: 0.25rem 0.7rem;
-    border-radius: 999px;
-    background: var(--ziegel);
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  @media (max-width: 520px) { .hinweis { flex-direction: column; align-items: flex-start; gap: 0.5rem; } }
+  .aktuelles-start { padding-bottom: 0; }
+  .aktuelles-start h2 { margin-bottom: 1.25rem; }
 
   .raster-termine { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1rem; }
 
 
-    display: flex;
-    flex-direction: column;
-    padding: clamp(1.75rem, 4vw, 2.75rem);
-    text-decoration: none;
-    color: #f4efe3;
-    background:
-      radial-gradient(500px 300px at 100% 100%, color-mix(in srgb, var(--ziegel) 55%, transparent), transparent 70%),
-      linear-gradient(140deg, #17405c, #2a6a8c);
-    border: 0;
-    min-height: 300px;
-    transition: transform 0.2s ease;
-  }
 
   .vereine-start { padding-top: 0; }
   .zeitband { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); position: relative; }
