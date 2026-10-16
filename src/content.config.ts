@@ -47,6 +47,7 @@ const verzeichnis = defineCollection({
     zeiten: z.string().optional(),
     seite: z.string().optional(),
     bestellen: z.string().url().optional(),
+    bild: z.string().optional(),
   }),
 });
 
