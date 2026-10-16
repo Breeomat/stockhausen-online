@@ -9,6 +9,7 @@ import chorFoto from '../assets/fotos/posaunenchor.jpg';
 import gefrierFoto from '../assets/fotos/gefrierhaus-fest.jpg';
 import maibaumFoto from '../assets/fotos/ogv-maibaum.jpg';
 import kirchgemeindeFoto from '../assets/fotos/kirche-stockhausen-aussen.jpg';
+import altenschlirfFoto from '../assets/fotos/gemeinschaft-altenschlirf-schloss.jpg';
 import kirmesFoto from '../assets/fotos/kirmesburschen-gruppe.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
@@ -91,7 +92,7 @@ export const vereinsseiten = [
     seit: 'Lebens- und Arbeitsgemeinschaft',
     text: 'Inklusion, Demeter-Landwirtschaft, Werkstätten, Fachschule und Kultur im Schlosspark Stockhausen.',
     href: 'vereine/gemeinschaft-altenschlirf/',
-    bild: { src: schlossFoto, nachweis: 'Foto: Marc Ahne', position: '50% 45%' },
+    bild: { src: altenschlirfFoto, nachweis: 'Bild: Gemeinschaft Altenschlirf', position: '50% 50%' },
   },
 ];
 

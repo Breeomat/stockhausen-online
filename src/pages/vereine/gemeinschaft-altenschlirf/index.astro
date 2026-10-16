@@ -1,7 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
-import schlossFoto from '../../../assets/fotos/stockhausen-schloss.jpg';
+import schlossFoto from '../../../assets/fotos/gemeinschaft-altenschlirf-schloss.jpg';
+import logo from '../../../assets/fotos/gemeinschaft-altenschlirf-logo.png';
 import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
@@ -36,7 +37,7 @@ const stockhausen = [
       <h1>Gemeinschaft Altenschlirf &amp; Campus am Park</h1>
       <p>Inklusion, ökologische Landwirtschaft und Kultur mitten in Stockhausen. Hier leben, lernen und arbeiten Menschen mit und ohne Hilfebedarf auf Augenhöhe zusammen.</p>
     </div>
-    <span class="ga-held__foto">Schloss Stockhausen · Foto: Marc Ahne</span>
+    <span class="ga-held__foto">Schloss Stockhausen · Bild: Gemeinschaft Altenschlirf</span>
   </section>
 
   <section class="huelle ga">
@@ -49,10 +50,20 @@ const stockhausen = [
       </div>
 
       <aside class="karte kasten">
-        <h3>Kontakt</h3>
+        <Image class="logo" src={logo} alt="Logo der Gemeinschaft Altenschlirf" width={132} />
+        <h3>Standort Stockhausen</h3>
         <dl class="liste">
-          <div><dt>Standort Stockhausen</dt><dd>Müser Straße 1, 36358 Herbstein-Stockhausen</dd></div>
+          <div><dt>Adresse</dt><dd>Müser Straße 1, 36358 Herbstein-Stockhausen</dd></div>
           <div><dt>Telefon</dt><dd><a href="tel:+49664796060">06647 9606-0</a></dd></div>
+          <div><dt>Fax</dt><dd>06647 9606-179</dd></div>
+        </dl>
+        <h3>Standort Altenschlirf</h3>
+        <dl class="liste">
+          <div><dt>Adresse</dt><dd>Erlenweg 9, 36358 Herbstein-Altenschlirf</dd></div>
+          <div><dt>Telefon</dt><dd><a href="tel:+4966437090">06643 709-0</a></dd></div>
+          <div><dt>Fax</dt><dd>06643 709-139</dd></div>
+        </dl>
+        <dl class="liste liste--ende">
           <div><dt>E-Mail</dt><dd><a href="mailto:info@gemeinschaft-altenschlirf.de">info@gemeinschaft-altenschlirf.de</a></dd></div>
           <div><dt>Website</dt><dd><a href="https://gemeinschaft-altenschlirf.de" rel="noopener">gemeinschaft-altenschlirf.de</a></dd></div>
         </dl>
@@ -101,7 +112,9 @@ const stockhausen = [
   @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
   .text p { max-width: 68ch; }
   .kasten { padding: 1.5rem; }
-  .kasten h3 { margin: 0 0 0.75rem; }
+  .kasten h3 { margin: 1.25rem 0 0.5rem; }
+  .logo { display: block; width: 132px; height: auto; margin-bottom: 0.5rem; }
+  .liste--ende { margin-top: 1rem; border-top: 1px solid var(--linie); }
   .liste { margin: 0; display: grid; }
   .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
   .liste div:last-child { border-bottom: 0; }
