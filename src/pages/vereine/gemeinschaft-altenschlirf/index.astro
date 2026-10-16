@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import schlossFoto from '../../../assets/fotos/stockhausen-schloss.jpg';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+
+// Quelle: Dossier „Gemeinschaft Altenschlirf e. V. & Campus am Park“ (Oktober 2026),
+// abgeglichen mit den Angaben auf „Unser Dorf“ und öffentlichen Einträgen zur Gemeinschaft
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Altenschlirf'));
+
+const bereiche = [
+  { titel: 'Wohnen und Leben', text: 'Hausgemeinschaften mit Assistenz – gelebte Inklusion mitten im Dorf.' },
+  { titel: 'Landwirtschaft', text: 'Biologisch-dynamische Demeter-Landwirtschaft rund um Stockhausen: Tierhaltung, Futter- und Getreideanbau sowie Pflege von Hecken, Wiesen und Biotopen.' },
+  { titel: 'Handwerk', text: 'Zwölf Werkstätten, darunter Gärtnerei, Käserei, Bäckerei, Holzwerkstatt, Kerzenzieherei und Weberei. Die Naturprodukte gibt es im Hofladen und auf Märkten.' },
+  { titel: 'Ausbildung', text: 'Am Campus am Park sitzt seit 2009 die Fachschule für Heilerziehungspflege – staatlich anerkannte Fachkräfteausbildung im Vogelsberg.' },
+  { titel: 'Kultur und Feste', text: 'Konzerte, Theater, Lesungen, Seminare und Feste im Schlosspark, dazu jedes Jahr Mitte Juni der Johannimarkt.' },
+];
+
+const stockhausen = [
+  { titel: 'Schloss und Schlosspark', text: 'Die Gemeinschaft ist Eigentümerin von Schloss Stockhausen und dem öffentlich zugänglichen Park, den Menschen mit Beeinträchtigung pflegen.' },
+  { titel: 'Campus am Park', text: 'Fachschule für Heilerziehungspflege, Tagungsort für Seminare und Fortbildungen; vor Ort wird in Gartenbau, Landschaftspflege, Küche und Hauswirtschaft gearbeitet.' },
+  { titel: 'Weberei', text: 'Teppiche, Kissen, Tischwäsche und Küchenhandtücher – auf Wunsch auch Unikate.' },
+  { titel: 'Kontiki', text: 'Tagesstrukturgruppe auf dem Schlossgelände.' },
+  { titel: 'Demeter-Hofladen', text: 'Gemüse und Obst aus dem Schlossgarten, im Schlosshof, montags bis freitags geöffnet.' },
+  { titel: 'Lädchen für alles', text: 'Täglicher Bedarf und Produkte aus den eigenen Werkstätten.' },
+];
+---
+<Basis titel="Gemeinschaft Altenschlirf" beschreibung="Gemeinschaft Altenschlirf e. V. und Campus am Park in Stockhausen: Inklusion, Demeter-Landwirtschaft, Werkstätten, Fachschule und Kultur im Schlosspark.">
+  <section class="ga-held">
+    <Image class="ga-held__bild" src={schlossFoto} alt="" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="huelle ga-kopf">
+      <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+      <span class="kicker">Lebens- und Arbeitsgemeinschaft · Schloss Stockhausen</span>
+      <h1>Gemeinschaft Altenschlirf &amp; Campus am Park</h1>
+      <p>Inklusion, ökologische Landwirtschaft und Kultur mitten in Stockhausen. Hier leben, lernen und arbeiten Menschen mit und ohne Hilfebedarf auf Augenhöhe zusammen.</p>
+    </div>
+    <span class="ga-held__foto">Schloss Stockhausen · Foto: Marc Ahne</span>
+  </section>
+
+  <section class="huelle ga">
+    <div class="spalten">
+      <div class="text">
+        <span class="kicker">Über die Gemeinschaft</span>
+        <h2>Leben, lernen und arbeiten</h2>
+        <p>Die Gemeinschaft Altenschlirf e. V. ist eine anthroposophisch orientierte, sozialtherapeutische Lebens- und Arbeitsgemeinschaft für erwachsene Menschen mit und ohne Hilfebedarf. Seit über 40 Jahren verbindet sie gelebte Inklusion, Sozialtherapie und biologisch-dynamisches Wirtschaften.</p>
+        <p>Neben dem namensgebenden Nachbarort Altenschlirf prägen in Stockhausen vor allem Schloss und Schlosspark mit dem Campus am Park, die Demeter-Landwirtschaft und die Werkstätten das Dorfbild. Ob in der Ausbildung zur Heilerziehungspflege, in Landwirtschaft und Handwerk oder bei Konzerten und Märkten: Die Gemeinschaft ist ein offener Ort der Begegnung für alle im Dorf.</p>
+      </div>
+
+      <aside class="karte kasten">
+        <h3>Kontakt</h3>
+        <dl class="liste">
+          <div><dt>Standort Stockhausen</dt><dd>Müser Straße 1, 36358 Herbstein-Stockhausen</dd></div>
+          <div><dt>Telefon</dt><dd><a href="tel:+49664796060">06647 9606-0</a></dd></div>
+          <div><dt>E-Mail</dt><dd><a href="mailto:info@gemeinschaft-altenschlirf.de">info@gemeinschaft-altenschlirf.de</a></dd></div>
+          <div><dt>Website</dt><dd><a href="https://gemeinschaft-altenschlirf.de" rel="noopener">gemeinschaft-altenschlirf.de</a></dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <div>
+      <span class="kicker">Tätigkeitsfelder</span>
+      <h2>Was die Gemeinschaft macht</h2>
+      <ul class="bereiche">
+        {bereiche.map(({ titel, text }) => <li class="karte"><h3>{titel}</h3><p>{text}</p></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <span class="kicker">In Stockhausen</span>
+      <h2>Rund ums Schloss</h2>
+      <ul class="bereiche">
+        {stockhausen.map(({ titel, text }) => <li class="karte"><h3>{titel}</h3><p>{text}</p></li>)}
+      </ul>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .ga-held { position: relative; isolation: isolate; overflow: hidden; margin-bottom: 2.5rem; color: #fff; }
+  .ga-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; z-index: -2; }
+  .ga-held::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(12 18 24 / 0.82) 0%, rgb(12 18 24 / 0.55) 55%, rgb(12 18 24 / 0.2) 100%); }
+  .ga-held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
+  .ga-kopf { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .ga-kopf h1 { color: #fff; max-width: 20ch; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
+  .ga-kopf p { font-size: 1.15rem; max-width: 60ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
+  .ga-kopf .kicker { color: var(--gold); }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; color: #fff; }
+
+  .ga { padding-block: 0 5rem; display: grid; gap: 3.5rem; }
+  .spalten { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
+  .text p { max-width: 68ch; }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin: 0 0 0.75rem; }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+  .bereiche { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
+  .bereiche li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
+  .bereiche h3 { margin: 0 0 0.4rem; font-size: 1.2rem; }
+  .bereiche p { margin: 0; color: var(--text-leise); }
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+</style>

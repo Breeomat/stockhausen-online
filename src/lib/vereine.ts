@@ -85,6 +85,14 @@ export const vereinsseiten = [
     href: 'vereine/kirchengemeinde/',
     bild: { src: kirchgemeindeFoto, nachweis: 'Foto: Ev. Kirchengemeinde Stockhausen-Rixfeld', position: '50% 30%' },
   },
+  {
+    name: 'Gemeinschaft Altenschlirf e. V. & Campus am Park',
+    kurz: 'Altenschlirf',
+    seit: 'Lebens- und Arbeitsgemeinschaft',
+    text: 'Inklusion, Demeter-Landwirtschaft, Werkstätten, Fachschule und Kultur im Schlosspark Stockhausen.',
+    href: 'vereine/gemeinschaft-altenschlirf/',
+    bild: { src: schlossFoto, nachweis: 'Foto: Marc Ahne', position: '50% 45%' },
+  },
 ];
 
 // Hintergrundbilder für Vereine ohne eigene Seite (Teil des Vereinsnamens → Bild)
