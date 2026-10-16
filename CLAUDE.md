@@ -14,7 +14,7 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
 - Personenfotos nur Gruppen oder mit Einwilligung.
 - Kurse und regelmäßige Angebote (z. B. Gymnastik donnerstags): KEINE Einzeltermine im Kalender, nur ein Hinweis auf der
   Vereinsseite (Zeit, Ort, Ansprechperson). Ein Plakat dazu einmal auf die Plakatwand (`gueltig_bis` = Kursende).
-- Orte: „Mehrzweckhalle“ und „Turnhalle“ meinen die Altfellhalle (Bleichstraße 19, am Sportplatz). In Terminen immer „Altfellhalle“ schreiben.
+- Orte: „Mehrzweckhalle“, „Turnhalle“ und „DGH Stockhausen“ meinen die Altfellhalle (Bleichstraße 19, am Sportplatz). In Terminen immer „Altfellhalle“ schreiben.
 - Neue Plakate: Eine geplante Aufgabe prüft täglich um ca. 20 Uhr den Drive-Ordner „Plakate“, liest neue Dateien ein
   (Bild verkleinern, Eintrag in `plakate.yaml` und `termine.yaml`) und veröffentlicht direkt.
   Verarbeitete Dateien stehen in `src/content/plakate-eingelesen.txt` – nur Dateien, deren ID dort fehlt, sind neu.
