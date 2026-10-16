@@ -1,0 +1,67 @@
+---
+import Basis from '../../../layouts/Basis.astro';
+import { url } from '../../../lib/site';
+import { chronik } from '../../../lib/chronik';
+
+const anker = (titel: string) => titel.toLowerCase().replace(/[^a-zäöüß0-9]+/g, '-').replace(/^-|-$/g, '');
+---
+<Basis titel="Ortschronik" beschreibung="Ortschronik von Stockhausen im Vogelsberg: von der Bronzezeit über die Riedesel-Herrschaft bis 1999.">
+  <section class="huelle seitenkopf">
+    <a class="zurueck" href={url('dorf/')}>← Unser Dorf</a>
+    <span class="kicker">Geschichte</span>
+    <h1>Ortschronik Stockhausen</h1>
+    <p>Von den Hügelgräbern der Bronzezeit über Fehden, Kriege und die Herrschaft der Riedesel bis zum Ende des 20. Jahrhunderts: die Geschichte des Dorfes Jahr für Jahr.</p>
+    <nav class="inhalt" aria-label="Abschnitte der Chronik">
+      {chronik.map(({ titel }) => <a href={`#${anker(titel)}`}>{titel}</a>)}
+    </nav>
+  </section>
+
+  <section class="huelle chronik">
+    {chronik.map(({ titel, eintraege }) => (
+      <div class="abschnitt" id={anker(titel)}>
+        <h2>{titel}</h2>
+        <ol class="zeitstrahl">
+          {eintraege.map(({ jahr, text, zitat }) => (
+            <li>
+              <span class="zeitstrahl__jahr">{jahr}</span>
+              <p>{text}</p>
+              {zitat && <blockquote>{zitat}</blockquote>}
+            </li>
+          ))}
+        </ol>
+      </div>
+    ))}
+
+    <p class="quelle">
+      Quelle: Ortschronik von Hans-Jürgen Döll, <a href="https://www.hjdoell.de" rel="noopener">www.hjdoell.de</a>.
+      Mehr zur Heimatforschung beim <a href={url('vereine/arbeitskreis-dorfgeschichte/')}>Arbeitskreis Dorfgeschichte Stockhausen</a>.
+    </p>
+  </section>
+</Basis>
+
+<style>
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .inhalt { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .inhalt a { padding: 0.3rem 0.8rem; border-radius: 999px; background: var(--ziegel-hell); color: var(--ziegel); font-size: 0.85rem; font-weight: 600; text-decoration: none; }
+  .chronik { padding-block: 1rem 5rem; display: grid; gap: 3rem; }
+  .abschnitt, .quelle { max-width: 820px; }
+  .abschnitt { scroll-margin-top: 6rem; }
+  .zeitstrahl { list-style: none; margin: 1.5rem 0 0; padding: 0; position: relative; }
+  .zeitstrahl::before { content: ''; position: absolute; left: 0.45rem; top: 0.5rem; bottom: 0.5rem; width: 2px; background: var(--linie); }
+  .zeitstrahl li { position: relative; padding: 0 0 1.4rem 2.25rem; }
+  .zeitstrahl li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.35rem;
+    width: 0.95rem;
+    height: 0.95rem;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 3px solid var(--lagune);
+  }
+  .zeitstrahl__jahr { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; color: var(--ziegel); }
+  .zeitstrahl p { margin: 0.15rem 0 0; max-width: 68ch; }
+  blockquote { margin: 0.75rem 0 0; padding: 0.75rem 1rem; border-left: 3px solid var(--ziegel); background: var(--ziegel-hell); font-style: italic; max-width: 64ch; }
+  .quelle { font-size: 0.85rem; color: var(--text-leise); }
+</style>

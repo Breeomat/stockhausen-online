@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Basis from '../../layouts/Basis.astro';
+import { url } from '../../lib/site';
 import luftbild from '../../assets/fotos/stockhausen-luftbild.jpg';
 import kirche from '../../assets/fotos/stockhausen-kirche.jpg';
 import schloss from '../../assets/fotos/stockhausen-schloss.jpg';
@@ -40,7 +41,7 @@ const zeitstrahl = [
   { jahr: '1770', text: 'Baubeginn des barocken Schlosses auf den Mauern der Hermannsburg, unter Baumeister Georg Koch für Friedrich Georg Riedesel.' },
   { jahr: '1801–1807', text: 'Das Schloss wird mit weiteren Umbauten fertiggestellt.' },
   { jahr: '1841', text: 'Gründung des ersten Kindergartens im damaligen Großherzogtum Hessen – des ältesten Dorfkindergartens dort.' },
-  { jahr: '1846–1849', text: 'Neubau der evangelischen Kirche als neuromanische Saalkirche anstelle eines älteren Gotteshauses; Einweihung 1849. (Zum Baubeginn nennen die Quellen 1846 oder 1847.)' },
+  { jahr: '1846–1849', text: 'Neubau der evangelischen Kirche als neuromanische Saalkirche anstelle eines älteren Gotteshauses: 1846 Fundament, 10. Mai 1847 Grundsteinlegung, 1. November 1849 Einweihung.' },
   { jahr: '1852', text: 'Stockhausen gehört nun zum Kreis Lauterbach in der Provinz Oberhessen.' },
   { jahr: '1874', text: 'Gründung der Freiwilligen Feuerwehr Stockhausen.' },
   { jahr: '1880', text: 'Gründung der Spar- und Darlehenskasse Stockhausen.' },
@@ -196,6 +197,7 @@ const entfernungen = [
             <li><span class="zeitstrahl__jahr">{jahr}</span><p>{text}</p></li>
           ))}
         </ol>
+        <p class="chronik-link"><a href={url('dorf/chronik/')}>Zur ausführlichen Ortschronik →</a></p>
       </div>
 
       <aside class="seitenleiste">
@@ -371,6 +373,7 @@ const entfernungen = [
   }
   .zeitstrahl__jahr { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; color: var(--ziegel); }
   .zeitstrahl p { margin: 0.15rem 0 0; }
+  .chronik-link { margin: 0.5rem 0 0; font-weight: 600; }
 
   .seitenleiste { display: grid; gap: 1rem; position: sticky; top: 90px; }
   @media (max-width: 900px) { .seitenleiste { position: static; } }
