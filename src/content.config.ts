@@ -50,6 +50,7 @@ const verzeichnis = defineCollection({
     seite: z.string().optional(),
     bestellen: z.string().url().optional(),
     bild: z.string().optional(),
+    angebot: z.object({ titel: z.string(), datei: z.string(), bis: datum }).optional(),
   }),
 });
 

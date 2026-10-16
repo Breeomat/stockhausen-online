@@ -2,7 +2,8 @@
 # Pflicht: id (eindeutig, z. B. baeckerei-muster), name, kategorie, text
 # kategorie: Einkaufen | Gastronomie | Handwerk | Landwirtschaft | Dienstleistung | Einrichtung
 # Optional: adresse, telefon, fax, email, web (volle URL), zeiten (Öffnungszeiten), seite (interne Seite, z. B. dorf/gemeinschaft-altenschlirf/),
-#           bestellen (volle URL zu einem Online-Bestellformular), bild (Logo/Foto, Datei in src/assets/verzeichnis/)
+#           bestellen (volle URL zu einem Online-Bestellformular), bild (Logo/Foto, Datei in src/assets/verzeichnis/),
+#           angebot (titel, datei in public/, bis = JJJJ-MM-TT; danach ausgeblendet) für Angebots- oder Preislisten
 #
 # - id: baeckerei-muster
 #   name: Bäckerei Muster
@@ -19,11 +20,19 @@
   zeiten: Mo–Fr 8–18 Uhr, Sa 7–13 Uhr
   seite: tante-enso/
 - id: demeter-hofladen
-  name: Demeter-Hofladen
+  name: Demeter-Hofladen (Gärtnerei-Hofverkauf)
   kategorie: Einkaufen
-  text: „Frisch von hier“ – Gemüse und Obst aus dem Schlossgarten der Gemeinschaft Altenschlirf.
-  adresse: Im Schlosshof, Müser Straße 1, 36358 Herbstein-Stockhausen
-  zeiten: Montag bis Freitag
+  text: >-
+    Hofverkauf der Demeter-Gärtnerei der Gemeinschaft Altenschlirf: frisches Gemüse, Kartoffeln und Kräuter je nach Saison,
+    dazu Eingemachtes, Direktsäfte und Tiefgekühltes aus der eigenen Werkstatt, Demeter-Eier aus Altenschlirf und Anzündholz.
+  adresse: Hofladen im Gutshof Schloss Stockhausen, Müser Straße 1, 36358 Herbstein-Stockhausen
+  zeiten: Mo–Fr 8:30–17 Uhr
+  telefon: 06647 9606-650
+  email: gaertnerei@gemeinschaft-altenschlirf.de
+  angebot:
+    titel: Angebot Oktober 2026
+    datei: angebote/demeter-gaertnerei-2026-10.jpg
+    bis: 2026-10-31
   seite: dorf/gemeinschaft-altenschlirf/
 - id: gemeinschaft-altenschlirf
   name: Gemeinschaft Altenschlirf e. V. & Campus am Park
