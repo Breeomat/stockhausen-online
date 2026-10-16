@@ -1,8 +1,8 @@
 ---
-import { Image } from 'astro:assets';
 import Basis from '../../layouts/Basis.astro';
+import VereinKarte from '../../components/VereinKarte.astro';
 import { url } from '../../lib/site';
-import { vereinsseiten as vereine, weitereVereine } from '../../lib/vereine';
+import { vereinsseiten as vereine, weitereVereine, bildFuer } from '../../lib/vereine';
 
 const weitere = await weitereVereine();
 ---
@@ -14,34 +14,15 @@ const weitere = await weitereVereine();
   </section>
 
   <section class="huelle vereine">
-    {vereine.map(({ name, seit, text, href, wappen }) => (
-      <a class="karte verein" href={url(href)}>
-        {wappen && <Image class="verein__wappen" src={wappen} alt="" width={120} />}
-        <span class="kicker">{seit}</span>
-        <h2>{name}</h2>
-        <p>{text}</p>
-        <span class="verein__mehr">Zur Vereinsseite →</span>
-      </a>
+    {vereine.map((v) => (
+      <VereinKarte name={v.name} kicker={v.seit} text={v.text} href={url(v.href)} linkText="Zur Vereinsseite" bild={v.bild} wappen={v.wappen} />
     ))}
     {weitere.map((name) => (
-      <a class="karte verein verein--klein" href={`${url('termine/')}?verein=${encodeURIComponent(name)}`}>
-        <h2>{name}</h2>
-        <p>Vereinsseite folgt.</p>
-        <span class="verein__mehr">Termine ansehen →</span>
-      </a>
+      <VereinKarte name={name} text="Vereinsseite folgt." href={`${url('termine/')}?verein=${encodeURIComponent(name)}`} linkText="Termine ansehen" bild={bildFuer(name)} />
     ))}
   </section>
 </Basis>
 
 <style>
   .vereine { padding-block: 1rem 5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 1rem; }
-  .verein { padding: 1.75rem; text-decoration: none; color: var(--text); display: flex; flex-direction: column; transition: transform 0.15s ease; }
-  .verein:hover { transform: translateY(-2px); }
-  .verein { position: relative; }
-  .verein__wappen { position: absolute; top: 1.25rem; right: 1.25rem; width: 60px; height: auto; }
-  .verein:has(.verein__wappen) h2 { padding-right: 4rem; }
-  .verein h2 { font-size: 1.5rem; }
-  .verein p { color: var(--text-leise); }
-  .verein--klein h2 { font-size: 1.2rem; }
-  .verein__mehr { margin-top: auto; font-weight: 600; color: var(--lagune); }
 </style>

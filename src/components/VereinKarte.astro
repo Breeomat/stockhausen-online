@@ -1,0 +1,66 @@
+---
+// Vereinskarte mit Foto als Hintergrund (Startseite und Vereinsübersicht)
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  name: string;
+  href: string;
+  linkText: string;
+  kicker?: string;
+  text?: string;
+  bild?: { src: ImageMetadata; nachweis: string; position?: string };
+  wappen?: ImageMetadata;
+}
+const { name, href, linkText, kicker, text, bild, wappen } = Astro.props;
+---
+<a class:list={['karte verein-karte', { 'verein-karte--hell': !bild }]} href={href}>
+  {bild && <Image class="verein-karte__bild" src={bild.src} alt="" widths={[640, 1024]} sizes="(max-width: 860px) 100vw, 640px" style={bild.position ? `object-position: ${bild.position}` : undefined} />}
+  {wappen && <Image class="verein-karte__wappen" src={wappen} alt="" width={120} />}
+  {kicker && <span class="kicker">{kicker}</span>}
+  <h3>{name}</h3>
+  {text && <p>{text}</p>}
+  <span class="verein-karte__pfeil">{linkText} →</span>
+  {bild && <span class="verein-karte__foto">{bild.nachweis}</span>}
+</a>
+
+<style>
+  .verein-karte {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    min-height: 260px;
+    text-decoration: none;
+    color: #fff;
+    border: 0;
+    transition: transform 0.2s ease;
+  }
+  .verein-karte:hover { transform: translateY(-3px); color: #fff; }
+  .verein-karte__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 70%; z-index: -2; }
+  .verein-karte:has(.verein-karte__bild)::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(100deg, rgb(12 18 24 / 0.82) 0%, rgb(12 18 24 / 0.55) 50%, rgb(12 18 24 / 0.15) 100%);
+  }
+  .verein-karte :is(h3, p, .kicker, .verein-karte__pfeil) { text-shadow: 0 1px 8px rgb(0 0 0 / 0.6); }
+  .verein-karte .kicker { color: #ffd98a; }
+  h3 { color: #fff; font-size: clamp(1.4rem, 2.2vw, 1.8rem); }
+  p { color: #f3ece4; max-width: 42ch; }
+  .verein-karte__pfeil { margin-top: auto; font-weight: 600; color: #ffd98a; }
+  .verein-karte__wappen { position: absolute; top: 1.25rem; right: 1.25rem; width: 72px; height: auto; }
+  .verein-karte:has(.verein-karte__wappen) h3 { padding-right: 4.5rem; }
+  .verein-karte__foto { position: absolute; right: 0.8rem; bottom: 0.5rem; font-size: 0.72rem; color: rgb(255 255 255 / 0.85); }
+
+  .verein-karte--hell { background: var(--flaeche); color: var(--text); border: 1px solid var(--linie); }
+  .verein-karte--hell:hover { color: var(--text); }
+  .verein-karte--hell :is(h3, p, .kicker, .verein-karte__pfeil) { text-shadow: none; }
+  .verein-karte--hell .kicker { color: var(--ziegel); }
+  .verein-karte--hell h3 { color: var(--meer); }
+  .verein-karte--hell p { color: var(--text-leise); }
+  .verein-karte--hell .verein-karte__pfeil { color: var(--lagune); }
+</style>

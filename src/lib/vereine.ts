@@ -2,6 +2,8 @@ import { kommendeTermine } from './termine';
 import feuerwehrFoto from '../assets/fotos/feuerwehr-einsatzabteilung.jpg';
 import svWappen from '../assets/fotos/sv-stockhausen-wappen.png';
 import sportplatzFoto from '../assets/fotos/sv-sportplatz-luftbild.jpg';
+import kircheFoto from '../assets/fotos/stockhausen-kirche.jpg';
+import schlossFoto from '../assets/fotos/stockhausen-schloss.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
 export const vereinsseiten = [
@@ -23,6 +25,13 @@ export const vereinsseiten = [
     bild: { src: sportplatzFoto, nachweis: 'Foto: Marc Ahne' },
   },
 ];
+
+// Hintergrundbilder für Vereine ohne eigene Seite (Teil des Vereinsnamens → Bild)
+const weitereBilder = [
+  { teil: 'Kirchengemeinde', bild: { src: kircheFoto, nachweis: 'Foto: Marc Ahne', position: '50% 45%' } },
+  { teil: 'Dorfgeschichte', bild: { src: schlossFoto, nachweis: 'Foto: Marc Ahne', position: '50% 40%' } },
+];
+export const bildFuer = (name: string) => weitereBilder.find((b) => name.includes(b.teil))?.bild;
 
 const hatSeite = (name: string) => vereinsseiten.some((v) => name.includes(v.kurz));
 
