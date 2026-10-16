@@ -6,6 +6,7 @@ import kircheFoto from '../assets/fotos/stockhausen-kirche.jpg';
 import schlossFoto from '../assets/fotos/stockhausen-schloss.jpg';
 import luftbildFoto from '../assets/fotos/stockhausen-luftbild.jpg';
 import chorFoto from '../assets/fotos/posaunenchor.jpg';
+import gefrierFoto from '../assets/fotos/gefrierhaus-fest.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
 export const vereinsseiten = [
@@ -55,6 +56,7 @@ export const vereinsseiten = [
     seit: 'seit 1963',
     text: 'Gemeinsame Gefrierfächer und Kühlraum im Gefrierhaus – seit über 60 Jahren in Betrieb.',
     href: 'vereine/gefriergemeinschaft/',
+    bild: { src: gefrierFoto, nachweis: 'Foto: Marc Ahne', position: '50% 55%' },
   },
 ];
 
