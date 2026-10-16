@@ -65,7 +65,7 @@ export const vereinsseiten = [
     seit: 'seit 1899',
     text: 'Streuobstwiesen, Baumschnittkurse, Keltern im Herbst und ein grünes Dorfbild.',
     href: 'vereine/obst-und-gartenbauverein/',
-    bild: { src: maibaumFoto, nachweis: '', position: '50% 30%' },
+    bild: { src: maibaumFoto, nachweis: 'Foto: Marc Ahne', position: '50% 30%' },
   },
 ];
 
