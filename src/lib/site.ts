@@ -8,4 +8,5 @@ export const navigation = [
   { href: 'plakate/', label: 'Plakatwand' },
   { href: 'aktuelles/', label: 'Aktuelles' },
   { href: 'dorf/', label: 'Unser Dorf' },
+  { href: 'ortsbeirat/', label: 'Ortsbeirat' },
 ];

@@ -7,6 +7,7 @@ import kirche from '../../assets/fotos/stockhausen-kirche.jpg';
 import schloss from '../../assets/fotos/stockhausen-schloss.jpg';
 import conradsRuhe from '../../assets/fotos/conrads-ruhe.jpg';
 import beiratFoto from '../../assets/fotos/ortsbeirat-stockhausen.png';
+import { ortsbeirat } from '../../lib/ortsbeirat';
 import gemeinschaftFoto from '../../assets/fotos/gemeinschaft-altenschlirf-schloss.jpg';
 import gemeinschaftLogo from '../../assets/fotos/gemeinschaft-altenschlirf-logo.png';
 import vorher from '../../assets/fotos/ortsdurchfahrt-vorher.jpg';
@@ -149,18 +150,6 @@ const schlossLeben = [
   { titel: 'Johannimarkt', text: 'Jedes Jahr Mitte Juni im Schlosspark: Handwerkliches aus den eigenen Werkstätten und aus anderen sozialen Einrichtungen.' },
 ];
 
-const ortsbeirat = {
-  aemter: [
-    ['Ortsvorsteher', 'Jonas Domaschka'],
-    ['Stellvertretender Ortsvorsteher', 'Christoph Schell'],
-    ['Schriftführer', 'Marc Ahne'],
-    ['Stellvertretender Schriftführer', 'Cornelius Tietz'],
-  ],
-  // Reihenfolge auf dem Foto laut Stadt Herbstein
-  fotoReihe: ['Cornelius Tietz', 'Marc Ahne', 'Kirsten Antritter', 'Markus Fischer', 'Jonas Domaschka', 'Cornelius Osthaus', 'Nadine Wahl', 'Friedrich-Wilhelm Picker', 'Christoph Schell'],
-  weitere: ['Kirsten Antritter', 'Markus Fischer', 'Cornelius Osthaus', 'Friedrich‑Wilhelm Picker', 'Nadine Wahl'],
-};
-
 const entfernungen = [
   ['Schadges', '2 km'],
   ['Hosenfeld-Blankenau', '2 km'],
@@ -233,6 +222,7 @@ const entfernungen = [
             <div><dt>Kontakt Ortsvorsteher</dt><dd><a href="tel:+4915118401352">0151 18401352</a><br /><a href="mailto:stockhausen@ortsvorsteher.herbstein.de">stockhausen@ortsvorsteher.herbstein.de</a></dd></div>
           </dl>
           <p class="beirat__text">Der Ortsbeirat vertritt die Anliegen des Dorfes gegenüber der Stadt Herbstein: Er wird zu wichtigen Angelegenheiten des Ortsbezirks angehört, nimmt zum Haushaltsentwurf Stellung und kann Vorschläge machen. Beim Ortsvorsteher können Anträge abgegeben sowie Beglaubigungen und Lebensbescheinigungen ausgestellt werden, soweit zulässig.</p>
+          <a class="beirat__mehr" href={url('ortsbeirat/')}>Alles zum Ortsbeirat →</a>
         </div>
         <div class="karte kasten">
           <h3>Nachbarorte</h3>
@@ -410,6 +400,7 @@ const entfernungen = [
   .beirat__foto { margin: 0 0 0.75rem; }
   .beirat__foto img { width: 100%; height: auto; }
   .beirat__foto figcaption { margin-top: 0.4rem; font-size: 0.78rem; line-height: 1.45; color: var(--text-leise); }
+  .beirat__mehr { display: inline-block; margin-top: 0.75rem; font-weight: 600; }
   .beirat__text { margin: 0.75rem 0 0; font-size: 0.88rem; line-height: 1.5; color: var(--text-leise); }
   .klein { font-size: 0.85rem; color: var(--text-leise); margin: 0.75rem 0 0; }
 
