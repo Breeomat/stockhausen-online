@@ -130,7 +130,7 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
         <a class="knopf knopf--leise" href={url('plakate/')}>Alle Plakate</a>
       </div>
       {aktuell.length > 0 ? (
-        <PlakatRaster liste={aktuell.slice(0, 4)} />
+        <PlakatRaster liste={aktuell} zeigen={4} fest={2} />
       ) : (
         <div class="leer">
           <strong>Noch keine Plakate ausgehängt.</strong>

@@ -2,14 +2,15 @@
 import { Image, getImage } from 'astro:assets';
 import type { Plakat } from '../lib/plakate';
 
-interface Props { liste: Plakat[]; archiv?: boolean }
-const { liste, archiv = false } = Astro.props;
+// zeigen/fest: nur `zeigen` Plakate anzeigen; die ersten `fest` bleiben, die übrigen Plätze wechseln je Besuch
+interface Props { liste: Plakat[]; archiv?: boolean; zeigen?: number; fest?: number }
+const { liste, archiv = false, zeigen, fest = 0 } = Astro.props;
 const gross = await Promise.all(liste.map((p) => getImage({ src: p.bild, width: Math.min(p.bild.width, 1400), format: 'webp' })));
 const bis = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long' }).format(new Date(`${iso}T12:00:00`));
 ---
-<ul class:list={['plakate', { 'plakate--archiv': archiv }]}>
+<ul class:list={['plakate', { 'plakate--archiv': archiv }]} data-zeigen={zeigen} data-fest={zeigen ? fest : undefined}>
   {liste.map((p, i) => (
-    <li>
+    <li hidden={zeigen !== undefined && i >= zeigen}>
       <button class="plakat" data-gross={gross[i].src} data-titel={p.data.titel}>
         <Image src={p.bild} alt={`Plakat: ${p.data.titel}`} widths={[320, 480, 720]} sizes="(max-width: 640px) 50vw, 280px" />
       </button>
@@ -27,6 +28,16 @@ const bis = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'numeric', 
 </dialog>
 
 <script>
+  // Wechselnde Plätze: die ersten `fest` Plakate bleiben, die restlichen Plätze werden zufällig aus den übrigen gefüllt
+  document.querySelectorAll<HTMLUListElement>('.plakate[data-zeigen]').forEach((ul) => {
+    const zeigen = Number(ul.dataset.zeigen);
+    const fest = Number(ul.dataset.fest) || 0;
+    const alle = [...ul.querySelectorAll<HTMLLIElement>(':scope > li')];
+    const rest = alle.slice(fest).map((li) => ({ li, r: Math.random() })).sort((a, b) => a.r - b.r).map(({ li }) => li);
+    const auswahl = rest.slice(0, Math.max(0, zeigen - fest));
+    alle.forEach((li, i) => (li.hidden = i >= fest && !auswahl.includes(li)));
+    auswahl.forEach((li) => ul.append(li));
+  });
   document.querySelectorAll<HTMLButtonElement>('.plakat').forEach((knopf) => {
     knopf.addEventListener('click', () => {
       const kasten = knopf.closest('ul')?.nextElementSibling as HTMLDialogElement | null;
@@ -65,6 +76,7 @@ const bis = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'numeric', 
     transform: rotate(-0.6deg);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
+  .plakate li[hidden] { display: none; }
   .plakate li:nth-child(even) .plakat { transform: rotate(0.7deg); }
   .plakat:hover, .plakate li:nth-child(even) .plakat:hover { transform: rotate(0) scale(1.02); }
   .plakat img { width: 100%; aspect-ratio: 1 / 1.414; object-fit: cover; }
