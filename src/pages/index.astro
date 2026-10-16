@@ -7,7 +7,7 @@ import PlakatRaster from '../components/PlakatRaster.astro';
 import { kommendeTermine } from '../lib/termine';
 import { plakate } from '../lib/plakate';
 import { url } from '../lib/site';
-import { aktion, aktionLaeuft } from '../lib/enso';
+import { aktion, aktionLaeuft, baustelle, baustelleAktiv } from '../lib/enso';
 import { vereinsseiten, weitereVereine } from '../lib/vereine';
 import VereinKarte from '../components/VereinKarte.astro';
 
@@ -29,6 +29,15 @@ const weitere = await weitereVereine();
     </div>
     <span class="held__foto">Luftbild: Marc Ahne</span>
   </section>
+
+  {baustelleAktiv() && (
+    <div class="huelle">
+      <a class="hinweis hinweis--baustelle" href={url('tante-enso/')}>
+        <span class="hinweis__marke">Baustelle</span>
+        <span><strong>{baustelle.text}</strong> Danke für eure Unterstützung! →</span>
+      </a>
+    </div>
+  )}
 
   {aktionLaeuft() && (
     <div class="huelle">
@@ -178,6 +187,9 @@ const weitere = await weitereVereine();
     border: 1px solid color-mix(in srgb, var(--ziegel) 30%, transparent);
   }
   .hinweis:hover { color: var(--ziegel); }
+  .hinweis--baustelle { background: #fff4cc; border-color: #e9ad3f; }
+  .hinweis--baustelle .hinweis__marke { background: #e9ad3f; color: #2a211c; }
+  .huelle + .huelle .hinweis { margin-top: 0.6rem; }
   .hinweis__marke {
     flex: none;
     padding: 0.25rem 0.7rem;

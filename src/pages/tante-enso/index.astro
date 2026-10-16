@@ -1,7 +1,7 @@
 ---
 import Basis from '../../layouts/Basis.astro';
 import { Image, getImage } from 'astro:assets';
-import { aktion, aktionLaeuft } from '../../lib/enso';
+import { aktion, aktionLaeuft, baustelle, baustelleAktiv } from '../../lib/enso';
 import { kommendeTermine, datumLang, zeitraum } from '../../lib/termine';
 import patenPlakat from '../../assets/fotos/tante-enso-paten.jpg';
 
@@ -24,6 +24,12 @@ const quellen = [
     <p>Nach dem Rückzug von tegut soll das Lädchen in der Welzgasse ein Tante-Enso-Laden werden. Betreiber bleibt die Gemeinschaft Altenschlirf. Dafür mussten mindestens {aktion.ziel} Menschen aus Stockhausen und Umgebung Teilhaber werden. Dieses Ziel ist erreicht: Laut Tante Enso kommt dann eine Filiale in den Ort.</p>
     <p><a class="knopf knopf--leise" href={aktion.standort} rel="noopener">Tante Enso Stockhausen auf tanteenso.de</a></p>
   </section>
+
+  {baustelleAktiv() && (
+    <div class="huelle">
+      <p class="baustelle"><strong>Trotz Baustelle erreichbar:</strong> Tante Enso und die Metzgerei Günther sind weiterhin für euch da. Danke für eure Unterstützung!</p>
+    </div>
+  )}
 
   <section class="huelle enso-seite">
     {laeuft && (
@@ -116,6 +122,7 @@ const quellen = [
 </Basis>
 
 <style>
+  .baustelle { margin: 0 0 1rem; padding: 0.9rem 1.25rem; border-radius: var(--radius); background: #fff4cc; border: 1px solid #e9ad3f; color: #2a211c; }
   .enso-seite { padding-block: 1rem 5rem; display: grid; gap: 2rem; }
   .aktion {
     display: grid;
