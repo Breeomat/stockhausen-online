@@ -24,5 +24,8 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
 - Farben/Schriften: Tokens in `src/styles/global.css`, Schriften lokal (Fontsource), keine externen Dienste.
 - Vor dem Push: `npm run build` muss fehlerfrei laufen.
 
-## Domain-Umstellung (noch offen)
-`astro.config.mjs`: `site: 'https://stockhausen-online.de'`, `base: '/'`; Datei `public/CNAME` mit `stockhausen-online.de`.
+## Domain
+Die Seite läuft unter https://stockhausen-online.de (`astro.config.mjs`: `site`, `base: '/'`; `public/CNAME`).
+GitHub Pages → Settings → Pages → Custom domain `stockhausen-online.de`, „Enforce HTTPS“ an.
+DNS beim Domain-Anbieter: A-Records 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153;
+AAAA 2606:50c0:8000::153, 2606:50c0:8001::153, 2606:50c0:8002::153, 2606:50c0:8003::153; `www` als CNAME auf `breeomat.github.io`.
