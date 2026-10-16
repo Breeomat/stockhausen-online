@@ -104,3 +104,19 @@
   telefon: 0151 18401352 (Ortsvorsteher)
   email: stockhausen@ortsvorsteher.herbstein.de
   seite: dorf/#ortsbeirat
+- id: zahnarzt-falcke
+  name: Zahnarztpraxis Dr. Carsten Falcke
+  kategorie: Gesundheit
+  text: >-
+    Zahnmedizinische Versorgung für die ganze Familie im Dorf: Vorsorge und professionelle Zahnreinigung,
+    Zahnerhaltung und Wurzelkanalbehandlung, Zahnersatz sowie Tätigkeitsschwerpunkt Implantologie.
+    Rücksicht auf Angstpatienten, Behandlung von Kindern und Senioren. Barrierearmer Zugang, eigene Parkplätze.
+    Termine nach Vereinbarung.
+  adresse: Müser Straße 49, 36358 Herbstein-Stockhausen
+  zeiten: Mo 8–12 und 15–19 Uhr · Di 8–12 und 13–17 Uhr · Mi geschlossen · Do 8–12 und 14:30–18 Uhr · Fr 8–13:30 Uhr
+  telefon:
+    - 06647 234
+    - 01805 607011 (zahnärztlicher Notdienst Hessen, Wochenende und Feiertage)
+  fax: 06647 1204
+  email: info@dr-carsten-falcke.de
+  web: https://www.dr-carsten-falcke.de

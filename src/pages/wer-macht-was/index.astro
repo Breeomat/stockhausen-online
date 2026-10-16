@@ -6,13 +6,14 @@ import Basis from '../../layouts/Basis.astro';
 import { url } from '../../lib/site';
 import BereichSymbol from '../../components/BereichSymbol.astro';
 
-const reihenfolge = ['Einkaufen', 'Gastronomie', 'Handwerk', 'Industrie', 'Landwirtschaft', 'Dienstleistung', 'Einrichtung'] as const;
+const reihenfolge = ['Einkaufen', 'Gastronomie', 'Handwerk', 'Industrie', 'Landwirtschaft', 'Gesundheit', 'Dienstleistung', 'Einrichtung'] as const;
 const ueberschrift: Record<(typeof reihenfolge)[number], string> = {
   Einkaufen: 'Einkaufen',
   Gastronomie: 'Essen und Trinken',
   Handwerk: 'Handwerk',
   Industrie: 'Industrie und Gewerbe',
   Landwirtschaft: 'Landwirtschaft',
+  Gesundheit: 'Gesundheit',
   Dienstleistung: 'Dienstleistungen',
   Einrichtung: 'Einrichtungen',
 };
