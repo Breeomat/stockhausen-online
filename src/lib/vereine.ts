@@ -83,7 +83,7 @@ export const vereinsseiten = [
     seit: 'EKHN · Dekanat Vogelsberg',
     text: 'Zwei Kirchen, ein Gemeindeleben: Gottesdienste in Stockhausen und Rixfeld, Kirchenmusik, Kinder-, Frauen- und Seniorenarbeit.',
     href: 'vereine/kirchengemeinde/',
-    bild: { src: kirchgemeindeFoto, nachweis: '', position: '50% 30%' },
+    bild: { src: kirchgemeindeFoto, nachweis: 'Foto: Ev. Kirchengemeinde Stockhausen-Rixfeld', position: '50% 30%' },
   },
 ];
 
