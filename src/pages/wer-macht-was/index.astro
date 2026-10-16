@@ -57,6 +57,7 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
                 {e.adresse && <div><dt>Adresse</dt><dd>{e.adresse}</dd></div>}
                 {e.zeiten && <div><dt>Geöffnet</dt><dd>{e.zeiten}</dd></div>}
                 {e.telefon && <div><dt>Telefon</dt><dd><a href={tel(e.telefon)}>{e.telefon}</a></dd></div>}
+                {e.fax && <div><dt>Fax</dt><dd>{e.fax}</dd></div>}
                 {e.email && <div><dt>E-Mail</dt><dd><a href={`mailto:${e.email}`}>{e.email}</a></dd></div>}
                 {e.web && <div><dt>Website</dt><dd><a href={e.web} rel="noopener">{e.web.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a></dd></div>}
               </dl>

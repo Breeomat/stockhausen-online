@@ -42,6 +42,7 @@ const verzeichnis = defineCollection({
     text: z.string(),
     adresse: z.string().optional(),
     telefon: z.string().optional(),
+    fax: z.string().optional(),
     email: z.string().email().optional(),
     web: z.string().url().optional(),
     zeiten: z.string().optional(),
