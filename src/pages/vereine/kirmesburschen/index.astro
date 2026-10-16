@@ -1,0 +1,99 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import gruppenFoto from '../../../assets/fotos/kirmesburschen-gruppe.jpg';
+import komiteeFoto from '../../../assets/fotos/kirmesburschen-komitee.jpg';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+
+// Quelle: Vereinsdossier „Kirmesburschen Stockhausen“ (Oktober 2026)
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Kirmes'));
+
+const ablauf = [
+  { tag: 'Mittwoch', titel: 'Internes Antrinken', punkte: ['Abends in der Halle, nur für die Burschen und ihre Mädchen – mit dem Kirmeslied „Oh schöne Kirmes, du bist nur einmal im Jahr …“'] },
+  { tag: 'Donnerstag', titel: 'Kirmesblasen und Dorfabend', punkte: ['15:00 Uhr Kirmesblasen: Der Posaunenchor zieht durchs Dorf.', '18:00 Uhr Kirmesessen: Die Burschen besuchen ihre Mädchen daheim, mit Blumen und Sekt.', '19:00 Uhr Dorfabend: offizieller Auftakt in der Altfellhalle.'] },
+  { tag: 'Freitag', titel: 'Frühschoppen und Partyabend', punkte: ['10:30 Uhr Frühschoppen mit regionaler Blasmusik – weit über das Dorf hinaus bekannt.', '15:00 Uhr Mittagessen und Stimmungsmusik.', '21:00 Uhr Partyabend mit Live-Band.'] },
+  { tag: 'Samstag', titel: 'Kinderkirmes, Fackelumzug, Finale', punkte: ['15:30 Uhr Kinderkirmes: Spiele und Tänze der Burschen gegen die Dorfkinder, Hüpfburg.', '18:30 Uhr Fackelumzug mit Musik durch die Straßen.', '21:00 Uhr Kirmesfinale mit Disconight.'] },
+];
+---
+<Basis titel="Kirmesburschen" beschreibung="Kirmesburschen Stockhausen: Die Stockhäuser Kirmes seit 1848 – am letzten Oktoberwochenende in der Altfellhalle.">
+  <section class="kb-held">
+    <Image class="kb-held__bild" src={gruppenFoto} alt="" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="huelle kb-kopf">
+      <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+      <span class="kicker">Brauchtum · seit 1848</span>
+      <h1>Kirmesburschen Stockhausen</h1>
+      <p>Seit 1848 halten die Kirmesburschen am letzten Oktoberwochenende die Kirchweih im Dorf lebendig. Vom Dorfabend über den Frühschoppen am Freitag bis zur Kinderkirmes mit Fackelumzug und dem Finale am Samstagabend: Die Kirmes in der Altfellhalle verbindet Generationen, dörfliches Brauchtum und beste Stimmung.</p>
+    </div>
+    <span class="kb-held__foto">Kirmesburschen und Kirmesmädchen · Foto: <span class="fehlt">[fehlt: Fotograf]</span></span>
+  </section>
+
+  <section class="huelle kb">
+    <div class="kb-geschichte">
+      <div class="text">
+        <span class="kicker">Über 175 Jahre</span>
+        <h2>Kirchweih statt Festzelt</h2>
+        <p>Gefeiert wurde die Stockhäuser Kirmes erstmals 1848, nach der Weihe der neuen Kirche. Ein Zelt gibt es nicht: Die Kirmes findet mitten im Dorf in der Altfellhalle statt.</p>
+        <h3>Feste Bräuche im Vorfeld</h3>
+        <ul>
+          <li><strong>Kirmes-Komitee:</strong> Sechs Burschen werden gewählt und leiten die Organisation. Neue Burschen werden traditionell aufgenommen, indem sie ein „Kännchen“ Kümmel in einem Zug leeren.</li>
+          <li><strong>Mädchenverstrich:</strong> Genau eine Woche vor der Kirmes.</li>
+        </ul>
+      </div>
+      <figure class="kb-komitee">
+        <Image src={komiteeFoto} alt="Sechs Kirmesburschen in schwarzer Weste und rotem Halstuch, einer mit Zylinder" widths={[480, 800]} sizes="(max-width: 860px) 100vw, 420px" />
+        <figcaption>Das Kirmes-Komitee · Foto: <span class="fehlt">[fehlt: Fotograf]</span></figcaption>
+      </figure>
+    </div>
+
+    <div>
+      <span class="kicker">Mittwoch bis Samstag</span>
+      <h2>So läuft die Kirmes ab</h2>
+      <ul class="ablauf">
+        {ablauf.map(({ tag, titel, punkte }) => (
+          <li class="karte">
+            <span class="ablauf__tag">{tag}</span>
+            <h3>{titel}</h3>
+            <ul>{punkte.map((p) => <li>{p}</li>)}</ul>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Kirmes {termine[0].data.datum.slice(0, 4)}</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .kb-held { position: relative; isolation: isolate; overflow: hidden; margin-bottom: 2.5rem; color: #fff; }
+  .kb-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; z-index: -2; }
+  .kb-held::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(12 18 24 / 0.85) 0%, rgb(12 18 24 / 0.6) 55%, rgb(12 18 24 / 0.25) 100%); }
+  .kb-held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
+  .kb-kopf { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .kb-kopf h1 { color: #fff; max-width: 20ch; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
+  .kb-kopf p { font-size: 1.15rem; max-width: 60ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
+  .kb-kopf .kicker { color: var(--gold); }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; color: #fff; }
+  .kb { padding-block: 0 5rem; display: grid; gap: 3.5rem; }
+  .kb-geschichte { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); gap: 2.5rem; align-items: start; }
+  .text p, .text ul { max-width: 68ch; }
+  .text li { margin-bottom: 0.5rem; }
+  .kb-komitee { margin: 0; }
+  .kb-komitee img { width: 100%; height: auto; border-radius: var(--radius, 12px); }
+  .kb-komitee figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-leise); }
+  .ablauf { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
+  .ablauf > li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
+  .ablauf h3 { margin: 0.3rem 0 0.6rem; font-size: 1.2rem; }
+  .ablauf ul { margin: 0; padding-left: 1.1rem; color: var(--text-leise); }
+  .ablauf ul li { margin-bottom: 0.35rem; }
+  .ablauf__tag { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ziegel); }
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+  @media (max-width: 860px) { .kb-geschichte { grid-template-columns: 1fr; } }
+</style>

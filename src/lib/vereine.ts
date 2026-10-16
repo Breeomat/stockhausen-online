@@ -8,6 +8,7 @@ import luftbildFoto from '../assets/fotos/stockhausen-luftbild.jpg';
 import chorFoto from '../assets/fotos/posaunenchor.jpg';
 import gefrierFoto from '../assets/fotos/gefrierhaus-fest.jpg';
 import maibaumFoto from '../assets/fotos/ogv-maibaum.jpg';
+import kirmesFoto from '../assets/fotos/kirmesburschen-gruppe.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
 export const vereinsseiten = [
@@ -66,6 +67,14 @@ export const vereinsseiten = [
     text: 'Streuobstwiesen, Baumschnittkurse, Keltern im Herbst und ein grünes Dorfbild.',
     href: 'vereine/obst-und-gartenbauverein/',
     bild: { src: maibaumFoto, nachweis: 'Foto: Marc Ahne', position: '50% 30%' },
+  },
+  {
+    name: 'Kirmesburschen Stockhausen',
+    kurz: 'Kirmes',
+    seit: 'seit 1848',
+    text: 'Die Stockhäuser Kirmes am letzten Oktoberwochenende: Dorfabend, Frühschoppen, Kinderkirmes und Fackelumzug in der Altfellhalle.',
+    href: 'vereine/kirmesburschen/',
+    bild: { src: kirmesFoto, nachweis: '', position: '50% 45%' },
   },
 ];
 

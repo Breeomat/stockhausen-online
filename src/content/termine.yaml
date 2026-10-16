@@ -32,12 +32,16 @@
 - id: 2026-10-22-kirmes-dorfabend
   titel: "Stockhäuser Kirmes: Dorfabend"
   datum: 2026-10-22
+  ort: Altfellhalle
+  verein: Kirmesburschen Stockhausen
   beginn: "19:00"
   text: Dorfabend mit DJ WalleaufMalle.
   plakat: kirmes-2026
 - id: 2026-10-23-kirmes-freitag
   titel: "Stockhäuser Kirmes: Frühschoppen und Livemusik"
   datum: 2026-10-23
+  ort: Altfellhalle
+  verein: Kirmesburschen Stockhausen
   beginn: "10:30"
   text: |-
     10:30 Uhr Frühschoppen mit der Original Wallenröder Dicke Backe Kapell, Essen vom Gasthof/Metzgerei Schwarz Uffhausen
@@ -47,6 +51,8 @@
 - id: 2026-10-24-kirmes-samstag
   titel: "Stockhäuser Kirmes: Kinderkirmes und Fackelumzug"
   datum: 2026-10-24
+  ort: Altfellhalle
+  verein: Kirmesburschen Stockhausen
   beginn: "15:30"
   text: |-
     15:30 Uhr Kinderkirmes mit Jan Wehner
