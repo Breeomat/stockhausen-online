@@ -27,19 +27,19 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1c1714;
-    --bg-tief: #161210;
-    --flaeche: #26201b;
-    --text: #f1e9de;
-    --text-leise: #bfae9c;
-    --linie: #3a2f27;
+    --bg: #18191c;
+    --bg-tief: #121316;
+    --flaeche: #222428;
+    --text: #eceef1;
+    --text-leise: #a9afb7;
+    --linie: #34373d;
     --meer: #9fcbe4;
     --lagune: #7bbad9;
     --aprikose: #a8693f;
     --ziegel: #ef8c63;
-    --ziegel-hell: #3d2419;
+    --ziegel-hell: #362a2a;
     --gold: #f0bf5c;
-    --warnung: #3a2e12;
+    --warnung: #36321f;
     --warnung-rand: #b8862c;
     --warnung-text: #f6e8c4;
     --schatten: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.6);
