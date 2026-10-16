@@ -10,6 +10,9 @@ import buchTitel from '../../../assets/fotos/ons-bladd-titel.jpg';
 // Quelle: Dossier „Arbeitskreis Dorfgeschichte Stockhausen“ (Drive, Oktober 2026)
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Dorfgeschichte'));
 
+// Mitarbeit laut Impressum „Die Schull is ous!“ (2010)
+const mitwirkende = ['Hans-Jürgen Döll', 'Martina Eichenauer', 'Michael Eichenauer', 'Wilhelm Picker', 'Hanne Maaser (für Schadges)'];
+
 const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Ausstellungen', 'Ahnenforschung'];
 ---
 <Basis titel="Arbeitskreis Dorfgeschichte" beschreibung="Arbeitskreis Dorfgeschichte Stockhausen: Ortschronik, Bildarchiv und Hofgeschichten – das Gedächtnis des Dorfes.">
@@ -50,7 +53,31 @@ const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Aus
             <div><dt>Webarchiv</dt><dd><a href="https://www.hjdoell.de" rel="noopener">www.hjdoell.de</a></dd></div>
           </dl>
         </div>
+        <div class="karte kasten">
+          <h3>Mitwirkende</h3>
+          <ul class="namen">
+            {mitwirkende.map((n) => <li>{n}</li>)}
+          </ul>
+        </div>
       </aside>
+    </div>
+
+    <div>
+      <span class="kicker">Veröffentlichung</span>
+      <h2>„Die Schull is ous!“</h2>
+      <p class="buch-untertitel">Aus 100 Jahren Schulgeschichte von Stockhausen und Schadges</p>
+      <div class="karte kasten buch-daten">
+        <dl class="liste">
+          <div><dt>Herausgeber</dt><dd>Der Magistrat der Stadt Herbstein, Marktplatz 7, 36358 Herbstein · Arbeitskreis Dorfgeschichte Stockhausen</dd></div>
+          <div><dt>Erschienen</dt><dd>2010</dd></div>
+          <div><dt>ISBN</dt><dd>978-3-929359-22-1</dd></div>
+          <div><dt>Konzept und Gestaltung</dt><dd>Arbeitskreis Dorfgeschichte Stockhausen</dd></div>
+          <div><dt>Mitarbeit</dt><dd>{mitwirkende.join(', ')}</dd></div>
+          <div><dt>Umsetzung und Druck</dt><dd>Mergard, Lauterbach</dd></div>
+          <div><dt>Buchbindearbeiten</dt><dd>Keller, Kleinlüder</dd></div>
+        </dl>
+        <p class="foerderung">Gefördert durch das Land Hessen über das Amt für den ländlichen Raum (Vogelsbergkreis).</p>
+      </div>
     </div>
 
     <div class="karte aufruf">
@@ -104,6 +131,13 @@ const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Aus
   .liste div:last-child { border-bottom: 0; }
   .liste dt { font-size: 0.8rem; color: var(--text-leise); }
   .liste dd { margin: 0; font-weight: 600; }
+
+  .namen { list-style: none; margin: 0; padding: 0; display: grid; }
+  .namen li { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); font-weight: 600; }
+  .namen li:last-child { border-bottom: 0; }
+  .buch-untertitel { margin-top: -0.5rem; font-size: 1.1rem; color: var(--text-leise); }
+  .buch-daten { max-width: 760px; margin-top: 1.25rem; }
+  .foerderung { margin: 1rem 0 0; font-size: 0.9rem; color: var(--text-leise); }
 
   .aufruf { padding: clamp(1.75rem, 4vw, 2.5rem); background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 25%, transparent); }
   .aufruf h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
