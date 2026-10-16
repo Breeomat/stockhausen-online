@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
+import wappen from '../../../assets/fotos/schuetzenverein-wappen.png';
 import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
@@ -7,6 +9,15 @@ import { url } from '../../../lib/site';
 // Quelle: Dossier „Schützenverein Stockhausen Vereinsdossier“ (Drive, Oktober 2026),
 // Name, Vereinsnummer und Postanschrift aus dem Vereinsverzeichnis (Screenshot, Oktober 2026)
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Schützenverein'));
+
+const vorstand = [
+  ['1. Vorsitzender', 'Günther Stolze'],
+  ['2. Vorsitzender', 'Jens Häuser'],
+  ['Rechnerin', 'Magdalena Schmidt'],
+  ['Schriftführerin', 'Tina Möller'],
+  ['Schießwarte', 'Wolfgang Janich, Klaus Biermann'],
+  ['Bogenwart', 'Lothar Stolze'],
+];
 
 const disziplinen = [
   { name: 'Luftgewehr 10 m', ebene: 'Bezirksrunde', text: 'Freihand-Schießen: Koordination, Standfestigkeit und ruhige Atmung.' },
@@ -16,11 +27,14 @@ const disziplinen = [
 ];
 ---
 <Basis titel="Schützenverein" beschreibung="KK Schützenverein 1926/68 e.V. Stockhausen: Sportschießen im Schützenbezirk 25 Vogelsberg – Luftgewehr, Auflage, Kleinkaliber und Königsschießen.">
-  <section class="huelle seitenkopf">
-    <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
-    <span class="kicker">Verein · 1926/68 · Schützenbezirk 25 Vogelsberg</span>
-    <h1>KK Schützenverein 1926/68 e.V. Stockhausen</h1>
-    <p>Sportlicher Ehrgeiz und dörfliche Gemeinschaft: Im Schützenverein stehen Konzentration, Zielsicherheit und Fairness an erster Stelle – für Jugendliche ebenso wie für die Seniorenmannschaften.</p>
+  <section class="huelle seitenkopf sch-kopf">
+    <div>
+      <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+      <span class="kicker">Verein · 1926/68 · Schützenbezirk 25 Vogelsberg</span>
+      <h1>KK Schützenverein 1926/68 e.V. Stockhausen</h1>
+      <p>Sportlicher Ehrgeiz und dörfliche Gemeinschaft: Im Schützenverein stehen Konzentration, Zielsicherheit und Fairness an erster Stelle – für Jugendliche ebenso wie für die Seniorenmannschaften.</p>
+    </div>
+    <Image class="sch-kopf__wappen" src={wappen} alt="Vereinswappen: zwei gekreuzte Gewehre über einer Zielscheibe, Schrift „K-K Schützenverein Stockhausen“" width={220} />
   </section>
 
   <section class="huelle sch">
@@ -47,12 +61,20 @@ const disziplinen = [
       <p>Wer den Schießsport ausprobieren oder wieder einsteigen möchte, spricht den Verein an. Erfahrene Mitglieder zeigen Neulingen und Jugendlichen den sicheren Umgang mit den Sportgeräten; Vereinsgewehre stehen zum Ausprobieren bereit.</p>
     </div>
 
+    <div class="kaesten">
+    <div class="karte kasten">
+      <h3>Vorstand</h3>
+      <dl class="liste">
+        {vorstand.map(([amt, name]) => <div><dt>{amt}</dt><dd>{name}</dd></div>)}
+      </dl>
+    </div>
     <div class="karte kasten">
       <h3>Kontakt</h3>
       <dl class="liste">
         <div><dt>Postanschrift</dt><dd>Günther Stolze<br />Hintergasse 11, 36358 Herbstein</dd></div>
         <div><dt>Vereinsnummer</dt><dd>2500047</dd></div>
       </dl>
+    </div>
     </div>
 
     {termine.length > 0 && (
@@ -79,7 +101,11 @@ const disziplinen = [
   .aufruf { padding: clamp(1.75rem, 4vw, 2.5rem); background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 25%, transparent); }
   .aufruf h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
   .aufruf p { margin: 0; max-width: 60ch; }
-  .kasten { padding: 1.5rem; max-width: 520px; }
+  .sch-kopf { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+  .sch-kopf__wappen { width: clamp(110px, 16vw, 200px); height: auto; filter: drop-shadow(0 8px 18px rgb(0 0 0 / 0.25)); }
+  @media (max-width: 640px) { .sch-kopf { grid-template-columns: 1fr; gap: 1.25rem; } .sch-kopf__wappen { width: 96px; grid-row: 1; } }
+  .kaesten { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1rem; align-items: start; }
+  .kasten { padding: 1.5rem; }
   .kasten h3 { margin: 0 0 0.75rem; }
   .liste { margin: 0; display: grid; }
   .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }

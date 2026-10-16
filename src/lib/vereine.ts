@@ -2,6 +2,7 @@ import type { ImageMetadata } from 'astro';
 import { kommendeTermine } from './termine';
 import feuerwehrFoto from '../assets/fotos/feuerwehr-einsatzabteilung.jpg';
 import svWappen from '../assets/fotos/sv-stockhausen-wappen.png';
+import schuetzenWappen from '../assets/fotos/schuetzenverein-wappen.png';
 import sportplatzFoto from '../assets/fotos/sv-sportplatz-luftbild.jpg';
 import kircheFoto from '../assets/fotos/stockhausen-kirche.jpg';
 import schlossFoto from '../assets/fotos/stockhausen-schloss.jpg';
@@ -53,6 +54,7 @@ export const vereinsseiten = [
     seit: 'seit 1926/68 · Schützenbezirk 25 Vogelsberg',
     text: 'Luftgewehr, Auflage und Kleinkaliber – vom Jungschützen bis zur Seniorenmannschaft. Schnupperschießen möglich.',
     href: 'vereine/schuetzenverein/',
+    wappen: schuetzenWappen,
   },
   {
     name: 'Gefriergemeinschaft Stockhausen e. V.',

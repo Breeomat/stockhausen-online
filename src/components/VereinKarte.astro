@@ -53,7 +53,7 @@ const { name, href, linkText, kicker, text, bild, wappen } = Astro.props;
   p { color: #f3ece4; max-width: 42ch; }
   .verein-karte__pfeil { margin-top: auto; font-weight: 600; color: #ffd98a; }
   .verein-karte__wappen { position: absolute; top: 1.25rem; right: 1.25rem; width: 72px; height: auto; }
-  .verein-karte:has(.verein-karte__wappen) h3 { padding-right: 4.5rem; }
+  .verein-karte:has(.verein-karte__wappen) h3, .verein-karte:has(.verein-karte__wappen) .kicker { padding-right: 4.5rem; }
   .verein-karte__foto { position: absolute; right: 0.8rem; bottom: 0.5rem; font-size: 0.72rem; color: rgb(255 255 255 / 0.85); }
 
   .verein-karte--hell { background: var(--flaeche); color: var(--text); border: 1px solid var(--linie); }
