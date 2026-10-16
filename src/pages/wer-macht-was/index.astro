@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Basis from '../../layouts/Basis.astro';
 import { url } from '../../lib/site';
+import BereichSymbol from '../../components/BereichSymbol.astro';
 
 const reihenfolge = ['Einkaufen', 'Gastronomie', 'Handwerk', 'Landwirtschaft', 'Dienstleistung', 'Einrichtung'] as const;
 const ueberschrift: Record<(typeof reihenfolge)[number], string> = {
@@ -30,13 +31,13 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
     {gruppen.length > 1 && (
       <div class="filter" role="group" aria-label="Nach Bereich filtern">
         <button class="filter__chip" aria-pressed="true" data-filter="">Alle</button>
-        {gruppen.map(([k]) => <button class="filter__chip" aria-pressed="false" data-filter={k}>{ueberschrift[k]}</button>)}
+        {gruppen.map(([k]) => <button class="filter__chip" aria-pressed="false" data-filter={k}><BereichSymbol name={k} groesse={18} />{ueberschrift[k]}</button>)}
       </div>
     )}
 
     {gruppen.map(([k, liste]) => (
       <section class="gruppe" data-kategorie={k}>
-        <h2>{ueberschrift[k]}</h2>
+        <h2><BereichSymbol name={k} groesse={26} class="gruppe__symbol" />{ueberschrift[k]}</h2>
         <ul class="eintraege">
           {liste.map(({ data: e }) => (
             <li class="karte eintrag">
@@ -74,6 +75,9 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
       });
     }),
   );
+  // Link mit ?bereich=… (z. B. von der Startseite) wählt den passenden Filter vor
+  const bereich = new URLSearchParams(location.search).get('bereich');
+  if (bereich) [...chips].find((c) => c.dataset.filter === bereich)?.click();
 </script>
 
 <style>
@@ -89,10 +93,14 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
   .filter__chip[aria-pressed='true'] { background: var(--meer); color: var(--bg); border-color: var(--meer); }
   .gruppe { margin-top: 2.5rem; }
-  .gruppe h2 { font-size: 1.5rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--linie); margin-bottom: 1.25rem; }
+  .gruppe h2 { display: flex; align-items: center; gap: 0.6rem; font-size: 1.5rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--linie); margin-bottom: 1.25rem; }
+  .gruppe__symbol { color: var(--ziegel); flex: none; }
   .eintraege { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 1rem; }
   .eintrag { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; }
   .eintrag h3 { margin: 0 0 0.4rem; font-size: 1.2rem; }

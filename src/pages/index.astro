@@ -10,10 +10,17 @@ import { url } from '../lib/site';
 import { aktion, aktionLaeuft, baustelle, baustelleAktiv } from '../lib/enso';
 import { vereinsseiten, weitereVereine } from '../lib/vereine';
 import VereinKarte from '../components/VereinKarte.astro';
+import BereichSymbol from '../components/BereichSymbol.astro';
+import { getCollection } from 'astro:content';
 
 const naechste = (await kommendeTermine()).slice(0, 4);
 const { aktuell } = await plakate();
 const weitere = await weitereVereine();
+const bereichNamen = { Einkaufen: 'Einkaufen', Gastronomie: 'Essen und Trinken', Handwerk: 'Handwerk', Landwirtschaft: 'Landwirtschaft', Dienstleistung: 'Dienstleistungen', Einrichtung: 'Einrichtungen' } as const;
+const verzeichnis = await getCollection('verzeichnis');
+const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
+  .map((k) => ({ k, anzahl: verzeichnis.filter((e) => e.data.kategorie === k).length }))
+  .filter((b) => b.anzahl > 0);
 ---
 <Basis>
   <section class="held">
@@ -93,6 +100,25 @@ const weitere = await weitereVereine();
             </ul>
           </div>
         )}
+      </div>
+    </div>
+  </section>
+
+  <section class="abschnitt wmw-start">
+    <div class="huelle">
+      <div class="karte wmw">
+        <a class="wmw__symbol" href={url('wer-macht-was/')} aria-hidden="true" tabindex="-1"><BereichSymbol name="Laden" groesse={64} /></a>
+        <div class="wmw__text">
+          <span class="kicker">Wer macht was</span>
+          <h2><a href={url('wer-macht-was/')}>Betriebe und Einrichtungen im Dorf</a></h2>
+          <p>Einkaufen, einkehren, etwas erledigen: wer im Dorf was anbietet – mit Adresse, Telefon und Öffnungszeiten.</p>
+        </div>
+        <ul class="wmw__bereiche">
+          {bereiche.map(({ k, anzahl }) => (
+            <li><a href={`${url('wer-macht-was/')}?bereich=${k}`}><BereichSymbol name={k} groesse={22} /><span>{bereichNamen[k]}</span><small>{anzahl}</small></a></li>
+          ))}
+          <li><a class="wmw__alle" href={url('wer-macht-was/')}>Zum Verzeichnis →</a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -229,6 +255,22 @@ const weitere = await weitereVereine();
   .enso__pfeil { margin-top: auto; font-weight: 600; color: var(--gold); }
 
   .vereine-start { padding-top: 0; }
+  .wmw-start { padding-top: 0; }
+  .wmw { display: grid; grid-template-columns: auto 1fr auto; gap: clamp(1.25rem, 3vw, 2.5rem); align-items: center; padding: clamp(1.5rem, 4vw, 2.5rem); }
+  .wmw__symbol { display: grid; place-items: center; width: 112px; height: 112px; border-radius: 50%; background: var(--ziegel-hell); color: var(--ziegel); }
+  .wmw__text h2 { margin: 0.25rem 0 0.5rem; }
+  .wmw__text h2 a { color: inherit; text-decoration: none; }
+  .wmw__text h2 a:hover { color: var(--ziegel); }
+  .wmw__text p { margin: 0; color: var(--text-leise); max-width: 48ch; }
+  .wmw__bereiche { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; min-width: 240px; }
+  .wmw__bereiche a { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.9rem; border-radius: 12px; border: 1px solid var(--linie); background: var(--bg); color: var(--text); text-decoration: none; font-weight: 500; }
+  .wmw__bereiche a:hover { border-color: var(--ziegel); color: var(--ziegel); }
+  .wmw__bereiche svg { color: var(--ziegel); flex: none; }
+  .wmw__bereiche small { margin-left: auto; font-size: 0.8rem; color: var(--text-leise); }
+  .wmw__bereiche .wmw__alle { justify-content: center; border: 0; background: var(--meer); color: var(--bg); font-weight: 600; }
+  .wmw__bereiche .wmw__alle:hover { background: var(--lagune); color: var(--bg); }
+  @media (max-width: 860px) { .wmw { grid-template-columns: auto 1fr; } .wmw__bereiche { grid-column: 1 / -1; min-width: 0; } }
+  @media (max-width: 520px) { .wmw { grid-template-columns: 1fr; } .wmw__symbol { width: 84px; height: 84px; } }
   .vereine-raster { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
   @media (max-width: 1000px) { .vereine-raster { grid-template-columns: 1fr 1fr; } .verein-liste { grid-column: 1 / -1 !important; } }
   @media (max-width: 640px) { .vereine-raster { grid-template-columns: 1fr; } }
