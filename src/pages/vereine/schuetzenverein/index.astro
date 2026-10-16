@@ -23,21 +23,11 @@ const disziplinen = [
   </section>
 
   <section class="huelle sch">
-    <div class="spalten">
-      <div>
+    <div class="text">
         <span class="kicker">Sportschießen</span>
         <h2>Präzision und Gemeinschaft</h2>
         <p>Der Verein gehört zum Schützenbezirk 25 Vogelsberg im Hessischen Schützenverband und schießt nach der Sportordnung des Deutschen Schützenbundes. Ein Schwerpunkt ist das Auflageschießen mit Luftgewehr und Kleinkaliber. In Rundenwettkämpfen treffen die Stockhäuser auf Nachbarvereine wie Lanzenhain, Lauterbach, Wallenrod und Herbstein.</p>
         <p>Sportschießen wird hier generationsübergreifend betrieben: Jugendliche und Jungschützen schulen Disziplin und Körperbeherrschung, die Seniorenteams tragen den Ligabetrieb in der Ältestenrunde.</p>
-      </div>
-      <aside class="karte kasten">
-        <h3>Training und Kontakt</h3>
-        <dl class="liste">
-          <div><dt>Ansprechpartner</dt><dd><span class="fehlt">[fehlt: Name 1. Vorsitzende/r oder Schießleitung]</span></dd></div>
-          <div><dt>Schießstand</dt><dd><span class="fehlt">[fehlt: Ort]</span></dd></div>
-          <div><dt>Trainingszeiten</dt><dd><span class="fehlt">[fehlt: Tag und Uhrzeit]</span></dd></div>
-        </dl>
-      </aside>
     </div>
 
     <div>
@@ -69,16 +59,7 @@ const disziplinen = [
 <style>
   .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
   .sch { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
-  .spalten { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
-  @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
-  .spalten p { max-width: 68ch; }
-  .kasten { padding: 1.5rem; }
-  .kasten h3 { margin: 0 0 0.75rem; }
-  .liste { margin: 0; display: grid; }
-  .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
-  .liste div:last-child { border-bottom: 0; }
-  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
-  .liste dd { margin: 0; font-weight: 600; }
+  .text p { max-width: 68ch; }
 
   .disziplinen { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
   .disziplinen li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
