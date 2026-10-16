@@ -50,6 +50,7 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
                 {e.email && <div><dt>E-Mail</dt><dd><a href={`mailto:${e.email}`}>{e.email}</a></dd></div>}
                 {e.web && <div><dt>Website</dt><dd><a href={e.web} rel="noopener">{e.web.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a></dd></div>}
               </dl>
+              {e.bestellen && <a class="knopf eintrag__bestellen" href={e.bestellen} rel="noopener">Online bestellen</a>}
               {e.seite && <a class="eintrag__mehr" href={url(e.seite)}>Mehr erfahren →</a>}
             </li>
           ))}
@@ -111,6 +112,7 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
   .angaben dt { font-size: 0.75rem; color: var(--text-leise); }
   .angaben dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
   .eintrag__mehr { margin-top: auto; font-weight: 600; }
+  .eintrag__bestellen { margin-top: auto; align-self: flex-start; }
   .hinweis { margin-top: 3.5rem; padding: clamp(1.5rem, 4vw, 2.25rem); background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 25%, transparent); }
   .hinweis h2 { font-size: 1.5rem; }
   .hinweis p { margin: 0; max-width: 62ch; }

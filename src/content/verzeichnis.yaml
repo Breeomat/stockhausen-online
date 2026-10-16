@@ -1,7 +1,8 @@
 # Verzeichnis „Wer macht was“: Betriebe und Einrichtungen in Stockhausen. Ein Eintrag je Betrieb.
 # Pflicht: id (eindeutig, z. B. baeckerei-muster), name, kategorie, text
 # kategorie: Einkaufen | Gastronomie | Handwerk | Landwirtschaft | Dienstleistung | Einrichtung
-# Optional: adresse, telefon, email, web (volle URL), zeiten (Öffnungszeiten), seite (interne Seite, z. B. dorf/gemeinschaft-altenschlirf/)
+# Optional: adresse, telefon, email, web (volle URL), zeiten (Öffnungszeiten), seite (interne Seite, z. B. dorf/gemeinschaft-altenschlirf/),
+#           bestellen (volle URL zu einem Online-Bestellformular)
 #
 # - id: baeckerei-muster
 #   name: Bäckerei Muster
@@ -52,3 +53,5 @@
   adresse: Mühlweg 3, 36358 Herbstein-Stockhausen
   telefon: 06647 1280
   zeiten: Mo, Mi, Sa 7–12:30 Uhr · Di, Do, Fr 7–12:30 und 15–18 Uhr
+  web: https://metzger-guenther.de
+  bestellen: https://metzger-guenther.de/bestellformular
