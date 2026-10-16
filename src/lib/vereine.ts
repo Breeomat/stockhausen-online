@@ -46,9 +46,9 @@ export const vereinsseiten = [
     bild: { src: schlossFoto, nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
   },
   {
-    name: 'Schützenverein Stockhausen',
+    name: 'KK Schützenverein 1926/68 e.V. Stockhausen',
     kurz: 'Schützenverein',
-    seit: 'Schützenbezirk 25 Vogelsberg',
+    seit: 'seit 1926/68 · Schützenbezirk 25 Vogelsberg',
     text: 'Luftgewehr, Auflage und Kleinkaliber – vom Jungschützen bis zur Seniorenmannschaft. Schnupperschießen möglich.',
     href: 'vereine/schuetzenverein/',
   },

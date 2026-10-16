@@ -4,7 +4,8 @@ import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
-// Quelle: Dossier „Schützenverein Stockhausen Vereinsdossier“ (Drive, Oktober 2026)
+// Quelle: Dossier „Schützenverein Stockhausen Vereinsdossier“ (Drive, Oktober 2026),
+// Name, Vereinsnummer und Postanschrift aus dem Vereinsverzeichnis (Screenshot, Oktober 2026)
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Schützenverein'));
 
 const disziplinen = [
@@ -14,11 +15,11 @@ const disziplinen = [
   { name: 'Königsschießen', ebene: 'Vereinsintern', text: 'Ermittlung der Schützenkönige und geselliges Pokalschießen.' },
 ];
 ---
-<Basis titel="Schützenverein" beschreibung="Schützenverein Stockhausen: Sportschießen im Schützenbezirk 25 Vogelsberg – Luftgewehr, Auflage, Kleinkaliber und Königsschießen.">
+<Basis titel="Schützenverein" beschreibung="KK Schützenverein 1926/68 e.V. Stockhausen: Sportschießen im Schützenbezirk 25 Vogelsberg – Luftgewehr, Auflage, Kleinkaliber und Königsschießen.">
   <section class="huelle seitenkopf">
     <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
-    <span class="kicker">Verein · Schützenbezirk 25 Vogelsberg</span>
-    <h1>Schützenverein Stockhausen</h1>
+    <span class="kicker">Verein · 1926/68 · Schützenbezirk 25 Vogelsberg</span>
+    <h1>KK Schützenverein 1926/68 e.V. Stockhausen</h1>
     <p>Sportlicher Ehrgeiz und dörfliche Gemeinschaft: Im Schützenverein stehen Konzentration, Zielsicherheit und Fairness an erster Stelle – für Jugendliche ebenso wie für die Seniorenmannschaften.</p>
   </section>
 
@@ -46,6 +47,15 @@ const disziplinen = [
       <p>Wer den Schießsport ausprobieren oder wieder einsteigen möchte, spricht den Verein an. Erfahrene Mitglieder zeigen Neulingen und Jugendlichen den sicheren Umgang mit den Sportgeräten; Vereinsgewehre stehen zum Ausprobieren bereit.</p>
     </div>
 
+    <div class="karte kasten">
+      <h3>Kontakt</h3>
+      <dl class="liste">
+        <div><dt>Postanschrift</dt><dd>Günther Stolze<br />Hintergasse 11, 36358 Herbstein</dd></div>
+        <div><dt>E-Mail</dt><dd><span class="fehlt">[fehlt: E-Mail-Adresse]</span></dd></div>
+        <div><dt>Vereinsnummer</dt><dd>2500047</dd></div>
+      </dl>
+    </div>
+
     {termine.length > 0 && (
       <div>
         <span class="kicker">Termine</span>
@@ -70,5 +80,12 @@ const disziplinen = [
   .aufruf { padding: clamp(1.75rem, 4vw, 2.5rem); background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 25%, transparent); }
   .aufruf h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
   .aufruf p { margin: 0; max-width: 60ch; }
+  .kasten { padding: 1.5rem; max-width: 520px; }
+  .kasten h3 { margin: 0 0 0.75rem; }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; }
   .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
 </style>
