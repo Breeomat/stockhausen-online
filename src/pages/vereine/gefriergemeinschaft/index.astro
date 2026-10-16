@@ -1,0 +1,117 @@
+---
+import Basis from '../../../layouts/Basis.astro';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+
+// Quelle: „Rückblick auf 60 Jahre Gefriergemeinschaft Stockhausen“ (August 2024); Vorsitz bestätigt Oktober 2026
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Gefrier'));
+
+const zahlen = [
+  { wert: '1963', text: 'gegründet, seit Februar 1964 in Betrieb' },
+  { wert: '100', text: 'Gefrierfächer (2 × 50), dazu ein Kühlraum' },
+  { wert: '90 €', text: 'pro Fach und Jahr (Stand 2024)' },
+];
+
+const chronik = [
+  { jahr: '1962', text: 'Am 20. Dezember „organisierte sich ein Gremium“ – so steht es im Protokollbuch –, um über die Gründung einer Gefriergemeinschaft zu beraten.' },
+  { jahr: '1963', text: 'Am 11. Januar wählt eine Versammlung unter der Leitung von Karl Schmelz senior den ersten Vorstand: Johannes Stockmann (1. Vorsitzender), Georg Nies (2. Vorsitzender), Johannes Döring (Rechner), Dieter Harnack (Geschäftsführer) und Karl Eurich II (Beisitzer). 63 Bürger erklären ihren Beitritt.' },
+  { jahr: '1963', text: 'Im März: Finanzierungsplan und ein zinsverbilligtes Darlehen über 40.000 DM bei der Spar- und Darlehenskasse Stockhausen, für das 15 Mitglieder bürgen. Die Gemeinde verkauft das Grundstück, bestellt werden eine Gefrieranlage mit 100 Fächern und ein Kühlraum. Karl Eurich leitet den Bau. Jedes Mitglied zahlt 200 DM an.' },
+  { jahr: '1964', text: 'Erste ordentliche Generalversammlung im Februar: 83 Mitglieder belegen 93½ Fächer. Fächer und Kühlraum gehen in Betrieb.' },
+  { jahr: '2024', text: '60 Jahre Gefriergemeinschaft – gefeiert am 7. September am Gefrierhaus.' },
+];
+
+const vorstand = [
+  ['1. Vorsitzender', 'Klaus Schwarz'],
+  ['2. Vorsitzender', 'Klaus Borrmann'],
+  ['Rechner', 'Marco Wahl'],
+  ['Schrift- und Geschäftsführer', 'Marc Ahne'],
+  ['Beisitzerin', 'Monika Renker'],
+];
+---
+<Basis titel="Gefriergemeinschaft" beschreibung="Gefriergemeinschaft Stockhausen: seit 1964 gemeinsame Gefrierfächer und Kühlraum im Gefrierhaus – Geschichte, Kosten und Vorstand.">
+  <section class="huelle seitenkopf">
+    <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+    <span class="kicker">Verein · seit 1963</span>
+    <h1>Gefriergemeinschaft Stockhausen</h1>
+    <p>Als Tiefkühlkost noch Luxus war, taten sich die Stockhäuser zusammen und bauten ein gemeinsames Gefrierhaus. Über 60 Jahre später ist die Anlage noch immer in Betrieb – und fast voll belegt.</p>
+  </section>
+
+  <section class="huelle gg">
+    <ul class="zahlen">
+      {zahlen.map(({ wert, text }) => <li class="karte"><strong>{wert}</strong><span>{text}</span></li>)}
+    </ul>
+
+    <div class="spalten">
+      <div>
+        <span class="kicker">Heute</span>
+        <h2>Ein Fach statt eigener Gefriertruhe</h2>
+        <p>Im Gefrierhaus gibt es 2 × 50 Fächer, die auch halb gemietet werden können. Bis auf wenige sind alle belegt. Der Kühlraum wird von Mitgliedern für Jagdwild und Hausschlachtung genutzt oder als Getränkekühlung bei Geburtstagsfeiern.</p>
+        <p>Mit 90 Euro pro Fach und Jahr rechnet sich das Gefrierhaus bis heute: Eine eigene Gefriertruhe zu Hause lohnt sich laut Rückblick erst nach mehr als 14 Jahren (hochwertiges Gerät) bzw. über 20 Jahren (günstiges Gerät).</p>
+
+        <span class="kicker abstand">Geschichte</span>
+        <h2>Von der Idee zum Gefrierhaus</h2>
+        <ol class="zeitstrahl">
+          {chronik.map(({ jahr, text }) => <li><span class="zeitstrahl__jahr">{jahr}</span><p>{text}</p></li>)}
+        </ol>
+      </div>
+
+      <aside class="seitenleiste">
+        <div class="karte kasten">
+          <h3>Vorstand</h3>
+          <dl class="liste">
+            {vorstand.map(([amt, name]) => <div><dt>{amt}</dt><dd>{name}</dd></div>)}
+          </dl>
+        </div>
+        <div class="karte kasten">
+          <h3>Fach mieten</h3>
+          <p>Freie oder halbe Fächer vergibt der Vorstand. Wer Interesse hat, wendet sich an Klaus Schwarz oder Marc Ahne.</p>
+          <dl class="liste">
+            <div><dt>Gefrierhaus</dt><dd><span class="fehlt">[fehlt: Lage/Anschrift]</span></dd></div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .gg { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .zahlen { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .zahlen li { padding: 1.5rem; display: flex; flex-direction: column; }
+  .zahlen strong { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--ziegel); font-weight: 600; line-height: 1; }
+  .zahlen span { color: var(--text-leise); margin-top: 0.4rem; }
+  @media (max-width: 640px) { .zahlen { grid-template-columns: 1fr; } }
+
+  .spalten { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
+  .spalten p { max-width: 68ch; }
+  .abstand { margin-top: 2.5rem; }
+
+  .zeitstrahl { list-style: none; margin: 1.5rem 0 0; padding: 0; position: relative; }
+  .zeitstrahl::before { content: ''; position: absolute; left: 0.45rem; top: 0.5rem; bottom: 0.5rem; width: 2px; background: var(--linie); }
+  .zeitstrahl li { position: relative; padding: 0 0 1.4rem 2.25rem; }
+  .zeitstrahl li::before { content: ''; position: absolute; left: 0; top: 0.35rem; width: 0.95rem; height: 0.95rem; border-radius: 50%; background: var(--bg); border: 3px solid var(--lagune); }
+  .zeitstrahl__jahr { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; color: var(--ziegel); }
+  .zeitstrahl p { margin: 0.15rem 0 0; }
+
+  .seitenleiste { display: grid; gap: 1rem; }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin: 0 0 0.75rem; }
+  .kasten p { margin: 0 0 0.75rem; color: var(--text-leise); }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; }
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+</style>

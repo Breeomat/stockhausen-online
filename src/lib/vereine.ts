@@ -49,6 +49,13 @@ export const vereinsseiten = [
     text: 'Luftgewehr, Auflage und Kleinkaliber – vom Jungschützen bis zur Seniorenmannschaft. Schnupperschießen möglich.',
     href: 'vereine/schuetzenverein/',
   },
+  {
+    name: 'Gefriergemeinschaft Stockhausen',
+    kurz: 'Gefrier',
+    seit: 'seit 1963',
+    text: 'Gemeinsame Gefrierfächer und Kühlraum im Gefrierhaus – seit über 60 Jahren in Betrieb.',
+    href: 'vereine/gefriergemeinschaft/',
+  },
 ];
 
 // Hintergrundbilder für Vereine ohne eigene Seite (Teil des Vereinsnamens → Bild)
