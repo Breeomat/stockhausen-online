@@ -105,3 +105,33 @@
   ort: Altfellhalle
   verein: Arbeitskreis Dorfgeschichte Stockhausen
   text: Feierliche Präsentation des neuen Buches über Stockhausen. Alle sind herzlich eingeladen.
+- id: 2026-10-18-ffw-kates-zuguebung
+  titel: "Kates Zugübung"
+  datum: 2026-10-18
+  beginn: "10:00"
+  ende: "12:00"
+  verein: Freiwillige Feuerwehr Stockhausen e.V.
+- id: 2026-10-20-ffw-gruppenuebung-loescheinsatz
+  titel: "Gruppenübung – Löscheinsatz"
+  datum: 2026-10-20
+  beginn: "19:30"
+  ende: "21:30"
+  verein: Freiwillige Feuerwehr Stockhausen e.V.
+- id: 2026-11-05-ffw-gruppenuebung-objektkunde
+  titel: "Gruppenübung – Objektkunde"
+  datum: 2026-11-05
+  beginn: "19:30"
+  ende: "21:30"
+  verein: Freiwillige Feuerwehr Stockhausen e.V.
+- id: 2026-11-24-ffw-gruppenuebung-loescheinsatz
+  titel: "Gruppenübung – Löscheinsatz"
+  datum: 2026-11-24
+  beginn: "19:30"
+  ende: "21:30"
+  verein: Freiwillige Feuerwehr Stockhausen e.V.
+- id: 2026-12-17-ffw-gruppenuebung-wasserfoerderung
+  titel: "Gruppenübung – Wasserförderung"
+  datum: 2026-12-17
+  beginn: "19:30"
+  ende: "21:30"
+  verein: Freiwillige Feuerwehr Stockhausen e.V.

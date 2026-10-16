@@ -6,11 +6,8 @@ import uniformFoto from '../../../assets/fotos/feuerwehr-uniform.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
-import { kommendeUebungen } from '../../../lib/feuerwehr-uebungen';
 
 // Quelle: Chronik „150 Jahre Freiwillige Feuerwehr Stockhausen e.V. 1874–2024“ (Mai 2024)
-const uebungen = kommendeUebungen();
-const tagText = (iso: string) => new Intl.DateTimeFormat('de-DE', { weekday: 'short', day: 'numeric', month: 'long' }).format(new Date(`${iso}T12:00:00`));
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Feuerwehr'));
 
 const zahlen = [
@@ -98,23 +95,6 @@ const chronik = [
       </div>
     )}
 
-    {uebungen.length > 0 && (
-      <div>
-        <span class="kicker">Übungsdienst</span>
-        <h2>Nächste Übungen</h2>
-        <ul class="uebungen">
-          {uebungen.map((u) => (
-            <li class="karte" data-datum={u.datum}>
-              <span class="uebungen__tag">{tagText(u.datum)}</span>
-              <strong>{u.titel}</strong>
-              <span class="uebungen__zeit">{u.beginn}–{u.ende} Uhr</span>
-            </li>
-          ))}
-        </ul>
-        <p class="uebungen__hinweis">Übungen für die Einsatzabteilung.</p>
-      </div>
-    )}
-
     <div class="spalten">
       <div>
         <span class="kicker">Chronik</span>
@@ -151,12 +131,6 @@ const chronik = [
   </section>
 </Basis>
 
-<script>
-  // Vergangene Übungen auch zwischen zwei Neubauten ausblenden
-  const heute = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Berlin' }).format(new Date());
-  document.querySelectorAll<HTMLElement>('.uebungen li').forEach((li) => { if ((li.dataset.datum ?? '') < heute) li.remove(); });
-</script>
-
 <style>
   .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
   .wehr { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
@@ -174,11 +148,6 @@ const chronik = [
   @media (max-width: 640px) { .zahlen { grid-template-columns: 1fr; } }
 
   .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
-  .uebungen { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 1rem; }
-  .uebungen li { padding: 1.1rem 1.25rem; display: flex; flex-direction: column; gap: 0.25rem; border-top: 4px solid var(--ziegel); }
-  .uebungen__tag { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ziegel); }
-  .uebungen__zeit { font-size: 0.9rem; color: var(--text-leise); }
-  .uebungen__hinweis { margin: 0.75rem 0 0; font-size: 0.9rem; color: var(--text-leise); }
 
   .spalten { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
   @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
