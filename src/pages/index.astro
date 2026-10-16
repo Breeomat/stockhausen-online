@@ -33,10 +33,6 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
       <span class="kicker">36358 Herbstein · Vogelsberg</span>
       <h1>Willkommen in <em>Stockhausen</em></h1>
       <p class="held__text">Was im Dorf los ist: Termine aller Vereine, aktuelle Plakate, Neuigkeiten und Geschichten von früher – an einem Ort.</p>
-      <div class="held__knoepfe">
-        <a class="knopf" href={url('termine/')}>Nächste Termine</a>
-        <a class="knopf knopf--leise" href={url('plakate/')}>Zur Plakatwand</a>
-      </div>
     </div>
     <span class="held__foto">Luftbild: Marc Ahne</span>
   </section>
@@ -199,7 +195,6 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
   .held h1 { max-width: 14ch; margin-bottom: 1.25rem; color: #fff; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
   .held h1 em { font-style: italic; font-weight: 500; color: #ffc89e; }
   .held__text { font-size: clamp(1.1rem, 1.8vw, 1.3rem); max-width: 46ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
-  .held__knoepfe { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
   .held .knopf { background: var(--gold); color: #2a211c; }
   .held .knopf:hover { background: #fff; color: #2a211c; }
   .held .knopf--leise { background: rgb(255 255 255 / 0.12); color: #fff; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.6); backdrop-filter: blur(4px); }
