@@ -5,12 +5,13 @@ import { chronik } from '../../../lib/chronik';
 
 const anker = (titel: string) => titel.toLowerCase().replace(/[^a-zäöüß0-9]+/g, '-').replace(/^-|-$/g, '');
 ---
-<Basis titel="Ortschronik" beschreibung="Ortschronik von Stockhausen im Vogelsberg: von der Bronzezeit über die Riedesel-Herrschaft bis 1999.">
+<Basis titel="Ortschronik" beschreibung="Ortschronik von Stockhausen im Vogelsberg, zusammengestellt von Hans-Jürgen Döll: von der Bronzezeit über die Riedesel-Herrschaft bis 1999.">
   <section class="huelle seitenkopf">
     <a class="zurueck" href={url('dorf/')}>← Unser Dorf</a>
     <span class="kicker">Geschichte</span>
     <h1>Ortschronik Stockhausen</h1>
     <p>Von den Hügelgräbern der Bronzezeit über Fehden, Kriege und die Herrschaft der Riedesel bis zum Ende des 20. Jahrhunderts: die Geschichte des Dorfes Jahr für Jahr.</p>
+    <p class="autor">Zusammengestellt von <strong>Hans-Jürgen Döll</strong>, Arbeitskreis Dorfgeschichte Stockhausen – veröffentlicht mit seiner freundlichen Genehmigung. Original: <a href="https://www.hjdoell.de" rel="noopener">www.hjdoell.de</a></p>
     <nav class="inhalt" aria-label="Abschnitte der Chronik">
       {chronik.map(({ titel }) => <a href={`#${anker(titel)}`}>{titel}</a>)}
     </nav>
@@ -33,7 +34,7 @@ const anker = (titel: string) => titel.toLowerCase().replace(/[^a-zäöüß0-9]+
     ))}
 
     <p class="quelle">
-      Quelle: Ortschronik von Hans-Jürgen Döll, <a href="https://www.hjdoell.de" rel="noopener">www.hjdoell.de</a>.
+      Chronik: Hans-Jürgen Döll, <a href="https://www.hjdoell.de" rel="noopener">www.hjdoell.de</a>.
       Mehr zur Heimatforschung beim <a href={url('vereine/arbeitskreis-dorfgeschichte/')}>Arbeitskreis Dorfgeschichte Stockhausen</a>.
     </p>
   </section>
@@ -41,6 +42,7 @@ const anker = (titel: string) => titel.toLowerCase().replace(/[^a-zäöüß0-9]+
 
 <style>
   .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .autor { margin-top: 1rem; padding: 0.75rem 1rem; border-left: 3px solid var(--ziegel); background: var(--ziegel-hell); max-width: 60ch; font-size: 0.95rem; }
   .inhalt { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
   .inhalt a { padding: 0.3rem 0.8rem; border-radius: 999px; background: var(--ziegel-hell); color: var(--ziegel); font-size: 0.85rem; font-weight: 600; text-decoration: none; }
   .chronik { padding-block: 1rem 5rem; display: grid; gap: 3rem; }
