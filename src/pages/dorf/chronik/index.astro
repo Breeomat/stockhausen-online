@@ -11,7 +11,7 @@ const anker = (titel: string) => titel.toLowerCase().replace(/[^a-zäöüß0-9]+
     <span class="kicker">Geschichte</span>
     <h1>Ortschronik Stockhausen</h1>
     <p>Von den Hügelgräbern der Bronzezeit über Fehden, Kriege und die Herrschaft der Riedesel bis zum Ende des 20. Jahrhunderts: die Geschichte des Dorfes Jahr für Jahr.</p>
-    <p class="autor">Zusammengestellt von <strong>Hans-Jürgen Döll</strong>, Arbeitskreis Dorfgeschichte Stockhausen – veröffentlicht mit seiner freundlichen Genehmigung. Original: <a href="https://www.hjdoell.de" rel="noopener">www.hjdoell.de</a></p>
+    <p class="autor">Zusammengestellt von <strong>Hans-Jürgen Döll</strong>, Arbeitskreis Dorfgeschichte Stockhausen. Original: <a href="https://www.hjdoell.de" rel="noopener">www.hjdoell.de</a></p>
     <nav class="inhalt" aria-label="Abschnitte der Chronik">
       {chronik.map(({ titel }) => <a href={`#${anker(titel)}`}>{titel}</a>)}
     </nav>
