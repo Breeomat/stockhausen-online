@@ -90,17 +90,15 @@
   adresse: Kehrweg 16, 36358 Herbstein-Stockhausen
   telefon: 06647 274
   email: dotzert@freenet.de
-- id: gasthaus-schmidts
-  name: Gasthaus Schmidts / Festsaal
+- id: lennys
+  name: Lenny’s im Saal
   kategorie: Gastronomie
-  text: Historischer Gasthof mit Gaststube, Mittagstisch und Biergarten, dazu ein großer Saal für Familienfeste, Hochzeiten und Vereinsveranstaltungen.
-  adresse: Müser Straße 9, 36358 Herbstein-Stockhausen
-  telefon:
-    - 06647 9606-680 (Mittagstisch)
-    - 0177 2881429 (Saalvermietung)
-  email:
-    - schmidts@gemeinschaft-altenschlirf.de
-    - lennart-kranz@hotmail.de (Saalvermietung)
+  text: >-
+    Treffpunkt für Jung und Alt mit Gastronomie und Bar: Burger, Schnitzel, Fingerfood und Kneipenklassiker,
+    frisch gezapfte Biere, Longdrinks, alkoholfreie Getränke und Kaffee. Dazu Dart, Sportübertragungen,
+    Themen- und Musikabende.
+  web: https://www.lennys-stockhausen.de
+  bild: lennys.jpg
 - id: kindergarten-storchennest
   name: Ev. Kindergarten „Storchennest“
   kategorie: Einrichtung
