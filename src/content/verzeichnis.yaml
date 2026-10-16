@@ -79,10 +79,11 @@
 - id: fritz-haustechnik
   name: FRITZ GmbH & Co. KG
   kategorie: Handwerk
-  text: Fachbetrieb für Haustechnik – Badsanierung mit Badausstellung, Sanitärinstallation, Heizungsbau sowie erneuerbare Energien wie Wärmepumpen und Solartechnik.
+  text: Spenglerei, Sanitär und Heizung – Dach und Fassade aus Metall, Badsanierung mit Badausstellung, Sanitärinstallation, Heizungsbau sowie erneuerbare Energien wie Wärmepumpen und Solartechnik.
   adresse: Müser Straße 36, 36358 Herbstein-Stockhausen
   telefon: 06647 919191
   email: info@sanitaer-fritz.de
+  bild: fritz.jpg
 - id: dotzert-steinmetz
   name: Reiner Dotzert GmbH & Co. KG
   kategorie: Handwerk
