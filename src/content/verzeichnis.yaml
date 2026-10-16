@@ -1,0 +1,42 @@
+# Verzeichnis „Wer macht was“: Betriebe und Einrichtungen in Stockhausen. Ein Eintrag je Betrieb.
+# Pflicht: id (eindeutig, z. B. baeckerei-muster), name, kategorie, text
+# kategorie: Einkaufen | Gastronomie | Handwerk | Landwirtschaft | Dienstleistung | Einrichtung
+# Optional: adresse, telefon, email, web (volle URL), zeiten (Öffnungszeiten), seite (interne Seite, z. B. dorf/gemeinschaft-altenschlirf/)
+#
+# - id: baeckerei-muster
+#   name: Bäckerei Muster
+#   kategorie: Einkaufen
+#   text: Brot, Brötchen und Kuchen aus eigener Backstube.
+#   adresse: Hauptstraße 1, 36358 Herbstein-Stockhausen
+#   telefon: 06647 0000
+#   zeiten: Mo–Sa 6–12 Uhr
+- id: laedchen-fuer-alles
+  name: Lädchen für alles
+  kategorie: Einkaufen
+  text: Dorfladen der Gemeinschaft Altenschlirf mit Waren für den täglichen Bedarf und Produkten aus den eigenen Werkstätten.
+  seite: dorf/gemeinschaft-altenschlirf/
+- id: demeter-hofladen
+  name: Demeter-Hofladen
+  kategorie: Einkaufen
+  text: „Frisch von hier“ – Gemüse und Obst aus dem Schlossgarten der Gemeinschaft Altenschlirf.
+  adresse: Im Schlosshof, Müser Straße 1, 36358 Herbstein-Stockhausen
+  zeiten: Montag bis Freitag
+  seite: dorf/gemeinschaft-altenschlirf/
+- id: gemeinschaft-altenschlirf
+  name: Gemeinschaft Altenschlirf e. V. & Campus am Park
+  kategorie: Einrichtung
+  text: Anthroposophische Lebens- und Arbeitsgemeinschaft für Menschen mit und ohne Hilfebedarf – Demeter-Landwirtschaft, Werkstätten, Fachschule für Heilerziehungspflege.
+  adresse: Müser Straße 1, 36358 Herbstein-Stockhausen
+  telefon: 06647 9606-0
+  email: info@gemeinschaft-altenschlirf.de
+  web: https://gemeinschaft-altenschlirf.de
+  seite: dorf/gemeinschaft-altenschlirf/
+- id: kirchengemeinde
+  name: Ev. Kirchengemeinde Stockhausen-Rixfeld – Gemeindebüro
+  kategorie: Einrichtung
+  text: Gottesdienste, Kirchenmusik, Kinder-, Frauen- und Seniorenarbeit in Stockhausen und Rixfeld.
+  adresse: Am Bockelberg 2, 36358 Herbstein-Stockhausen
+  telefon: 06647 217
+  email: kirchengemeinde.stockhausen@ekhn.de
+  web: https://kirchen-stockhausen-rixfeld.ekhn.de
+  seite: vereine/kirchengemeinde/

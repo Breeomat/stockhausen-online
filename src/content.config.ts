@@ -34,4 +34,19 @@ const plakate = defineCollection({
   }),
 });
 
-export const collections = { termine, plakate };
+const verzeichnis = defineCollection({
+  loader: file('src/content/verzeichnis.yaml'),
+  schema: z.object({
+    name: z.string(),
+    kategorie: z.enum(['Einkaufen', 'Gastronomie', 'Handwerk', 'Landwirtschaft', 'Dienstleistung', 'Einrichtung']),
+    text: z.string(),
+    adresse: z.string().optional(),
+    telefon: z.string().optional(),
+    email: z.string().email().optional(),
+    web: z.string().url().optional(),
+    zeiten: z.string().optional(),
+    seite: z.string().optional(),
+  }),
+});
+
+export const collections = { termine, plakate, verzeichnis };

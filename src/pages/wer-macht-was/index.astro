@@ -1,0 +1,109 @@
+---
+import { getCollection } from 'astro:content';
+import Basis from '../../layouts/Basis.astro';
+import { url } from '../../lib/site';
+
+const reihenfolge = ['Einkaufen', 'Gastronomie', 'Handwerk', 'Landwirtschaft', 'Dienstleistung', 'Einrichtung'] as const;
+const ueberschrift: Record<(typeof reihenfolge)[number], string> = {
+  Einkaufen: 'Einkaufen',
+  Gastronomie: 'Essen und Trinken',
+  Handwerk: 'Handwerk',
+  Landwirtschaft: 'Landwirtschaft',
+  Dienstleistung: 'Dienstleistungen',
+  Einrichtung: 'Einrichtungen',
+};
+
+const eintraege = (await getCollection('verzeichnis')).sort((a, b) => a.data.name.localeCompare(b.data.name, 'de'));
+const gruppen = reihenfolge
+  .map((k) => [k, eintraege.filter((e) => e.data.kategorie === k)] as const)
+  .filter(([, liste]) => liste.length > 0);
+const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^0/, '');
+---
+<Basis titel="Wer macht was" beschreibung="Betriebe und Einrichtungen in Stockhausen: Einkaufen, Gastronomie, Handwerk, Landwirtschaft und Dienstleistungen.">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Wer macht was</span>
+    <h1>Betriebe und Einrichtungen</h1>
+    <p>Wo man im Dorf einkaufen, einkehren und etwas erledigen kann – mit Adresse und Telefon. Die Vereine stehen unter <a href={url('vereine/')}>Vereine</a>.</p>
+  </section>
+
+  <section class="huelle verzeichnis">
+    {gruppen.length > 1 && (
+      <div class="filter" role="group" aria-label="Nach Bereich filtern">
+        <button class="filter__chip" aria-pressed="true" data-filter="">Alle</button>
+        {gruppen.map(([k]) => <button class="filter__chip" aria-pressed="false" data-filter={k}>{ueberschrift[k]}</button>)}
+      </div>
+    )}
+
+    {gruppen.map(([k, liste]) => (
+      <section class="gruppe" data-kategorie={k}>
+        <h2>{ueberschrift[k]}</h2>
+        <ul class="eintraege">
+          {liste.map(({ data: e }) => (
+            <li class="karte eintrag">
+              <h3>{e.name}</h3>
+              <p>{e.text}</p>
+              <dl class="angaben">
+                {e.adresse && <div><dt>Adresse</dt><dd>{e.adresse}</dd></div>}
+                {e.zeiten && <div><dt>Geöffnet</dt><dd>{e.zeiten}</dd></div>}
+                {e.telefon && <div><dt>Telefon</dt><dd><a href={tel(e.telefon)}>{e.telefon}</a></dd></div>}
+                {e.email && <div><dt>E-Mail</dt><dd><a href={`mailto:${e.email}`}>{e.email}</a></dd></div>}
+                {e.web && <div><dt>Website</dt><dd><a href={e.web} rel="noopener">{e.web.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a></dd></div>}
+              </dl>
+              {e.seite && <a class="eintrag__mehr" href={url(e.seite)}>Mehr erfahren →</a>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <aside class="karte hinweis">
+      <h2>Ihr Betrieb fehlt?</h2>
+      <p>Handwerk, Hofladen, Gaststätte oder Dienstleistung aus Stockhausen: Schicken Sie Name, eine kurze Beschreibung, Adresse und Telefon an <a href="mailto:marc@ahne.de">marc@ahne.de</a> – der Eintrag ist kostenlos.</p>
+    </aside>
+  </section>
+</Basis>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>('.filter__chip');
+  chips.forEach((chip) =>
+    chip.addEventListener('click', () => {
+      const wahl = chip.dataset.filter;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      document.querySelectorAll<HTMLElement>('.gruppe').forEach((g) => {
+        g.hidden = Boolean(wahl) && g.dataset.kategorie !== wahl;
+      });
+    }),
+  );
+</script>
+
+<style>
+  .verzeichnis { padding-bottom: 5rem; }
+  .filter { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 1rem; }
+  .filter__chip {
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--linie);
+    background: var(--flaeche);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .filter__chip[aria-pressed='true'] { background: var(--meer); color: var(--bg); border-color: var(--meer); }
+  .gruppe { margin-top: 2.5rem; }
+  .gruppe h2 { font-size: 1.5rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--linie); margin-bottom: 1.25rem; }
+  .eintraege { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 1rem; }
+  .eintrag { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; }
+  .eintrag h3 { margin: 0 0 0.4rem; font-size: 1.2rem; }
+  .eintrag > p { margin: 0 0 0.75rem; color: var(--text-leise); }
+  .angaben { margin: 0 0 0.75rem; display: grid; }
+  .angaben div { padding: 0.35rem 0; border-bottom: 1px solid var(--linie); }
+  .angaben div:last-child { border-bottom: 0; }
+  .angaben dt { font-size: 0.75rem; color: var(--text-leise); }
+  .angaben dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+  .eintrag__mehr { margin-top: auto; font-weight: 600; }
+  .hinweis { margin-top: 3.5rem; padding: clamp(1.5rem, 4vw, 2.25rem); background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 25%, transparent); }
+  .hinweis h2 { font-size: 1.5rem; }
+  .hinweis p { margin: 0; max-width: 62ch; }
+</style>

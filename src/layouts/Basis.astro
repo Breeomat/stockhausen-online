@@ -122,13 +122,14 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     color: var(--text);
     font-weight: 500;
     font-size: 0.95rem;
+    white-space: nowrap;
   }
   .menue a:hover { background: var(--flaeche); color: var(--ziegel); }
   .menue a[aria-current='page'] { background: var(--meer); color: var(--bg); }
 
   .menue-knopf { display: none; }
 
-  @media (max-width: 760px) {
+  @media (max-width: 1000px) {
     .menue-knopf {
       display: grid;
       place-items: center;
