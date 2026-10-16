@@ -4,7 +4,8 @@ import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
-// Quelle: „Rückblick auf 60 Jahre Gefriergemeinschaft Stockhausen“ (August 2024); Vorstand und Preis bestätigt Oktober 2026
+// Quellen: „Rückblick auf 60 Jahre Gefriergemeinschaft Stockhausen“ (August 2024), Profil-PDF (Oktober 2026);
+// Vorstand, Preis und Ansprechpartner bestätigt Oktober 2026
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Gefrier'));
 
 const zahlen = [
@@ -33,7 +34,7 @@ const vorstand = [
   <section class="huelle seitenkopf">
     <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
     <span class="kicker">Verein · seit 1963</span>
-    <h1>Gefriergemeinschaft Stockhausen</h1>
+    <h1>Gefriergemeinschaft Stockhausen e.&nbsp;V.</h1>
     <p>Als Tiefkühlkost noch Luxus war, taten sich die Stockhäuser zusammen und bauten ein gemeinsames Gefrierhaus. Über 60 Jahre später ist die Anlage noch immer in Betrieb – und fast voll belegt.</p>
   </section>
 
@@ -47,6 +48,7 @@ const vorstand = [
         <span class="kicker">Heute</span>
         <h2>Ein Fach statt eigener Gefriertruhe</h2>
         <p>Im Gefrierhaus gibt es 2 × 50 Fächer, die auch halb gemietet werden können. Bis auf wenige sind alle belegt. Der Kühlraum wird von Mitgliedern für Jagdwild und Hausschlachtung genutzt oder als Getränkekühlung bei Geburtstagsfeiern.</p>
+        <p>Ob Ernte aus dem eigenen Garten, Beeren, Fleisch oder Wildbret: Eine gemeinsame Kälteanlage kühlt viele Fächer sparsamer als viele einzelne alte Truhen in privaten Kellern. Die Beiträge decken Strom, Wartung und Instandhaltung.</p>
         <p>Mit 90 Euro pro Fach und Jahr rechnet sich das Gefrierhaus bis heute: Eine eigene Gefriertruhe zu Hause lohnt sich laut Rückblick erst nach mehr als 14 Jahren (hochwertiges Gerät) bzw. über 20 Jahren (günstiges Gerät).</p>
 
         <span class="kicker abstand">Geschichte</span>
@@ -65,9 +67,10 @@ const vorstand = [
         </div>
         <div class="karte kasten">
           <h3>Fach mieten</h3>
-          <p>Freie oder halbe Fächer vergibt der Vorstand. Wer Interesse hat, wendet sich an Klaus Schwarz oder Marco Wahl.</p>
+          <p>Freie oder halbe Fächer vergibt der Vorstand, auch eine Besichtigung ist möglich. Wer Interesse hat, wendet sich an Klaus Schwarz oder Marco Wahl.</p>
           <dl class="liste">
-            <div><dt>Gefrierhaus</dt><dd><span class="fehlt">[fehlt: Lage/Anschrift]</span></dd></div>
+            <div><dt>Gefrierhaus</dt><dd>Mühlweg 5<br />36358 Herbstein-Stockhausen</dd></div>
+            <div><dt>Vereinsregister</dt><dd>VR 3581</dd></div>
           </dl>
         </div>
       </aside>

@@ -50,7 +50,7 @@ export const vereinsseiten = [
     href: 'vereine/schuetzenverein/',
   },
   {
-    name: 'Gefriergemeinschaft Stockhausen',
+    name: 'Gefriergemeinschaft Stockhausen e. V.',
     kurz: 'Gefrier',
     seit: 'seit 1963',
     text: 'Gemeinsame Gefrierfächer und Kühlraum im Gefrierhaus – seit über 60 Jahren in Betrieb.',
