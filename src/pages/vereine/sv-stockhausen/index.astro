@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import TerminKarte from '../../../components/TerminKarte.astro';
-import { kommendeTermine } from '../../../lib/termine';
+import { kommendeTermine, heute } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 import wappen from '../../../assets/fotos/sv-stockhausen-wappen.png';
 import beachFoto from '../../../assets/fotos/sv-beachvolleyball.jpg';
@@ -20,7 +20,12 @@ const abteilungen = [
   { name: 'Tischtennis', text: 'Hobby- und Mannschaftsbetrieb' },
   { name: 'Volleyball', text: 'Damen' },
   { name: 'Damengymnastik', text: '' },
-  { name: 'Männergymnastik', text: 'Gymnastikrunde ab 29. September 2026, dienstags 20 Uhr in der Altfellhalle. Ansprechpartner: Hartmut Wahl' },
+  {
+    name: 'Männergymnastik',
+    text: '10 Abende ab 29. September 2026, dienstags 20 Uhr in der Altfellhalle. Ansprechpartner: Hartmut Wahl',
+    // Hinweis verschwindet nach dem Datum von selbst
+    hinweis: { text: 'Am Dienstag, 20. Oktober, fällt das Training aus, weil für die Kirmes aufgebaut wird.', bis: '2026-10-20' },
+  },
   { name: 'Stuhlgymnastik', text: 'Kurs mit 10 Einheiten ab 1. Oktober 2026, donnerstags 16–17 Uhr in der Altfellhalle. Ansprechpartnerin: Heike Christen, Tel. 06647 388' },
   { name: 'Theatergruppe', text: 'Das kulturelle Highlight im Verein' },
 ];
@@ -67,8 +72,12 @@ const erweitert = [
       <h2>Sport und Kultur für Jung und Alt</h2>
       <p class="einleitung">Der Verein bietet ein vielfältiges Sport- und Freizeitangebot. Großen Wert legt er auf ein lebendiges Vereinsleben, Teamgeist und gemeinsame Erlebnisse.</p>
       <ul class="abteilungen">
-        {abteilungen.map(({ name, text }) => (
-          <li class="karte"><h3>{name}</h3>{text && <p>{text}</p>}</li>
+        {abteilungen.map(({ name, text, hinweis }) => (
+          <li class="karte">
+            <h3>{name}</h3>
+            {text && <p>{text}</p>}
+            {hinweis && heute() <= hinweis.bis && <p class="abteilungen__hinweis">{hinweis.text}</p>}
+          </li>
         ))}
       </ul>
       <div class="galerie">
@@ -189,6 +198,7 @@ const erweitert = [
   .abteilungen li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
   .abteilungen h3 { margin: 0; font-size: 1.2rem; }
   .abteilungen p { margin: 0.3rem 0 0; color: var(--text-leise); }
+  .abteilungen .abteilungen__hinweis { margin-top: 0.6rem; padding: 0.5rem 0.7rem; border-radius: 8px; background: var(--ziegel-hell); color: var(--ziegel); font-weight: 500; font-size: 0.92rem; }
 
   .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
 
