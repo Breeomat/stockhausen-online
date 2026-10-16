@@ -119,14 +119,27 @@ const einwohner = [
 const sehenswert = [
   {
     titel: 'Schloss Stockhausen',
-    text: 'Barockes Schloss der Riedesel, ab 1770 auf den Mauern der Hermannsburg errichtet und 1807 vollendet. Heute nutzt die Gemeinschaft Altenschlirf die Anlage.',
+    text: 'Dreiflügeliges Barockschloss der Riedesel, ab 1770 auf den Mauern der Hermannsburg errichtet und 1807 vollendet. Dazu gehört ein gepflegter Rokoko-Landschaftsgarten, der öffentlich zugänglich ist und von Menschen mit Beeinträchtigung gepflegt wird. Einige der Baumriesen im Park stammen noch aus Samen, die General Riedesel aus dem Nordamerikanischen Unabhängigkeitskrieg mitbrachte. Eigentümerin von Schloss und Park ist heute die Gemeinschaft Altenschlirf.',
     bild: { src: schloss, alt: 'Schloss Stockhausen: langgestreckter Barockbau mit Torbogen und Uhrturm hinter einer Rasenfläche mit Teich', foto: 'Marc Ahne' },
   },
   {
     titel: 'Evangelische Kirche',
-    text: 'Neuromanische Saalkirche, 1849 eingeweiht, ein Kulturdenkmal.',
+    text: 'Patronatskirche der Freiherren Riedesel, 1849 eingeweiht: ein längsrechteckiger, neuromanischer Saalbau mit schlankem, eingebautem Frontturm und einer Fassade aus roten Sandsteinquadern. Ein Kulturdenkmal.',
     bild: { src: kirche, alt: 'Die evangelische Kirche aus der Luft: roter Sandsteinbau mit Turm und Uhr, davor die Freitreppe', foto: 'Marc Ahne' },
   },
+];
+
+const weitereOrte = [
+  { titel: 'Conrads-Ruhe', jahr: '1812', text: 'Mausoleum der Familie Riedesel im klassizistischen Stil, erbaut von Johann Conrad Riedesel. Es liegt südwestlich des Dorfes am westlichen Ende eines großen Waldstücks.' },
+  { titel: 'Hubertuskapelle', jahr: '1937', text: 'Kleine Kapelle ganz in der Nähe der Conrads-Ruhe.' },
+];
+
+const schlossLeben = [
+  { titel: 'Campus am Park', text: 'Seit 2009 Fachschule für Heilerziehungspflege im Schlosspark.' },
+  { titel: 'Weberei', text: 'Werkstatt für Teppiche, Kissen, Tischwäsche und Küchenhandtücher – auf Wunsch auch Unikate und neue Produkte.' },
+  { titel: 'Kontiki', text: 'Tagesstrukturgruppe auf dem Schlossgelände.' },
+  { titel: 'Demeter-Hofladen', text: '„Frisch von hier: Gemüse und Obst aus dem Schlossgarten!“ – im Schlosshof, montags bis freitags geöffnet.' },
+  { titel: 'Johannimarkt', text: 'Jedes Jahr Mitte Juni im Schlosspark: Handwerkliches aus den eigenen Werkstätten und aus anderen sozialen Einrichtungen.' },
 ];
 
 const ortsbeirat = {
@@ -153,7 +166,7 @@ const entfernungen = [
   <section class="huelle seitenkopf">
     <span class="kicker">Unser Dorf</span>
     <h1>Stockhausen im Vogelsberg</h1>
-    <p>Der größte Ortsteil von Herbstein liegt am Nordostrand des Vogelsbergs und zieht sich entlang der Altefeld. Der Name leitet sich von den Wurzelstöcken und Baumstümpfen ab, die nach einer Rodung stehen blieben. Hier wurde 1841 der älteste Dorfkindergarten im damaligen Großherzogtum Hessen eingerichtet.</p>
+    <p>Der größte Ortsteil von Herbstein liegt idyllisch im Tal der Altefeld am Nordostrand des Vogelsbergs. Als östlichster Stadtteil grenzt er ans Fuldaer Land – hier beginnt schon das Buntsandsteingebiet, das sich östlich an den Vogelsberg-Basalt anschließt. Der Jakobsweg von Fulda über Blankenau nach Herbstein führt am Dorf vorbei. Der Name leitet sich von den Wurzelstöcken und Baumstümpfen ab, die nach einer Rodung stehen blieben. Hier wurde 1841 der älteste Dorfkindergarten im damaligen Großherzogtum Hessen eingerichtet.</p>
   </section>
 
   <section class="huelle dorf">
@@ -293,13 +306,28 @@ const entfernungen = [
           </article>
         ))}
       </div>
+      <div class="weitere-orte">
+        {weitereOrte.map(({ titel, jahr, text }) => (
+          <article class="karte"><span class="weitere-orte__jahr">{jahr}</span><h3>{titel}</h3><p>{text}</p></article>
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <span class="kicker">Rund ums Schloss</span>
+      <h2>Leben und Arbeiten mit der Gemeinschaft Altenschlirf</h2>
+      <p class="schloss-text">Auf dem Schlossgelände wird gelernt, gewebt, gegärtnert und gefeiert. Auch im „Lädchen für alles“, das die Gemeinschaft Altenschlirf betreibt, gibt es neben dem täglichen Bedarf Produkte aus den eigenen Werkstätten.</p>
+      <ul class="schloss-leben">
+        {schlossLeben.map(({ titel, text }) => <li class="karte"><h3>{titel}</h3><p>{text}</p></li>)}
+      </ul>
     </div>
 
     <p class="quelle">
       Quellen: Wikipedia, Artikel <a href="https://de.wikipedia.org/wiki/Stockhausen_(Herbstein)" rel="noopener">Stockhausen (Herbstein)</a>,
       <a href="https://de.wikipedia.org/wiki/Schloss_Stockhausen" rel="noopener">Schloss Stockhausen</a> und
       <a href="https://de.wikipedia.org/wiki/Evangelische_Kirche_Stockhausen_(Herbstein)" rel="noopener">Evangelische Kirche Stockhausen (Herbstein)</a>
-      (Lizenz <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" rel="noopener">CC BY-SA 4.0</a>).
+      (Lizenz <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" rel="noopener">CC BY-SA 4.0</a>);
+      Ortsbeschreibung Stockhausen (2026).
     </p>
   </section>
 </Basis>
@@ -433,5 +461,18 @@ const entfernungen = [
   .zeitung figcaption { margin-top: 1rem; font-size: 0.92rem; }
   .zeitung q { display: block; font-style: italic; color: var(--text-leise); }
   .zeitung__quelle { display: block; margin-top: 0.5rem; font-size: 0.82rem; color: var(--text-leise); }
+  .weitere-orte { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1rem; margin-top: 1rem; }
+  .weitere-orte article { padding: 1.5rem; }
+  .weitere-orte h3 { margin: 0.3rem 0 0.4rem; }
+  .weitere-orte p { margin: 0; color: var(--text-leise); }
+  .weitere-orte__jahr { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; color: var(--ziegel); }
+  .schloss-text { max-width: 68ch; color: var(--text-leise); }
+  .schloss-leben { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+  @media (max-width: 1100px) { .schloss-leben { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px) { .schloss-leben { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .schloss-leben { grid-template-columns: 1fr; } }
+  .schloss-leben li { padding: 1.1rem 1.2rem; border-top: 4px solid var(--ziegel); }
+  .schloss-leben h3 { margin: 0 0 0.4rem; font-size: 1.15rem; }
+  .schloss-leben p { margin: 0; color: var(--text-leise); font-size: 0.95rem; }
   .quelle { font-size: 0.85rem; color: var(--text-leise); margin: 0; }
 </style>
