@@ -170,7 +170,6 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
     const gemischt = plaetze.map((p) => ({ p, r: Math.random() })).sort((a, b) => a.r - b.r).map(({ p }) => p);
     const auswahl = new Set(gemischt.slice(0, anzahl));
     plaetze.forEach((p) => (p.hidden = !auswahl.has(p)));
-    gemischt.slice(0, anzahl).forEach((p) => raster.append(p));
   }
 </script>
 

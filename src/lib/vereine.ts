@@ -12,6 +12,7 @@ import kirchgemeindeFoto from '../assets/fotos/kirche-stockhausen-aussen.jpg';
 import kirmesFoto from '../assets/fotos/kirmesburschen-gruppe.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
+// Reihenfolge: alphabetisch nach Name
 export const vereinsseiten = [
   {
     name: 'Freiwillige Feuerwehr Stockhausen e.V.',
@@ -85,7 +86,7 @@ export const vereinsseiten = [
     href: 'vereine/kirchengemeinde/',
     bild: { src: kirchgemeindeFoto, nachweis: 'Foto: Ev. Kirchengemeinde Stockhausen-Rixfeld', position: '50% 30%' },
   },
-];
+].sort((a, b) => a.name.localeCompare(b.name, 'de'));
 
 // Hintergrundbilder für Vereine ohne eigene Seite (Teil des Vereinsnamens → Bild)
 const weitereBilder: { teil: string; bild: { src: ImageMetadata; nachweis: string; position?: string } }[] = [];

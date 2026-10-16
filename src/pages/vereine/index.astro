@@ -5,6 +5,8 @@ import { url } from '../../lib/site';
 import { vereinsseiten as vereine, weitereVereine, bildFuer } from '../../lib/vereine';
 
 const weitere = await weitereVereine();
+// Vereine mit und ohne eigene Seite gemeinsam alphabetisch
+const alle = [...vereine, ...weitere.map((name) => ({ name }))].sort((a, b) => a.name.localeCompare(b.name, 'de'));
 ---
 <Basis titel="Vereine" beschreibung="Die Vereine in Stockhausen: Ansprechpartner, Geschichte und Termine.">
   <section class="huelle seitenkopf">
@@ -14,11 +16,10 @@ const weitere = await weitereVereine();
   </section>
 
   <section class="huelle vereine">
-    {vereine.map((v) => (
+    {alle.map((v) => 'href' in v ? (
       <VereinKarte name={v.name} kicker={v.seit} text={v.text} href={url(v.href)} linkText="Zur Vereinsseite" bild={v.bild} wappen={v.wappen} />
-    ))}
-    {weitere.map((name) => (
-      <VereinKarte name={name} text="Vereinsseite folgt." href={`${url('termine/')}?verein=${encodeURIComponent(name)}`} linkText="Termine ansehen" bild={bildFuer(name)} />
+    ) : (
+      <VereinKarte name={v.name} text="Vereinsseite folgt." href={`${url('termine/')}?verein=${encodeURIComponent(v.name)}`} linkText="Termine ansehen" bild={bildFuer(v.name)} />
     ))}
   </section>
 </Basis>

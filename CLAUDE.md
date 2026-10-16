@@ -10,6 +10,7 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
   - „Plakate“ (Ordner-ID 16d65tlcJ2OzsJkx36GuNBOwnsk6SqfCc)
   - „Fotos und Sonstiges“ (Ordner-ID 1gykGhG4TPb4o3Ep1tVcJaSTgClbFIT1Z)
   Nach dem Einbau Bilder für das Web verkleinern (max. ca. 1600 px, JPG).
+- Vereine (`src/lib/vereine.ts`) und Verzeichnis werden automatisch alphabetisch sortiert.
 - Betriebe und Einrichtungen („Wer macht was“): `src/content/verzeichnis.yaml` (Felder siehe Kommentar). Ausführliche Seite nur für größere Einrichtungen (z. B. `dorf/gemeinschaft-altenschlirf/`), sonst nur Verzeichniseintrag.
 - Nichts erfinden. Fehlende Angaben als `<span class="fehlt">[fehlt: …]</span>` markieren.
 - Personenfotos nur Gruppen oder mit Einwilligung.
