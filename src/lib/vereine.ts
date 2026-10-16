@@ -72,7 +72,7 @@ export const vereinsseiten = [
   {
     name: 'Kirmesburschen Stockhausen',
     kurz: 'Kirmes',
-    seit: 'seit 1848',
+    seit: 'seit 1849',
     text: 'Die Stockhäuser Kirmes am letzten Oktoberwochenende: Dorfabend, Frühschoppen, Kinderkirmes und Fackelumzug in der Altfellhalle.',
     href: 'vereine/kirmesburschen/',
     bild: { src: kirmesFoto, nachweis: 'Foto: Kirmesburschen Stockhausen', position: '50% 45%' },
