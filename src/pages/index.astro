@@ -7,7 +7,7 @@ import PlakatRaster from '../components/PlakatRaster.astro';
 import { kommendeTermine } from '../lib/termine';
 import { plakate } from '../lib/plakate';
 import { url } from '../lib/site';
-import { aktion, aktionLaeuft, baustelle, baustelleAktiv } from '../lib/enso';
+import { baustelle, baustelleAktiv } from '../lib/enso';
 import { vereinsseiten } from '../lib/vereine';
 import VereinKarte from '../components/VereinKarte.astro';
 import BereichSymbol from '../components/BereichSymbol.astro';
@@ -17,6 +17,19 @@ const naechste = (await kommendeTermine()).slice(0, 4);
 const { aktuell } = await plakate();
 // Vereine auf der Startseite: vier Stück, im Browser bei jedem Besuch zufällig gewählt.
 // Ohne JavaScript (und bis das Skript läuft) wechselt die Auswahl täglich mit dem nächtlichen Neubau.
+// Kompakte Chronik (Auswahl aus src/lib/chronik.ts)
+const meilensteine = [
+  { jahr: 'Vorzeit', text: 'Hügelgräber der Bronzezeit rund ums Dorf zeugen von früher Besiedlung' },
+  { jahr: '1287', text: 'Erste urkundliche Erwähnung' },
+  { jahr: '1428', text: 'Beginn der Herrschaft der Riedesel' },
+  { jahr: '1527', text: 'Reformation, Kirchspiel Stockhausen entsteht' },
+  { jahr: '1563', text: 'Die Hermannsburg ist fertig' },
+  { jahr: '1635', text: 'Dreißigjähriger Krieg: fast die Hälfte der Bewohner verloren' },
+  { jahr: '1807', text: 'Das heutige Schloss ist vollendet' },
+  { jahr: '1841', text: 'Ältester Dorfkindergarten im Großherzogtum Hessen' },
+  { jahr: '1849', text: 'Weihe der neuen Kirche' },
+  { jahr: '1972', text: 'Stockhausen wird Stadtteil von Herbstein' },
+];
 const VEREINE_START = 4;
 const tag = Math.floor(Date.now() / 86_400_000);
 const startAuswahl = Array.from({ length: Math.min(VEREINE_START, vereinsseiten.length) }, (_, k) => (tag * VEREINE_START + k) % vereinsseiten.length);
@@ -42,15 +55,6 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
       <a class="hinweis hinweis--baustelle" href={url('ortsdurchfahrt/')}>
         <span class="hinweis__marke">Baustelle</span>
         <span><strong>{baustelle.text}</strong> Umleitungen und Infos →</span>
-      </a>
-    </div>
-  )}
-
-  {aktionLaeuft() && (
-    <div class="huelle">
-      <a class="hinweis" href={url('tante-enso/')}>
-        <span class="hinweis__marke">Lädchen</span>
-        <span><strong>Ziel erreicht: {aktion.stand} von {aktion.ziel} Teilhabern fürs Lädchen.</strong> Mitmachen geht noch bis {aktion.fristText} →</span>
       </a>
     </div>
   )}
@@ -136,23 +140,21 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
     </div>
   </section>
 
-  <section class="abschnitt">
-    <div class="huelle zweier">
-      <a class="karte enso" href={url('tante-enso/')}>
-        <span class="kicker">Einkaufen im Dorf</span>
-        <h2>Tante Enso</h2>
-        <p>Das Lädchen in der Welzgasse wird ein Tante-Enso-Laden: mit Karte rund um die Uhr einkaufen, getragen von Teilhabern aus dem Dorf. Das Ziel von {aktion.ziel} Teilhabern ist erreicht. Alles zum Stand und zum Mitmachen.</p>
-        <span class="enso__pfeil">Mehr erfahren →</span>
-      </a>
-      <div class="karte wissen">
-        <span class="kicker">Wussten Sie schon?</span>
-        <ul>
-          <li><strong>1287</strong><span>wird der Ort als „Stochusen“ zum ersten Mal urkundlich erwähnt.</span></li>
-          <li><strong>1770</strong><span>beginnt der Bau des barocken Schlosses der Riedesel – fertig wird es erst 1807.</span></li>
-          <li><strong>1841</strong><span>wird hier der erste Kindergarten im damaligen Großherzogtum Hessen gegründet.</span></li>
-        </ul>
-        <a class="wissen__mehr" href={url('dorf/')}>Mehr zur Dorfgeschichte →</a>
+  <section class="abschnitt chronik-band">
+    <div class="huelle">
+      <div class="kopf-abschnitt">
+        <div>
+          <span class="kicker">Ortschronik</span>
+          <h2>Stockhausen im Lauf der Zeit</h2>
+        </div>
+        <a class="knopf knopf--leise" href={url('dorf/chronik/')}>Ganze Chronik</a>
       </div>
+      <ol class="zeitband">
+        {meilensteine.map(({ jahr, text }) => (
+          <li><span class="zeitband__jahr">{jahr}</span><span class="zeitband__text">{text}</span></li>
+        ))}
+      </ol>
+      <p class="zeitband__quelle">Nach der Ortschronik von Hans-Jürgen Döll. <a href={url('dorf/chronik/')}>Alle Jahre im Detail →</a></p>
     </div>
   </section>
 </Basis>
@@ -236,10 +238,7 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
 
   .raster-termine { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1rem; }
 
-  .zweier { display: grid; grid-template-columns: 1.1fr 1fr; gap: 1.5rem; }
-  @media (max-width: 860px) { .zweier { grid-template-columns: 1fr; } }
 
-  .enso {
     display: flex;
     flex-direction: column;
     padding: clamp(1.75rem, 4vw, 2.75rem);
@@ -252,13 +251,20 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
     min-height: 300px;
     transition: transform 0.2s ease;
   }
-  .enso:hover { transform: translateY(-3px); color: #fff; }
-  .enso .kicker { color: var(--gold); }
-  .enso h2 { color: #fff; font-size: clamp(2rem, 4vw, 3rem); }
-  .enso p { max-width: 40ch; color: #dce9f1; }
-  .enso__pfeil { margin-top: auto; font-weight: 600; color: var(--gold); }
 
   .vereine-start { padding-top: 0; }
+  .zeitband { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); position: relative; }
+  .zeitband::before { content: ''; position: absolute; left: 0; right: 0; top: 2.35rem; height: 2px; background: var(--linie); }
+  .zeitband li { position: relative; padding: 0 0.75rem 0 0; display: flex; flex-direction: column; gap: 1.6rem; }
+  .zeitband li::before { content: ''; position: absolute; left: 0; top: calc(2.35rem - 0.45rem); width: 0.95rem; height: 0.95rem; border-radius: 50%; background: var(--bg); border: 3px solid var(--lagune); }
+  .zeitband__jahr { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--ziegel); white-space: nowrap; }
+  .zeitband__text { font-size: 0.88rem; line-height: 1.45; color: var(--text-leise); hyphens: auto; overflow-wrap: break-word; }
+  .zeitband__quelle { margin: 2rem 0 0; font-size: 0.9rem; color: var(--text-leise); }
+  .zeitband__quelle a { font-weight: 600; }
+  @media (max-width: 1000px) {
+    .zeitband { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 9.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 0.75rem; scrollbar-width: thin; }
+    .zeitband li { scroll-snap-align: start; }
+  }
   .wmw-start { padding-top: 0; }
   .wmw { display: grid; grid-template-columns: auto 1fr auto; gap: clamp(1.25rem, 3vw, 2.5rem); align-items: center; padding: clamp(1.5rem, 4vw, 2.5rem); }
   .wmw__symbol { display: grid; place-items: center; width: 112px; height: 112px; border-radius: 50%; background: var(--ziegel-hell); color: var(--ziegel); }
@@ -281,11 +287,5 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
   .vereine-mehr { margin: 1.25rem 0 0; color: var(--text-leise); font-size: 0.95rem; }
   .vereine-mehr a { font-weight: 600; }
   @media (max-width: 640px) { .vereine-raster { grid-template-columns: 1fr; } }
-  .wissen { padding: clamp(1.75rem, 4vw, 2.5rem); }
-  .wissen ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
-  .wissen li { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; align-items: baseline; }
-  .wissen li + li { border-top: 1px solid var(--linie); padding-top: 1.1rem; }
-  .wissen strong { font-family: var(--serif); font-size: 1.5rem; color: var(--ziegel); font-weight: 600; }
-  .wissen__mehr { display: inline-block; margin-top: 1.25rem; font-weight: 600; }
 
 </style>
