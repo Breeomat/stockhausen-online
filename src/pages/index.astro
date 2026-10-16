@@ -14,12 +14,6 @@ import VereinKarte from '../components/VereinKarte.astro';
 const naechste = (await kommendeTermine()).slice(0, 4);
 const { aktuell } = await plakate();
 const weitere = await weitereVereine();
-
-const demnaechst = [
-  { titel: 'Neuigkeiten', text: 'Was sich im Dorf tut – kurz, aktuell und aus erster Hand.' },
-  { titel: 'Damals in Stockhausen', text: 'Alte Fotos, Geschichten und ein Zeitstrahl der Dorfgeschichte.' },
-  { titel: 'Ortsbeirat', text: 'Sitzungstermine, Beschlüsse und alles Wichtige aus dem Ortsbeirat.' },
-];
 ---
 <Basis>
   <section class="held">
@@ -133,26 +127,6 @@ const demnaechst = [
       </div>
     </div>
   </section>
-
-  <section class="abschnitt abschnitt--tief">
-    <div class="huelle">
-      <div class="kopf-abschnitt">
-        <div>
-          <span class="kicker">Die Seite wächst</span>
-          <h2>Demnächst hier</h2>
-        </div>
-      </div>
-      <ol class="demnaechst">
-        {demnaechst.map(({ titel, text }, i) => (
-          <li class="karte">
-            <span class="demnaechst__nr">{String(i + 1).padStart(2, '0')}</span>
-            <h3>{titel}</h3>
-            <p>{text}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
 </Basis>
 
 <style>
@@ -259,9 +233,4 @@ const demnaechst = [
   .wissen strong { font-family: var(--serif); font-size: 1.5rem; color: var(--ziegel); font-weight: 600; }
   .wissen__mehr { display: inline-block; margin-top: 1.25rem; font-weight: 600; }
 
-  .demnaechst { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
-  .demnaechst li { padding: 1.5rem; }
-  .demnaechst__nr { font-family: var(--serif); font-size: 2.2rem; color: var(--ziegel); font-weight: 600; line-height: 1; }
-  .demnaechst h3 { margin: 0.75rem 0 0.4rem; }
-  .demnaechst p { margin: 0; color: var(--text-leise); font-size: 0.95rem; }
 </style>
