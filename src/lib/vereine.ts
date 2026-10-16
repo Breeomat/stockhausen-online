@@ -58,6 +58,13 @@ export const vereinsseiten = [
     href: 'vereine/gefriergemeinschaft/',
     bild: { src: gefrierFoto, nachweis: 'Foto: Marc Ahne', position: '50% 55%' },
   },
+  {
+    name: 'Obst- und Gartenbauverein Stockhausen 1899',
+    kurz: 'Gartenbau',
+    seit: 'seit 1899',
+    text: 'Streuobstwiesen, Baumschnittkurse, Keltern im Herbst und ein grünes Dorfbild.',
+    href: 'vereine/obst-und-gartenbauverein/',
+  },
 ];
 
 // Hintergrundbilder für Vereine ohne eigene Seite (Teil des Vereinsnamens → Bild)

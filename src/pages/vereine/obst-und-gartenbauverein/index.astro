@@ -1,0 +1,72 @@
+---
+import Basis from '../../../layouts/Basis.astro';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+
+// Quelle: Profil-PDF „Obst- und Gartenbauverein Stockhausen 1899“ (Oktober 2026)
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Gartenbau'));
+
+const jahreslauf = [
+  { zeit: 'Spätwinter und Frühjahr', titel: 'Baumschnittkurse', text: 'Fachgerechter Erziehungs- und Verjüngungsschnitt an Hochstämmen und Obstbäumen.' },
+  { zeit: 'Frühjahr und Sommer', titel: 'Dorfverschönerung', text: 'Bepflanzung und Pflege von Blumenbeeten, Ruheplätzen und öffentlichen Grünflächen.' },
+  { zeit: 'Herbst', titel: 'Ernte und Keltern', text: 'Gemeinsame Obstlese und Verarbeitung zu naturreinem Apfelsaft und Most.' },
+  { zeit: 'Ganzjährig', titel: 'Vorträge und Beratung', text: 'Kompostierung, biologischer Pflanzenschutz und insektenfreundliche Gärten – in der Altfellhalle.' },
+];
+---
+<Basis titel="Obst- und Gartenbauverein" beschreibung="Obst- und Gartenbauverein Stockhausen 1899: Streuobstwiesen, Baumschnitt, Keltern und Dorfverschönerung.">
+  <section class="huelle seitenkopf">
+    <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+    <span class="kicker">Verein · seit 1899</span>
+    <h1>Obst- und Gartenbauverein Stockhausen 1899</h1>
+    <p>Frisches Obst von heimischen Wiesen, artenreiche Hausgärten und ein grünes Dorfbild: Ob Obstbaumschnitt, Tipps für den Gemüsegarten oder gemeinsames Keltern zur Erntezeit – hier packen Jung und Alt gemeinsam an.</p>
+  </section>
+
+  <section class="huelle ogv">
+    <div class="text">
+      <span class="kicker">Über 125 Jahre</span>
+      <h2>Vom Obstanbau zum Naturschutz</h2>
+      <p>Gegründet 1899, gehört der Verein zu den ältesten im Dorf. Ursprünglich sollte guter Obstanbau mit veredelten Sorten die Ernährung im rauen Vogelsbergklima sichern.</p>
+      <p>Heute verbindet der Verein dieses Erbe mit Arten- und Biotopschutz: Die Streuobstwiesen rund um Stockhausen bieten Vögeln, Fledermäusen und Insekten Lebensraum. Alte Apfelsorten wie Rheinischer Bohnapfel, Kaiser Wilhelm oder Graue Herbstrenette trotzen hier Wind und Wetter. Der Verein vermittelt Wissen vom Setzen junger Bäume bis zur naturnahen Pflege der Hausgärten.</p>
+    </div>
+
+    <div>
+      <span class="kicker">Im Jahreslauf</span>
+      <h2>Was der Verein macht</h2>
+      <ul class="jahreslauf">
+        {jahreslauf.map(({ zeit, titel, text }) => (
+          <li class="karte"><span class="jahreslauf__zeit">{zeit}</span><h3>{titel}</h3><p>{text}</p></li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="karte aufruf">
+      <span class="kicker">Mitmachen</span>
+      <h2>Garten- und Naturfreunde willkommen</h2>
+      <p>Der Verein freut sich über alle, die die Streuobsttradition in Stockhausen mitgestalten möchten.</p>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .ogv { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .text p { max-width: 68ch; }
+  .jahreslauf { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
+  .jahreslauf li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
+  .jahreslauf h3 { margin: 0.3rem 0 0.4rem; font-size: 1.2rem; }
+  .jahreslauf p { margin: 0; color: var(--text-leise); }
+  .jahreslauf__zeit { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ziegel); }
+  .aufruf { padding: clamp(1.75rem, 4vw, 2.5rem); background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 25%, transparent); }
+  .aufruf h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+  .aufruf p { margin: 0; max-width: 60ch; }
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+</style>
