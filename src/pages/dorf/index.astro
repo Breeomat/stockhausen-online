@@ -141,10 +141,6 @@ const sehenswert = [
   },
 ];
 
-const weitereOrte = [
-  { titel: 'Hubertuskapelle', jahr: '1937', text: 'Kleine Kapelle ganz in der Nähe der Conrads-Ruhe.' },
-];
-
 const schlossLeben = [
   { titel: 'Campus am Park', text: 'Seit 2009 Fachschule für Heilerziehungspflege im Schlosspark.' },
   { titel: 'Weberei', text: 'Werkstatt für Teppiche, Kissen, Tischwäsche und Küchenhandtücher – auf Wunsch auch Unikate und neue Produkte.' },
@@ -327,11 +323,6 @@ const entfernungen = [
           </article>
         ))}
       </div>
-      <div class="weitere-orte">
-        {weitereOrte.map(({ titel, jahr, text }) => (
-          <article class="karte"><span class="weitere-orte__jahr">{jahr}</span><h3>{titel}</h3><p>{text}</p></article>
-        ))}
-      </div>
     </div>
 
     <div>
@@ -509,11 +500,6 @@ const entfernungen = [
   .zeitung figcaption { margin-top: 1rem; font-size: 0.92rem; }
   .zeitung q { display: block; font-style: italic; color: var(--text-leise); }
   .zeitung__quelle { display: block; margin-top: 0.5rem; font-size: 0.82rem; color: var(--text-leise); }
-  .weitere-orte { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1rem; margin-top: 1rem; }
-  .weitere-orte article { padding: 1.5rem; }
-  .weitere-orte h3 { margin: 0.3rem 0 0.4rem; }
-  .weitere-orte p { margin: 0; color: var(--text-leise); }
-  .weitere-orte__jahr { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; color: var(--ziegel); }
   .schloss-text { max-width: 68ch; color: var(--text-leise); }
   .schloss-leben { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
   @media (max-width: 1100px) { .schloss-leben { grid-template-columns: repeat(3, 1fr); } }
