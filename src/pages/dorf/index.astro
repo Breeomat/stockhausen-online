@@ -4,6 +4,7 @@ import Basis from '../../layouts/Basis.astro';
 import luftbild from '../../assets/fotos/stockhausen-luftbild.jpg';
 import kirche from '../../assets/fotos/stockhausen-kirche.jpg';
 import schloss from '../../assets/fotos/stockhausen-schloss.jpg';
+import conradsRuhe from '../../assets/fotos/conrads-ruhe.jpg';
 import vorher from '../../assets/fotos/ortsdurchfahrt-vorher.jpg';
 import nachher from '../../assets/fotos/ortsdurchfahrt-nachher.jpg';
 import zeitung from '../../assets/fotos/ortsdurchfahrt-zeitung.jpg';
@@ -128,10 +129,14 @@ const sehenswert = [
     text: 'Patronatskirche der Freiherren Riedesel, 1849 eingeweiht: ein längsrechteckiger, neuromanischer Saalbau mit schlankem, eingebautem Frontturm und einer Fassade aus roten Sandsteinquadern. Ein Kulturdenkmal.',
     bild: { src: kirche, alt: 'Die evangelische Kirche aus der Luft: roter Sandsteinbau mit Turm und Uhr, davor die Freitreppe', foto: 'Marc Ahne' },
   },
+  {
+    titel: 'Conrads-Ruhe',
+    text: 'Mausoleum der Familie Riedesel im klassizistischen Stil, erbaut von Johann Conrad Riedesel. (Zum Baujahr nennen die Quellen 1805 oder 1812.) Angeschlossen ist ein kleiner Friedhof, auf dem Conrad Riedesel begraben liegt. Das Mausoleum steht auf 328 m Höhe südwestlich des Dorfes am westlichen Ende eines großen Waldstücks. Am besten erreicht man es von der Schlagmühle an der L 3182 aus: Ein Pfad führt an einer Kapelle vorbei zu einer Allee, an deren Ende die Conrads-Ruhe liegt.',
+    bild: { src: conradsRuhe, alt: 'Die Conrads-Ruhe: Mausoleum aus rotem Sandstein mit vier Säulen und der Inschrift „Conrads-Ruhe“, davor zwei weiße Bänke, ringsum kahle Bäume' },
+  },
 ];
 
 const weitereOrte = [
-  { titel: 'Conrads-Ruhe', jahr: '1812', text: 'Mausoleum der Familie Riedesel im klassizistischen Stil, erbaut von Johann Conrad Riedesel. Es liegt südwestlich des Dorfes am westlichen Ende eines großen Waldstücks.' },
   { titel: 'Hubertuskapelle', jahr: '1937', text: 'Kleine Kapelle ganz in der Nähe der Conrads-Ruhe.' },
 ];
 
@@ -300,7 +305,7 @@ const entfernungen = [
             {bild && (
               <figure class="sehenswert__bild">
                 <Image src={bild.src} alt={bild.alt} widths={[480, 800, 1200]} sizes="(max-width: 640px) calc(100vw - 32px), 560px" />
-                <figcaption>Foto: {bild.foto}</figcaption>
+                <figcaption>Foto: {bild.foto ?? <span class="fehlt">[fehlt: Fotograf]</span>}</figcaption>
               </figure>
             )}
             <div><h3>{titel}</h3><p>{text}</p></div>
