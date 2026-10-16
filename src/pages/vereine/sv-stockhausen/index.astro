@@ -12,14 +12,15 @@ import fussballFoto from '../../../assets/fotos/sv-fussball.jpg';
 import faschingFoto from '../../../assets/fotos/sv-fasching.jpg';
 import theaterPlakat from '../../../assets/fotos/sv-theater-2023.jpg';
 
+// Quellen: Vereinsangaben und Profil-PDF „Sportverein Stockhausen 1946 e. V.“ (Oktober 2026)
 const termine = (await kommendeTermine()).filter((t) => t.data.verein === 'SV Stockhausen');
 
 const abteilungen = [
-  { name: 'Fußball', text: 'Jugend- und Seniorenmannschaften' },
-  { name: 'Leichtathletik und Turnen', text: 'Vom Nachwuchs bis zum Sportabzeichen' },
-  { name: 'Tischtennis', text: 'Hobby- und Mannschaftsbetrieb' },
-  { name: 'Volleyball', text: 'Damen' },
-  { name: 'Damengymnastik', text: '' },
+  { name: 'Fußball', text: 'Jugend- und Seniorenmannschaften; bei den Senioren als Spielgemeinschaft SG Müs/Stockhausen mit dem SV Germania Müs im Spielkreis Fulda/Lauterbach' },
+  { name: 'Leichtathletik und Turnen', text: 'Kinderturnen, Kinder- und Schülerleichtathletik bis zum Sportabzeichen – dazu jedes Jahr ein Sportfest mit Gästen aus dem ganzen Vogelsberg' },
+  { name: 'Tischtennis', text: 'Hobby- und Mannschaftsbetrieb im Hessischen Tischtennis-Verband (Senioren und Jugend), Training dienstags und mittwochs in der Altfellhalle' },
+  { name: 'Volleyball', text: 'Damen – Freizeit- und Teamsport in der Altfellhalle' },
+  { name: 'Damengymnastik', text: 'Fitness, Beweglichkeit und Gesundheit in der Altfellhalle' },
   {
     name: 'Männergymnastik',
     text: '10 Abende ab 29. September 2026, dienstags 20 Uhr in der Altfellhalle. Ansprechpartner: Hartmut Wahl',
@@ -53,8 +54,8 @@ const erweitert = [
     <div>
       <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
       <span class="kicker">Verein · seit 1946</span>
-      <h1>SV Stockhausen e.V.</h1>
-      <p>Der Sportverein steht für Bewegung, Gemeinschaft und Engagement im Dorfleben. Hier treffen sportliche Tradition und moderne Vereinsarbeit aufeinander.</p>
+      <h1>Sportverein Stockhausen 1946 e.&nbsp;V.</h1>
+      <p>Sport verbindet, hält fit und macht in der Gemeinschaft am meisten Spaß. Der größte Sportverein im Ort bietet Kindern, Jugendlichen und Erwachsenen eine sportliche Heimat – auf dem Sportgelände an der Bleichstraße und in der Altfellhalle. Vereinsfarben: Weiß und Rot.</p>
     </div>
     <Image class="sv-kopf__wappen" src={wappen} alt="Vereinswappen des SV Stockhausen e.V." width={220} />
     </div>
@@ -137,6 +138,13 @@ const erweitert = [
         </dl>
       </div>
       <div class="karte kasten">
+        <h3>Kontakt</h3>
+        <dl class="liste">
+          <div><dt>Anschrift</dt><dd>Sportplatz, Bleichstraße 25<br />36358 Herbstein-Stockhausen</dd></div>
+          <div><dt>E-Mail und Website</dt><dd><span class="fehlt">[fehlt: Adresse bestätigen – im Dossier svstockhausen.de und sv-stockhausen.de]</span></dd></div>
+        </dl>
+      </div>
+      <div class="karte kasten">
         <h3>Abteilungsleitungen und Veranstaltungen</h3>
         <dl class="liste">
           {erweitert.map(([amt, name]) => <div><dt>{amt}</dt><dd>{name}</dd></div>)}
@@ -147,7 +155,7 @@ const erweitert = [
     <div class="karte mitmachen">
       <span class="kicker">Mach mit!</span>
       <h2>Werde Teil des SV Stockhausen</h2>
-      <p>Egal ob Sport, Kultur oder Ehrenamt – der Verein freut sich über jede Person, die ihn bereichert. Schau vorbei und lerne uns kennen.</p>
+      <p>Egal ob Sport, Kultur oder Ehrenamt – der Verein freut sich über neue Gesichter beim Training und über Unterstützung an den Spieltagen. Schau vorbei und lerne uns kennen.</p>
     </div>
   </section>
 </Basis>
@@ -202,7 +210,8 @@ const erweitert = [
 
   .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
 
-  .spalten { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+  .spalten { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; align-items: start; }
+  @media (max-width: 1000px) { .spalten { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 760px) { .spalten { grid-template-columns: 1fr; } }
   .kasten { padding: 1.5rem; }
   .kasten h3 { margin-bottom: 0.75rem; }

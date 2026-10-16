@@ -19,7 +19,7 @@ export const vereinsseiten = [
     bild: { src: feuerwehrFoto, nachweis: 'Foto: Christian Heuser' },
   },
   {
-    name: 'SV Stockhausen e.V.',
+    name: 'Sportverein Stockhausen 1946 e. V.',
     kurz: 'SV Stockhausen',
     seit: 'seit 1946',
     text: 'Fußball, Leichtathletik, Tischtennis, Volleyball, Gymnastik und eine Theatergruppe – Sport und Kultur für Jung und Alt.',
