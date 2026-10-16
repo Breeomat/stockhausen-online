@@ -5,6 +5,7 @@ import sportplatzFoto from '../assets/fotos/sv-sportplatz-luftbild.jpg';
 import kircheFoto from '../assets/fotos/stockhausen-kirche.jpg';
 import schlossFoto from '../assets/fotos/stockhausen-schloss.jpg';
 import luftbildFoto from '../assets/fotos/stockhausen-luftbild.jpg';
+import chorFoto from '../assets/fotos/posaunenchor.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
 export const vereinsseiten = [
@@ -31,7 +32,7 @@ export const vereinsseiten = [
     seit: 'seit 1905',
     text: 'Blechbläsermusik in Gottesdiensten, bei Ständchen und Dorffesten – von Barock bis Pop. Nachwuchs ist willkommen.',
     href: 'vereine/posaunenchor/',
-    bild: { src: kircheFoto, nachweis: 'Foto: Marc Ahne', position: '50% 45%' },
+    bild: { src: chorFoto, nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
   },
 ];
 

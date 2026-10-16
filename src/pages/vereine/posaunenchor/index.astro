@@ -5,6 +5,7 @@ import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 import kircheFoto from '../../../assets/fotos/stockhausen-kirche.jpg';
+import chorFoto from '../../../assets/fotos/posaunenchor.jpg';
 
 // Quelle: Dossier „Posaunenchor Stockhausen Profil & Webreferenz“ (Drive, Oktober 2026)
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Posaunenchor'));
@@ -76,6 +77,10 @@ const instrumente = ['Trompete', 'Flügelhorn', 'Posaune', 'Tenorhorn', 'Tuba'];
     <div>
       <span class="kicker">Im Jahreskreis</span>
       <h2>Wann der Posaunenchor spielt</h2>
+      <figure class="chor-foto">
+        <Image src={chorFoto} alt="Die Bläserinnen und Bläser des Posaunenchors spielen an einem Winterabend im Freien, mit Notenständern und Stirnlampen" widths={[640, 1024, 1600]} sizes="(max-width: 1192px) calc(100vw - 32px), 1160px" />
+        <figcaption>Der Posaunenchor an einem Winterabend im Dorf · Foto: Marc Ahne</figcaption>
+      </figure>
       <ul class="einsaetze">
         {einsaetze.map(({ anlass, ort, text }) => (
           <li class="karte"><span class="einsaetze__ort">{ort}</span><h3>{anlass}</h3><p>{text}</p></li>
@@ -139,5 +144,8 @@ const instrumente = ['Trompete', 'Flügelhorn', 'Posaune', 'Tenorhorn', 'Tuba'];
   .einsaetze p { margin: 0; color: var(--text-leise); }
   .einsaetze__ort { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ziegel); }
 
+  .chor-foto { margin: 1.5rem 0 0; }
+  .chor-foto img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 45%; border-radius: var(--radius); box-shadow: var(--schatten); }
+  .chor-foto figcaption { margin-top: 0.6rem; font-size: 0.85rem; color: var(--text-leise); }
   .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
 </style>
