@@ -49,6 +49,12 @@ const vorstand = [
         <h2>Ein Fach statt eigener Gefriertruhe</h2>
         <p>Im Gefrierhaus gibt es 2 × 50 Fächer, die auch halb gemietet werden können. Bis auf wenige sind alle belegt. Der Kühlraum wird von Mitgliedern für Jagdwild und Hausschlachtung genutzt oder als Getränkekühlung bei Geburtstagsfeiern.</p>
         <p>Ob Ernte aus dem eigenen Garten, Beeren, Fleisch oder Wildbret: Eine gemeinsame Kälteanlage kühlt viele Fächer sparsamer als viele einzelne alte Truhen in privaten Kellern. Die Beiträge decken Strom, Wartung und Instandhaltung.</p>
+        <ul class="merkmale">
+          <li><strong>Abschließbare Fächer</strong> – sauber getrennter Lagerplatz für jede Familie</li>
+          <li><strong>−18 bis −20 °C</strong> – konstante Tiefkühlung mit gewerblicher Kältetechnik</li>
+          <li><strong>Rund um die Uhr</strong> – mit eigenem Schlüssel jederzeit einlagern und entnehmen</li>
+          <li><strong>Für alle in der Großgemeinde</strong> – Fächer können auch Bürgerinnen und Bürger aus ganz Herbstein mieten, solange welche frei sind</li>
+        </ul>
         <p>Mit 90 Euro pro Fach und Jahr rechnet sich das Gefrierhaus bis heute: Eine eigene Gefriertruhe zu Hause lohnt sich laut Rückblick erst nach mehr als 14 Jahren (hochwertiges Gerät) bzw. über 20 Jahren (günstiges Gerät).</p>
 
         <span class="kicker abstand">Geschichte</span>
@@ -98,6 +104,9 @@ const vorstand = [
   .spalten { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
   @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
   .spalten p { max-width: 68ch; }
+  .merkmale { margin: 1.25rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.6rem; max-width: 68ch; }
+  .merkmale li { padding-left: 1.4rem; position: relative; }
+  .merkmale li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--ziegel); }
   .abstand { margin-top: 2.5rem; }
 
   .zeitstrahl { list-style: none; margin: 1.5rem 0 0; padding: 0; position: relative; }
