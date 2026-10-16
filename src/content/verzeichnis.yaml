@@ -93,7 +93,9 @@
     und sein Team fertigen Steinmetzarbeiten aller Art – Grabanlagen, Treppen, Natursteinböden und individuelle
     Arbeiten für Haus und Garten, von modern und klassisch bis edel oder rustikal.
   adresse: Kehrweg 16, 36358 Herbstein-Stockhausen
-  telefon: 06647 274
+  telefon:
+    - 06647 274
+    - 0171 6230674 (mobil)
   email: dotzert@freenet.de
   bild: dotzert.jpg
 - id: lennys
