@@ -1,0 +1,93 @@
+---
+import Basis from '../../../layouts/Basis.astro';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+
+// Quelle: Dossier „Schützenverein Stockhausen Vereinsdossier“ (Drive, Oktober 2026)
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Schützenverein'));
+
+const disziplinen = [
+  { name: 'Luftgewehr 10 m', ebene: 'Bezirksrunde', text: 'Freihand-Schießen: Koordination, Standfestigkeit und ruhige Atmung.' },
+  { name: 'Luftgewehr Auflage', ebene: 'Ältestenrunde Vogelsberg', text: 'Präzision im Zehntel-Ringbereich; Seniorenmannschaften im Ligabetrieb.' },
+  { name: 'Kleinkaliber 50 m', ebene: 'Bezirks- und Landesmeisterschaften', text: 'Gewehrschießen im Sommerhalbjahr auf 50 Meter.' },
+  { name: 'Königsschießen', ebene: 'Vereinsintern', text: 'Ermittlung der Schützenkönige und geselliges Pokalschießen.' },
+];
+---
+<Basis titel="Schützenverein" beschreibung="Schützenverein Stockhausen: Sportschießen im Schützenbezirk 25 Vogelsberg – Luftgewehr, Auflage, Kleinkaliber und Königsschießen.">
+  <section class="huelle seitenkopf">
+    <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+    <span class="kicker">Verein · Schützenbezirk 25 Vogelsberg</span>
+    <h1>Schützenverein Stockhausen</h1>
+    <p>Sportlicher Ehrgeiz und dörfliche Gemeinschaft: Im Schützenverein stehen Konzentration, Zielsicherheit und Fairness an erster Stelle – für Jugendliche ebenso wie für die Seniorenmannschaften.</p>
+  </section>
+
+  <section class="huelle sch">
+    <div class="spalten">
+      <div>
+        <span class="kicker">Sportschießen</span>
+        <h2>Präzision und Gemeinschaft</h2>
+        <p>Der Verein gehört zum Schützenbezirk 25 Vogelsberg im Hessischen Schützenverband und schießt nach der Sportordnung des Deutschen Schützenbundes. Ein Schwerpunkt ist das Auflageschießen mit Luftgewehr und Kleinkaliber. In Rundenwettkämpfen treffen die Stockhäuser auf Nachbarvereine wie Lanzenhain, Lauterbach, Wallenrod und Herbstein.</p>
+        <p>Sportschießen wird hier generationsübergreifend betrieben: Jugendliche und Jungschützen schulen Disziplin und Körperbeherrschung, die Seniorenteams tragen den Ligabetrieb in der Ältestenrunde.</p>
+      </div>
+      <aside class="karte kasten">
+        <h3>Training und Kontakt</h3>
+        <dl class="liste">
+          <div><dt>Ansprechpartner</dt><dd><span class="fehlt">[fehlt: Name 1. Vorsitzende/r oder Schießleitung]</span></dd></div>
+          <div><dt>Schießstand</dt><dd><span class="fehlt">[fehlt: Ort]</span></dd></div>
+          <div><dt>Trainingszeiten</dt><dd><span class="fehlt">[fehlt: Tag und Uhrzeit]</span></dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <div>
+      <span class="kicker">Disziplinen</span>
+      <h2>Was geschossen wird</h2>
+      <ul class="disziplinen">
+        {disziplinen.map(({ name, ebene, text }) => (
+          <li class="karte"><span class="disziplinen__ebene">{ebene}</span><h3>{name}</h3><p>{text}</p></li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="karte aufruf">
+      <span class="kicker">Schnupperschießen</span>
+      <h2>Einfach mal ausprobieren</h2>
+      <p>Wer den Schießsport kennenlernen oder wieder einsteigen möchte, ist bei den Trainingsabenden willkommen. Erfahrene Mitglieder zeigen Neulingen und Jugendlichen den sicheren Umgang mit den Sportgeräten; Vereinsgewehre stehen zum Ausprobieren bereit.</p>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .sch { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .spalten { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
+  .spalten p { max-width: 68ch; }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin: 0 0 0.75rem; }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; }
+
+  .disziplinen { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
+  .disziplinen li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
+  .disziplinen h3 { margin: 0.3rem 0 0.4rem; font-size: 1.2rem; }
+  .disziplinen p { margin: 0; color: var(--text-leise); }
+  .disziplinen__ebene { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ziegel); }
+
+  .aufruf { padding: clamp(1.75rem, 4vw, 2.5rem); background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 25%, transparent); }
+  .aufruf h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+  .aufruf p { margin: 0; max-width: 60ch; }
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+</style>

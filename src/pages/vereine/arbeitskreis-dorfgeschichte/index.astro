@@ -1,0 +1,112 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+import schlossFoto from '../../../assets/fotos/stockhausen-schloss.jpg';
+import buchTitel from '../../../assets/fotos/ons-bladd-titel.jpg';
+
+// Quelle: Dossier „Arbeitskreis Dorfgeschichte Stockhausen“ (Drive, Oktober 2026)
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Dorfgeschichte'));
+
+const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Ausstellungen', 'Ahnenforschung'];
+---
+<Basis titel="Arbeitskreis Dorfgeschichte" beschreibung="Arbeitskreis Dorfgeschichte Stockhausen: Ortschronik, Bildarchiv und Hofgeschichten – das Gedächtnis des Dorfes.">
+  <section class="ak-held">
+    <Image class="ak-held__bild" src={schlossFoto} alt="" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="huelle ak-kopf">
+      <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+      <span class="kicker">Heimatforschung · Chronik · Bildarchiv</span>
+      <h1>Arbeitskreis Dorfgeschichte Stockhausen</h1>
+      <p>Wer die Zukunft des Dorfes gestalten will, muss seine Wurzeln kennen. Der Arbeitskreis erforscht, sammelt und bewahrt die Geschichte von Herbstein-Stockhausen.</p>
+    </div>
+    <span class="ak-held__foto">Foto: Marc Ahne</span>
+  </section>
+
+  <section class="huelle ak">
+    <div class="spalten">
+      <div>
+        <span class="kicker">Was wir tun</span>
+        <h2>Das Gedächtnis des Dorfes</h2>
+        <p>Ehrenamtliche Heimatforscher und Chronisten – allen voran Hans-Jürgen Döll – sichern Dokumente, Fotos aus Privatbesitz, Kirchenbücher und Gerichtsakten und machen sie der Öffentlichkeit zugänglich.</p>
+        <p>Vom mittelalterlichen Gerichtsplatz unter der Linde über die Schlossgeschichte der Freiherren Riedesel bis zu den Lebensgeschichten und Handwerkstraditionen früherer Dorfbewohner: Aus Ahnenforschung, Haus- und Hofchroniken und Erzählungen von Zeitzeugen entsteht ein Bild vom Wandel des Bauerndorfs zur heutigen Dorfgemeinschaft.</p>
+        <ul class="themen" aria-label="Themen des Arbeitskreises">
+          {themen.map((t) => <li>{t}</li>)}
+        </ul>
+        <p>Ziel ist ein digitales Bildarchiv mit alten Glasplatten, Ansichtskarten und Vereinsaufnahmen aus den letzten 130 Jahren.</p>
+        <p>Die wichtigsten Daten der Ortsgeschichte stehen auf der Seite <a href={url('dorf/')}>Unser Dorf</a>.</p>
+      </div>
+
+      <aside class="seitenleiste">
+        <figure class="karte buch">
+          <Image src={buchTitel} alt="Buchtitel „Ons Bladd! Bie die Stockhäiser schwaddse.“ – Die Mundart von Stockhausen im Vogelsberg, mit altem Foto der Dorfstraße und der Kirche" widths={[400]} sizes="300px" />
+          <figcaption>„Ons Bladd! Bie die Stockhäiser schwaddse.“ – Die Mundart von Stockhausen im Vogelsberg</figcaption>
+        </figure>
+        <div class="karte kasten">
+          <h3>Kontakt</h3>
+          <dl class="liste">
+            <div><dt>Chronik und Redaktion</dt><dd>Hans-Jürgen Döll</dd></div>
+            <div><dt>Webarchiv</dt><dd><a href="https://www.hjdoell.de" rel="noopener">www.hjdoell.de</a></dd></div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+
+    <div class="karte aufruf">
+      <span class="kicker">Mitmachen</span>
+      <h2>Haben Sie alte Fotos oder Geschichten?</h2>
+      <p>Historische Aufnahmen, Schriftstücke oder Erinnerungen aus alten Tagen helfen, das kulturelle Gedächtnis Stockhausens lebendig zu halten. Sprechen Sie den Arbeitskreis an.</p>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .ak-held { position: relative; isolation: isolate; overflow: hidden; margin-bottom: 2.5rem; color: #fff; }
+  .ak-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; z-index: -2; }
+  .ak-held::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgb(12 18 24 / 0.82) 0%, rgb(12 18 24 / 0.55) 55%, rgb(12 18 24 / 0.2) 100%);
+  }
+  .ak-held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
+  .ak-kopf { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .ak-kopf h1 { color: #fff; max-width: 18ch; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
+  .ak-kopf p { font-size: 1.15rem; max-width: 60ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
+  .ak-kopf .kicker { color: var(--gold); }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; color: #fff; }
+
+  .ak { padding-block: 0 5rem; display: grid; gap: 3.5rem; }
+  .spalten { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
+  .spalten p { max-width: 68ch; }
+  .themen { list-style: none; margin: 1.25rem 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .themen li { padding: 0.3rem 0.8rem; border-radius: 999px; background: var(--ziegel-hell); color: var(--ziegel); font-size: 0.85rem; font-weight: 600; }
+
+  .seitenleiste { display: grid; gap: 1rem; }
+  .buch { margin: 0; padding: 1rem; }
+  .buch img { width: 100%; height: auto; border-radius: 6px; }
+  .buch figcaption { margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-leise); }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin: 0 0 0.75rem; }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; }
+
+  .aufruf { padding: clamp(1.75rem, 4vw, 2.5rem); background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 25%, transparent); }
+  .aufruf h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+  .aufruf p { margin: 0; max-width: 60ch; }
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+</style>

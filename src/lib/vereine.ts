@@ -34,12 +34,26 @@ export const vereinsseiten = [
     href: 'vereine/posaunenchor/',
     bild: { src: chorFoto, nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
   },
+  {
+    name: 'Arbeitskreis Dorfgeschichte Stockhausen',
+    kurz: 'Dorfgeschichte',
+    seit: 'Heimatforschung',
+    text: 'Ortschronik, Bildarchiv und Hofgeschichten – das Gedächtnis des Dorfes. Alte Fotos und Geschichten sind willkommen.',
+    href: 'vereine/arbeitskreis-dorfgeschichte/',
+    bild: { src: schlossFoto, nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
+  },
+  {
+    name: 'Schützenverein Stockhausen',
+    kurz: 'Schützenverein',
+    seit: 'Schützenbezirk 25 Vogelsberg',
+    text: 'Luftgewehr, Auflage und Kleinkaliber – vom Jungschützen bis zur Seniorenmannschaft. Schnupperschießen möglich.',
+    href: 'vereine/schuetzenverein/',
+  },
 ];
 
 // Hintergrundbilder für Vereine ohne eigene Seite (Teil des Vereinsnamens → Bild)
 const weitereBilder = [
   { teil: 'Kirchengemeinde', bild: { src: luftbildFoto, nachweis: 'Foto: Marc Ahne', position: '50% 50%' } },
-  { teil: 'Dorfgeschichte', bild: { src: schlossFoto, nachweis: 'Foto: Marc Ahne', position: '50% 40%' } },
 ];
 export const bildFuer = (name: string) => weitereBilder.find((b) => name.includes(b.teil))?.bild;
 
