@@ -187,8 +187,9 @@ const weitere = await weitereVereine();
     border: 1px solid color-mix(in srgb, var(--ziegel) 30%, transparent);
   }
   .hinweis:hover { color: var(--ziegel); }
-  .hinweis--baustelle { background: #fff4cc; border-color: #e9ad3f; }
-  .hinweis--baustelle .hinweis__marke { background: #e9ad3f; color: #2a211c; }
+  .hinweis--baustelle { background: var(--warnung); border-color: var(--warnung-rand); color: var(--warnung-text); }
+  .hinweis--baustelle:hover { color: var(--warnung-text); text-decoration: underline; }
+  .hinweis--baustelle .hinweis__marke { background: var(--warnung-rand); color: #2a211c; }
   .huelle + .huelle .hinweis { margin-top: 0.6rem; }
   .hinweis__marke {
     flex: none;

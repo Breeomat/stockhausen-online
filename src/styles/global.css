@@ -14,6 +14,9 @@
   --ziegel: #c0522b;
   --ziegel-hell: #f9dfd2;
   --gold: #e9ad3f;
+  --warnung: #fff4cc;
+  --warnung-rand: #e9ad3f;
+  --warnung-text: #2a211c;
   --schatten: 0 1px 2px rgb(42 33 28 / 0.06), 0 8px 24px -12px rgb(42 33 28 / 0.18);
   --radius: 18px;
   --serif: 'Fraunces Variable', Georgia, serif;
@@ -36,6 +39,9 @@
     --ziegel: #ef8c63;
     --ziegel-hell: #3d2419;
     --gold: #f0bf5c;
+    --warnung: #3a2e12;
+    --warnung-rand: #b8862c;
+    --warnung-text: #f6e8c4;
     --schatten: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.6);
     color-scheme: dark;
   }
