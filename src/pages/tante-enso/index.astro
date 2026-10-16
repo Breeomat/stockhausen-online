@@ -1,5 +1,6 @@
 ---
 import Basis from '../../layouts/Basis.astro';
+import { url } from '../../lib/site';
 import { Image, getImage } from 'astro:assets';
 import { aktion, aktionLaeuft, baustelle, baustelleAktiv } from '../../lib/enso';
 import { kommendeTermine, datumLang, zeitraum } from '../../lib/termine';
@@ -27,7 +28,7 @@ const quellen = [
 
   {baustelleAktiv() && (
     <div class="huelle">
-      <p class="baustelle"><strong>Trotz Baustelle erreichbar:</strong> Tante Enso und die Metzgerei Günther sind weiterhin für euch da. Danke für eure Unterstützung!</p>
+      <p class="baustelle"><strong>Trotz Baustelle erreichbar:</strong> Tante Enso und die Metzgerei Günther sind weiterhin für euch da. Danke für eure Unterstützung! <a href={url('ortsdurchfahrt/')}>Infos zur Sperrung und zu den Umleitungen</a></p>
     </div>
   )}
 

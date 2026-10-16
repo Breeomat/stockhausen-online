@@ -19,7 +19,7 @@ export const aktionLaeuft = () => heute() <= aktion.frist;
 // Baustellen-Hinweis: Lädchen und Metzgerei bleiben erreichbar. Ende noch offen –
 // bei bekanntem Datum `bis` setzen (JJJJ-MM-TT), dann verschwindet der Hinweis danach von selbst.
 export const baustelle = {
-  text: 'Trotz Baustelle erreichbar: Tante Enso und Metzgerei Günther sind weiterhin für euch da.',
+  text: 'Ortsdurchfahrt voll gesperrt (Ortseingang aus Richtung Schadges bis „Am Weinberg“). Tante Enso und Metzgerei Günther sind trotzdem erreichbar.',
   bis: null as string | null,
 };
 export const baustelleAktiv = () => baustelle.bis === null || heute() <= baustelle.bis;

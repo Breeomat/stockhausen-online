@@ -1,0 +1,58 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import { url } from '../../lib/site';
+
+// Quelle: Mitteilung der Stadtverwaltung Herbstein (Oktober 2026)
+const umleitungen = [
+  'über die K 87 („Am Weinberg“) auf die B 275 bei Eisenbach, weiter in Richtung „Rixfelder Kreuz“ oder Lauterbach',
+  'über Blankenau, Zahmen und Heisters, weiter ins Stadtgebiet Herbstein oder ins Gemeindegebiet Grebenhain',
+  'über Blankenau, Hainzell und Uffhausen, weiter ins Gemeindegebiet Großenlüder sowie nach Wartenberg und Lauterbach',
+];
+---
+<Basis titel="Baustelle Ortsdurchfahrt" beschreibung="Erneuerung der Ortsdurchfahrt Stockhausen: Vollsperrung, Umleitungen und Erreichbarkeit von Lädchen und Metzgerei.">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Baustelle · Mitteilung der Stadtverwaltung</span>
+    <h1>Erneuerung der Ortsdurchfahrt</h1>
+    <p>Seit Montag, 5. Oktober 2026, wird die Ortsdurchfahrt Stockhausen grundhaft erneuert. Bei der Gemeinschaftsmaßnahme mit HessenMobil werden Fahrbahn und Gehweg sowie Teilstücke der städtischen Versorgungsleitungen erneuert.</p>
+  </section>
+
+  <section class="huelle od">
+    <div class="karte sperrung">
+      <span class="kicker">Vollsperrung</span>
+      <h2>Bauabschnitt 2026</h2>
+      <p>Gesperrt ist die Strecke vom <strong>Ortseingang aus Richtung Schadges</strong> bis zur <strong>Mitte der Einmündung der K 87 („Am Weinberg“)</strong>. Dieser Abschnitt soll noch in diesem Jahr fertig werden.</p>
+    </div>
+
+    <div>
+      <span class="kicker">Umleitungen</span>
+      <h2>So kommt man aus Stockhausen heraus</h2>
+      <ol class="umleitungen">
+        {umleitungen.map((u) => <li class="karte">{u}</li>)}
+      </ol>
+      <p class="klein">In der Gegenrichtung gelten die Umleitungen entsprechend.</p>
+    </div>
+
+    <div class="karte erreichbar">
+      <h2>Trotz Baustelle erreichbar</h2>
+      <p><a href={url('tante-enso/')}>Tante Enso</a> und die Metzgerei Günther sind weiterhin für euch da. Danke für eure Unterstützung!</p>
+    </div>
+
+    <p class="quelle">Quelle: Mitteilung der Stadtverwaltung Herbstein. Die Stadt bittet alle Verkehrsteilnehmenden, sich auf die Einschränkungen einzustellen.</p>
+  </section>
+</Basis>
+
+<style>
+  .od { padding-block: 1rem 5rem; display: grid; gap: 2.5rem; }
+  .od > * { max-width: 900px; }
+  .sperrung { padding: clamp(1.5rem, 4vw, 2.25rem); background: #fff4cc; border-color: #e9ad3f; }
+  .sperrung h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
+  .sperrung p { margin: 0; }
+  .umleitungen { margin: 1.25rem 0 0; padding: 0; list-style: none; counter-reset: u; display: grid; gap: 0.75rem; }
+  .umleitungen li { counter-increment: u; position: relative; padding: 1rem 1.25rem 1rem 3.5rem; }
+  .umleitungen li::before { content: counter(u); position: absolute; left: 1rem; top: 0.9rem; width: 1.8rem; height: 1.8rem; display: grid; place-items: center; border-radius: 50%; background: var(--meer); color: #fff; font-weight: 700; font-size: 0.9rem; }
+  .klein { font-size: 0.9rem; color: var(--text-leise); margin: 0.75rem 0 0; }
+  .erreichbar { padding: 1.5rem; }
+  .erreichbar h2 { font-size: 1.4rem; }
+  .erreichbar p { margin: 0; }
+  .quelle { font-size: 0.85rem; color: var(--text-leise); margin: 0; }
+</style>
