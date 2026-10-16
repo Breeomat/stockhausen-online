@@ -6,6 +6,8 @@ import luftbild from '../../assets/fotos/stockhausen-luftbild.jpg';
 import kirche from '../../assets/fotos/stockhausen-kirche.jpg';
 import schloss from '../../assets/fotos/stockhausen-schloss.jpg';
 import conradsRuhe from '../../assets/fotos/conrads-ruhe.jpg';
+import gemeinschaftFoto from '../../assets/fotos/gemeinschaft-altenschlirf-schloss.jpg';
+import gemeinschaftLogo from '../../assets/fotos/gemeinschaft-altenschlirf-logo.png';
 import vorher from '../../assets/fotos/ortsdurchfahrt-vorher.jpg';
 import nachher from '../../assets/fotos/ortsdurchfahrt-nachher.jpg';
 import zeitung from '../../assets/fotos/ortsdurchfahrt-zeitung.jpg';
@@ -326,10 +328,21 @@ const entfernungen = [
       <span class="kicker">Rund ums Schloss</span>
       <h2>Leben und Arbeiten mit der Gemeinschaft Altenschlirf</h2>
       <p class="schloss-text">Auf dem Schlossgelände wird gelernt, gewebt, gegärtnert und gefeiert. Auch im „Lädchen für alles“, das die Gemeinschaft Altenschlirf betreibt, gibt es neben dem täglichen Bedarf Produkte aus den eigenen Werkstätten.</p>
+      <a class="karte gemeinschaft" href={url('dorf/gemeinschaft-altenschlirf/')}>
+        <figure class="sehenswert__bild">
+          <Image src={gemeinschaftFoto} alt="Schloss Stockhausen mit Torbau und Uhrturm hinter der Sandsteinmauer des Schlossparks" widths={[480, 680]} sizes="(max-width: 760px) calc(100vw - 32px), 560px" />
+          <figcaption>Bild: Gemeinschaft Altenschlirf</figcaption>
+        </figure>
+        <div class="gemeinschaft__text">
+          <Image class="gemeinschaft__logo" src={gemeinschaftLogo} alt="Gemeinschaft Altenschlirf" width={132} />
+          <h3>Gemeinschaft Altenschlirf &amp; Campus am Park</h3>
+          <p>Anthroposophische Lebens- und Arbeitsgemeinschaft für Menschen mit und ohne Hilfebedarf: Demeter-Landwirtschaft, zwölf Werkstätten, Fachschule für Heilerziehungspflege, Kultur und Märkte im Schlosspark.</p>
+          <span class="gemeinschaft__pfeil">Mehr über die Gemeinschaft →</span>
+        </div>
+      </a>
       <ul class="schloss-leben">
         {schlossLeben.map(({ titel, text }) => <li class="karte"><h3>{titel}</h3><p>{text}</p></li>)}
       </ul>
-      <p class="chronik-link"><a href={url('vereine/gemeinschaft-altenschlirf/')}>Mehr über die Gemeinschaft Altenschlirf →</a></p>
     </div>
 
     <p class="quelle">
@@ -401,6 +414,14 @@ const entfernungen = [
   .mit-bild:nth-child(even) .sehenswert__bild { order: 2; }
   .mit-bild { display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: center; padding: 0 2rem 0 0 !important; overflow: hidden; }
   .sehenswert__bild { margin: 0; position: relative; }
+  .gemeinschaft { display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: center; margin-top: 1.5rem; overflow: hidden; text-decoration: none; color: inherit; }
+  .gemeinschaft .sehenswert__bild img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .gemeinschaft__text { padding: 1.5rem 2rem 1.5rem 0; }
+  .gemeinschaft__text h3 { margin: 0.75rem 0 0.5rem; }
+  .gemeinschaft__text p { margin: 0 0 1rem; color: var(--text-leise); }
+  .gemeinschaft__logo { width: 132px; height: auto; }
+  .gemeinschaft__pfeil { font-weight: 600; color: var(--lagune); }
+  @media (max-width: 760px) { .gemeinschaft { grid-template-columns: 1fr; gap: 0; } .gemeinschaft__text { padding: 1.25rem 1.5rem 1.5rem; } }
   .sehenswert__bild img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
   @media (max-width: 760px) {
     .mit-bild, .mit-bild:nth-child(even) { grid-template-columns: 1fr; gap: 1.25rem; padding: 0 0 1.5rem !important; }

@@ -9,7 +9,6 @@ import chorFoto from '../assets/fotos/posaunenchor.jpg';
 import gefrierFoto from '../assets/fotos/gefrierhaus-fest.jpg';
 import maibaumFoto from '../assets/fotos/ogv-maibaum.jpg';
 import kirchgemeindeFoto from '../assets/fotos/kirche-stockhausen-aussen.jpg';
-import altenschlirfFoto from '../assets/fotos/gemeinschaft-altenschlirf-schloss.jpg';
 import kirmesFoto from '../assets/fotos/kirmesburschen-gruppe.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
@@ -86,21 +85,15 @@ export const vereinsseiten = [
     href: 'vereine/kirchengemeinde/',
     bild: { src: kirchgemeindeFoto, nachweis: 'Foto: Ev. Kirchengemeinde Stockhausen-Rixfeld', position: '50% 30%' },
   },
-  {
-    name: 'Gemeinschaft Altenschlirf e. V. & Campus am Park',
-    kurz: 'Altenschlirf',
-    seit: 'Lebens- und Arbeitsgemeinschaft',
-    text: 'Inklusion, Demeter-Landwirtschaft, Werkstätten, Fachschule und Kultur im Schlosspark Stockhausen.',
-    href: 'vereine/gemeinschaft-altenschlirf/',
-    bild: { src: altenschlirfFoto, nachweis: 'Bild: Gemeinschaft Altenschlirf', position: '50% 50%' },
-  },
 ];
 
 // Hintergrundbilder für Vereine ohne eigene Seite (Teil des Vereinsnamens → Bild)
 const weitereBilder: { teil: string; bild: { src: ImageMetadata; nachweis: string; position?: string } }[] = [];
 export const bildFuer = (name: string) => weitereBilder.find((b) => name.includes(b.teil))?.bild;
 
-const hatSeite = (name: string) => vereinsseiten.some((v) => name.includes(v.kurz));
+// Einrichtungen mit eigener Seite außerhalb der Vereine (z. B. unter „Unser Dorf“)
+const andereSeiten = ['Altenschlirf'];
+const hatSeite = (name: string) => vereinsseiten.some((v) => name.includes(v.kurz)) || andereSeiten.some((k) => name.includes(k));
 
 // Vereine mit kommenden Terminen, die (noch) keine eigene Seite haben
 export async function weitereVereine(): Promise<string[]> {
