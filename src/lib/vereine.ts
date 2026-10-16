@@ -52,7 +52,7 @@ export const vereinsseiten = [
     name: 'KK Schützenverein 1926/68 e.V. Stockhausen',
     kurz: 'Schützenverein',
     seit: 'seit 1926/68 · Schützenbezirk 25 Vogelsberg',
-    text: 'Luftgewehr, Auflage und Kleinkaliber – vom Jungschützen bis zur Seniorenmannschaft. Schnupperschießen möglich.',
+    text: 'Luftgewehr, Auflage, Kleinkaliber und Bogen – vom Jungschützen bis zur Seniorenmannschaft. Schnupperschießen möglich.',
     href: 'vereine/schuetzenverein/',
     wappen: schuetzenWappen,
   },
