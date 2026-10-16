@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import aussenFoto from '../../../assets/fotos/kirche-stockhausen-aussen.jpg';
+import dekanatLogo from '../../../assets/verzeichnis/dekanat-vogelsberg.jpg';
 import innenFoto from '../../../assets/fotos/kirche-rixfeld-innen.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
@@ -57,13 +58,14 @@ const team = [
       </div>
 
       <aside class="seitenleiste">
+        <a class="karte dekanat" href="https://dekanat-vogelsberg.ekhn.de/gemeinden/nachbarschaftsraum-hoher-vogelsberg" rel="noopener"><Image src={dekanatLogo} alt="Evangelisches Dekanat Vogelsberg" width={600} /></a>
         <div class="karte kasten">
           <h3>Gemeindebüro Stockhausen</h3>
           <dl class="liste">
             <div><dt>Adresse</dt><dd>Am Bockelberg 2, 36358 Herbstein-Stockhausen</dd></div>
             <div><dt>Telefon</dt><dd><a href="tel:+496647217">06647 217</a></dd></div>
             <div><dt>E-Mail</dt><dd><a href="mailto:kirchengemeinde.stockhausen@ekhn.de">kirchengemeinde.stockhausen@ekhn.de</a></dd></div>
-            <div><dt>Website</dt><dd><a href="https://kirchen-stockhausen-rixfeld.ekhn.de" rel="noopener">kirchen-stockhausen-rixfeld.ekhn.de</a></dd></div>
+            <div><dt>Website</dt><dd><a href="https://dekanat-vogelsberg.ekhn.de/gemeinden/nachbarschaftsraum-hoher-vogelsberg" rel="noopener">Nachbarschaftsraum Hoher Vogelsberg (Dekanat Vogelsberg)</a></dd></div>
           </dl>
         </div>
         <div class="karte kasten">
@@ -72,7 +74,6 @@ const team = [
             <div><dt>Adresse</dt><dd>Wallweg 1, 36358 Herbstein</dd></div>
             <div><dt>Telefon</dt><dd><a href="tel:+4966438044">06643 8044</a></dd></div>
             <div><dt>Pfarramtssekretärin</dt><dd>Ilona Jöckel</dd></div>
-            <div><dt>Website</dt><dd><a href="https://dekanat-vogelsberg.ekhn.de/gemeinden/nachbarschaftsraum-hoher-vogelsberg" rel="noopener">Nachbarschaftsraum Hoher Vogelsberg (Dekanat Vogelsberg)</a></dd></div>
           </dl>
         </div>
         <div class="karte kasten">
@@ -157,4 +158,6 @@ const team = [
   .kirche__text p { margin: 0; color: var(--text-leise); }
   .kirche__text .kirche__foto { margin-top: 0.75rem; font-size: 0.8rem; }
   .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+  .dekanat { display: block; padding: 0.75rem 1rem; background: #fff; }
+  .dekanat img { width: 100%; height: auto; display: block; }
 </style>
