@@ -53,9 +53,9 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
       <span class="kicker">Kinder</span>
       <h2>Kindergarten und Schule</h2>
       <dl class="liste">
-        <div><dt>Ev. Kindergarten „Storchennest“</dt><dd>Müser Straße 27, Stockhausen · <a href={tel('06647 333')}>06647 333</a></dd></div>
-        <div><dt>Grundschule</dt><dd>Freiherr-vom-Stein-Schule, Oelegemer Straße 30, Herbstein · <a href={tel('06643 8010')}>06643 8010</a> · mit Ganztagsangebot</dd></div>
-        <div><dt>Weiterführende Schulen</dt><dd class="schulen"><strong>Alexander-von-Humboldt-Schule</strong> – Gymnasium (Sekundarstufe I und II)<br /><span class="klein">Am Eichberg 31, 36341 Lauterbach · <a href={tel('06641 6554-0')}>06641 6554-0</a></span><br /><strong>Schule an der Wascherde</strong> – Haupt- und Realschule mit Förderstufe<br /><span class="klein">An der Wascherde 1, 36341 Lauterbach · <a href={tel('06641 6556-0')}>06641 6556-0</a></span><br /><strong>Oberwaldschule Grebenhain</strong> – Kooperative Gesamtschule (Klassen 5–10)<br /><span class="klein">An der Oberwaldschule 2, 36355 Grebenhain · <a href={tel('06644 9605-0')}>06644 9605-0</a></span><br /><strong>Vogelsbergschule Lauterbach</strong> – Berufliches Schulzentrum (Berufsschule, FOS, Berufliches Gymnasium)<br /><span class="klein">Lindenstraße 115, 36341 Lauterbach · <a href={tel('06641 6555-0')}>06641 6555-0</a></span><br /><strong>Helmut-von-Bracken-Schule</strong> – Förderschule, Standort Herbstein<br /><span class="klein">Hessenstraße 60, 36358 Herbstein · <a href={tel('06643 8225')}>06643 8225</a></span></dd></div>
+        <div><dt>Kindergarten</dt><dd><span class="eintrag"><span class="eintrag__name">Ev. Kindergarten „Storchennest“</span><span class="eintrag__info">Müser Straße 27, Stockhausen</span><span class="eintrag__tel">Tel. <a href={tel('06647 333')}>06647 333</a></span></span></dd></div>
+        <div><dt>Grundschule</dt><dd><span class="eintrag"><span class="eintrag__name">Freiherr-vom-Stein-Schule</span><span class="eintrag__info">Oelegemer Straße 30, Herbstein</span><span class="eintrag__tel">Tel. <a href={tel('06643 8010')}>06643 8010</a></span><span class="eintrag__zusatz">mit Ganztagsangebot</span></span></dd></div>
+        <div><dt>Weiterführende Schulen</dt><dd><span class="eintrag"><span class="eintrag__name">Alexander-von-Humboldt-Schule</span><span class="eintrag__info">Am Eichberg 31, 36341 Lauterbach</span><span class="eintrag__tel">Tel. <a href={tel('06641 6554-0')}>06641 6554-0</a></span><span class="eintrag__zusatz">Gymnasium (Sekundarstufe I und II)</span></span><span class="eintrag"><span class="eintrag__name">Schule an der Wascherde</span><span class="eintrag__info">An der Wascherde 1, 36341 Lauterbach</span><span class="eintrag__tel">Tel. <a href={tel('06641 6556-0')}>06641 6556-0</a></span><span class="eintrag__zusatz">Haupt- und Realschule mit Förderstufe</span></span><span class="eintrag"><span class="eintrag__name">Oberwaldschule Grebenhain</span><span class="eintrag__info">An der Oberwaldschule 2, 36355 Grebenhain</span><span class="eintrag__tel">Tel. <a href={tel('06644 9605-0')}>06644 9605-0</a></span><span class="eintrag__zusatz">Kooperative Gesamtschule (Klassen 5–10)</span></span><span class="eintrag"><span class="eintrag__name">Vogelsbergschule Lauterbach</span><span class="eintrag__info">Lindenstraße 115, 36341 Lauterbach</span><span class="eintrag__tel">Tel. <a href={tel('06641 6555-0')}>06641 6555-0</a></span><span class="eintrag__zusatz">Berufliches Schulzentrum (Berufsschule, FOS, Berufliches Gymnasium)</span></span><span class="eintrag"><span class="eintrag__name">Helmut-von-Bracken-Schule</span><span class="eintrag__info">Hessenstraße 60, 36358 Herbstein</span><span class="eintrag__tel">Tel. <a href={tel('06643 8225')}>06643 8225</a></span><span class="eintrag__zusatz">Förderschule, Standort Herbstein</span></span></dd></div>
       </dl>
     </div>
 
@@ -63,10 +63,10 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
       <span class="kicker">Gesundheit</span>
       <h2>Ärzte und Apotheke</h2>
       <dl class="liste">
-        <div><dt>Hausärzte in Herbstein</dt><dd><span class="zeile">Dr. med. (univ.) Christine Lamp, Am Scherzacker 8 · <a href={tel('06643 397')}>06643 397</a></span><span class="zeile">Dr. med. Hartmut Roth, Alter Weg 23 · <a href={tel('06643 292')}>06643 292</a></span><span class="zeile">Dr. med. Luise Hengst, Zum Thermalbad 1 · <a href={tel('06643 7989500')}>06643 798 950 0</a></span></dd></div>
-        <div><dt>Zahnarzt im Dorf</dt><dd><a href={url('wer-macht-was/')}>Zahnarztpraxis Dr. Carsten Falcke</a></dd></div>
-        <div><dt>Apotheke</dt><dd>Apotheke in Herbstein, Marktplatz 3 · <a href={tel('06643 96220')}>06643 96220</a></dd></div>
-        <div><dt>Notfall</dt><dd>Notruf <a href="tel:112">112</a> · Ärztlicher Bereitschaftsdienst <a href="tel:116117">116 117</a></dd></div>
+        <div><dt>Hausärzte in Herbstein</dt><dd><span class="eintrag"><span class="eintrag__name">Dr. med. (univ.) Christine Lamp</span><span class="eintrag__info">Am Scherzacker 8</span><span class="eintrag__tel">Tel. <a href={tel('06643 397')}>06643 397</a></span></span><span class="eintrag"><span class="eintrag__name">Dr. med. Hartmut Roth</span><span class="eintrag__info">Alter Weg 23</span><span class="eintrag__tel">Tel. <a href={tel('06643 292')}>06643 292</a></span></span><span class="eintrag"><span class="eintrag__name">Dr. med. Luise Hengst</span><span class="eintrag__info">Zum Thermalbad 1</span><span class="eintrag__tel">Tel. <a href={tel('06643 7989500')}>06643 798 950 0</a></span></span></dd></div>
+        <div><dt>Zahnarzt im Dorf</dt><dd><span class="eintrag"><span class="eintrag__name">Zahnarztpraxis Dr. Carsten Falcke</span><span class="eintrag__info">Müser Straße 49, Stockhausen</span><span class="eintrag__tel">Tel. <a href={tel('06647 234')}>06647 234</a></span><span class="eintrag__zusatz"><a href={url('wer-macht-was/')}>Sprechzeiten unter „Wer macht was“</a></span></span></dd></div>
+        <div><dt>Apotheke</dt><dd><span class="eintrag"><span class="eintrag__name">Apotheke in Herbstein</span><span class="eintrag__info">Marktplatz 3, Herbstein</span><span class="eintrag__tel">Tel. <a href={tel('06643 96220')}>06643 96220</a></span></span></dd></div>
+        <div><dt>Notfall</dt><dd><span class="eintrag"><span class="eintrag__name">Notruf (Rettungsdienst, Feuerwehr)</span><span class="eintrag__tel">Tel. <a href="tel:112">112</a></span></span><span class="eintrag"><span class="eintrag__name">Ärztlicher Bereitschaftsdienst</span><span class="eintrag__tel">Tel. <a href="tel:116117">116 117</a></span></span></dd></div>
       </dl>
     </div>
 
@@ -116,11 +116,11 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
   .liste div:last-child { border-bottom: 0; }
   .liste dt { font-size: 0.8rem; color: var(--text-leise); margin-bottom: 0.25rem; }
   .liste dd { margin: 0; font-weight: 600; line-height: 1.65; overflow-wrap: anywhere; }
-  .zeile { display: block; }
-  .zeile + .zeile { margin-top: 0.6rem; }
-  .schulen { font-weight: 400 !important; line-height: 1.6; }
-  .schulen strong { font-weight: 600; }
-  .schulen .klein { display: inline-block; margin-bottom: 0.85rem; font-size: 0.9rem; color: var(--text-leise); }
+  .eintrag { display: block; }
+  .eintrag + .eintrag { margin-top: 0.9rem; }
+  .eintrag__name { display: block; font-weight: 600; }
+  .eintrag__info, .eintrag__zusatz { display: block; font-weight: 400; font-size: 0.95rem; color: var(--text-leise); }
+  .eintrag__tel { display: block; font-size: 0.95rem; font-weight: 600; white-space: nowrap; }
   .halle { grid-column: 1 / -1; }
   .preise { width: 100%; max-width: 640px; border-collapse: collapse; margin: 0 0 1rem; font-variant-numeric: tabular-nums; }
   .preise th, .preise td { text-align: left; padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--linie); }
