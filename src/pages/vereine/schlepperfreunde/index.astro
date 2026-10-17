@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import schlepperFoto from '../../../assets/fotos/schlepperfreunde.jpg';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+
+// Quelle: Angaben des Betreibers (Oktober 2026)
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Schlepperfreunde'));
+
+const schwerpunkte = [
+  { titel: 'Historische Landtechnik', text: 'Alte Traktoren und Schlepper verschiedener Marken – von Lanz Bulldog, Hanomag und Deutz bis Fendt, Fahr, MAN oder Güldner – werden gepflegt und fahrbereit gehalten.' },
+  { titel: 'Ausfahrten und Treffen', text: 'Gemeinsame Ausfahrten durch den Vogelsberg, Besuche bei Oldtimertreffen in der Region und Auftritte bei Festumzügen, Kirmes und Vereinsfesten im Dorf.' },
+  { titel: 'Schrauberhilfe', text: 'Austausch über Ersatzteile und Reparaturen und gemeinsames Schrauben in den Scheunen – der Kern der Gemeinschaft.' },
+];
+---
+<Basis titel="Schlepperfreunde" beschreibung="Schlepperfreunde Stockhausen: Liebhaber historischer Traktoren und Landmaschinen im Dorf.">
+  <section class="sf-held">
+    <Image class="sf-held__bild" src={schlepperFoto} alt="" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="huelle sf-kopf">
+      <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+      <span class="kicker">Interessengemeinschaft · Oldtimer-Traktoren</span>
+      <h1>Schlepperfreunde Stockhausen</h1>
+      <p>Ein lockerer Zusammenschluss von Liebhabern historischer Landmaschinen direkt im Ort: Tradition, Technik und Geselligkeit rund um alte Traktoren und Zugmaschinen.</p>
+    </div>
+    <span class="sf-held__foto">Historische Schlepper, darunter Hanomag und Lanz Bulldog · Foto: <span class="fehlt">[fehlt: Fotograf]</span></span>
+  </section>
+
+  <section class="huelle sf">
+    <ul class="schwerpunkte">
+      {schwerpunkte.map(({ titel, text }) => <li class="karte"><h3>{titel}</h3><p>{text}</p></li>)}
+    </ul>
+
+    <div class="spalten">
+      <div class="text">
+        <span class="kicker">Liebe zum alten Eisen</span>
+        <h2>Knatternde Ein- und Mehrzylinder</h2>
+        <p>Wo früher schwere Feldarbeit verrichtet wurde, schlägt heute das Herz der Schlepperfreunde für alte Motoren. Die Maschinen werden mit Geduld und technischem Geschick restauriert und einsatzbereit gehalten. Bei Ausfahrten, Traktortreffen oder Festen im Dorf sind sie immer ein Blickfang.</p>
+        <p>Schon Mitte der 2000er-Jahre machten die Schlepperfreunde mit einem eigenen Internetauftritt auf ihre Maschinen und Treffen aufmerksam.</p>
+      </div>
+      <aside class="karte kasten">
+        <h3>Kontakt</h3>
+        <dl class="liste">
+          <div><dt>Ansprechperson</dt><dd><span class="fehlt">[fehlt: Ansprechperson und Kontakt]</span></dd></div>
+          <div><dt>Treffen</dt><dd><span class="fehlt">[fehlt: Treffpunkt und Termine]</span></dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .sf-held { position: relative; isolation: isolate; overflow: hidden; margin-bottom: 2.5rem; color: #fff; }
+  .sf-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; z-index: -2; }
+  .sf-held::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(12 18 24 / 0.85) 0%, rgb(12 18 24 / 0.6) 55%, rgb(12 18 24 / 0.2) 100%); }
+  .sf-held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
+  .sf-kopf { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .sf-kopf h1 { color: #fff; max-width: 20ch; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
+  .sf-kopf p { font-size: 1.15rem; max-width: 60ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
+  .sf-kopf .kicker { color: var(--gold); }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; color: #fff; }
+  .sf { padding-block: 0 5rem; display: grid; gap: 3.5rem; }
+  .schwerpunkte { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
+  .schwerpunkte li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
+  .schwerpunkte h3 { margin: 0 0 0.4rem; font-size: 1.2rem; }
+  .schwerpunkte p { margin: 0; color: var(--text-leise); }
+  .spalten { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
+  .text p { max-width: 68ch; }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin: 0 0 0.75rem; }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; }
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+</style>

@@ -12,6 +12,7 @@ import maibaumFoto from '../assets/fotos/ogv-maibaum.jpg';
 import kirchgemeindeFoto from '../assets/fotos/kirche-stockhausen-aussen.jpg';
 import kirmesFoto from '../assets/fotos/kirmesburschen-gruppe.jpg';
 import schuetzenFoto from '../assets/fotos/schuetzenhaus-luftbild.jpg';
+import schlepperFoto from '../assets/fotos/schlepperfreunde.jpg';
 import gesangFoto from '../assets/fotos/gesangverein-daemmerschoppen.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
@@ -58,6 +59,14 @@ export const vereinsseiten = [
     href: 'vereine/schuetzenverein/',
     wappen: schuetzenWappen,
     bild: { src: schuetzenFoto, nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
+  },
+  {
+    name: 'Schlepperfreunde Stockhausen',
+    kurz: 'Schlepperfreunde',
+    seit: 'Oldtimer-Traktoren',
+    text: 'Lanz Bulldog, Hanomag, Deutz und Co.: Liebhaber historischer Landtechnik, die ihre Schlepper pflegen und bei Ausfahrten und Festen zeigen.',
+    href: 'vereine/schlepperfreunde/',
+    bild: { src: schlepperFoto, nachweis: 'Foto: [fehlt: Fotograf]', position: '50% 60%' },
   },
   {
     name: 'Gefriergemeinschaft Stockhausen e. V.',
