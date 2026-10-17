@@ -64,6 +64,8 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
           {navigation.map(({ href, label }) => (
             <a href={url(href)} aria-current={istAktiv(href) ? 'page' : undefined}>{label}</a>
           ))}
+          <!-- nur im Handy-Menü (Burger); am Computer steht der Link im Seitenfuß -->
+          <a class="menue__mobil" href={url('neu-im-dorf/')} aria-current={istAktiv('neu-im-dorf/') ? 'page' : undefined}>Neu im Dorf</a>
         </nav>
         <div class="kopf__aktionen">
           <a class="suche-knopf" href={url('suche/')} aria-current={istAktiv('suche/') ? 'page' : undefined}>
@@ -162,6 +164,7 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
   .menue a[aria-current='page'] { background: var(--meer); color: var(--bg); }
 
   .menue-knopf { display: none; }
+  .menue .menue__mobil { display: none; }
   .kopf__aktionen { display: flex; align-items: center; gap: 0.5rem; }
   .suche-knopf {
     display: grid;
@@ -217,6 +220,7 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
       box-shadow: var(--schatten);
     }
     .menue.offen { display: flex; }
+    .menue .menue__mobil { display: block; }
     .menue a { padding: 0.8rem 1rem; font-size: 1.05rem; }
   }
 
