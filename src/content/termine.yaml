@@ -153,3 +153,26 @@
   ort: Altfellhalle
   verein: SV Stockhausen
   plakat: sv-flamingo-bounce-2027
+- id: 2026-10-31-kirmes-abtrinken
+  titel: Kirmes-Abtrinken und Helferfest
+  datum: 2026-10-31
+  verein: Kirmesburschen Stockhausen
+- id: 2026-11-28-landfrauen-plaetzchenbacken
+  titel: Plätzchenbacken
+  datum: 2026-11-28
+  ort: Altfellhalle
+  verein: Landfrauenverein
+- id: 2026-11-29-gv-seniorennachmittag
+  titel: Seniorennachmittag
+  datum: 2026-11-29
+  ort: Altfellhalle
+  verein: Gesangverein „Germania“ Stockhausen
+- id: 2026-12-06-sv-kartenvorverkauf-theater
+  titel: Kartenvorverkauf Theater
+  datum: 2026-12-06
+  verein: SV Stockhausen
+- id: 2026-12-12-schuetzen-gluehweinabend
+  titel: Glühweinabend
+  datum: 2026-12-12
+  ort: Lennys
+  verein: KK Schützenverein 1926/68 e.V. Stockhausen
