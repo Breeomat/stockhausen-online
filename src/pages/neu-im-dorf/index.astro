@@ -20,10 +20,8 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
       <h2>Anmelden und Ansprechpartner</h2>
       <p>Wohnsitz anmelden, Ausweise, Mülltonnen und Zusatzsäcke: zuständig ist das Bürgerbüro der Stadt Herbstein. Termin am besten vorher vereinbaren.</p>
       <dl class="liste">
-        <div><dt>Bürgerbüro Stadt Herbstein</dt><dd>Rathaus, Marktplatz 7, 36358 Herbstein</dd></div>
-        <div><dt>Telefon</dt><dd><a href={tel('06643 9600-0')}>06643 9600-0</a></dd></div>
-        <div><dt>E-Mail</dt><dd><a href="mailto:info@stadt-herbstein.de">info@stadt-herbstein.de</a></dd></div>
-        <div><dt>Öffnungszeiten</dt><dd>Mo–Fr 8–12 Uhr, Do zusätzlich 13:30–18:30 Uhr</dd></div>
+        <div><dt>Bürgerbüro</dt><dd><span class="eintrag"><span class="eintrag__name">Stadt Herbstein</span><span class="eintrag__info">Rathaus, Marktplatz 7, 36358 Herbstein</span><span class="eintrag__tel">Tel. <a href={tel('06643 9600-0')}>06643 9600-0</a></span><span class="eintrag__tel"><a href="mailto:info@stadt-herbstein.de">info@stadt-herbstein.de</a></span></span></dd></div>
+        <div><dt>Öffnungszeiten</dt><dd><span class="eintrag"><span class="eintrag__name">Mo–Fr 8–12 Uhr</span><span class="eintrag__name">Do zusätzlich 13:30–18:30 Uhr</span></span></dd></div>
         <div><dt>Im Dorf</dt><dd><a href={url('ortsbeirat/')}>Ortsbeirat und Ortsvorsteher</a> – für alles, was Stockhausen direkt betrifft</dd></div>
       </dl>
     </div>
@@ -34,7 +32,7 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
       <p>Die Abfuhr übernimmt der Zweckverband Abfallwirtschaft Vogelsbergkreis (ZAV). Den persönlichen Abfuhrkalender für die eigene Straße gibt es online und als App „ZAV“ – auf Wunsch mit Erinnerung am Vortag.</p>
       <dl class="liste">
         <div><dt>Abfuhrkalender</dt><dd><a href="https://www.zav-online.de/abfallkalender" rel="noopener">zav-online.de/abfallkalender</a></dd></div>
-        <div><dt>Grünschnitt-Sammelplatz Herbstein</dt><dd>Am Steinbruch (Schrimpf) · Mi 15–17 Uhr, Sa 10–13 Uhr</dd></div>
+        <div><dt>Grünschnitt-Sammelplatz Herbstein</dt><dd><span class="eintrag"><span class="eintrag__name">Am Steinbruch (Schrimpf)</span><span class="eintrag__info">Mi 15–17 Uhr · Sa 10–13 Uhr</span></span></dd></div>
         <div><dt>Zusätzliche Restmüllsäcke</dt><dd>im Bürgerbüro Herbstein (9,30 € je Sack)</dd></div>
       </dl>
     </div>
@@ -77,8 +75,8 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
       <dl class="liste">
         <div><dt>Vereine</dt><dd><a href={url('vereine/')}>Alle Vereine in Stockhausen</a></dd></div>
         <div><dt>Termine</dt><dd><a href={url('termine/')}>Was ist los im Dorf</a> – auch als Kalender-Abo fürs Handy</dd></div>
-        <div><dt>Altfellhalle mieten (Mehrzweckhalle)</dt><dd>Bleichstraße 19 · barrierefrei · bis 150 Personen<br />Buchung: Jürgen Kurz · <a href={tel('06647 919007')}>06647 919007</a> · mobil <a href={tel('0171 5578478')}>0171 55 78 478</a><br /><a href="#altfellhalle">Ausstattung und Mietpreise ↓</a></dd></div>
-        <div><dt>Friedhof und Bestattungen</dt><dd>Magistrat der Stadt Herbstein, Marktplatz 7 · Dominik Frech<br /><a href={tel('06643 9600-24')}>06643 9600-24</a> · <a href="mailto:buergerbuero@herbstein.de">buergerbuero@herbstein.de</a></dd></div>
+        <div><dt>Altfellhalle mieten (Mehrzweckhalle)</dt><dd><span class="eintrag"><span class="eintrag__name">Buchung: Jürgen Kurz</span><span class="eintrag__info">Bleichstraße 19 · barrierefrei · bis 150 Personen</span><span class="eintrag__tel">Tel. <a href={tel('06647 919007')}>06647 919007</a></span><span class="eintrag__tel">Mobil <a href={tel('0171 5578478')}>0171 55 78 478</a></span><span class="eintrag__zusatz"><a href="#altfellhalle">Ausstattung und Mietpreise ↓</a></span></span></dd></div>
+        <div><dt>Friedhof und Bestattungen</dt><dd><span class="eintrag"><span class="eintrag__name">Dominik Frech</span><span class="eintrag__info">Magistrat der Stadt Herbstein, Marktplatz 7, Herbstein</span><span class="eintrag__tel">Tel. <a href={tel('06643 9600-24')}>06643 9600-24</a></span><span class="eintrag__tel"><a href="mailto:buergerbuero@herbstein.de">buergerbuero@herbstein.de</a></span></span></dd></div>
       </dl>
     </div>
 
@@ -97,8 +95,7 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
       </table>
       <p class="klein-text">Zuzüglich Nebenkosten nach Aufwand gemäß Gebührenordnung der Stadt Herbstein für „Haus des Gastes“, Mehrzweckhallen und Dorfgemeinschaftshäuser. Auch Übungsstunden, Spiele und Wettkämpfe örtlicher Vereine, Verbände, Parteien und Organisationen sind gebührenpflichtig.</p>
       <dl class="liste">
-        <div><dt>Buchung</dt><dd>Jürgen Kurz, Am Weinberg 12, Stockhausen</dd></div>
-        <div><dt>Telefon</dt><dd><a href={tel('06647 919007')}>06647 919007</a> · mobil <a href={tel('0171 5578478')}>0171 55 78 478</a> · Fax 06647 919008</dd></div>
+        <div><dt>Buchung</dt><dd><span class="eintrag"><span class="eintrag__name">Jürgen Kurz</span><span class="eintrag__info">Am Weinberg 12, Stockhausen</span><span class="eintrag__tel">Tel. <a href={tel('06647 919007')}>06647 919007</a></span><span class="eintrag__tel">Mobil <a href={tel('0171 5578478')}>0171 55 78 478</a></span><span class="eintrag__info">Fax 06647 919008</span></span></dd></div>
       </dl>
     </div>
 
@@ -120,7 +117,7 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
   .eintrag + .eintrag { margin-top: 0.9rem; }
   .eintrag__name { display: block; font-weight: 600; }
   .eintrag__info, .eintrag__zusatz { display: block; font-weight: 400; font-size: 0.95rem; color: var(--text-leise); }
-  .eintrag__tel { display: block; font-size: 0.95rem; font-weight: 600; white-space: nowrap; }
+  .eintrag__tel { display: block; font-size: 0.95rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .halle { grid-column: 1 / -1; }
   .preise { width: 100%; max-width: 640px; border-collapse: collapse; margin: 0 0 1rem; font-variant-numeric: tabular-nums; }
   .preise th, .preise td { text-align: left; padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--linie); }
