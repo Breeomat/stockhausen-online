@@ -73,6 +73,13 @@ export const vereinsseiten = [
     bild: { src: maibaumFoto, nachweis: 'Foto: Marc Ahne', position: '50% 30%' },
   },
   {
+    name: 'Gesangverein „Germania“ Stockhausen',
+    kurz: 'Gesangverein',
+    seit: 'seit 1894',
+    text: 'Gemischter Chor und Männerchor unter Chorleiter Kai Mertin – die CD des Männerchors gibt es beim Verein.',
+    href: 'vereine/gesangverein/',
+  },
+  {
     name: 'Kirmesburschen Stockhausen',
     kurz: 'Kirmes',
     seit: 'seit 1849',

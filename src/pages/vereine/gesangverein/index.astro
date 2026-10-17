@@ -1,0 +1,112 @@
+---
+import Basis from '../../../layouts/Basis.astro';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+
+// Quelle: Zeitungsbericht zur Jahreshauptversammlung 2024 (130-jähriges Jubiläum), zusammengefasst
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Gesangverein'));
+
+const zahlen = [
+  { wert: '1894', text: 'gegründet als Männergesangverein, seit 1900 auch Gemischter Chor' },
+  { wert: '123', text: 'Mitglieder, darunter 14 Ehrenmitglieder (Stand 2024)' },
+  { wert: '40', text: 'Chorproben im Jahr 2023: 28 im Gemischten Chor, 12 im Männerchor' },
+];
+
+const ehrungen = [
+  ['70 Jahre aktiv und passiv', 'Georg Dotzert, Ilse Schwarz'],
+  ['70 Jahre passiv', 'Christel Dotzert'],
+  ['60 Jahre aktiv und passiv', 'Christel Cremer'],
+  ['60 Jahre Singen', 'Renate Ahne'],
+  ['50 Jahre Singen', 'Karin Muth'],
+  ['50 Jahre aktiv und passiv', 'Helga Fischer, Werner Eichenauer'],
+];
+---
+<Basis titel="Gesangverein „Germania“" beschreibung="Gesangverein „Germania“ Stockhausen: Gemischter Chor und Männerchor seit 1894 – Chorleitung, Rückblick und CD des Männerchors.">
+  <section class="huelle seitenkopf">
+    <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+    <span class="kicker">Chor · seit 1894</span>
+    <h1>Gesangverein „Germania“ Stockhausen</h1>
+    <p>Seit über 130 Jahren wird in Stockhausen im Verein gesungen: im Gemischten Chor und im Männerchor, geleitet von Kai Mertin aus dem eigenen Ort. Wie viele Chöre kämpft auch die „Germania“ mit weniger und älter werdenden Sängerinnen und Sängern – umso mehr zählt jede Stimme.</p>
+  </section>
+
+  <section class="huelle gv">
+    <ul class="zahlen">
+      {zahlen.map(({ wert, text }) => <li class="karte"><strong>{wert}</strong><span>{text}</span></li>)}
+    </ul>
+
+    <div class="spalten">
+      <div class="text">
+        <span class="kicker">Rückblick</span>
+        <h2>Aus der Jahreshauptversammlung 2024</h2>
+        <p>Höhepunkte des Vorjahres waren die Teilnahme am Bundessängerfest und an den Feierlichkeiten zum 150-jährigen Bestehen des MGV „Bruderliebe“ Herbstein. Im Herbst nahm der Männerchor an zwei Abenden in „Schmitts“ Saal eine CD auf – als Geschenk für Geburtstage und andere Feiern und als bleibende Erinnerung an den Männerchor.</p>
+        <p>Neun Mitglieder sind innerhalb eines Jahres verstorben, darunter Vorstandsmitglied Heinrich Roth, der die Termine des Vereins jahrelang akribisch geführt hatte. Ein- oder Austritte gab es keine. Co-Vorsitzender Werner Wahl dankte Chorleiter Kai Mertin, der die Proben auch dann mit viel Rücksicht und Ermutigung leitet, wenn in manchen Stimmen nur ein oder zwei Sänger da sind. Ohne ihn wäre auch das Männerchorprojekt nicht möglich gewesen.</p>
+        <p>Werner Wahl legte nach 35 Jahren sein Amt im Vorstand aus gesundheitlichen Gründen nieder. Er war 1988 als Beisitzer in den Vorstand gekommen und hatte 1998 den stellvertretenden Vorsitz übernommen. Eine Neuwahl war nicht nötig, da der Teamvorstand noch genügend Mitglieder und Beisitzer hat.</p>
+        <p>Für 2024 plante der Verein, sein 130-jähriges Jubiläum im Juni zusammen mit dem 30. Lindenfest zu feiern, dazu den musikalischen Adventsnachmittag am 30. November und die Aufnahme einer CD mit dem Gemischten Chor.</p>
+
+        <span class="kicker abstand">Ehrungen 2024</span>
+        <h2>Jahrzehnte im Verein</h2>
+        <p>Die Ehrungen nahm Harald Appel, Vorsitzender des Vogelsberger Sängerbundes, vor. Renate Ahne und Karin Muth wurden zusätzlich vom Hessischen Sängerbund und vom Deutschen Chorverband ausgezeichnet.</p>
+        <dl class="liste">
+          {ehrungen.map(([anlass, namen]) => <div><dt>{anlass}</dt><dd>{namen}</dd></div>)}
+        </dl>
+      </div>
+
+      <aside class="seitenleiste">
+        <div class="karte kasten">
+          <h3>Mitsingen</h3>
+          <dl class="liste">
+            <div><dt>Chorleiter</dt><dd>Kai Mertin</dd></div>
+            <div><dt>Chorproben</dt><dd><span class="fehlt">[fehlt: Wochentag und Uhrzeit]</span></dd></div>
+            <div><dt>Ort</dt><dd><span class="fehlt">[fehlt: Probenort]</span></dd></div>
+            <div><dt>Ansprechperson</dt><dd><span class="fehlt">[fehlt: Ansprechperson und Kontakt]</span></dd></div>
+          </dl>
+        </div>
+        <div class="karte kasten">
+          <h3>CD des Männerchors</h3>
+          <p>Die CD ist fertig und für 9 Euro (Selbstkostenpreis) beim Verein erhältlich.</p>
+        </div>
+        <div class="karte kasten">
+          <h3>Vorstand</h3>
+          <p>Der Verein wird von einem Teamvorstand geführt.</p>
+          <p><span class="fehlt">[fehlt: aktuelle Vorstandsmitglieder]</span></p>
+        </div>
+      </aside>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .gv { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .zahlen { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .zahlen li { padding: 1.5rem; display: flex; flex-direction: column; }
+  .zahlen strong { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--ziegel); font-weight: 600; line-height: 1; }
+  .zahlen span { color: var(--text-leise); margin-top: 0.4rem; }
+  @media (max-width: 640px) { .zahlen { grid-template-columns: 1fr; } }
+
+  .spalten { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
+  .text p, .text .liste { max-width: 68ch; }
+  .abstand { display: block; margin-top: 2.5rem; }
+
+  .seitenleiste { display: grid; gap: 1rem; }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin: 0 0 0.75rem; }
+  .kasten p { margin: 0 0 0.75rem; color: var(--text-leise); }
+  .kasten p:last-child { margin-bottom: 0; }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; }
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+</style>
