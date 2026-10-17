@@ -10,7 +10,7 @@ const bis = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'numeric', 
 ---
 <ul class:list={['plakate', { 'plakate--archiv': archiv }]} data-zeigen={zeigen} data-fest={zeigen ? fest : undefined}>
   {liste.map((p, i) => (
-    <li hidden={zeigen !== undefined && i >= zeigen}>
+    <li id={`plakat-${p.id}`} hidden={zeigen !== undefined && i >= zeigen}>
       <button class="plakat" data-gross={gross[i].src} data-titel={p.data.titel}>
         <Image src={p.bild} alt={`Plakat: ${p.data.titel}`} widths={[320, 480, 720]} sizes="(max-width: 640px) 50vw, 280px" />
       </button>
@@ -51,6 +51,14 @@ const bis = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'numeric', 
   document.querySelectorAll<HTMLDialogElement>('.leuchtkasten').forEach((kasten) => {
     kasten.addEventListener('click', (e) => { if (e.target === kasten) kasten.close(); });
   });
+  // Link aus einem Termin (#plakat-<id>): Plakat sichtbar machen und groß öffnen
+  const ziel = location.hash.startsWith('#plakat-') ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+  if (ziel && !ziel.hidden) {
+    const archiv = ziel.closest('details');
+    if (archiv) archiv.open = true;
+    ziel.scrollIntoView({ block: 'center' });
+    ziel.querySelector<HTMLButtonElement>('.plakat')?.click();
+  }
 </script>
 
 <style>

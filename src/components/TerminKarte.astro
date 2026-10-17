@@ -4,7 +4,7 @@ import { url } from '../lib/site';
 
 interface Props { termin: Termin; kompakt?: boolean }
 const { termin, kompakt = false } = Astro.props;
-const { titel, datum, ort, verein, text, link } = termin.data;
+const { titel, datum, ort, verein, text, link, plakat } = termin.data;
 const zeit = zeitraum(termin);
 ---
 <article class="termin" data-verein={verein ?? ''} data-ende={letzterTag(termin)}>
@@ -24,6 +24,7 @@ const zeit = zeitraum(termin);
     {!kompakt && (
       <p class="termin__aktionen">
         <a href={url(`termine/${termin.id}.ics`)} download>In meinen Kalender</a>
+        {plakat && <a href={url(`plakate/#plakat-${plakat}`)}>Plakat ansehen</a>}
         {link && <a href={link} rel="noopener">Mehr erfahren</a>}
       </p>
     )}
@@ -63,5 +64,5 @@ const zeit = zeitraum(termin);
   .termin__meta { color: var(--text-leise); font-size: 0.92rem; margin: 0; }
   .termin__meta > * + *::before { content: ' · '; }
   .termin__text { margin: 0.75rem 0 0; white-space: pre-line; }
-  .termin__aktionen { display: flex; gap: 1.25rem; margin: 0.85rem 0 0; font-size: 0.9rem; font-weight: 600; }
+  .termin__aktionen { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0.85rem 0 0; font-size: 0.9rem; font-weight: 600; }
 </style>
