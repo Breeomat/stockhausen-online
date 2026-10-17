@@ -93,6 +93,13 @@ export const vereinsseiten = [
     bild: { src: gesangFoto, nachweis: 'Foto: Instagram', position: '50% 85%' },
   },
   {
+    name: 'Landfrauenverein Stockhausen e. V.',
+    kurz: 'Landfrauen',
+    seit: 'Teamvorstand',
+    text: 'Geführt von einem fünfköpfigen Teamvorstand – Kontakt und Termine des Vereins.',
+    href: 'vereine/landfrauenverein/',
+  },
+  {
     name: 'Kirmesburschen Stockhausen',
     kurz: 'Kirmes',
     seit: 'seit 1849',

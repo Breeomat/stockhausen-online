@@ -1,0 +1,60 @@
+---
+import Basis from '../../../layouts/Basis.astro';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+
+// Quelle: Angaben des Betreibers (Oktober 2026)
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Landfrauen'));
+
+const vorstand = ['Kirsten Antritter', 'Katrin Schwan', 'Elisabeth Eichenauer', 'Birgit Boß', 'Cornelia Schwarz'];
+---
+<Basis titel="Landfrauenverein" beschreibung="Landfrauenverein Stockhausen e. V.: Teamvorstand, Kontakt und Termine.">
+  <section class="huelle seitenkopf">
+    <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+    <span class="kicker">Verein</span>
+    <h1>Landfrauenverein Stockhausen e.&nbsp;V.</h1>
+    <p>Der Landfrauenverein wird von einem fünfköpfigen Teamvorstand geführt. <span class="fehlt">[fehlt: Beschreibung des Vereins und seiner Angebote]</span></p>
+  </section>
+
+  <section class="huelle lf">
+    <div class="kaesten">
+      <div class="karte kasten">
+        <h3>Teamvorstand</h3>
+        <ul class="namen">{vorstand.map((name) => <li>{name}</li>)}</ul>
+      </div>
+      <div class="karte kasten">
+        <h3>Kontakt</h3>
+        <dl class="liste">
+          <div><dt>Anschrift</dt><dd>Hochstraße 1<br />36358 Herbstein-Stockhausen</dd></div>
+          <div><dt>Telefon / E-Mail</dt><dd><span class="fehlt">[fehlt: Telefon oder E-Mail]</span></dd></div>
+        </dl>
+      </div>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .lf { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .kaesten { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1rem; align-items: start; }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin: 0 0 0.75rem; }
+  .namen { margin: 0; padding: 0; list-style: none; display: grid; }
+  .namen li { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); font-weight: 600; }
+  .namen li:last-child { border-bottom: 0; }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; }
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+</style>
