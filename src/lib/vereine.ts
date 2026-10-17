@@ -95,8 +95,8 @@ export const vereinsseiten = [
   {
     name: 'Landfrauenverein Stockhausen e. V.',
     kurz: 'Landfrauen',
-    seit: 'Teamvorstand',
-    text: 'Geführt von einem fünfköpfigen Teamvorstand – Kontakt und Termine des Vereins.',
+    seit: 'LandFrauenverband Hessen',
+    text: 'Frauen aller Generationen: Kaffeetafeln bei Dorffesten, Vorträge, Kränzebinden, Handarbeit und gemeinsame Ausflüge.',
     href: 'vereine/landfrauenverein/',
   },
   {

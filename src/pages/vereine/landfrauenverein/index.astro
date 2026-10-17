@@ -4,20 +4,31 @@ import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
-// Quelle: Angaben des Betreibers (Oktober 2026)
+// Quellen: Angaben des Betreibers und Vereinsprofil „Landfrauenverein Stockhausen“ (Drive, Oktober 2026)
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Landfrauen'));
+
+const schwerpunkte = [
+  { titel: 'Feste und Jubiläen', text: 'Kuchen- und Kaffeetafeln bei Jubiläen im Dorf, Vereinsfesten, Seniorennachmittagen und kirchlichen Anlässen wie Erntedank.' },
+  { titel: 'Vorträge', text: 'Themenabende zu gesunder regionaler Ernährung, Hauswirtschaft, Vorsorge, Gesundheit und Gartenwissen.' },
+  { titel: 'Kreativ und Handarbeit', text: 'Oster- und Adventskränze binden, Handarbeiten, Nähkurse und saisonales Backen.' },
+  { titel: 'Ausflüge', text: 'Wanderungen im Vogelsberg, Radtouren, Besichtigungen regionaler Betriebe und Museen sowie Theaterbesuche.' },
+];
 
 const vorstand = ['Kirsten Antritter', 'Katrin Schwan', 'Elisabeth Eichenauer', 'Birgit Boß', 'Cornelia Schwarz'];
 ---
-<Basis titel="Landfrauenverein" beschreibung="Landfrauenverein Stockhausen e. V.: Teamvorstand, Kontakt und Termine.">
+<Basis titel="Landfrauenverein" beschreibung="Landfrauenverein Stockhausen e. V.: Gemeinschaft, Vorträge, Kreatives und Ausflüge für Frauen aller Generationen – Teamvorstand, Kontakt und Termine.">
   <section class="huelle seitenkopf">
     <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
-    <span class="kicker">Verein</span>
+    <span class="kicker">Verein · LandFrauenverband Hessen</span>
     <h1>Landfrauenverein Stockhausen e.&nbsp;V.</h1>
-    <p>Der Landfrauenverein wird von einem fünfköpfigen Teamvorstand geführt. <span class="fehlt">[fehlt: Beschreibung des Vereins und seiner Angebote]</span></p>
+    <p>Der Landfrauenverein bringt Frauen aller Generationen und Berufe aus Stockhausen und den umliegenden Dörfern zusammen. Im Mittelpunkt stehen Dorfleben, Kultur, gesunde Ernährung und Geselligkeit – von der Kaffeetafel beim Dorffest bis zum Vortragsabend.</p>
   </section>
 
   <section class="huelle lf">
+    <ul class="schwerpunkte">
+      {schwerpunkte.map(({ titel, text }) => <li class="karte"><h3>{titel}</h3><p>{text}</p></li>)}
+    </ul>
+
     <div class="kaesten">
       <div class="karte kasten">
         <h3>Teamvorstand</h3>
@@ -27,7 +38,15 @@ const vorstand = ['Kirsten Antritter', 'Katrin Schwan', 'Elisabeth Eichenauer', 
         <h3>Kontakt</h3>
         <dl class="liste">
           <div><dt>Anschrift</dt><dd>Hochstraße 1<br />36358 Herbstein-Stockhausen</dd></div>
+          <div><dt>Treffpunkt</dt><dd>Altfellhalle</dd></div>
           <div><dt>Telefon / E-Mail</dt><dd><span class="fehlt">[fehlt: Telefon oder E-Mail]</span></dd></div>
+        </dl>
+      </div>
+      <div class="karte kasten">
+        <h3>Verband</h3>
+        <dl class="liste">
+          <div><dt>Bezirk</dt><dd>Bezirkslandfrauenverein Lauterbach</dd></div>
+          <div><dt>Land und Bund</dt><dd>LandFrauenverband Hessen e. V.<br />Deutscher LandFrauenverband (dlv)</dd></div>
         </dl>
       </div>
     </div>
@@ -45,6 +64,10 @@ const vorstand = ['Kirsten Antritter', 'Katrin Schwan', 'Elisabeth Eichenauer', 
 <style>
   .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
   .lf { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .schwerpunkte { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
+  .schwerpunkte li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
+  .schwerpunkte h3 { margin: 0 0 0.4rem; font-size: 1.2rem; }
+  .schwerpunkte p { margin: 0; color: var(--text-leise); }
   .kaesten { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1rem; align-items: start; }
   .kasten { padding: 1.5rem; }
   .kasten h3 { margin: 0 0 0.75rem; }
