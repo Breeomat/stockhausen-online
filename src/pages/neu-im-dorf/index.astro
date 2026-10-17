@@ -4,7 +4,7 @@ import { url } from '../../lib/site';
 
 // Quellen (recherchiert Oktober 2026, vom Betreiber gegenzuprüfen): herbstein.de (Öffnungszeiten, Abfall, Schulen),
 // zav-online.de (Abfallkalender, Grünabfall), Wikipedia „Stockhausen (Herbstein)“ (Haltestellen und Linien),
-// weiterführende Schulen: Angaben des Betreibers (Oktober 2026); Arzt- und Apothekenverzeichnisse (arzt-auskunft.de, apotheke-herbstein-app.de), Schuldatenbank Hessen
+// weiterführende Schulen, Friedhof, Altfellhalle (Mietpreise, Buchung): Angaben des Betreibers (Oktober 2026); Arzt- und Apothekenverzeichnisse (arzt-auskunft.de, apotheke-herbstein-app.de), Schuldatenbank Hessen
 const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^0/, '');
 ---
 <Basis titel="Neu im Dorf" beschreibung="Neu in Stockhausen? Anmeldung, Müllabfuhr, Bus, Schule, Ärzte, Einkaufen und Vereine – alles Wichtige auf einen Blick.">
@@ -78,8 +78,28 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
       <dl class="liste">
         <div><dt>Vereine</dt><dd><a href={url('vereine/')}>Alle Vereine in Stockhausen</a></dd></div>
         <div><dt>Termine</dt><dd><a href={url('termine/')}>Was ist los im Dorf</a> – auch als Kalender-Abo fürs Handy</dd></div>
-        <div><dt>Altfellhalle mieten</dt><dd>Bleichstraße 19 · <span class="fehlt">[fehlt: Ansprechperson und Bedingungen]</span></dd></div>
+        <div><dt>Altfellhalle mieten (Mehrzweckhalle)</dt><dd>Bleichstraße 19 · barrierefrei · bis 150 Personen<br />Buchung: Jürgen Kurz · <a href={tel('06647 919007')}>06647 919007</a> · mobil <a href={tel('0171 5578478')}>0171 55 78 478</a><br /><a href="#altfellhalle">Ausstattung und Mietpreise ↓</a></dd></div>
         <div><dt>Friedhof und Bestattungen</dt><dd>Magistrat der Stadt Herbstein, Marktplatz 7 · Dominik Frech<br /><a href={tel('06643 9600-24')}>06643 9600-24</a> · <a href="mailto:buergerbuero@herbstein.de">buergerbuero@herbstein.de</a></dd></div>
+      </dl>
+    </div>
+
+    <div class="karte block halle" id="altfellhalle">
+      <span class="kicker">Feiern im Dorf</span>
+      <h2>Altfellhalle mieten</h2>
+      <p>Die Mehrzweckhalle am Sportplatz gehört der Stadt Herbstein und kann für Feiern gemietet werden. Sie ist barrierefrei und bietet Bühne, Küche mit Küchenzeile, Thekenanlage und Kühlung. Großer Saal 289 m², Vereinsraum 43 m², höchstens 150 Personen.</p>
+      <table class="preise">
+        <thead><tr><th>Raum</th><th>bis 4 Stunden</th><th>über 4 Stunden</th></tr></thead>
+        <tbody>
+          <tr><td>Alle Räume</td><td>128,00 €</td><td>185,00 €</td></tr>
+          <tr><td>Großer Saal</td><td>85,00 €</td><td>143,00 €</td></tr>
+          <tr><td>Teil des großen Saals</td><td>64,00 €</td><td>93,00 €</td></tr>
+          <tr><td>Kleiner Saal</td><td>43,00 €</td><td>71,00 €</td></tr>
+        </tbody>
+      </table>
+      <p class="klein-text">Zuzüglich Nebenkosten nach Aufwand gemäß Gebührenordnung der Stadt Herbstein für „Haus des Gastes“, Mehrzweckhallen und Dorfgemeinschaftshäuser. Auch Übungsstunden, Spiele und Wettkämpfe örtlicher Vereine, Verbände, Parteien und Organisationen sind gebührenpflichtig.</p>
+      <dl class="liste">
+        <div><dt>Buchung</dt><dd>Jürgen Kurz, Am Weinberg 12, Stockhausen</dd></div>
+        <div><dt>Telefon</dt><dd><a href={tel('06647 919007')}>06647 919007</a> · mobil <a href={tel('0171 5578478')}>0171 55 78 478</a> · Fax 06647 919008</dd></div>
       </dl>
     </div>
 
@@ -100,5 +120,11 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
   .schulen { font-weight: 400 !important; line-height: 1.5; }
   .schulen strong { font-weight: 600; }
   .schulen .klein { display: inline-block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-leise); }
+  .halle { grid-column: 1 / -1; }
+  .preise { width: 100%; max-width: 640px; border-collapse: collapse; margin: 0 0 1rem; font-variant-numeric: tabular-nums; }
+  .preise th, .preise td { text-align: left; padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--linie); }
+  .preise th { font-size: 0.8rem; font-weight: 600; color: var(--text-leise); }
+  .preise td:not(:first-child), .preise th:not(:first-child) { text-align: right; }
+  .klein-text { font-size: 0.9rem; }
   .hinweis-klein { grid-column: 1 / -1; margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--text-leise); }
 </style>
