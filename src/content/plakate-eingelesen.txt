@@ -1,6 +1,6 @@
 # Bereits verarbeitete Dateien aus dem Drive-Ordner „Plakate“ (ID 16d65tlcJ2OzsJkx36GuNBOwnsk6SqfCc).
 # Eine Zeile je Datei: Drive-Datei-ID | Dateiname | Ergebnis
-# Die tägliche Plakat-Aufgabe liest nur Dateien ein, deren ID hier noch nicht steht.
+# Beim Einlesen gelten nur Dateien als neu, deren ID hier noch nicht steht.
 # Verarbeitete Dateien werden in Drive in den Unterordner „Archiv“ verschoben.
 1N074WrkbhPZtJVtKE066Z4w3gi0W_EKj | PHOTO-2026-10-14-09-42-40.jpg | vor Einrichtung der Aufgabe eingebaut
 1papOkxsC_0bPHMqtSwTROqq7q60tpvFn | PHOTO-2026-10-15-17-52-59.jpg | vor Einrichtung der Aufgabe eingebaut
