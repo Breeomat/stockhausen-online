@@ -3,12 +3,15 @@ import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import schlossFoto from '../../../assets/fotos/gemeinschaft-altenschlirf-schloss.jpg';
 import logo from '../../../assets/fotos/gemeinschaft-altenschlirf-logo.png';
+import marktFoto from '../../../assets/fotos/johannimarkt.jpg';
+import parkFoto from '../../../assets/fotos/schloss-stockhausen-park.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
 // Quelle: Dossier „Gemeinschaft Altenschlirf e. V. & Campus am Park“ (Oktober 2026),
-// abgeglichen mit den Angaben auf „Unser Dorf“ und öffentlichen Einträgen zur Gemeinschaft
+// abgeglichen mit den Angaben auf „Unser Dorf“ und öffentlichen Einträgen zur Gemeinschaft;
+// Johannimarkt: Angaben und Fotos der Gemeinschaft (Oktober 2026)
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Altenschlirf'));
 
 const bereiche = [
@@ -16,7 +19,7 @@ const bereiche = [
   { titel: 'Landwirtschaft', text: 'Biologisch-dynamische Demeter-Landwirtschaft rund um Stockhausen: Tierhaltung, Futter- und Getreideanbau sowie Pflege von Hecken, Wiesen und Biotopen.' },
   { titel: 'Handwerk', text: 'Zwölf Werkstätten, darunter Gärtnerei, Käserei, Bäckerei, Holzwerkstatt, Kerzenzieherei und Weberei. Die Naturprodukte gibt es im Hofladen und auf Märkten.' },
   { titel: 'Ausbildung', text: 'Am Campus am Park sitzt seit 2009 die Fachschule für Heilerziehungspflege – staatlich anerkannte Fachkräfteausbildung im Vogelsberg.' },
-  { titel: 'Kultur und Feste', text: 'Konzerte, Theater, Lesungen, Seminare und Feste im Schlosspark, dazu jedes Jahr Mitte Juni der Johannimarkt.' },
+  { titel: 'Kultur und Feste', text: 'Konzerte, Theater, Lesungen, Seminare und Feste im Schlosspark, dazu jedes Jahr am Wochenende um Johanni der Johannimarkt.' },
 ];
 
 const stockhausen = [
@@ -26,6 +29,13 @@ const stockhausen = [
   { titel: 'Kontiki', text: 'Tagesstrukturgruppe auf dem Schlossgelände.' },
   { titel: 'Demeter-Hofladen', text: 'Hofverkauf der Demeter-Gärtnerei im Gutshof: Gemüse, Kartoffeln, Kräuter, Säfte und Eingemachtes. Mo–Fr 8:30–17 Uhr, Telefon 06647 9606-650.' },
   { titel: 'Lädchen für alles (Tante Enso)', text: 'Dorfladen in der Welzgasse 1: täglicher Bedarf und Produkte aus den eigenen Werkstätten. Er wird ein Tante-Enso-Laden, Betreiber bleibt die Gemeinschaft.' },
+];
+
+const johannimarkt = [
+  { titel: 'Kunsthandwerk', text: 'Holzprodukte, handgewebte Textilien, gezogene Kerzen und Pflanzen aus den Werkstätten der Gemeinschaft, dazu über 50 ausgewählte Kunsthandwerker aus ganz Deutschland – von Keramik, Korbwaren und Rosen über Naturkleidung, Seifen und Schmuck bis zu Filzkunst und Spielzeug.' },
+  { titel: 'Essen und Trinken', text: 'Bio-Backwaren aus der Holzofenbäckerei, Käse aus der Hofkäserei, Eis, Kaffee und Kuchen sowie Herzhaftes vom Grill.' },
+  { titel: 'Programm', text: 'Puppenspiel, Gaukelei, Mitmach-Werkstätten für Kinder und Live-Musik im Park.' },
+  { titel: 'Das ganze Dorf hilft mit', text: 'Die Freiwillige Feuerwehr regelt Verkehr und Parken, Sportverein, Kirmesburschen, Schützenverein und weitere Vereine betreuen gemeinsam mit der Gemeinschaft Grill- und Getränkestände.' },
 ];
 ---
 <Basis titel="Gemeinschaft Altenschlirf" beschreibung="Gemeinschaft Altenschlirf e. V. und Campus am Park in Stockhausen: Inklusion, Demeter-Landwirtschaft, Werkstätten, Fachschule und Kultur im Schlosspark.">
@@ -86,6 +96,30 @@ const stockhausen = [
       </ul>
     </div>
 
+    <div class="markt">
+      <div class="markt__text">
+        <span class="kicker">Jedes Jahr im Juni</span>
+        <h2>Johannimarkt im Schlosspark</h2>
+        <p>Am Wochenende um den Johannistag wird der Schlosspark zum Marktplatz: Stände unter alten Bäumen, entlang der Schlosswiesen und im Innenhof des Schlosses. Veranstalter ist die Gemeinschaft Altenschlirf, gemeinsam mit den Stockhäuser Vereinen. Der zweitägige Kunsthandwerker- und Sommermarkt zieht Besucher aus dem ganzen Vogelsberg und darüber hinaus an.</p>
+        <dl class="liste">
+          <div><dt>Wann</dt><dd>Samstag und Sonntag am Wochenende um Johanni, jeweils 11–18 Uhr</dd></div>
+          <div><dt>Wo</dt><dd>Schlosspark und Campus am Park, Müser Straße 1</dd></div>
+          <div><dt>Parken</dt><dd>An den Ortseingängen, eingewiesen von der Freiwilligen Feuerwehr</dd></div>
+        </dl>
+      </div>
+      <figure class="markt__bild">
+        <Image src={marktFoto} alt="Besucher auf dem Weg durch den Schlosspark, links Marktstände mit weißen Zelten vor dem Schloss, rechts ein Holzhäuschen unter einem großen Baum" widths={[480, 680]} sizes="(max-width: 900px) calc(100vw - 32px), 560px" />
+        <figcaption>Johannimarkt im Schlosspark · Foto: Gemeinschaft Altenschlirf</figcaption>
+      </figure>
+      <ul class="bereiche markt__liste">
+        {johannimarkt.map(({ titel, text }) => <li class="karte"><h3>{titel}</h3><p>{text}</p></li>)}
+      </ul>
+      <figure class="markt__kulisse">
+        <Image src={parkFoto} alt="Schloss Stockhausen von der Parkseite: langgestreckter Bau mit Mittelrisalit, Dachreiter und Veranda, davor eine große Rasenfläche" widths={[640, 1024, 1600]} sizes="(max-width: 1192px) calc(100vw - 32px), 1160px" />
+        <figcaption>Die Kulisse: Schloss Stockhausen von der Parkseite · Foto: Gemeinschaft Altenschlirf</figcaption>
+      </figure>
+    </div>
+
     {termine.length > 0 && (
       <div>
         <span class="kicker">Termine</span>
@@ -125,4 +159,13 @@ const stockhausen = [
   .bereiche h3 { margin: 0 0 0.4rem; font-size: 1.2rem; }
   .bereiche p { margin: 0; color: var(--text-leise); }
   .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+  .markt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem 3rem; align-items: start; }
+  .markt__text p { max-width: 68ch; }
+  .markt__liste, .markt__kulisse { grid-column: 1 / -1; }
+  .markt__liste { margin-top: 0; }
+  .markt figure { margin: 0; }
+  .markt img { width: 100%; height: auto; border-radius: var(--radius, 12px); }
+  .markt__kulisse img { aspect-ratio: 16 / 7; object-fit: cover; object-position: 50% 45%; }
+  .markt figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-leise); }
+  @media (max-width: 900px) { .markt { grid-template-columns: 1fr; } .markt__kulisse img { aspect-ratio: 4 / 3; } }
 </style>
