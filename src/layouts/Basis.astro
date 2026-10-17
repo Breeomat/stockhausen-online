@@ -19,6 +19,8 @@ const { titel, strukturiert, bild = standardBild, beschreibung = 'Neuigkeiten, T
 const seitentitel = titel ? `${titel} · Stockhausen` : 'Stockhausen · Ortsteil von Herbstein';
 const aktuell = Astro.url.pathname;
 const kanonisch = new URL(aktuell, Astro.site).href;
+// Suche (Pagefind): diese Seiten nicht in den Suchindex aufnehmen
+const suchbar = !['suche/', 'qr-code/'].some((pfad) => aktuell.startsWith(url(pfad)));
 const vorschau = await getImage({ src: bild, width: Math.min(bild.width, 1200), format: 'jpg' });
 const vorschauUrl = new URL(vorschau.src, Astro.site).href;
 const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.startsWith(url(href)));
@@ -58,19 +60,25 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
         <a class="marke" href={url('')} aria-label="Stockhausen, Stadt Herbstein, Vogelsbergkreis – zur Startseite">
           <Ortsschild groesse={0.7} />
         </a>
-        <button class="menue-knopf" aria-expanded="false" aria-controls="hauptmenue">
-          <span class="menue-knopf__striche" aria-hidden="true"></span>
-          <span class="sr">Menü</span>
-        </button>
         <nav id="hauptmenue" class="menue" aria-label="Hauptmenü">
           {navigation.map(({ href, label }) => (
             <a href={url(href)} aria-current={istAktiv(href) ? 'page' : undefined}>{label}</a>
           ))}
         </nav>
+        <div class="kopf__aktionen">
+          <a class="suche-knopf" href={url('suche/')} aria-current={istAktiv('suche/') ? 'page' : undefined}>
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2" /><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" /></svg>
+            <span class="sr">Suche</span>
+          </a>
+          <button class="menue-knopf" aria-expanded="false" aria-controls="hauptmenue">
+            <span class="menue-knopf__striche" aria-hidden="true"></span>
+            <span class="sr">Menü</span>
+          </button>
+        </div>
       </div>
     </header>
 
-    <main id="inhalt">
+    <main id="inhalt" data-pagefind-body={suchbar ? '' : undefined}>
       <slot />
     </main>
 
@@ -153,6 +161,19 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
   .menue a[aria-current='page'] { background: var(--meer); color: var(--bg); }
 
   .menue-knopf { display: none; }
+  .kopf__aktionen { display: flex; align-items: center; gap: 0.5rem; }
+  .suche-knopf {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    color: var(--text);
+    background: var(--flaeche);
+    box-shadow: inset 0 0 0 1px var(--linie);
+  }
+  .suche-knopf:hover { color: var(--ziegel); }
+  .suche-knopf[aria-current='page'] { background: var(--meer); color: var(--bg); box-shadow: none; }
 
   @media (max-width: 1100px) {
     .menue-knopf {

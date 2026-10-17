@@ -1,0 +1,47 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import { url } from '../../lib/site';
+
+// Volltextsuche mit Pagefind: Der Index entsteht beim Build (npm run build → pagefind --site dist), läuft komplett lokal
+---
+<Basis titel="Suche" beschreibung="Suche auf stockhausen-online.de: Vereine, Betriebe, Termine und Geschichte von Stockhausen.">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Suche</span>
+    <h1>Was suchen Sie?</h1>
+    <p>Vereine, Betriebe, Termine, Orte oder Geschichte – zum Beispiel „Kirmes“, „Metzgerei“ oder „Altfellhalle“.</p>
+  </section>
+
+  <section class="huelle suche" data-pagefind-ignore>
+    <link rel="stylesheet" href={url('pagefind/pagefind-ui.css')} />
+    <div id="suche" class="suche__feld"></div>
+    <noscript><p>Die Suche braucht JavaScript.</p></noscript>
+  </section>
+</Basis>
+
+<script is:inline define:vars={{ skript: url('pagefind/pagefind-ui.js'), basis: url('') }}>
+  const s = document.createElement('script');
+  s.src = skript;
+  s.onload = () => {
+    const ui = new PagefindUI({ element: '#suche', baseUrl: basis, showSubResults: true, showImages: false, resetStyles: false, autofocus: true });
+    const q = new URLSearchParams(location.search).get('q');
+    if (q) ui.triggerSearch(q);
+  };
+  document.head.append(s);
+</script>
+
+<style>
+  .suche { padding-block: 0.5rem 5rem; }
+  .suche__feld { max-width: 820px; }
+  .suche__feld :global(.pagefind-ui) { margin: 0; }
+  .suche {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: var(--meer);
+    --pagefind-ui-text: var(--text);
+    --pagefind-ui-background: var(--flaeche);
+    --pagefind-ui-border: var(--linie);
+    --pagefind-ui-tag: var(--ziegel-hell);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 12px;
+    --pagefind-ui-font: inherit;
+  }
+</style>
