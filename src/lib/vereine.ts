@@ -11,6 +11,7 @@ import gefrierFoto from '../assets/fotos/gefrierhaus-fest.jpg';
 import maibaumFoto from '../assets/fotos/ogv-maibaum.jpg';
 import kirchgemeindeFoto from '../assets/fotos/kirche-stockhausen-aussen.jpg';
 import kirmesFoto from '../assets/fotos/kirmesburschen-gruppe.jpg';
+import gesangFoto from '../assets/fotos/gesangverein-daemmerschoppen.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
 // Reihenfolge: alphabetisch nach Name
@@ -78,6 +79,7 @@ export const vereinsseiten = [
     seit: 'seit 1894',
     text: 'Gemischter Chor und Männerchor unter Chorleiter Kai Mertin – die CD des Männerchors gibt es beim Verein.',
     href: 'vereine/gesangverein/',
+    bild: { src: gesangFoto, nachweis: 'Foto: Instagram', position: '50% 85%' },
   },
   {
     name: 'Kirmesburschen Stockhausen',

@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
+import schoppenFoto from '../../../assets/fotos/gesangverein-daemmerschoppen.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
@@ -23,11 +25,15 @@ const ehrungen = [
 ];
 ---
 <Basis titel="Gesangverein „Germania“" beschreibung="Gesangverein „Germania“ Stockhausen: Gemischter Chor und Männerchor seit 1894 – Chorleitung, Rückblick und CD des Männerchors.">
-  <section class="huelle seitenkopf">
-    <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
-    <span class="kicker">Chor · seit 1894</span>
-    <h1>Gesangverein „Germania“ Stockhausen</h1>
-    <p>Seit über 130 Jahren wird in Stockhausen im Verein gesungen: im Gemischten Chor und im Männerchor, geleitet von Kai Mertin aus dem eigenen Ort. Wie viele Chöre kämpft auch die „Germania“ mit weniger und älter werdenden Sängerinnen und Sängern – umso mehr zählt jede Stimme.</p>
+  <section class="gv-held">
+    <Image class="gv-held__bild" src={schoppenFoto} alt="" widths={[640, 1024, 1198]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="huelle gv-kopf">
+      <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+      <span class="kicker">Chor · seit 1894</span>
+      <h1>Gesangverein „Germania“ Stockhausen</h1>
+      <p>Seit über 130 Jahren wird in Stockhausen im Verein gesungen: im Gemischten Chor und im Männerchor, geleitet von Kai Mertin aus dem eigenen Ort. Wie viele Chöre kämpft auch die „Germania“ mit weniger und älter werdenden Sängerinnen und Sängern – umso mehr zählt jede Stimme.</p>
+    </div>
+    <span class="gv-held__foto">„Sing &amp; Drink beim Dämmerschoppen – Wo Chorgesang auf Blasmusik trifft“ · Foto: Instagram</span>
   </section>
 
   <section class="huelle gv">
@@ -87,8 +93,16 @@ const ehrungen = [
 </Basis>
 
 <style>
-  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
-  .gv { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .gv-held { position: relative; isolation: isolate; overflow: hidden; margin-bottom: 2.5rem; color: #fff; }
+  .gv-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 85%; z-index: -2; }
+  .gv-held::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(12 18 24 / 0.85) 0%, rgb(12 18 24 / 0.6) 55%, rgb(12 18 24 / 0.2) 100%); }
+  .gv-held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
+  .gv-kopf { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .gv-kopf h1 { color: #fff; max-width: 20ch; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
+  .gv-kopf p { font-size: 1.15rem; max-width: 60ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
+  .gv-kopf .kicker { color: var(--gold); }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; color: #fff; }
+  .gv { padding-block: 0 5rem; display: grid; gap: 3.5rem; }
   .zahlen { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
   .zahlen li { padding: 1.5rem; display: flex; flex-direction: column; }
   .zahlen strong { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--ziegel); font-weight: 600; line-height: 1; }
