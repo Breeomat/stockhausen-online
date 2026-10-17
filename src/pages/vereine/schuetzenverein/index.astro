@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import wappen from '../../../assets/fotos/schuetzenverein-wappen.png';
+import luftbild from '../../../assets/fotos/schuetzenhaus-luftbild.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
@@ -28,7 +29,9 @@ const disziplinen = [
 ];
 ---
 <Basis titel="Schützenverein" beschreibung="KK Schützenverein 1926/68 e.V. Stockhausen: Sportschießen im Schützenbezirk 25 Vogelsberg – Luftgewehr, Auflage, Kleinkaliber, Bogen und Königsschießen.">
-  <section class="huelle seitenkopf sch-kopf">
+  <section class="sch-held">
+    <Image class="sch-held__bild" src={luftbild} alt="" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="huelle sch-kopf">
     <div>
       <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
       <span class="kicker">Verein · 1926/68 · Schützenbezirk 25 Vogelsberg</span>
@@ -36,6 +39,8 @@ const disziplinen = [
       <p>Sportlicher Ehrgeiz und dörfliche Gemeinschaft: Im Schützenverein stehen Konzentration, Zielsicherheit und Fairness an erster Stelle – für Jugendliche ebenso wie für die Seniorenmannschaften.</p>
     </div>
     <Image class="sch-kopf__wappen" src={wappen} alt="Vereinswappen: zwei gekreuzte Gewehre über einer Zielscheibe, Schrift „K-K Schützenverein Stockhausen“" width={220} />
+    </div>
+    <span class="sch-held__foto">Schützenhaus am Weinberg aus der Luft · Foto: Marc Ahne</span>
   </section>
 
   <section class="huelle sch">
@@ -89,8 +94,16 @@ const disziplinen = [
 </Basis>
 
 <style>
-  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
-  .sch { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .sch-held { position: relative; isolation: isolate; overflow: hidden; margin-bottom: 2.5rem; color: #fff; }
+  .sch-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; z-index: -2; }
+  .sch-held::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(12 18 24 / 0.85) 0%, rgb(12 18 24 / 0.6) 55%, rgb(12 18 24 / 0.2) 100%); }
+  .sch-held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
+  .sch-kopf { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .sch-kopf h1 { color: #fff; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
+  .sch-kopf p { font-size: 1.15rem; max-width: 60ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
+  .sch-kopf .kicker { color: var(--gold); }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; color: #fff; }
+  .sch { padding-block: 0 5rem; display: grid; gap: 3.5rem; }
   .text p { max-width: 68ch; }
 
   .disziplinen { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }

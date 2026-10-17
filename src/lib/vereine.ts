@@ -11,6 +11,7 @@ import gefrierFoto from '../assets/fotos/gefrierhaus-fest.jpg';
 import maibaumFoto from '../assets/fotos/ogv-maibaum.jpg';
 import kirchgemeindeFoto from '../assets/fotos/kirche-stockhausen-aussen.jpg';
 import kirmesFoto from '../assets/fotos/kirmesburschen-gruppe.jpg';
+import schuetzenFoto from '../assets/fotos/schuetzenhaus-luftbild.jpg';
 import gesangFoto from '../assets/fotos/gesangverein-daemmerschoppen.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
@@ -56,6 +57,7 @@ export const vereinsseiten = [
     text: 'Luftgewehr, Auflage, Kleinkaliber und Bogen – vom Jungschützen bis zur Seniorenmannschaft. Schnupperschießen möglich.',
     href: 'vereine/schuetzenverein/',
     wappen: schuetzenWappen,
+    bild: { src: schuetzenFoto, nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
   },
   {
     name: 'Gefriergemeinschaft Stockhausen e. V.',
