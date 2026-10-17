@@ -63,7 +63,7 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
       <span class="kicker">Gesundheit</span>
       <h2>Ärzte und Apotheke</h2>
       <dl class="liste">
-        <div><dt>Hausärzte in Herbstein</dt><dd>Dr. med. (univ.) Christine Lamp, Am Scherzacker 8 · <a href={tel('06643 397')}>06643 397</a><br />Dr. med. Hartmut Roth, Alter Weg 23 · <a href={tel('06643 292')}>06643 292</a><br />Dr. med. Luise Hengst, Zum Thermalbad 1 · <a href={tel('06643 7989500')}>06643 798 950 0</a></dd></div>
+        <div><dt>Hausärzte in Herbstein</dt><dd><span class="zeile">Dr. med. (univ.) Christine Lamp, Am Scherzacker 8 · <a href={tel('06643 397')}>06643 397</a></span><span class="zeile">Dr. med. Hartmut Roth, Alter Weg 23 · <a href={tel('06643 292')}>06643 292</a></span><span class="zeile">Dr. med. Luise Hengst, Zum Thermalbad 1 · <a href={tel('06643 7989500')}>06643 798 950 0</a></span></dd></div>
         <div><dt>Zahnarzt im Dorf</dt><dd><a href={url('wer-macht-was/')}>Zahnarztpraxis Dr. Carsten Falcke</a></dd></div>
         <div><dt>Apotheke</dt><dd>Apotheke in Herbstein, Marktplatz 3 · <a href={tel('06643 96220')}>06643 96220</a></dd></div>
         <div><dt>Notfall</dt><dd>Notruf <a href="tel:112">112</a> · Ärztlicher Bereitschaftsdienst <a href="tel:116117">116 117</a></dd></div>
@@ -107,18 +107,20 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
 </Basis>
 
 <style>
-  .neu { padding-block: 1rem 5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 1rem; align-items: start; }
+  .neu { padding-block: 1rem 5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 1.5rem; align-items: start; }
   .block { padding: clamp(1.25rem, 3vw, 1.75rem); }
   .block h2 { font-size: 1.5rem; margin: 0.2rem 0 0.75rem; }
-  .block p { margin: 0 0 1rem; color: var(--text-leise); }
+  .block p { margin: 0 0 1.25rem; color: var(--text-leise); line-height: 1.65; }
   .liste { margin: 0; display: grid; }
-  .liste div { padding: 0.5rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div { padding: 0.8rem 0; border-bottom: 1px solid var(--linie); }
   .liste div:last-child { border-bottom: 0; }
-  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
-  .liste dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
-  .schulen { font-weight: 400 !important; line-height: 1.5; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); margin-bottom: 0.25rem; }
+  .liste dd { margin: 0; font-weight: 600; line-height: 1.65; overflow-wrap: anywhere; }
+  .zeile { display: block; }
+  .zeile + .zeile { margin-top: 0.6rem; }
+  .schulen { font-weight: 400 !important; line-height: 1.6; }
   .schulen strong { font-weight: 600; }
-  .schulen .klein { display: inline-block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-leise); }
+  .schulen .klein { display: inline-block; margin-bottom: 0.85rem; font-size: 0.9rem; color: var(--text-leise); }
   .halle { grid-column: 1 / -1; }
   .preise { width: 100%; max-width: 640px; border-collapse: collapse; margin: 0 0 1rem; font-variant-numeric: tabular-nums; }
   .preise th, .preise td { text-align: left; padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--linie); }
