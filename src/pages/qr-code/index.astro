@@ -1,0 +1,43 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import { qrCodes, qrSvg } from '../../lib/qr';
+import { url } from '../../lib/site';
+
+const codes = await Promise.all(qrCodes.map(async (q) => ({ ...q, svg: await qrSvg(q.ziel) })));
+---
+<Basis titel="QR-Code" beschreibung="QR-Codes für stockhausen-online.de zum Ausdrucken – für Plakate, Schaukasten und Gemeindeblatt.">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Zum Ausdrucken</span>
+    <h1>QR-Code für die Dorfseite</h1>
+    <p>Für Plakate, Aushänge im Schaukasten oder das Gemeindeblatt: Handy-Kamera drauf, und die Seite öffnet sich. Zum Drucken die Datei herunterladen – SVG bleibt in jeder Größe scharf, PNG passt in Word und Co.</p>
+  </section>
+
+  <section class="huelle qr">
+    {codes.map((q) => (
+      <article class="karte qr__karte">
+        <div class="qr__bild" set:html={q.svg} role="img" aria-label={`QR-Code: ${q.ziel}`} />
+        <div>
+          <h2>{q.titel}</h2>
+          <p class="qr__ziel">{q.ziel.replace('https://', '')}</p>
+          <p>{q.text}</p>
+          <p class="qr__laden">
+            <a href={url(`qr-code/stockhausen-${q.name}.svg`)} download>SVG herunterladen</a>
+            <a href={url(`qr-code/stockhausen-${q.name}.png`)} download>PNG herunterladen</a>
+          </p>
+        </div>
+      </article>
+    ))}
+    <p class="qr__tipp">Tipp: Gedruckt mindestens 2 × 2 cm groß, mit etwas weißem Rand drumherum.</p>
+  </section>
+</Basis>
+
+<style>
+  .qr { padding-block: 1rem 5rem; display: grid; gap: 1rem; }
+  .qr__karte { padding: 1.5rem; display: grid; grid-template-columns: 220px 1fr; gap: 2rem; align-items: center; }
+  @media (max-width: 640px) { .qr__karte { grid-template-columns: 1fr; } .qr__bild { max-width: 240px; } }
+  .qr__bild :global(svg) { display: block; width: 100%; height: auto; border-radius: 8px; }
+  .qr h2 { margin: 0 0 0.25rem; }
+  .qr__ziel { margin: 0 0 0.75rem; font-weight: 600; color: var(--lagune); overflow-wrap: anywhere; }
+  .qr__laden { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-weight: 600; margin: 1rem 0 0; }
+  .qr__tipp { color: var(--text-leise); font-size: 0.9rem; margin: 1rem 0 0; }
+</style>
