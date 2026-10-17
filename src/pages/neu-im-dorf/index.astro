@@ -87,7 +87,7 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
       <h2>Altfellhalle mieten</h2>
       <p>Die Mehrzweckhalle am Sportplatz gehört der Stadt Herbstein und kann für Feiern gemietet werden. Sie ist barrierefrei und bietet Bühne, Küche mit Küchenzeile, Thekenanlage und Kühlung. Großer Saal 289 m², Vereinsraum 43 m², höchstens 150 Personen.</p>
       <table class="preise">
-        <thead><tr><th>Raum</th><th>bis 4 Stunden</th><th>über 4 Stunden</th></tr></thead>
+        <thead><tr><th>Raum</th><th>bis 4 Std.</th><th>über 4 Std.</th></tr></thead>
         <tbody>
           <tr><td>Alle Räume</td><td>128,00 €</td><td>185,00 €</td></tr>
           <tr><td>Großer Saal</td><td>85,00 €</td><td>143,00 €</td></tr>
@@ -123,7 +123,8 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
   .preise { width: 100%; max-width: 640px; border-collapse: collapse; margin: 0 0 1rem; font-variant-numeric: tabular-nums; }
   .preise th, .preise td { text-align: left; padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--linie); }
   .preise th { font-size: 0.8rem; font-weight: 600; color: var(--text-leise); }
-  .preise td:not(:first-child), .preise th:not(:first-child) { text-align: right; }
+  .preise td:not(:first-child), .preise th:not(:first-child) { text-align: right; white-space: nowrap; padding-left: 0.75rem; }
+  @media (max-width: 520px) { .preise { font-size: 0.92rem; } .preise th, .preise td { padding-right: 0.25rem; } .preise td:not(:first-child), .preise th:not(:first-child) { padding-left: 0.5rem; } }
   .klein-text { font-size: 0.9rem; }
   .hinweis-klein { grid-column: 1 / -1; margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--text-leise); }
 </style>
