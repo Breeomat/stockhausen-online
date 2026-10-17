@@ -1,0 +1,101 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import { url } from '../../lib/site';
+
+// Quellen (recherchiert Oktober 2026, vom Betreiber gegenzuprüfen): herbstein.de (Öffnungszeiten, Abfall, Schulen),
+// zav-online.de (Abfallkalender, Grünabfall), Wikipedia „Stockhausen (Herbstein)“ (Haltestellen und Linien),
+// Arzt- und Apothekenverzeichnisse (arzt-auskunft.de, apotheke-herbstein-app.de), Schuldatenbank Hessen
+const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^0/, '');
+---
+<Basis titel="Neu im Dorf" beschreibung="Neu in Stockhausen? Anmeldung, Müllabfuhr, Bus, Schule, Ärzte, Einkaufen und Vereine – alles Wichtige auf einen Blick.">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Willkommen</span>
+    <h1>Neu in Stockhausen?</h1>
+    <p>Schön, dass Sie da sind! Hier steht das Wichtigste für den Anfang – von der Anmeldung über Müllabfuhr und Bus bis zu Ärzten, Einkaufen und den Vereinen im Dorf.</p>
+  </section>
+
+  <section class="huelle neu">
+    <div class="karte block">
+      <span class="kicker">Erste Wege</span>
+      <h2>Anmelden und Ansprechpartner</h2>
+      <p>Wohnsitz anmelden, Ausweise, Mülltonnen und Zusatzsäcke: zuständig ist das Bürgerbüro der Stadt Herbstein. Termin am besten vorher vereinbaren.</p>
+      <dl class="liste">
+        <div><dt>Bürgerbüro Stadt Herbstein</dt><dd>Rathaus, Marktplatz 7, 36358 Herbstein</dd></div>
+        <div><dt>Telefon</dt><dd><a href={tel('06643 9600-0')}>06643 9600-0</a></dd></div>
+        <div><dt>E-Mail</dt><dd><a href="mailto:info@stadt-herbstein.de">info@stadt-herbstein.de</a></dd></div>
+        <div><dt>Öffnungszeiten</dt><dd>Mo–Fr 8–12 Uhr, Do zusätzlich 13:30–18:30 Uhr</dd></div>
+        <div><dt>Im Dorf</dt><dd><a href={url('ortsbeirat/')}>Ortsbeirat und Ortsvorsteher</a> – für alles, was Stockhausen direkt betrifft</dd></div>
+      </dl>
+    </div>
+
+    <div class="karte block">
+      <span class="kicker">Abfall</span>
+      <h2>Müllabfuhr und Grünschnitt</h2>
+      <p>Die Abfuhr übernimmt der Zweckverband Abfallwirtschaft Vogelsbergkreis (ZAV). Den persönlichen Abfuhrkalender für die eigene Straße gibt es online und als App „ZAV“ – auf Wunsch mit Erinnerung am Vortag.</p>
+      <dl class="liste">
+        <div><dt>Abfuhrkalender</dt><dd><a href="https://www.zav-online.de/abfallkalender" rel="noopener">zav-online.de/abfallkalender</a></dd></div>
+        <div><dt>Grünschnitt-Sammelplatz Herbstein</dt><dd>Am Steinbruch (Schrimpf) · Mi 15–17 Uhr, Sa 10–13 Uhr</dd></div>
+        <div><dt>Zusätzliche Restmüllsäcke</dt><dd>im Bürgerbüro Herbstein (9,30 € je Sack)</dd></div>
+      </dl>
+    </div>
+
+    <div class="karte block">
+      <span class="kicker">Unterwegs</span>
+      <h2>Bus</h2>
+      <p>Stockhausen gehört zum Rhein-Main-Verkehrsverbund (RMV), die Busse fährt die Verkehrsgesellschaft Oberhessen (VGO). Linie VB-28 verbindet das Dorf mit Lauterbach. Wo kein Bus fährt, gibt es das Anruf-Linien-Taxi (ALT) zum RMV-Tarif – vorher anmelden.</p>
+      <dl class="liste">
+        <div><dt>Stockhausen Ortsmitte</dt><dd>Linien VB-28, VB-42, VB-53 sowie Anruf-Linien-Taxi ALT VB-28 und ALT VB-48</dd></div>
+        <div><dt>Stockhausen Kindergarten</dt><dd>nur Schulbus VB-28</dd></div>
+        <div><dt>Fahrplan</dt><dd><a href="https://www.rmv.de" rel="noopener">rmv.de</a> oder App „RMVgo“</dd></div>
+      </dl>
+    </div>
+
+    <div class="karte block">
+      <span class="kicker">Kinder</span>
+      <h2>Kindergarten und Schule</h2>
+      <dl class="liste">
+        <div><dt>Ev. Kindergarten „Storchennest“</dt><dd>Müser Straße 27, Stockhausen · <a href={tel('06647 333')}>06647 333</a></dd></div>
+        <div><dt>Grundschule</dt><dd>Freiherr-vom-Stein-Schule, Oelegemer Straße 30, Herbstein · <a href={tel('06643 8010')}>06643 8010</a> · mit Ganztagsangebot</dd></div>
+        <div><dt>Weiterführende Schulen</dt><dd><span class="fehlt">[fehlt: zuständige weiterführende Schulen und Schulbus]</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="karte block">
+      <span class="kicker">Gesundheit</span>
+      <h2>Ärzte und Apotheke</h2>
+      <dl class="liste">
+        <div><dt>Hausärzte in Herbstein</dt><dd>Dr. med. (univ.) Christine Lamp, Am Scherzacker 8 · <a href={tel('06643 397')}>06643 397</a><br />Dr. med. Hartmut Roth, Alter Weg 23 · <a href={tel('06643 292')}>06643 292</a><br />Dr. med. Luise Hengst, Zum Thermalbad 1 · <a href={tel('06643 7989500')}>06643 798 950 0</a></dd></div>
+        <div><dt>Zahnarzt im Dorf</dt><dd><a href={url('wer-macht-was/')}>Zahnarztpraxis Dr. Carsten Falcke</a></dd></div>
+        <div><dt>Apotheke</dt><dd>Apotheke in Herbstein, Marktplatz 3 · <a href={tel('06643 96220')}>06643 96220</a></dd></div>
+        <div><dt>Notfall</dt><dd>Notruf <a href="tel:112">112</a> · Ärztlicher Bereitschaftsdienst <a href="tel:116117">116 117</a></dd></div>
+      </dl>
+    </div>
+
+    <div class="karte block">
+      <span class="kicker">Im Dorf</span>
+      <h2>Einkaufen und Mitmachen</h2>
+      <p>Lädchen, Metzgerei, Hofladen und Handwerker aus dem Ort stehen unter <a href={url('wer-macht-was/')}>Wer macht was</a>. Am schnellsten kommt man über die Vereine ins Gespräch – ob Feuerwehr, Sportverein, Chor oder Kirmes: Neue sind überall willkommen.</p>
+      <dl class="liste">
+        <div><dt>Vereine</dt><dd><a href={url('vereine/')}>Alle Vereine in Stockhausen</a></dd></div>
+        <div><dt>Termine</dt><dd><a href={url('termine/')}>Was ist los im Dorf</a> – auch als Kalender-Abo fürs Handy</dd></div>
+        <div><dt>Altfellhalle mieten</dt><dd>Bleichstraße 19 · <span class="fehlt">[fehlt: Ansprechperson und Bedingungen]</span></dd></div>
+        <div><dt>Friedhof</dt><dd><span class="fehlt">[fehlt: Ansprechperson bzw. Friedhofsverwaltung]</span></dd></div>
+      </dl>
+    </div>
+
+    <p class="hinweis-klein">Alle Angaben ohne Gewähr, Stand Oktober 2026. Fehlt etwas oder hat sich etwas geändert? Bitte kurz an <a href="mailto:marc@ahne.de">marc@ahne.de</a>.</p>
+  </section>
+</Basis>
+
+<style>
+  .neu { padding-block: 1rem 5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 1rem; align-items: start; }
+  .block { padding: clamp(1.25rem, 3vw, 1.75rem); }
+  .block h2 { font-size: 1.5rem; margin: 0.2rem 0 0.75rem; }
+  .block p { margin: 0 0 1rem; color: var(--text-leise); }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.5rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+  .hinweis-klein { grid-column: 1 / -1; margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--text-leise); }
+</style>
