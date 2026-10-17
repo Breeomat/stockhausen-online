@@ -66,7 +66,7 @@ export const vereinsseiten = [
     seit: 'Oldtimer-Traktoren',
     text: 'Lanz Bulldog, Hanomag, Deutz und Co.: Liebhaber historischer Landtechnik, die ihre Schlepper pflegen und bei Ausfahrten und Festen zeigen.',
     href: 'vereine/schlepperfreunde/',
-    bild: { src: schlepperFoto, nachweis: 'Foto: [fehlt: Fotograf]', position: '50% 60%' },
+    bild: { src: schlepperFoto, nachweis: 'Foto: Marc Ahne', position: '50% 60%' },
   },
   {
     name: 'Gefriergemeinschaft Stockhausen e. V.',
