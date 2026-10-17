@@ -6,11 +6,14 @@ import { url, navigation } from '../lib/site';
 interface Props {
   titel?: string;
   beschreibung?: string;
+  // Strukturierte Daten (JSON-LD) für Suchmaschinen, siehe src/lib/strukturiert.ts
+  strukturiert?: object;
 }
 
-const { titel, beschreibung = 'Neuigkeiten, Termine, Plakate und Geschichten aus Stockhausen, Ortsteil von Herbstein im Vogelsberg.' } = Astro.props;
+const { titel, strukturiert, beschreibung = 'Neuigkeiten, Termine, Plakate und Geschichten aus Stockhausen, Ortsteil von Herbstein im Vogelsberg.' } = Astro.props;
 const seitentitel = titel ? `${titel} · Stockhausen` : 'Stockhausen · Ortsteil von Herbstein';
 const aktuell = Astro.url.pathname;
+const kanonisch = new URL(aktuell, Astro.site).href;
 const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.startsWith(url(href)));
 ---
 <!doctype html>
@@ -31,6 +34,11 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
     <meta property="og:title" content={seitentitel} />
     <meta property="og:description" content={beschreibung} />
     <meta property="og:locale" content="de_DE" />
+    <meta property="og:url" content={kanonisch} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Stockhausen" />
+    <link rel="canonical" href={kanonisch} />
+    {strukturiert && <script type="application/ld+json" set:html={JSON.stringify(strukturiert)} />}
   </head>
   <body>
     <a class="springen" href="#inhalt">Zum Inhalt springen</a>

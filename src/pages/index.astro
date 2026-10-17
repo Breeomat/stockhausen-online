@@ -13,6 +13,7 @@ import { vereinsseiten } from '../lib/vereine';
 import VereinKarte from '../components/VereinKarte.astro';
 import BereichSymbol from '../components/BereichSymbol.astro';
 import { getCollection } from 'astro:content';
+import { webseite } from '../lib/strukturiert';
 
 const naechste = (await kommendeTermine()).slice(0, 4);
 const { aktuell } = await plakate();
@@ -40,7 +41,7 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
   .map((k) => ({ k, anzahl: verzeichnis.filter((e) => e.data.kategorie === k).length }))
   .filter((b) => b.anzahl > 0);
 ---
-<Basis>
+<Basis strukturiert={webseite}>
   <section class="held">
     <Image class="held__bild" src={luftbild} alt="" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
     <div class="huelle held__innen">

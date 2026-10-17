@@ -29,6 +29,8 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
 - Links immer über `url()` aus `src/lib/site.ts` (Basis-Pfad).
 - Farben/Schriften: Tokens in `src/styles/global.css`, Schriften lokal (Fontsource), keine externen Dienste.
 - Vor dem Push: `npm run build` muss fehlerfrei laufen.
+- Suchmaschinen: Sitemap automatisch (@astrojs/sitemap), `public/robots.txt`, canonical im Layout; strukturierte Daten
+  (schema.org) in `src/lib/strukturiert.ts` (Startseite: Ort, Termine: Veranstaltungen, Vereine: Organisationen).
 
 ## Domain
 Die Seite läuft unter https://stockhausen-online.de (`astro.config.mjs`: `site`, `base: '/'`; `public/CNAME`).

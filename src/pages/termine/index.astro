@@ -3,14 +3,22 @@ import Basis from '../../layouts/Basis.astro';
 import TerminKarte from '../../components/TerminKarte.astro';
 import { kommendeTermine, gruppiertNachMonat } from '../../lib/termine';
 import { url } from '../../lib/site';
+import { getImage } from 'astro:assets';
+import { plakate } from '../../lib/plakate';
+import { veranstaltungen } from '../../lib/strukturiert';
 
 const termine = await kommendeTermine();
 const vereine = [...new Set(termine.flatMap((t) => (t.data.verein ? [t.data.verein] : [])))].sort((a, b) => a.localeCompare(b, 'de'));
 const monate = gruppiertNachMonat(termine);
+// Plakatbilder als absolute Adressen für die strukturierten Daten
+const { aktuell, archiv } = await plakate();
+const plakatBilder = new Map(
+  await Promise.all([...aktuell, ...archiv].map(async (p) => [p.id, new URL((await getImage({ src: p.bild, width: Math.min(p.bild.width, 1200), format: 'jpg' })).src, Astro.site).href] as const)),
+);
 const feed = new URL(url('termine.ics'), Astro.site);
 const webcal = feed.href.replace(/^https?:/, 'webcal:');
 ---
-<Basis titel="Termine" beschreibung="Alle Termine der Vereine in Stockhausen – mit Kalender-Abo fürs Handy.">
+<Basis strukturiert={veranstaltungen(termine, (id) => (id ? plakatBilder.get(id) : undefined))} titel="Termine" beschreibung="Alle Termine der Vereine in Stockhausen – mit Kalender-Abo fürs Handy.">
   <section class="huelle seitenkopf">
     <span class="kicker">Termine</span>
     <h1>Was ist los in Stockhausen?</h1>

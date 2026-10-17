@@ -3,12 +3,13 @@ import Basis from '../../layouts/Basis.astro';
 import VereinKarte from '../../components/VereinKarte.astro';
 import { url } from '../../lib/site';
 import { vereinsseiten as vereine, weitereVereine, bildFuer } from '../../lib/vereine';
+import { vereine as vereineDaten } from '../../lib/strukturiert';
 
 const weitere = await weitereVereine();
 // Vereine mit und ohne eigene Seite gemeinsam alphabetisch
 const alle = [...vereine, ...weitere.map((name) => ({ name }))].sort((a, b) => a.name.localeCompare(b.name, 'de'));
 ---
-<Basis titel="Vereine" beschreibung="Die Vereine in Stockhausen: Ansprechpartner, Geschichte und Termine.">
+<Basis strukturiert={vereineDaten(vereine)} titel="Vereine" beschreibung="Die Vereine in Stockhausen: Ansprechpartner, Geschichte und Termine.">
   <section class="huelle seitenkopf">
     <span class="kicker">Vereine</span>
     <h1>Vereine in Stockhausen</h1>
