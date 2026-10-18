@@ -37,6 +37,13 @@ const teile = (eintrag: string) => {
   const m = eintrag.match(/^(.*?)\s*\(([^)]*)\)\s*$/);
   return m ? { wert: m[1], hinweis: m[2] } : { wert: eintrag, hinweis: undefined };
 };
+// Website-Link lesbar: Facebook/Instagram als „<Name> auf Facebook“, sonst nur die Domain
+const sozial = (web: string) => (/facebook\.com/.test(web) ? 'Facebook' : /instagram\.com/.test(web) ? 'Instagram' : null);
+const webArt = (web: string) => sozial(web) ?? 'Website';
+const webText = (web: string, name: string) => {
+  const netz = sozial(web);
+  return netz ? `${name} auf ${netz}` : new URL(web).hostname;
+};
 const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^0/, '');
 ---
 <Basis titel="Wer macht was" beschreibung="Betriebe und Einrichtungen in Stockhausen: Einkaufen, Gastronomie, Handwerk, Landwirtschaft und Dienstleistungen.">
@@ -69,7 +76,7 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
                 {e.telefon && <div><dt>Telefon</dt>{alsListe(e.telefon).map(teile).map(({ wert, hinweis }) => <dd><a href={tel(wert)}>{wert}</a>{hinweis && <small> ({hinweis})</small>}</dd>)}</div>}
                 {e.fax && <div><dt>Fax</dt><dd>{e.fax}</dd></div>}
                 {e.email && <div><dt>E-Mail</dt>{alsListe(e.email).map(teile).map(({ wert, hinweis }) => <dd><a href={`mailto:${wert}`}>{wert}</a>{hinweis && <small> ({hinweis})</small>}</dd>)}</div>}
-                {e.web && <div><dt>Website</dt><dd><a href={e.web} rel="noopener">{e.web.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a></dd></div>}
+                {e.web && <div><dt>{webArt(e.web)}</dt><dd><a href={e.web} rel="noopener">{webText(e.web, e.name)}</a></dd></div>}
               </dl>
               {e.angebot && e.angebot.bis >= heute() && <a class="knopf knopf--leise eintrag__angebot" href={url(e.angebot.datei)}>{e.angebot.titel} ansehen</a>}
               {e.bestellen && <a class="knopf eintrag__bestellen" href={e.bestellen} rel="noopener">Online bestellen</a>}
