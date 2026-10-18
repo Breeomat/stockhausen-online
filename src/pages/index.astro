@@ -35,7 +35,7 @@ const meilensteine = [
 const VEREINE_START = 4;
 const tag = Math.floor(Date.now() / 86_400_000);
 const startAuswahl = Array.from({ length: Math.min(VEREINE_START, vereinsseiten.length) }, (_, k) => (tag * VEREINE_START + k) % vereinsseiten.length);
-const bereichNamen = { Einkaufen: 'Einkaufen', Gastronomie: 'Essen und Trinken', Handwerk: 'Handwerk', Industrie: 'Industrie und Gewerbe', Landwirtschaft: 'Landwirtschaft', Gesundheit: 'Gesundheit', Dienstleistung: 'Dienstleistungen', Einrichtung: 'Einrichtungen' } as const;
+const bereichNamen = { Einkaufen: 'Einkaufen', Gastronomie: 'Essen und Trinken', Handwerk: 'Handwerk', Industrie: 'Industrie und Gewerbe', Landwirtschaft: 'Landwirtschaft', Gesundheit: 'Gesundheit', Dienstleistung: 'Dienstleistungen', Kultur: 'Kultur und Musik', Einrichtung: 'Einrichtungen' } as const;
 const verzeichnis = await getCollection('verzeichnis');
 const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
   .map((k) => ({ k, anzahl: verzeichnis.filter((e) => e.data.kategorie === k).length }))

@@ -1,6 +1,6 @@
 # Verzeichnis „Wer macht was“: Betriebe und Einrichtungen in Stockhausen. Ein Eintrag je Betrieb.
 # Pflicht: id (eindeutig, z. B. baeckerei-muster), name, kategorie, text
-# kategorie: Einkaufen | Gastronomie | Handwerk | Landwirtschaft | Dienstleistung | Einrichtung
+# kategorie: Einkaufen | Gastronomie | Handwerk | Industrie | Landwirtschaft | Gesundheit | Dienstleistung | Kultur | Einrichtung
 # Optional: adresse, telefon, fax, email, web (volle URL), zeiten (Öffnungszeiten), seite (interne Seite, z. B. dorf/gemeinschaft-altenschlirf/),
 #           bestellen (volle URL zu einem Online-Bestellformular), bild (Logo/Foto, Datei in src/assets/verzeichnis/),
 #           angebot (titel, datei in public/, bis = JJJJ-MM-TT; danach ausgeblendet) für Angebots- oder Preislisten
@@ -217,3 +217,11 @@
     - 0171 5578478 (mobil)
   fax: 06647 919008
   seite: neu-im-dorf/#altfellhalle
+- id: desert-oak
+  name: Desert Oak
+  kategorie: Kultur
+  text: >-
+    Cover- und Rockband aus Stockhausen, seit über 20 Jahren: gitarrenlastiger Rock von den 1970er-Jahren bis heute,
+    von AC/DC bis Westernhagen – live auf Kirmes, Stadtfesten und Rocknächten in der Region.
+  seite: wer-macht-was/desert-oak/
+  bild: desert-oak.jpg

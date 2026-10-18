@@ -7,7 +7,7 @@ import { url } from '../../lib/site';
 import { heute } from '../../lib/termine';
 import BereichSymbol from '../../components/BereichSymbol.astro';
 
-const reihenfolge = ['Einkaufen', 'Gastronomie', 'Handwerk', 'Industrie', 'Landwirtschaft', 'Gesundheit', 'Dienstleistung', 'Einrichtung'] as const;
+const reihenfolge = ['Einkaufen', 'Gastronomie', 'Handwerk', 'Industrie', 'Landwirtschaft', 'Gesundheit', 'Dienstleistung', 'Kultur', 'Einrichtung'] as const;
 const ueberschrift: Record<(typeof reihenfolge)[number], string> = {
   Einkaufen: 'Einkaufen',
   Gastronomie: 'Essen und Trinken',
@@ -16,6 +16,7 @@ const ueberschrift: Record<(typeof reihenfolge)[number], string> = {
   Landwirtschaft: 'Landwirtschaft',
   Gesundheit: 'Gesundheit',
   Dienstleistung: 'Dienstleistungen',
+  Kultur: 'Kultur und Musik',
   Einrichtung: 'Einrichtungen',
 };
 
