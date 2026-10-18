@@ -8,6 +8,7 @@ import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
 // Quelle: Pressetext von Desert Oak (Oktober 2026); Fotos und Logo: Desert Oak
+// Ansprechpartner Philip Hoppe: zieht ca. Ostern 2027 in die Schöne Aussicht 8 – Adresse dann anpassen (auch verzeichnis.yaml)
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Desert Oak'));
 
 const kacheln = [
@@ -64,7 +65,7 @@ const besetzung = [
         <h3>Kontakt und Termine</h3>
         <p>Aktuelle Auftritte stehen auf der <a href="https://www.facebook.com/share/1C8ZBgQo2v/" rel="noopener">Facebook-Seite</a> der Band.</p>
         <dl class="liste">
-          <div><dt>Booking</dt><dd><span class="fehlt">[fehlt: Ansprechperson, E-Mail oder Telefon]</span></dd></div>
+          <div><dt>Anfragen und Booking</dt><dd><span class="eintrag"><span class="eintrag__name">Philip Hoppe</span><span class="eintrag__info">Kehrweg 20, Stockhausen</span><span class="eintrag__tel">Tel. <a href="tel:+4915165170486">0151 65170486</a></span></span></dd></div>
           <div><dt>Facebook</dt><dd><a href="https://www.facebook.com/share/1C8ZBgQo2v/" rel="noopener">Desert Oak auf Facebook</a></dd></div>
         </dl>
       </aside>
@@ -114,5 +115,9 @@ const besetzung = [
   .liste div:last-child { border-bottom: 0; }
   .liste dt { font-size: 0.8rem; color: var(--text-leise); }
   .liste dd { margin: 0; font-weight: 600; }
+  .eintrag { display: block; }
+  .eintrag__name { display: block; }
+  .eintrag__info { display: block; font-weight: 400; color: var(--text-leise); }
+  .eintrag__tel { display: block; white-space: nowrap; }
   .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
 </style>
