@@ -1,5 +1,4 @@
 import { aktion, aktionLaeuft, baustelle, baustelleAktiv } from './enso';
-import { heute } from './termine';
 
 // Kacheln für „Aktuelles“ (Startseite und /aktuelles/). Nur Einträge mit aktiv() === true erscheinen.
 // ton: 'warnung' (gelb, z. B. Baustelle) oder 'info' (Ziegelton)
@@ -26,16 +25,6 @@ export const meldungen: Meldung[] = [
     linkText: 'Stand und Infos',
     ton: 'info',
     aktiv: () => true,
-  },
-  {
-    marke: 'Rückblick',
-    titel: 'Erntedank im Stall',
-    text: 'Ein Stall voller Menschen und eine Maus, die die Predigt hält: Der Erntedankgottesdienst mit dem Kindergarten Storchennest war gut besucht und endete am Kartoffelfeuer.',
-    href: 'aktuelles/erntedank-2026/',
-    linkText: 'Bericht und Fotos',
-    ton: 'info',
-    aktiv: () => heute() <= '2026-11-15',
-    datum: '2026-10-18',
   },
 ];
 
