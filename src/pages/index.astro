@@ -58,6 +58,7 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
         <span class="kicker">Aktuelles</span>
         <h2>Was gerade wichtig ist</h2>
         <AktuellesKarten />
+        <p class="rueckblick-link"><a href={url('aktuelles/rueckblick/')}>Rückblick: frühere Meldungen, Berichte und Fotos →</a></p>
       </div>
     </section>
   )}
@@ -211,6 +212,7 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
   .abschnitt--direkt { padding-top: 1rem; }
   .aktuelles-start { padding-bottom: 1.5rem; }
   .aktuelles-start h2 { margin-bottom: 1.25rem; }
+  .rueckblick-link { margin: 1.25rem 0 0; font-weight: 600; }
 
   .raster-termine { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1rem; }
 

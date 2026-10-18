@@ -1,14 +1,11 @@
 ---
-import { Image } from 'astro:assets';
 import Basis from '../../layouts/Basis.astro';
 import AktuellesKarten from '../../components/AktuellesKarten.astro';
 import { aktuelleMeldungen } from '../../lib/aktuelles';
-import { rueckblicke } from '../../lib/rueckblicke';
 import { url } from '../../lib/site';
 
-const datumLang = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${iso}T12:00:00`));
 ---
-<Basis titel="Aktuelles" beschreibung="Was gerade wichtig ist in Stockhausen: Baustelle Ortsdurchfahrt, Tante Enso, Neuigkeiten und Rückblicke mit Fotos.">
+<Basis titel="Aktuelles" beschreibung="Was gerade wichtig ist in Stockhausen: Baustelle Ortsdurchfahrt, Tante Enso, Neuigkeiten und Rückblick.">
   <section class="huelle seitenkopf">
     <span class="kicker">Aktuelles</span>
     <h1>Was gerade wichtig ist</h1>
@@ -17,40 +14,11 @@ const datumLang = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'nume
   <section class="huelle aktuelles-seite">
     {aktuelleMeldungen().length > 0 ? <AktuellesKarten /> : <div class="leer"><strong>Gerade gibt es nichts Neues.</strong> Schauen Sie bald wieder vorbei.</div>}
 
-    {rueckblicke.length > 0 && (
-      <div class="rueckblicke">
-        <span class="kicker">Rückblicke</span>
-        <h2>Berichte und Fotos aus dem Dorf</h2>
-        <ul class="rueckblicke__liste">
-          {rueckblicke.map((r) => (
-            <li>
-              <a class="karte rueckblick" href={url(r.href)}>
-                {r.bild && <Image class="rueckblick__bild" src={r.bild.src} alt={r.bild.alt} widths={[480, 720]} sizes="(max-width: 760px) calc(100vw - 32px), 380px" />}
-                <div class="rueckblick__text">
-                  <time datetime={r.datum}>{datumLang(r.datum)}</time>
-                  <h3>{r.titel}</h3>
-                  <p>{r.text}</p>
-                  <span class="rueckblick__pfeil">Bericht lesen →</span>
-                </div>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
+    <p class="rueckblick-link"><a href={url('aktuelles/rueckblick/')}>Rückblick: frühere Meldungen, Berichte und Fotos →</a></p>
   </section>
 </Basis>
 
 <style>
   .aktuelles-seite { padding-bottom: 5rem; }
-  .rueckblicke { margin-top: 4rem; }
-  .rueckblicke__liste { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 1rem; }
-  .rueckblick { display: flex; flex-direction: column; height: 100%; overflow: hidden; text-decoration: none; color: var(--text); transition: transform 0.2s ease; }
-  .rueckblick:hover { transform: translateY(-3px); color: var(--text); }
-  .rueckblick__bild { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
-  .rueckblick__text { display: flex; flex-direction: column; gap: 0.4rem; padding: 1.25rem 1.5rem 1.5rem; flex: 1; }
-  .rueckblick time { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ziegel); }
-  .rueckblick h3 { margin: 0; font-size: 1.3rem; }
-  .rueckblick p { margin: 0; color: var(--text-leise); }
-  .rueckblick__pfeil { margin-top: auto; padding-top: 0.5rem; font-weight: 600; color: var(--ziegel); }
+  .rueckblick-link { margin: 2rem 0 0; font-weight: 600; }
 </style>

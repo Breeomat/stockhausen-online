@@ -3,7 +3,9 @@ import { heute } from './termine';
 
 // Kacheln für „Aktuelles“ (Startseite und /aktuelles/). Nur Einträge mit aktiv() === true erscheinen.
 // ton: 'warnung' (gelb, z. B. Baustelle) oder 'info' (Ziegelton)
-export interface Meldung { marke: string; titel: string; text: string; href: string; linkText: string; ton: 'warnung' | 'info'; aktiv: () => boolean }
+// Abgelaufene Meldungen (aktiv() === false) erscheinen automatisch im Rückblick (/aktuelles/rueckblick/);
+// datum (JJJJ-MM-TT) bestimmt dort die Reihenfolge.
+export interface Meldung { marke: string; titel: string; text: string; href: string; linkText: string; ton: 'warnung' | 'info'; aktiv: () => boolean; datum?: string }
 
 export const meldungen: Meldung[] = [
   {
@@ -14,6 +16,7 @@ export const meldungen: Meldung[] = [
     linkText: 'Umleitungen und Infos',
     ton: 'warnung',
     aktiv: baustelleAktiv,
+    datum: baustelle.bis ?? undefined,
   },
   {
     marke: 'Tante Enso',
@@ -32,7 +35,9 @@ export const meldungen: Meldung[] = [
     linkText: 'Bericht und Fotos',
     ton: 'info',
     aktiv: () => heute() <= '2026-11-15',
+    datum: '2026-10-18',
   },
 ];
 
 export const aktuelleMeldungen = () => meldungen.filter((m) => m.aktiv());
+export const abgelaufeneMeldungen = () => meldungen.filter((m) => !m.aktiv());

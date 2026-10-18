@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import { alleRueckblicke } from '../../../lib/rueckblicke';
+import { url } from '../../../lib/site';
+
+const liste = alleRueckblicke();
+const datumLang = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${iso}T12:00:00`));
+---
+<Basis titel="Rückblick" beschreibung="Rückblick auf Stockhausen: Berichte mit Fotos und frühere Meldungen aus dem Dorf.">
+  <section class="huelle seitenkopf">
+    <a class="zurueck" href={url('aktuelles/')}>← Aktuelles</a>
+    <span class="kicker">Rückblick</span>
+    <h1>Was im Dorf passiert ist</h1>
+    <p>Berichte und Fotos von Festen und Veranstaltungen – und frühere Meldungen aus „Aktuelles“.</p>
+  </section>
+
+  <section class="huelle rueckblick-seite">
+    {liste.length > 0 ? (
+      <ul class="liste">
+        {liste.map((r) => (
+          <li>
+            <a class="karte eintrag" href={url(r.href)}>
+              {r.bild && <Image class="eintrag__bild" src={r.bild.src} alt={r.bild.alt} widths={[480, 720]} sizes="(max-width: 760px) calc(100vw - 32px), 380px" />}
+              <div class="eintrag__text">
+                <span class="eintrag__kopf">{[r.marke, r.datum ? datumLang(r.datum) : null].filter(Boolean).join(' · ')}</span>
+                <h2>{r.titel}</h2>
+                <p>{r.text}</p>
+                <span class="eintrag__pfeil">{r.bild ? 'Bericht lesen' : 'Mehr dazu'} →</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="leer"><strong>Noch keine Rückblicke.</strong> Hier erscheinen Berichte und frühere Meldungen.</div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .rueckblick-seite { padding-block: 1rem 5rem; }
+  .liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 1rem; }
+  .eintrag { display: flex; flex-direction: column; height: 100%; overflow: hidden; text-decoration: none; color: var(--text); transition: transform 0.2s ease; }
+  .eintrag:hover { transform: translateY(-3px); color: var(--text); }
+  .eintrag__bild { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .eintrag__text { display: flex; flex-direction: column; gap: 0.4rem; padding: 1.25rem 1.5rem 1.5rem; flex: 1; }
+  .eintrag__kopf { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ziegel); }
+  .eintrag h2 { margin: 0; font-size: 1.3rem; }
+  .eintrag p { margin: 0; color: var(--text-leise); }
+  .eintrag__pfeil { margin-top: auto; padding-top: 0.5rem; font-weight: 600; color: var(--ziegel); }
+</style>

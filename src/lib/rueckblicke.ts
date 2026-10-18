@@ -1,9 +1,10 @@
 import type { ImageMetadata } from 'astro';
 import erntedank2026 from '../assets/fotos/erntedank-2026-stall.jpg';
+import { abgelaufeneMeldungen } from './aktuelles';
 
-// Rückblicke (Berichte mit Fotos) für die Liste unter /aktuelles/. Neue Berichte als eigene Seite unter
-// src/pages/aktuelles/<name>/ anlegen und hier eintragen; die Liste wird nach Datum sortiert (neueste zuerst).
-export interface Rueckblick { titel: string; datum: string; text: string; href: string; bild?: { src: ImageMetadata; alt: string } }
+// Rückblick (/aktuelles/rueckblick/): Berichte mit Fotos und abgelaufene Meldungen aus „Aktuelles“.
+// Neue Berichte als eigene Seite unter src/pages/aktuelles/<name>/ anlegen und hier eintragen.
+export interface Rueckblick { titel: string; datum?: string; marke?: string; text: string; href: string; bild?: { src: ImageMetadata; alt: string } }
 
 export const rueckblicke: Rueckblick[] = [
   {
@@ -13,4 +14,13 @@ export const rueckblicke: Rueckblick[] = [
     href: 'aktuelles/erntedank-2026/',
     bild: { src: erntedank2026, alt: 'Voll besetzter Stall beim Erntedankgottesdienst' },
   },
-].sort((a, b) => b.datum.localeCompare(a.datum));
+];
+
+// Alles für den Rückblick, neueste zuerst; eine abgelaufene Meldung, die schon als Bericht drinsteht, nur einmal
+export function alleRueckblicke(): Rueckblick[] {
+  const berichte = new Set(rueckblicke.map((r) => r.href));
+  const alteMeldungen = abgelaufeneMeldungen()
+    .filter((m) => !berichte.has(m.href))
+    .map((m) => ({ titel: m.titel, datum: m.datum, marke: m.marke, text: m.text, href: m.href }));
+  return [...rueckblicke, ...alteMeldungen].sort((a, b) => (b.datum ?? '').localeCompare(a.datum ?? ''));
+}
