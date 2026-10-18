@@ -1,11 +1,12 @@
 ---
-// Große Kacheln für „Aktuelles“
+// Große Kacheln für „Aktuelles“, am Ende immer die Kachel zum Rückblick (mit dem neuesten Eintrag)
 import { aktuelleMeldungen } from '../lib/aktuelles';
+import { alleRueckblicke } from '../lib/rueckblicke';
 import { url } from '../lib/site';
 const liste = aktuelleMeldungen();
+const neuester = alleRueckblicke()[0];
 ---
-{liste.length > 0 && (
-  <div class="aktuelles">
+<div class="aktuelles">
     {liste.map((m) => (
       <a class:list={['karte meldung', `meldung--${m.ton}`]} href={url(m.href)}>
         <span class="meldung__marke">{m.marke}</span>
@@ -14,8 +15,13 @@ const liste = aktuelleMeldungen();
         <span class="meldung__pfeil">{m.linkText} →</span>
       </a>
     ))}
-  </div>
-)}
+    <a class="karte meldung meldung--rueckblick" href={url('aktuelles/rueckblick/')}>
+      <span class="meldung__marke">Rückblick</span>
+      <h3>Berichte und Fotos aus dem Dorf</h3>
+      <p>{neuester ? `Zuletzt: ${neuester.titel}. Was war los bei Festen und Veranstaltungen in Stockhausen?` : 'Was war los bei Festen und Veranstaltungen in Stockhausen?'}</p>
+      <span class="meldung__pfeil">Zum Rückblick →</span>
+    </a>
+</div>
 
 <style>
   .aktuelles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1rem; }
@@ -32,4 +38,7 @@ const liste = aktuelleMeldungen();
   .meldung--info { background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 30%, transparent); }
   .meldung--info .meldung__marke { background: var(--ziegel); color: #fff; }
   .meldung--info .meldung__pfeil { color: var(--ziegel); }
+  .meldung--rueckblick { background: var(--flaeche); }
+  .meldung--rueckblick .meldung__marke { background: var(--meer); color: var(--bg); }
+  .meldung--rueckblick .meldung__pfeil { color: var(--meer); }
 </style>

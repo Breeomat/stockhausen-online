@@ -1,8 +1,6 @@
 ---
 import Basis from '../../layouts/Basis.astro';
 import AktuellesKarten from '../../components/AktuellesKarten.astro';
-import { aktuelleMeldungen } from '../../lib/aktuelles';
-import { url } from '../../lib/site';
 
 ---
 <Basis titel="Aktuelles" beschreibung="Was gerade wichtig ist in Stockhausen: Baustelle Ortsdurchfahrt, Tante Enso, Neuigkeiten und Rückblick.">
@@ -12,13 +10,11 @@ import { url } from '../../lib/site';
     <p>Neuigkeiten aus dem Dorf auf einen Blick.</p>
   </section>
   <section class="huelle aktuelles-seite">
-    {aktuelleMeldungen().length > 0 ? <AktuellesKarten /> : <div class="leer"><strong>Gerade gibt es nichts Neues.</strong> Schauen Sie bald wieder vorbei.</div>}
+    <AktuellesKarten />
 
-    <p class="rueckblick-link"><a href={url('aktuelles/rueckblick/')}>Rückblick: Berichte und Fotos aus dem Dorf →</a></p>
   </section>
 </Basis>
 
 <style>
   .aktuelles-seite { padding-bottom: 5rem; }
-  .rueckblick-link { margin: 2rem 0 0; font-weight: 600; }
 </style>

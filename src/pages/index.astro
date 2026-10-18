@@ -55,13 +55,8 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
   <section class="abschnitt aktuelles-start">
     <div class="huelle">
       <span class="kicker">Aktuelles</span>
-      {aktuelleMeldungen().length > 0 && (
-        <>
-          <h2>Was gerade wichtig ist</h2>
-          <AktuellesKarten />
-        </>
-      )}
-      <p class="rueckblick-link"><a href={url('aktuelles/rueckblick/')}>Rückblick: Berichte und Fotos aus dem Dorf →</a></p>
+      <h2>{aktuelleMeldungen().length > 0 ? 'Was gerade wichtig ist' : 'Neues und Rückblick'}</h2>
+      <AktuellesKarten />
     </div>
   </section>
 
@@ -214,7 +209,6 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
   .abschnitt--direkt { padding-top: 1rem; }
   .aktuelles-start { padding-bottom: 1.5rem; }
   .aktuelles-start h2 { margin-bottom: 1.25rem; }
-  .rueckblick-link { margin: 1.25rem 0 0; font-weight: 600; }
 
   .raster-termine { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1rem; }
 
