@@ -5,6 +5,8 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
 
 ## Inhalte pflegen
 - Aktuelles (Kacheln Startseite und /aktuelles/): `src/lib/aktuelles.ts`, Baustelle und Tante-Enso-Zahlen in `src/lib/enso.ts`.
+- Rückblicke (Berichte mit Fotos): eigene Seite unter `src/pages/aktuelles/<name>/`, Eintrag in `src/lib/rueckblicke.ts`
+  (Liste unter /aktuelles/, bleibt dauerhaft); dazu eine befristete Kachel in `aktuelles.ts` für die Startseite.
 - Termine: `src/content/termine.yaml` (Felder siehe Kommentar in der Datei). Vergangene Termine fallen automatisch weg.
 - Plakate: Bild nach `src/assets/plakate/`, Eintrag in `src/content/plakate.yaml`. Nach `gueltig_bis` → Archiv.
 - Bilder/Plakate liefert der Betreiber über Google Drive, Ordner „Stockhausen-Webseite“:
