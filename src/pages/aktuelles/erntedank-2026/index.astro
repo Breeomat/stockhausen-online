@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import stallFoto from '../../../assets/fotos/erntedank-2026-stall.jpg';
+import predigtFoto from '../../../assets/fotos/erntedank-2026-predigt.jpg';
+import { url } from '../../../lib/site';
+
+// Quelle: Beitrag der Ev. Kirchengemeinde Stockhausen-Rixfeld (Facebook, 18.10.2026), Fotos der Kirchengemeinde
+---
+<Basis bild={stallFoto} titel="Rückblick: Erntedank im Stall" beschreibung="Erntedankgottesdienst im Stall am 18. Oktober 2026 mit dem Ev. Kindergarten Storchennest – Rückblick mit Fotos.">
+  <article class="huelle bericht">
+    <a class="zurueck" href={url('aktuelles/')}>← Aktuelles</a>
+    <span class="kicker">Rückblick · 18. Oktober 2026</span>
+    <h1>Ein Stall voller Menschen</h1>
+    <p class="vorspann">Zum Erntedankgottesdienst im Stall kamen zahlreiche Besucherinnen und Besucher. Gestaltet wurde er von der Ev. Kirchengemeinde Stockhausen-Rixfeld gemeinsam mit dem Ev. Kindergarten „Storchennest“ Stockhausen.</p>
+
+    <figure class="bild-gross">
+      <Image src={stallFoto} alt="Voll besetzter Stall mit Holzdach: Gottesdienstbesucher auf Bänken, vorne Strohballen und Erntegaben" widths={[640, 960]} sizes="(max-width: 860px) calc(100vw - 32px), 820px" loading="eager" />
+      <figcaption>Gut besucht: der Erntedankgottesdienst im Stall · Foto: Ev. Kirchengemeinde Stockhausen-Rixfeld</figcaption>
+    </figure>
+
+    <p>„Ein Stall voller Menschen – und eine Maus, die die Predigt hält“, so fasst die Kirchengemeinde den Gottesdienst zusammen. Vor Strohballen, Erntekörben und einem alten Wagenrad feierten Groß und Klein gemeinsam Erntedank.</p>
+
+    <figure class="bild-gross">
+      <Image src={predigtFoto} alt="Der Pfarrer im Talar vor Strohballen mit Erntegaben, im Vordergrund Kinder auf Strohballen" widths={[640, 960]} sizes="(max-width: 860px) calc(100vw - 32px), 820px" />
+      <figcaption>Predigt mit tierischer Unterstützung · Foto: Ev. Kirchengemeinde Stockhausen-Rixfeld</figcaption>
+    </figure>
+
+    <p>Im Anschluss klang der besondere Tag bei einem gemütlichen Kartoffelfeuer aus.</p>
+
+    <p class="mehr"><a href={url('vereine/kirchengemeinde/')}>Mehr über die Ev. Kirchengemeinde Stockhausen-Rixfeld →</a></p>
+  </article>
+</Basis>
+
+<style>
+  .bericht { padding-block: clamp(2.5rem, 6vw, 4rem) 5rem; max-width: 860px; }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .vorspann { font-size: 1.2rem; color: var(--text-leise); }
+  .bericht p { max-width: 68ch; line-height: 1.7; }
+  .bild-gross { margin: 2rem 0; }
+  .bild-gross img { width: 100%; height: auto; border-radius: var(--radius, 12px); }
+  .bild-gross figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-leise); }
+  .mehr { margin-top: 2rem; font-weight: 600; }
+</style>
