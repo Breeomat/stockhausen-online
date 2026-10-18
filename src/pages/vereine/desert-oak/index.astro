@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import bandFoto from '../../../assets/fotos/desert-oak-band.jpg';
+import logo from '../../../assets/fotos/desert-oak-logo.jpg';
+import TerminKarte from '../../../components/TerminKarte.astro';
+import { kommendeTermine } from '../../../lib/termine';
+import { url } from '../../../lib/site';
+
+// Quelle: Angaben des Betreibers (Oktober 2026); Fotos und Logo: Desert Oak
+const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Desert Oak'));
+
+const repertoire = [
+  { titel: 'Rock-Klassiker', text: 'AC/DC, Deep Purple, Billy Idol, Melissa Etheridge – gitarrenlastiger Rock von den 1970er-Jahren bis heute.' },
+  { titel: 'Party und Mitsingen', text: 'Hits zum Mitsingen, etwa von Bryan Adams, Pink, den Toten Hosen oder Westernhagen.' },
+  { titel: 'Live in der Region', text: 'Regelmäßig auf Kirmes- und Stadtfesten sowie bei Rocknächten im Vogelsberg und drumherum.' },
+];
+---
+<Basis bild={bandFoto} titel="Desert Oak" beschreibung="Desert Oak: Cover- und Rockband aus Stockhausen – seit über 20 Jahren live auf Kirmes, Stadtfesten und Rocknächten in der Region.">
+  <section class="do-held">
+    <Image class="do-held__bild" src={bandFoto} alt="" widths={[640, 1024, 1170]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="huelle do-kopf">
+      <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
+      <span class="kicker">Rockband · seit über 20 Jahren</span>
+      <h1>Desert Oak</h1>
+      <p>Cover- und Rockband aus Stockhausen: gitarrenlastiger Rock von den 1970er-Jahren bis heute, live auf Kirmes, Stadtfesten und Rocknächten in der Region.</p>
+    </div>
+    <span class="do-held__foto">Foto: Desert Oak</span>
+  </section>
+
+  <section class="huelle do">
+    <ul class="kacheln">
+      {repertoire.map(({ titel, text }) => <li class="karte"><h3>{titel}</h3><p>{text}</p></li>)}
+    </ul>
+
+    <div class="spalten">
+      <div class="text">
+        <span class="kicker">Über die Band</span>
+        <h2>Rock aus dem Dorf</h2>
+        <p>Desert Oak gibt es seit über 20 Jahren – das Jubiläum wurde unter anderem 2023 gefeiert. Der Bandname geht auf den Song „Beds Are Burning“ der australischen Band Midnight Oil zurück.</p>
+        <p>Durch das Programm führen die beiden Frontstimmen Inga (Inga Lenzer aus Michelbach) und Casi. Das Repertoire reicht von Rock-Klassikern bis zu Party- und Mitsing-Hits.</p>
+      </div>
+      <aside class="karte kasten">
+        <Image class="logo" src={logo} alt="Logo von Desert Oak: weißer Baum in einem Kreis aus Stacheldraht, darüber der Schriftzug in gebrochener Schrift" width={360} />
+        <h3>Kontakt und Termine</h3>
+        <p>Aktuelle Auftritte stehen auf der Facebook-Seite der Band.</p>
+        <dl class="liste">
+          <div><dt>Booking</dt><dd><span class="fehlt">[fehlt: Ansprechperson, E-Mail oder Telefon]</span></dd></div>
+          <div><dt>Facebook</dt><dd><span class="fehlt">[fehlt: Link zur Facebook-Seite]</span></dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    {termine.length > 0 && (
+      <div>
+        <span class="kicker">Termine</span>
+        <h2>Demnächst</h2>
+        <div class="termine">{termine.map((t) => <TerminKarte termin={t} />)}</div>
+      </div>
+    )}
+  </section>
+</Basis>
+
+<style>
+  .do-held { position: relative; isolation: isolate; overflow: hidden; margin-bottom: 2.5rem; color: #fff; }
+  .do-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; z-index: -2; }
+  .do-held::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(12 18 24 / 0.88) 0%, rgb(12 18 24 / 0.65) 50%, rgb(12 18 24 / 0.15) 100%); }
+  .do-held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
+  .do-kopf { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .do-kopf h1 { color: #fff; text-shadow: 0 2px 20px rgb(0 0 0 / 0.35); }
+  .do-kopf p { font-size: 1.15rem; max-width: 52ch; color: #eef3f6; text-shadow: 0 1px 10px rgb(0 0 0 / 0.4); }
+  .do-kopf .kicker { color: var(--gold); }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; color: #fff; }
+  .do { padding-block: 0 5rem; display: grid; gap: 3.5rem; }
+  .kacheln { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 1rem; }
+  .kacheln li { padding: 1.25rem 1.5rem; border-top: 4px solid var(--ziegel); }
+  .kacheln h3 { margin: 0 0 0.4rem; font-size: 1.2rem; }
+  .kacheln p { margin: 0; color: var(--text-leise); }
+  .spalten { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
+  .text p { max-width: 68ch; line-height: 1.7; }
+  .kasten { padding: 1.5rem; }
+  .kasten h3 { margin: 1rem 0 0.5rem; }
+  .kasten p { margin: 0 0 0.75rem; color: var(--text-leise); }
+  .logo { display: block; width: 100%; height: auto; border-radius: 8px; }
+  .liste { margin: 0; display: grid; }
+  .liste div { padding: 0.6rem 0; border-bottom: 1px solid var(--linie); }
+  .liste div:last-child { border-bottom: 0; }
+  .liste dt { font-size: 0.8rem; color: var(--text-leise); }
+  .liste dd { margin: 0; font-weight: 600; }
+  .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+</style>

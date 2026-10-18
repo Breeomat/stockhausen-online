@@ -13,6 +13,7 @@ import kirchgemeindeFoto from '../assets/fotos/kirche-stockhausen-aussen.jpg';
 import kirmesFoto from '../assets/fotos/kirmesburschen-gruppe.jpg';
 import schuetzenFoto from '../assets/fotos/schuetzenhaus-luftbild.jpg';
 import schlepperFoto from '../assets/fotos/schlepperfreunde.jpg';
+import desertOakFoto from '../assets/fotos/desert-oak-band.jpg';
 import gesangFoto from '../assets/fotos/gesangverein-daemmerschoppen.jpg';
 
 // Vereine mit eigener Seite. Weitere Vereine erscheinen automatisch, sobald sie Termine eingetragen haben.
@@ -83,6 +84,14 @@ export const vereinsseiten = [
     text: 'Streuobstwiesen, Baumschnittkurse, Keltern im Herbst und ein grünes Dorfbild.',
     href: 'vereine/obst-und-gartenbauverein/',
     bild: { src: maibaumFoto, nachweis: 'Foto: Marc Ahne', position: '50% 30%' },
+  },
+  {
+    name: 'Desert Oak',
+    kurz: 'Desert Oak',
+    seit: 'Rockband · seit über 20 Jahren',
+    text: 'Cover- und Rockband aus Stockhausen: von AC/DC bis Westernhagen, live auf Kirmes, Stadtfesten und Rocknächten.',
+    href: 'vereine/desert-oak/',
+    bild: { src: desertOakFoto, nachweis: 'Foto: Desert Oak', position: '50% 30%' },
   },
   {
     name: 'Gesangverein „Germania“ Stockhausen',
