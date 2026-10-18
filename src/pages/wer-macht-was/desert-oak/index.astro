@@ -7,38 +7,57 @@ import TerminKarte from '../../../components/TerminKarte.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
-// Quelle: Angaben des Betreibers (Oktober 2026); Fotos und Logo: Desert Oak
+// Quelle: Pressetext von Desert Oak (Oktober 2026); Fotos und Logo: Desert Oak
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Desert Oak'));
 
-const repertoire = [
-  { titel: 'Rock-Klassiker', text: 'AC/DC, Deep Purple, Billy Idol, Melissa Etheridge – gitarrenlastiger Rock von den 1970er-Jahren bis heute.' },
-  { titel: 'Party und Mitsingen', text: 'Hits zum Mitsingen, etwa von Bryan Adams, Pink, den Toten Hosen oder Westernhagen.' },
-  { titel: 'Live in der Region', text: 'Regelmäßig auf Kirmes- und Stadtfesten sowie bei Rocknächten im Vogelsberg und drumherum.' },
+const kacheln = [
+  { titel: 'Von AC/DC bis Linkin Park', text: 'Rockklassiker und neuere Songs von den 1970ern bis heute – von AC/DC über Die Toten Hosen und Metallica bis Pink, Volbeat und Linkin Park.' },
+  { titel: 'Unterwegs in der Region', text: 'Seit über 20 Jahren auf Veranstaltungen rund um den Vogelsberg – von der Rhön bis nach Limburg.' },
+  { titel: 'Der Name', text: 'Er stammt aus dem Song „Beds Are Burning“ der australischen Rockband Midnight Oil – damit war die Richtung vorgegeben.' },
+];
+
+const besetzung = [
+  { name: 'Carsten „Casi“ Schwarz', rolle: 'Gesang', seit: 'seit der Gründung' },
+  { name: 'Inga Lenzer', rolle: 'Gesang', seit: 'seit 2022, aus Michelbach' },
+  { name: 'Carsten Biermann', rolle: 'Gitarre', seit: 'seit der Gründung' },
+  { name: 'Philip Hoppe', rolle: 'Gitarre', seit: 'seit 2005' },
+  { name: 'Konstantin „Gustav“ Metzker', rolle: 'Bass', seit: 'seit der Gründung' },
+  { name: 'Tobias Haas', rolle: 'Schlagzeug', seit: 'seit 2015, aus Breungeshain' },
+  { name: 'Bernd Muth', rolle: 'Keyboard, Gitarre, Geige und Technik', seit: 'seit der Gründung' },
 ];
 ---
-<Basis bild={bandFoto} titel="Desert Oak" beschreibung="Desert Oak: Cover- und Rockband aus Stockhausen – seit über 20 Jahren live auf Kirmes, Stadtfesten und Rocknächten in der Region.">
+<Basis bild={bandFoto} titel="Desert Oak" beschreibung="Desert Oak: Rock aus Stockhausen seit 2004 – sieben Musiker, Rockklassiker und neuere Songs, live von der Rhön bis Limburg.">
   <section class="do-held">
     <Image class="do-held__bild" src={bandFoto} alt="" widths={[640, 1024, 1170]} sizes="100vw" loading="eager" fetchpriority="high" />
     <div class="huelle do-kopf">
       <a class="zurueck" href={url('wer-macht-was/')}>← Wer macht was</a>
-      <span class="kicker">Rockband · seit über 20 Jahren</span>
+      <span class="kicker">Rockband · seit 2004</span>
       <h1>Desert Oak</h1>
-      <p>Cover- und Rockband aus Stockhausen: gitarrenlastiger Rock von den 1970er-Jahren bis heute, live auf Kirmes, Stadtfesten und Rocknächten in der Region.</p>
+      <p>Rock aus Stockhausen mit ordentlich Dampf: handgemachte Musik, jede Menge Spielfreude und eine bunte Mischung aus Rockklassikern und neueren Songs.</p>
     </div>
     <span class="do-held__foto">Foto: Desert Oak</span>
   </section>
 
   <section class="huelle do">
     <ul class="kacheln">
-      {repertoire.map(({ titel, text }) => <li class="karte"><h3>{titel}</h3><p>{text}</p></li>)}
+      {kacheln.map(({ titel, text }) => <li class="karte"><h3>{titel}</h3><p>{text}</p></li>)}
     </ul>
 
     <div class="spalten">
       <div class="text">
-        <span class="kicker">Über die Band</span>
-        <h2>Rock aus dem Dorf</h2>
-        <p>Desert Oak gibt es seit über 20 Jahren – das Jubiläum wurde unter anderem 2023 gefeiert. Der Bandname geht auf den Song „Beds Are Burning“ der australischen Band Midnight Oil zurück.</p>
-        <p>Durch das Programm führen die beiden Frontstimmen Inga (Inga Lenzer aus Michelbach) und Casi. Das Repertoire reicht von Rock-Klassikern bis zu Party- und Mitsing-Hits.</p>
+        <span class="kicker">Besetzung</span>
+        <h2>Sieben Musiker, ein Sound</h2>
+        <p>„Und manchmal sieben Meinungen“, sagt die Band selbst. Vier der sieben sind seit der Gründung 2004 dabei.</p>
+        <ul class="besetzung">
+          {besetzung.map(({ name, rolle, seit }) => (
+            <li><span class="besetzung__name">{name}</span><span class="besetzung__rolle">{rolle}</span><span class="besetzung__seit">{seit}</span></li>
+          ))}
+        </ul>
+
+        <span class="kicker abstand">Proberaum</span>
+        <h2>Hauptquartier: ein alter Stall</h2>
+        <p>Geprobt wird im Steinweg in Stockhausen, bei Bassist Gustav. Den alten Stall im Erdgeschoss seines Fachwerkhauses hat er komplett kernsaniert und zum Proberaum umgebaut. Wo früher vermutlich ganz andere Geräusche zu hören waren, gibt es heute Gitarrenriffs, Schlagzeugbeats – und gelegentlich Diskussionen darüber, wie ein Song eigentlich richtig gespielt wird.</p>
+        <p class="zitat">„Desert Oak – sieben Leute, jede Menge Rock und immer bereit für den nächsten Auftritt. Wir sehen uns vor der Bühne!“</p>
       </div>
       <aside class="karte kasten">
         <Image class="logo" src={logo} alt="Logo von Desert Oak: weißer Baum in einem Kreis aus Stacheldraht, darüber der Schriftzug in gebrochener Schrift" width={360} />
@@ -79,6 +98,13 @@ const repertoire = [
   .spalten { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 3rem; align-items: start; }
   @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
   .text p { max-width: 68ch; line-height: 1.7; }
+  .abstand { display: block; margin-top: 3rem; }
+  .besetzung { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 0.75rem; }
+  .besetzung li { padding: 0.9rem 1rem; border: 1px solid var(--linie); border-radius: 10px; background: var(--flaeche); display: flex; flex-direction: column; gap: 0.15rem; }
+  .besetzung__name { font-weight: 600; }
+  .besetzung__rolle { color: var(--ziegel); font-size: 0.92rem; font-weight: 600; }
+  .besetzung__seit { color: var(--text-leise); font-size: 0.88rem; }
+  .zitat { font-family: var(--serif); font-size: 1.25rem; color: var(--meer); margin-top: 1.5rem; }
   .kasten { padding: 1.5rem; }
   .kasten h3 { margin: 1rem 0 0.5rem; }
   .kasten p { margin: 0 0 0.75rem; color: var(--text-leise); }
