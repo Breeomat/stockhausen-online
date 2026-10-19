@@ -112,13 +112,14 @@
   ende: "12:00"
   ort: Feuerwehrhaus
   verein: Freiwillige Feuerwehr Stockhausen e.V.
-- id: 2026-10-20-ffw-gruppenuebung-loescheinsatz
+- id: 2026-10-27-ffw-gruppenuebung-loescheinsatz
   titel: "Gruppenübung – Löscheinsatz"
-  datum: 2026-10-20
+  datum: 2026-10-27
   beginn: "19:30"
   ende: "21:30"
   ort: Feuerwehrhaus
   verein: Freiwillige Feuerwehr Stockhausen e.V.
+  text: Verschoben vom 20. Oktober.
 - id: 2026-11-05-ffw-gruppenuebung-objektkunde
   titel: "Gruppenübung – Objektkunde"
   datum: 2026-11-05
