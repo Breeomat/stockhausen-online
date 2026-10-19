@@ -118,6 +118,14 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
           <li><a class="wmw__alle" href={url('wer-macht-was/')}>Zum Verzeichnis →</a></li>
         </ul>
       </div>
+      <a class="karte neu-banner" href={url('neu-im-dorf/')}>
+        <span class="neu-banner__symbol" aria-hidden="true"><BereichSymbol name="Einrichtung" groesse={30} /></span>
+        <span class="neu-banner__text">
+          <strong>Neu in Stockhausen?</strong>
+          <span>Anmeldung, Müllabfuhr, Bus, Schulen, Ärzte und Altfellhalle – das Wichtigste für den Anfang.</span>
+        </span>
+        <span class="neu-banner__pfeil">Neu im Dorf →</span>
+      </a>
     </div>
   </section>
 
@@ -237,6 +245,14 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
   .wmw__bereiche { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; min-width: 240px; }
   .wmw__bereiche a { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.9rem; border-radius: 12px; border: 1px solid var(--linie); background: var(--bg); color: var(--text); text-decoration: none; font-weight: 500; }
   .wmw__bereiche a:hover { border-color: var(--ziegel); color: var(--ziegel); }
+  .neu-banner { display: flex; align-items: center; gap: 1.25rem; margin-top: 1rem; padding: 1.1rem clamp(1.25rem, 3vw, 2rem); text-decoration: none; color: var(--text); background: color-mix(in srgb, var(--meer) 8%, var(--flaeche)); transition: transform 0.2s ease; }
+  .neu-banner:hover { transform: translateY(-2px); color: var(--text); }
+  .neu-banner__symbol { flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--meer); color: var(--bg); }
+  .neu-banner__text { display: flex; flex-direction: column; gap: 0.15rem; flex: 1; }
+  .neu-banner__text strong { font-family: var(--serif); font-size: 1.3rem; color: var(--meer); }
+  .neu-banner__text span { color: var(--text-leise); }
+  .neu-banner__pfeil { flex: none; font-weight: 600; color: var(--meer); }
+  @media (max-width: 640px) { .neu-banner { flex-wrap: wrap; } .neu-banner__pfeil { width: 100%; } }
   .wmw__bereiche svg { color: var(--ziegel); flex: none; }
   .wmw__bereiche small { margin-left: auto; font-size: 0.8rem; color: var(--text-leise); }
   .wmw__bereiche .wmw__alle { justify-content: center; border: 0; background: var(--meer); color: var(--bg); font-weight: 600; }
