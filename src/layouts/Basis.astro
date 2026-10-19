@@ -5,6 +5,7 @@ import { getImage } from 'astro:assets';
 import standardBild from '../assets/fotos/stockhausen-luftbild.jpg';
 import Ortsschild from '../components/Ortsschild.astro';
 import { url, navigation } from '../lib/site';
+import { stand, standText } from '../lib/stand';
 
 interface Props {
   titel?: string;
@@ -19,6 +20,7 @@ const { titel, strukturiert, bild = standardBild, beschreibung = 'Neuigkeiten, T
 const seitentitel = titel ? `${titel} · Stockhausen` : 'Stockhausen · Ortsteil von Herbstein';
 const aktuell = Astro.url.pathname;
 const kanonisch = new URL(aktuell, Astro.site).href;
+const standSeite = stand[aktuell.replace(url(''), '')];
 // Suche (Pagefind): diese Seiten nicht in den Suchindex aufnehmen
 const suchbar = !['suche/', 'qr-code/'].some((pfad) => aktuell.startsWith(url(pfad)));
 const vorschau = await getImage({ src: bild, width: Math.min(bild.width, 1200), format: 'jpg' });
@@ -82,6 +84,9 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
 
     <main id="inhalt" data-pagefind-body={suchbar ? '' : undefined}>
       <slot />
+      {standSeite && (
+        <p class="huelle stand" data-pagefind-ignore>Stand der Angaben: {standText(standSeite)} · Fehler oder Änderungen? Bitte an <a href="mailto:marc@ahne.de">marc@ahne.de</a></p>
+      )}
     </main>
 
     <footer class="fuss">
@@ -163,6 +168,7 @@ const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.
   .menue a:hover { background: var(--flaeche); color: var(--ziegel); }
   .menue a[aria-current='page'] { background: var(--meer); color: var(--bg); }
 
+  .stand { margin-top: -2.5rem; padding-bottom: 2.5rem; font-size: 0.82rem; color: var(--text-leise); }
   .menue-knopf { display: none; }
   .menue .menue__mobil { display: none; }
   .kopf__aktionen { display: flex; align-items: center; gap: 0.5rem; }

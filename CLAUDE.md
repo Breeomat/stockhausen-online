@@ -19,6 +19,8 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
   (Bilder, PDFs, Dossiers) mit `update_file` (parentId) ins Archiv verschieben – in den Ordnern liegen nur Unbearbeitete.
 - Vereine (`src/lib/vereine.ts`) und Verzeichnis werden automatisch alphabetisch sortiert.
 - Betriebe und Einrichtungen („Wer macht was“): `src/content/verzeichnis.yaml` (Felder siehe Kommentar), Logos/Bilder dazu in `src/assets/verzeichnis/`. Ausführliche Seite nur für größere Einrichtungen (z. B. `dorf/gemeinschaft-altenschlirf/`), sonst nur Verzeichniseintrag.
+- „Stand der Angaben“ (unten auf Vereins- und Infoseiten): `src/lib/stand.ts`. Nach jeder inhaltlichen Änderung einer Seite
+  dort den Monat aktualisieren; `veralteteSeiten()` liefert Seiten, die länger als ein Jahr nicht geprüft wurden.
 - Nichts erfinden. Fehlende Angaben als `<span class="fehlt">[fehlt: …]</span>` markieren.
 - Personenfotos nur Gruppen oder mit Einwilligung.
 - Kurse und regelmäßige Angebote (z. B. Gymnastik donnerstags): KEINE Einzeltermine im Kalender, nur ein Hinweis auf der
