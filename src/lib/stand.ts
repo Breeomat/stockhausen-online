@@ -19,6 +19,7 @@ export const stand: Record<string, string> = {
   'ortsbeirat/': '2026-10',
   'dorf/': '2026-10',
   'dorf/gemeinschaft-altenschlirf/': '2026-10',
+  'dorf/karte/': '2026-10',
   'tante-enso/': '2026-10',
   'ortsdurchfahrt/': '2026-10',
 };

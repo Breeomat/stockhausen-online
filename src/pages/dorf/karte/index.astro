@@ -1,0 +1,155 @@
+---
+import Basis from '../../../layouts/Basis.astro';
+import basis from '../../../assets/dorfkarte/basis.svg?raw';
+import { rahmen, marken, gruppenNamen, fehlend, type Gruppe } from '../../../lib/dorfkarte';
+import { url } from '../../../lib/site';
+
+// Dorfkarte: Grundkarte (scripts/dorfkarte.py, Daten © OpenStreetMap-Mitwirkende) mit nummerierten Marken
+const liste = await marken();
+// Liste nach Gruppe des einzelnen Eintrags (eine Marke kann Einträge verschiedener Gruppen tragen, z. B. Schloss und Hofladen)
+const eintraege = liste.flatMap((m) => m.eintraege.map((e) => ({ ...e, nr: m.nr })));
+const gruppen = (Object.keys(gruppenNamen) as Gruppe[])
+  .map((g) => ({ g, eintraege: eintraege.filter((e) => e.gruppe === g).sort((a, b) => a.nr - b.nr), fehlt: fehlend.filter((f) => f.gruppe === g) }))
+  .filter((x) => x.eintraege.length > 0 || x.fehlt.length > 0);
+---
+<Basis titel="Dorfkarte" beschreibung="Karte von Stockhausen: Altfellhalle, Feuerwehrhaus, Kirche, Schloss, Spielplätze, Bushaltestellen und Betriebe auf einen Blick.">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Unser Dorf</span>
+    <h1>Dorfkarte</h1>
+    <p>Wo ist die Altfellhalle, wo das Feuerwehrhaus? Die Nummern auf der Karte stehen auch in der Liste darunter – ein Klick auf eine Nummer springt zum Eintrag.</p>
+  </section>
+
+  <section class="huelle dk">
+    <div class="dorfkarte" id="karte">
+      <div class="dorfkarte__flaeche">
+        <Fragment set:html={basis} />
+        <svg class="dorfkarte__marken" viewBox={`0 0 ${rahmen.breite} ${rahmen.hoehe}`} role="img" aria-label="Orte in Stockhausen, nummeriert wie in der Liste unter der Karte">
+          {liste.map((m) => (
+            <a href={`#${m.eintraege[0].id}`} class={`marke marke--${m.gruppe}`} data-ids={m.eintraege.map((e) => e.id).join(' ')} aria-label={`${m.nr}: ${m.eintraege.map((e) => e.name).join(', ')}`}>
+              <circle cx={m.x.toFixed(1)} cy={m.y.toFixed(1)} r="11" />
+              <text x={m.x.toFixed(1)} y={(m.y + 4).toFixed(1)}>{m.nr}</text>
+            </a>
+          ))}
+        </svg>
+      </div>
+    </div>
+    <p class="dk__quelle">Kartendaten © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap-Mitwirkende</a> · Auf dem Handy lässt sich die Karte seitlich verschieben.</p>
+
+    <div class="dk__liste">
+      {gruppen.map(({ g, eintraege: es, fehlt }) => (
+        <section class="dk__gruppe">
+          <h2><span class={`punkt marke--${g}`} aria-hidden="true"></span>{gruppenNamen[g]}</h2>
+          <ol>
+            {es.map((e) => (
+              <li id={e.id}>
+                <a class={`nr marke--${e.gruppe}`} href="#karte" data-ziel={e.id} aria-label={`Nummer ${e.nr} auf der Karte zeigen`}>{e.nr}</a>
+                <div>
+                  {e.href ? <a href={url(e.href)}>{e.name}</a> : <strong>{e.name}</strong>}
+                  {e.zusatz && <span class="zusatz">{e.zusatz}</span>}
+                </div>
+              </li>
+            ))}
+            {fehlt.map((f) => (
+              <li class="ohne">
+                <span class="nr nr--leer" aria-hidden="true">–</span>
+                <div><strong>{f.name}</strong> <span class="fehlt">[fehlt: Lage]</span></div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
+    </div>
+  </section>
+</Basis>
+
+<script>
+  // Marke hervorheben: beim Klick auf eine Nummer in der Liste und bei Aufruf mit #ort-… (z. B. aus den Terminen)
+  const karte = document.querySelector<HTMLElement>('.dorfkarte')!;
+  const marken = [...document.querySelectorAll<SVGAElement>('.marke')];
+  const zeige = (id: string, scrollen: boolean) => {
+    const m = marken.find((x) => x.dataset.ids?.split(' ').includes(id));
+    marken.forEach((x) => x.classList.toggle('aktiv', x === m));
+    if (!m) return;
+    const c = m.querySelector('circle')!.getBoundingClientRect();
+    const f = karte.getBoundingClientRect();
+    karte.scrollLeft += c.left + c.width / 2 - (f.left + f.width / 2);
+    if (scrollen) karte.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+  document.querySelectorAll<HTMLAnchorElement>('.nr[data-ziel]').forEach((a) =>
+    a.addEventListener('click', (ev) => { ev.preventDefault(); zeige(a.dataset.ziel!, true); history.replaceState(null, '', `#${a.dataset.ziel}`); }),
+  );
+  const start = location.hash.slice(1);
+  karte.scrollLeft = (karte.scrollWidth - karte.clientWidth) * 0.55;
+  // nach dem Sprung des Browsers zum Listeneintrag zur Karte scrollen
+  if (start.startsWith('ort-')) addEventListener('load', () => setTimeout(() => zeige(start, true), 50));
+</script>
+
+<style>
+  .dk { padding-block: 0.5rem 5rem; }
+  .dorfkarte { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--linie); box-shadow: var(--schatten); background: var(--k-grund); -webkit-overflow-scrolling: touch; }
+  .dorfkarte__flaeche { position: relative; min-width: 820px; }
+  .dorfkarte__flaeche :global(svg) { display: block; width: 100%; height: auto; }
+  .dorfkarte__marken { position: absolute; inset: 0; }
+  .dk__quelle { font-size: 0.85rem; color: var(--text-leise); margin: 0.6rem 0 2.5rem; }
+
+  .marke circle { stroke: #fff; stroke-width: 2.5; }
+  .marke text { font: 700 11px var(--sans); fill: #fff; text-anchor: middle; pointer-events: none; }
+  .marke:hover circle, .marke:focus-visible circle, .marke.aktiv circle { r: 15; stroke: var(--text); stroke-width: 3; }
+  .marke.aktiv text { font-size: 13px; }
+
+  .marke--treffpunkt { --farbe: #c0522b; }
+  .marke--kirche { --farbe: #7a4a8c; }
+  .marke--familie { --farbe: #2e7d4f; }
+  .marke--bus { --farbe: #1f6e92; }
+  .marke--betrieb { --farbe: #6f6157; }
+  .marke circle { fill: var(--farbe); }
+
+  .dk__liste { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 2rem 3rem; }
+  .dk__gruppe h2 { font-size: 1.3rem; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem; }
+  .punkt { width: 0.9rem; height: 0.9rem; border-radius: 50%; background: var(--farbe); flex: none; }
+  .dk__gruppe ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
+  .dk__gruppe li { display: grid; grid-template-columns: 2rem 1fr; gap: 0.75rem; align-items: start; scroll-margin-top: 6rem; }
+  .dk__gruppe li:target { background: var(--ziegel-hell); border-radius: 8px; }
+  .nr { width: 1.8rem; height: 1.8rem; border-radius: 50%; display: grid; place-items: center; background: var(--farbe); color: #fff; font-weight: 700; font-size: 0.85rem; text-decoration: none; }
+  .nr--leer { background: var(--linie); color: var(--text-leise); }
+  .zusatz { display: block; font-size: 0.9rem; color: var(--text-leise); }
+
+  /* Farben der Grundkarte (Klassen aus scripts/dorfkarte.py) */
+  .dorfkarte {
+    --k-grund: #f3efe3; --k-acker: #efe9d2; --k-wiese: #dfeac8; --k-wald: #b9d3a4; --k-gebuesch: #cfe0b4; --k-wohnen: #f1e6d6;
+    --k-gewerbe: #eadfd6; --k-friedhof: #cddcc0; --k-parken: #e6e0d8; --k-sport: #bfdcae; --k-wasser: #a9d1e6;
+    --k-haus: #d8c6b2; --k-haus-rand: #b8a38c; --k-strasse: #fff; --k-strasse-rand: #c9b9a4; --k-haupt: #fbe3a7; --k-weg: #a8957f; --k-name: #4a3d33;
+  }
+  @media (prefers-color-scheme: dark) {
+    .dorfkarte {
+      --k-grund: #1e2023; --k-acker: #25272a; --k-wiese: #232b24; --k-wald: #1f3324; --k-gebuesch: #233025; --k-wohnen: #2a2724;
+      --k-gewerbe: #2b2826; --k-friedhof: #233026; --k-parken: #2c2b2a; --k-sport: #24382a; --k-wasser: #1f3b4d;
+      --k-haus: #48413a; --k-haus-rand: #5c544b; --k-strasse: #5a5650; --k-strasse-rand: #3a3733; --k-haupt: #7a6a45; --k-weg: #6d6459; --k-name: #e3ddd5;
+    }
+  }
+  .dorfkarte :global(.k-grund) { fill: var(--k-grund); }
+  .dorfkarte :global(.k-acker) { fill: var(--k-acker); }
+  .dorfkarte :global(.k-wiese) { fill: var(--k-wiese); }
+  .dorfkarte :global(.k-wald) { fill: var(--k-wald); }
+  .dorfkarte :global(.k-gebuesch) { fill: var(--k-gebuesch); }
+  .dorfkarte :global(.k-wohnen) { fill: var(--k-wohnen); }
+  .dorfkarte :global(.k-gewerbe) { fill: var(--k-gewerbe); }
+  .dorfkarte :global(.k-friedhof) { fill: var(--k-friedhof); }
+  .dorfkarte :global(.k-parken) { fill: var(--k-parken); }
+  .dorfkarte :global(.k-sport) { fill: var(--k-sport); }
+  .dorfkarte :global(.k-wasser) { fill: var(--k-wasser); }
+  .dorfkarte :global(.k-fluss) { fill: none; stroke: var(--k-wasser); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .dorfkarte :global(.k-bach) { fill: none; stroke: var(--k-wasser); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .dorfkarte :global(.k-haus) { fill: var(--k-haus); stroke: var(--k-haus-rand); stroke-width: 0.5; }
+  .dorfkarte :global(:is(.k-feldweg, .k-weg, .k-treppe, .k-zufahrt, .k-wohnstrasse, .k-hauptstrasse, [class$='-rand'])) { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .dorfkarte :global(.k-feldweg) { stroke: var(--k-weg); stroke-width: 1.2; stroke-dasharray: 4 3; opacity: 0.7; }
+  .dorfkarte :global(.k-weg) { stroke: var(--k-weg); stroke-width: 1.2; stroke-dasharray: 2 2; }
+  .dorfkarte :global(.k-treppe) { stroke: var(--k-weg); stroke-width: 2.5; stroke-dasharray: 1 1.5; }
+  .dorfkarte :global(.k-zufahrt-rand) { stroke: var(--k-strasse-rand); stroke-width: 5; }
+  .dorfkarte :global(.k-zufahrt) { stroke: var(--k-strasse); stroke-width: 3.5; }
+  .dorfkarte :global(.k-wohnstrasse-rand) { stroke: var(--k-strasse-rand); stroke-width: 9; }
+  .dorfkarte :global(.k-wohnstrasse) { stroke: var(--k-strasse); stroke-width: 7; }
+  .dorfkarte :global(.k-hauptstrasse-rand) { stroke: var(--k-strasse-rand); stroke-width: 12; }
+  .dorfkarte :global(.k-hauptstrasse) { stroke: var(--k-haupt); stroke-width: 10; }
+  .dorfkarte :global(.k-name) { font: 500 9.5px var(--sans); fill: var(--k-name); paint-order: stroke; stroke: var(--k-grund); stroke-width: 3; stroke-linejoin: round; dominant-baseline: central; }
+</style>

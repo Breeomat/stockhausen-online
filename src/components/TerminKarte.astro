@@ -1,11 +1,13 @@
 ---
 import { type Termin, wochentagKurz, tag, monatKurz, zeitraum, letzterTag } from '../lib/termine';
 import { url } from '../lib/site';
+import { kartenAnker } from '../lib/dorfkarte';
 
 interface Props { termin: Termin; kompakt?: boolean }
 const { termin, kompakt = false } = Astro.props;
 const { titel, datum, ort, verein, mit, text, link, plakat } = termin.data;
 const zeit = zeitraum(termin);
+const anker = kartenAnker(ort);
 ---
 <article class="termin" data-verein={verein ?? ''} data-ende={letzterTag(termin)}>
   <div class="termin__datum" aria-hidden="true">
@@ -18,7 +20,8 @@ const zeit = zeitraum(termin);
     <h3>{titel}</h3>
     <p class="termin__meta">
       <time datetime={datum}>{new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${datum}T12:00:00`))}</time>
-      {[zeit, ort].filter(Boolean).map((teil) => <span>{teil}</span>)}
+      {zeit && <span>{zeit}</span>}
+      {ort && <span>{anker ? <a href={url(`dorf/karte/#${anker}`)} title="Auf der Dorfkarte zeigen">{ort}</a> : ort}</span>}
     </p>
     {!kompakt && text && <p class="termin__text">{text}</p>}
     {!kompakt && (

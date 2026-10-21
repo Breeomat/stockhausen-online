@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { adresseAus } from '../../lib/dorfkarte';
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Basis from '../../layouts/Basis.astro';
@@ -65,13 +66,13 @@ const tel = (nummer: string) => 'tel:+49' + nummer.replace(/\D/g, '').replace(/^
       <section class="gruppe" data-kategorie={k}>
         <h2><BereichSymbol name={k} groesse={26} class="gruppe__symbol" />{ueberschrift[k]}</h2>
         <ul class="eintraege">
-          {liste.map(({ data: e }) => (
-            <li class:list={['karte eintrag', { 'eintrag--bild': e.bild }]}>
+          {liste.map(({ id, data: e }) => (
+            <li id={`eintrag-${id}`} class:list={['karte eintrag', { 'eintrag--bild': e.bild }]}>
               {e.bild && <Image class="eintrag__bild" src={bildFuer(e.bild)!} alt={e.name} widths={[400, 720]} sizes="(max-width: 760px) 100vw, 380px" />}
               <h3>{e.name}</h3>
               <p>{e.text}</p>
               <dl class="angaben">
-                {e.adresse && <div><dt>Adresse</dt><dd>{e.adresse}</dd></div>}
+                {e.adresse && <div><dt>Adresse</dt><dd>{e.adresse}{adresseAus(e.adresse) && <> · <a href={url(`dorf/karte/#ort-${id}`)}>Karte</a></>}</dd></div>}
                 {e.zeiten && <div><dt>{e.kategorie === 'Gesundheit' ? 'Sprechzeiten' : e.kategorie === 'Industrie' ? 'Bürozeiten' : 'Geöffnet'}</dt><dd>{e.zeiten}</dd></div>}
                 {e.telefon && <div><dt>Telefon</dt>{alsListe(e.telefon).map(teile).map(({ wert, hinweis }) => <dd><a href={tel(wert)}>{wert}</a>{hinweis && <small> ({hinweis})</small>}</dd>)}</div>}
                 {e.fax && <div><dt>Fax</dt><dd>{e.fax}</dd></div>}

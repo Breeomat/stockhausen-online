@@ -19,6 +19,10 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
   (Bilder, PDFs, Dossiers) mit `update_file` (parentId) ins Archiv verschieben – in den Ordnern liegen nur Unbearbeitete.
 - Vereine (`src/lib/vereine.ts`) und Verzeichnis werden automatisch alphabetisch sortiert.
 - Betriebe und Einrichtungen („Wer macht was“): `src/content/verzeichnis.yaml` (Felder siehe Kommentar), Logos/Bilder dazu in `src/assets/verzeichnis/`. Ausführliche Seite nur für größere Einrichtungen (z. B. `dorf/gemeinschaft-altenschlirf/`), sonst nur Verzeichniseintrag.
+- Dorfkarte (/dorf/karte/): Orte in `src/lib/dorfkarte.ts` (`orte` mit lat/lon aus OpenStreetMap, `fehlend` für Orte ohne OSM-Eintrag).
+  Betriebe aus `verzeichnis.yaml` erscheinen automatisch, wenn ihre Adresse in OSM steht. Ortsangaben in Terminen werden
+  zum Link auf die Karte (`namen` in `orte`, `ortsnamenVerzeichnis`). Grundkarte neu erzeugen (nur bei Änderungen in OSM):
+  `python3 scripts/dorfkarte.py` (braucht Zugriff auf api.openstreetmap.org). Hinweis „© OpenStreetMap-Mitwirkende“ bleibt unter der Karte.
 - „Stand der Angaben“ (unten auf Vereins- und Infoseiten): `src/lib/stand.ts`. Nach jeder inhaltlichen Änderung einer Seite
   dort den Monat aktualisieren; `veralteteSeiten()` liefert Seiten, die länger als ein Jahr nicht geprüft wurden.
 - Nichts erfinden. Fehlende Angaben als `<span class="fehlt">[fehlt: …]</span>` markieren.
