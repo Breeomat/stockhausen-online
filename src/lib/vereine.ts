@@ -24,7 +24,7 @@ export const vereinsseiten = [
     seit: 'seit 1874',
     text: '57 Aktive, 183 Mitglieder und 150 Jahre Geschichte – von der Spritzenmannschaft bis zum LF 10.',
     href: 'vereine/feuerwehr/',
-    bild: { src: feuerwehrFoto, nachweis: 'Foto: Christian Heuser' },
+    bild: { src: feuerwehrFoto, alt: 'Die Einsatzabteilung in Schutzkleidung und Helm vor dem Feuerwehrhaus und einem roten Löschfahrzeug', nachweis: 'Foto: Christian Heuser' },
   },
   {
     name: 'Sportverein Stockhausen 1946 e. V.',
@@ -33,7 +33,7 @@ export const vereinsseiten = [
     text: 'Fußball, Leichtathletik, Tischtennis, Volleyball, Gymnastik und eine Theatergruppe – Sport und Kultur für Jung und Alt.',
     href: 'vereine/sv-stockhausen/',
     wappen: svWappen,
-    bild: { src: sportplatzFoto, nachweis: 'Foto: Marc Ahne' },
+    bild: { src: sportplatzFoto, alt: 'Der Sportplatz aus der Luft: Rasenplatz mit roter Laufbahn, daneben eine Halle mit rotem Dach', nachweis: 'Foto: Marc Ahne' },
   },
   {
     name: 'Ev. Posaunenchor Stockhausen',
@@ -41,7 +41,7 @@ export const vereinsseiten = [
     seit: 'seit 1905',
     text: 'Blechbläsermusik in Gottesdiensten, bei Ständchen und Dorffesten – von Barock bis Pop. Nachwuchs ist willkommen.',
     href: 'vereine/posaunenchor/',
-    bild: { src: chorFoto, nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
+    bild: { src: chorFoto, alt: 'Der Posaunenchor spielt im Halbdunkel mit Trompeten, Posaunen und Tuben, Notenständer mit Stirnlampen beleuchtet', nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
   },
   {
     name: 'Arbeitskreis Dorfgeschichte Stockhausen',
@@ -49,7 +49,7 @@ export const vereinsseiten = [
     seit: 'Heimatforschung',
     text: 'Ortschronik, Bildarchiv und Hofgeschichten – das Gedächtnis des Dorfes. Alte Fotos und Geschichten sind willkommen.',
     href: 'vereine/arbeitskreis-dorfgeschichte/',
-    bild: { src: schlossFoto, nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
+    bild: { src: schlossFoto, alt: 'Schloss Stockhausen: langgestreckter Barockbau mit Uhrturm hinter einer Rasenfläche mit Teich', nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
   },
   {
     name: 'KK Schützenverein 1926/68 e.V. Stockhausen',
@@ -58,7 +58,7 @@ export const vereinsseiten = [
     text: 'Luftgewehr, Auflage, Kleinkaliber und Bogen – vom Jungschützen bis zur Seniorenmannschaft. Schnupperschießen möglich.',
     href: 'vereine/schuetzenverein/',
     wappen: schuetzenWappen,
-    bild: { src: schuetzenFoto, nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
+    bild: { src: schuetzenFoto, alt: 'Das Schützenhaus aus der Luft, umgeben von Bäumen, mit Zufahrt und Parkplatz', nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
   },
   {
     name: 'Schlepperfreunde Stockhausen',
@@ -66,7 +66,7 @@ export const vereinsseiten = [
     seit: 'Oldtimer-Traktoren',
     text: 'Lanz Bulldog, Hanomag, Deutz und Co.: Liebhaber historischer Landtechnik, die ihre Schlepper pflegen und bei Ausfahrten und Festen zeigen.',
     href: 'vereine/schlepperfreunde/',
-    bild: { src: schlepperFoto, nachweis: 'Foto: Marc Ahne', position: '50% 60%' },
+    bild: { src: schlepperFoto, alt: 'Drei alte Traktoren mit eingeschalteten Scheinwerfern vor einer Halle, daneben einige Männer', nachweis: 'Foto: Marc Ahne', position: '50% 60%' },
   },
   {
     name: 'Gefriergemeinschaft Stockhausen e. V.',
@@ -74,7 +74,7 @@ export const vereinsseiten = [
     seit: 'seit 1963',
     text: 'Gemeinsame Gefrierfächer und Kühlraum im Gefrierhaus – seit über 60 Jahren in Betrieb.',
     href: 'vereine/gefriergemeinschaft/',
-    bild: { src: gefrierFoto, nachweis: 'Foto: Marc Ahne', position: '50% 55%' },
+    bild: { src: gefrierFoto, alt: 'Viele Gäste stehen auf der Straße vor dem weiß verputzten Gefrierhaus in der Abendsonne', nachweis: 'Foto: Marc Ahne', position: '50% 55%' },
   },
   {
     name: 'Obst- und Gartenbauverein Stockhausen 1889',
@@ -82,7 +82,7 @@ export const vereinsseiten = [
     seit: 'seit 1889',
     text: 'Streuobstwiesen, Baumschnittkurse, Keltern im Herbst und ein grünes Dorfbild.',
     href: 'vereine/obst-und-gartenbauverein/',
-    bild: { src: maibaumFoto, nachweis: 'Foto: Marc Ahne', position: '50% 30%' },
+    bild: { src: maibaumFoto, alt: 'Ein geschmückter Maibaum wird mit einem grünen Teleskoplader aufgestellt, ringsum Zuschauer', nachweis: 'Foto: Marc Ahne', position: '50% 30%' },
   },
   {
     name: 'Gesangverein „Germania“ Stockhausen',
@@ -90,7 +90,7 @@ export const vereinsseiten = [
     seit: 'seit 1894',
     text: 'Gemischter Chor und Männerchor unter Chorleiter Kai Mertin – die CD des Männerchors gibt es beim Verein.',
     href: 'vereine/gesangverein/',
-    bild: { src: gesangFoto, nachweis: 'Foto: Instagram', position: '50% 85%' },
+    bild: { src: gesangFoto, alt: 'Weinflasche, Heidekraut im Topf und eine Karte „Sing & Drink beim Dämmerschoppen“ auf einem Tisch', nachweis: 'Foto: Instagram', position: '50% 85%' },
   },
   {
     name: 'Kirmesburschen Stockhausen',
@@ -98,7 +98,7 @@ export const vereinsseiten = [
     seit: 'seit 1849',
     text: 'Die Stockhäuser Kirmes am letzten Oktoberwochenende: Dorfabend, Frühschoppen, Kinderkirmes und Fackelumzug in der Altfellhalle.',
     href: 'vereine/kirmesburschen/',
-    bild: { src: kirmesFoto, nachweis: 'Foto: Kirmesburschen Stockhausen', position: '50% 45%' },
+    bild: { src: kirmesFoto, alt: 'Gruppenfoto vor einer Sandsteinmauer: vorn sechs Kirmesburschen in schwarzen Westen mit roten Halstüchern, dahinter junge Leute in schwarzen T-Shirts', nachweis: 'Foto: Kirmesburschen Stockhausen', position: '50% 45%' },
   },
   {
     name: 'Ev. Kirchengemeinde Stockhausen-Rixfeld',
@@ -106,12 +106,12 @@ export const vereinsseiten = [
     seit: 'EKHN · Dekanat Vogelsberg',
     text: 'Zwei Kirchen, ein Gemeindeleben: Gottesdienste in Stockhausen und Rixfeld, Kirchenmusik, Kinder-, Frauen- und Seniorenarbeit.',
     href: 'vereine/kirchengemeinde/',
-    bild: { src: kirchgemeindeFoto, nachweis: 'Foto: Ev. Kirchengemeinde Stockhausen-Rixfeld', position: '50% 30%' },
+    bild: { src: kirchgemeindeFoto, alt: 'Die Kirche in Stockhausen: roter Sandsteinbau mit spitzem Turm und Uhr, davor Sträucher in Herbstfarben', nachweis: 'Foto: Ev. Kirchengemeinde Stockhausen-Rixfeld', position: '50% 30%' },
   },
 ].sort((a, b) => a.name.localeCompare(b.name, 'de'));
 
 // Hintergrundbilder für Vereine ohne eigene Seite (Teil des Vereinsnamens → Bild)
-const weitereBilder: { teil: string; bild: { src: ImageMetadata; nachweis: string; position?: string } }[] = [];
+const weitereBilder: { teil: string; bild: { src: ImageMetadata; alt: string; nachweis: string; position?: string } }[] = [];
 export const bildFuer = (name: string) => weitereBilder.find((b) => name.includes(b.teil))?.bild;
 
 // Einrichtungen mit eigener Seite außerhalb der Vereine (z. B. unter „Unser Dorf“)
