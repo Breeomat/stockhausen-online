@@ -23,7 +23,9 @@ export const gruppenNamen: Record<Gruppe, string> = {
 
 // id: auch Anker (#ort-…) für Links aus den Terminen; namen: Ortsangaben in termine.yaml, die auf diesen Ort zeigen
 // bei: id eines anderen Orts/Verzeichniseintrags, dessen Marke mitbenutzt wird (z. B. angebaute Gebäude)
-interface Ort { id: string; name: string; gruppe: Gruppe; lat: number; lon: number; zusatz?: string; href?: string; namen?: string[]; bei?: string }
+// pfeil: Hinweispfeil von der Marke aus auf einen Ort außerhalb der Karte (dx/dy in Kartenpunkten)
+export interface Pfeil { text: string; dx: number; dy: number }
+interface Ort { id: string; name: string; gruppe: Gruppe; lat: number; lon: number; zusatz?: string; href?: string; namen?: string[]; bei?: string; pfeil?: Pfeil }
 export const orte: Ort[] = [
   { id: 'feuerwehrhaus', name: 'Feuerwehrhaus', gruppe: 'treffpunkt', lat: 50.562767, lon: 9.446901, zusatz: 'Steinweg 3', href: 'vereine/feuerwehr/', namen: ['Feuerwehrhaus'] },
   { id: 'sportlerheim', name: 'Sportlerheim', gruppe: 'treffpunkt', lat: 50.561492, lon: 9.451413, zusatz: 'an die Altfellhalle angebaut', href: 'vereine/sv-stockhausen/', namen: ['Sportlerheim'], bei: 'altfellhalle' },
@@ -33,7 +35,7 @@ export const orte: Ort[] = [
   { id: 'kirche', name: 'Evangelische Kirche', gruppe: 'kirche', lat: 50.56427, lon: 9.445357, zusatz: 'Am Bockelberg 4', href: 'vereine/kirchengemeinde/', namen: ['Kirche'] },
   { id: 'schloss', name: 'Schloss Stockhausen', gruppe: 'kirche', lat: 50.563582, lon: 9.444021, zusatz: 'Müser Straße 1', href: 'dorf/' },
   { id: 'friedhof', name: 'Friedhof', gruppe: 'kirche', lat: 50.56536, lon: 9.44649 },
-  { id: 'conrads-ruhe', name: 'Conrads-Ruhe', gruppe: 'kirche', lat: 50.561508, lon: 9.434697, zusatz: 'Mausoleum mit Familienfriedhof', href: 'dorf/' },
+  { id: 'riedesel-kapelle', name: 'Riedesel-Kapelle', gruppe: 'kirche', lat: 50.561508, lon: 9.434697, zusatz: 'mit Familienfriedhof; weiter im Wäldchen liegt die Conrads-Ruhe', href: 'dorf/', pfeil: { text: 'Conrads-Ruhe', dx: -78, dy: 26 } },
   { id: 'spielplatz', name: 'Spielplatz', gruppe: 'familie', lat: 50.5621818, lon: 9.4490361 },
   { id: 'spielplatz-campus', name: 'Spielplatz', gruppe: 'familie', lat: 50.5617507, lon: 9.4414777, zusatz: 'beim Campus am Park' },
   { id: 'schule', name: 'Siegfried-Pickert-Schule', gruppe: 'familie', lat: 50.561977, lon: 9.44071, zusatz: 'Am Campus 1' },
@@ -50,16 +52,16 @@ const gruppeVerzeichnis: Record<string, Gruppe> = { altfellhalle: 'treffpunkt', 
 const ortsnamenVerzeichnis: Record<string, string> = { altfellhalle: 'altfellhalle', 'lädchen': 'laedchen-fuer-alles', lennys: 'lennys' };
 
 export interface Eintrag { id: string; name: string; gruppe: Gruppe; zusatz?: string; href?: string }
-export interface Marke { nr: number; x: number; y: number; gruppe: Gruppe; eintraege: Eintrag[] }
+export interface Marke { nr: number; x: number; y: number; gruppe: Gruppe; eintraege: Eintrag[]; pfeil?: Pfeil }
 
 export const adresseAus = (a: string) => a.split(',').map((s) => s.trim()).find((s) => s in adressen || s.replace(/(\d+)[–-]\d+$/, '$1') in adressen);
 
 export async function marken(): Promise<Marke[]> {
   const verzeichnis = (await getCollection('verzeichnis')).sort((a, b) => a.data.name.localeCompare(b.data.name, 'de'));
-  const punkte: { x: number; y: number; eintrag: Eintrag; bei?: string }[] = [
+  const punkte: { x: number; y: number; eintrag: Eintrag; bei?: string; pfeil?: Pfeil }[] = [
     ...orte.map((o) => {
       const [x, y] = projiziere(o.lat, o.lon);
-      return { x, y, bei: o.bei && `ort-${o.bei}`, eintrag: { id: `ort-${o.id}`, name: o.name, gruppe: o.gruppe, zusatz: o.zusatz, href: o.href } };
+      return { x, y, pfeil: o.pfeil, bei: o.bei && `ort-${o.bei}`, eintrag: { id: `ort-${o.id}`, name: o.name, gruppe: o.gruppe, zusatz: o.zusatz, href: o.href } };
     }),
     ...verzeichnis.flatMap(({ id, data: e }) => {
       const a = e.adresse && adresseAus(e.adresse);
@@ -77,7 +79,7 @@ export async function marken(): Promise<Marke[]> {
   for (const p of punkte) {
     const da = liste.find((m) => Math.hypot(m.x - p.x, m.y - p.y) < 4);
     if (da) da.eintraege.push(p.eintrag);
-    else liste.push({ nr: 0, x: p.x, y: p.y, gruppe: p.eintrag.gruppe, eintraege: [p.eintrag] });
+    else liste.push({ nr: 0, x: p.x, y: p.y, gruppe: p.eintrag.gruppe, eintraege: [p.eintrag], pfeil: p.pfeil });
   }
   // Nah beieinander liegende Marken etwas auseinanderschieben, damit sich die Nummern nicht verdecken
   const abstand = 24;

@@ -24,6 +24,17 @@ const gruppen = (Object.keys(gruppenNamen) as Gruppe[])
       <div class="dorfkarte__flaeche">
         <Fragment set:html={basis} />
         <svg class="dorfkarte__marken" viewBox={`0 0 ${rahmen.breite} ${rahmen.hoehe}`} role="img" aria-label="Orte in Stockhausen, nummeriert wie in der Liste unter der Karte">
+          <defs><marker id="pfeilspitze" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="pfeil__spitze" /></marker></defs>
+          {liste.filter((m) => m.pfeil).map(({ x, y, pfeil }) => {
+            const l = Math.hypot(pfeil!.dx, pfeil!.dy);
+            const sx = x + (pfeil!.dx / l) * 15, sy = y + (pfeil!.dy / l) * 15;
+            return (
+              <g class="pfeil" aria-hidden="true">
+                <line x1={sx.toFixed(1)} y1={sy.toFixed(1)} x2={(x + pfeil!.dx).toFixed(1)} y2={(y + pfeil!.dy).toFixed(1)} marker-end="url(#pfeilspitze)" />
+                <text x={(x + pfeil!.dx).toFixed(1)} y={(y + pfeil!.dy + 16).toFixed(1)}>{pfeil!.text}</text>
+              </g>
+            );
+          })}
           {liste.map((m) => (
             <a href={`#${m.eintraege[0].id}`} class={`marke marke--${m.gruppe}`} data-ids={m.eintraege.map((e) => e.id).join(' ')} aria-label={`${m.nr}: ${m.eintraege.map((e) => e.name).join(', ')}`}>
               <circle cx={m.x.toFixed(1)} cy={m.y.toFixed(1)} r="11" />
@@ -92,6 +103,9 @@ const gruppen = (Object.keys(gruppenNamen) as Gruppe[])
   .dorfkarte__marken { position: absolute; inset: 0; }
   .dk__quelle { font-size: 0.85rem; color: var(--text-leise); margin: 0.6rem 0 2.5rem; }
 
+  .pfeil line { stroke: var(--k-name); stroke-width: 2; stroke-dasharray: 5 3; }
+  :global(.pfeil__spitze) { fill: var(--k-name); }
+  .pfeil text { font: italic 600 11px var(--sans); fill: var(--k-name); text-anchor: start; paint-order: stroke; stroke: var(--k-grund); stroke-width: 3; }
   .marke circle { stroke: #fff; stroke-width: 2.5; }
   .marke text { font: 700 11px var(--sans); fill: #fff; text-anchor: middle; pointer-events: none; }
   .marke:hover circle, .marke:focus-visible circle, .marke.aktiv circle { r: 15; stroke: var(--text); stroke-width: 3; }
