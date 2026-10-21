@@ -33,7 +33,7 @@ export const vereinsseiten = [
     text: 'Fußball, Leichtathletik, Tischtennis, Volleyball, Gymnastik und eine Theatergruppe – Sport und Kultur für Jung und Alt.',
     href: 'vereine/sv-stockhausen/',
     wappen: svWappen,
-    bild: { src: sportplatzFoto, alt: 'Der Sportplatz aus der Luft: Rasenplatz mit roter Laufbahn, daneben eine Halle mit rotem Dach', nachweis: 'Foto: Marc Ahne' },
+    bild: { src: sportplatzFoto, alt: 'Der Sportplatz aus der Luft: Rasenplatz mit roter Laufbahn, daneben die Altfellhalle mit rotem Dach', nachweis: 'Foto: Marc Ahne' },
   },
   {
     name: 'Ev. Posaunenchor Stockhausen',
