@@ -12,4 +12,5 @@ export const ortsbeirat = {
   weitere: ['Kirsten Antritter', 'Markus Fischer', 'Cornelius Osthaus', 'Friedrich-Wilhelm Picker', 'Nadine Wahl'],
   telefon: '0151 18401352',
   email: 'stockhausen@ortsvorsteher.herbstein.de',
+  fotoNachweis: 'Ortsbeirat Stockhausen',
 };

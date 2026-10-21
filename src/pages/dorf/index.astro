@@ -221,7 +221,7 @@ const entfernungen = [
           <p class="beirat__amtszeit">Amtszeit 2026–2031 · Sitzungen grundsätzlich öffentlich</p>
           <figure class="beirat__foto">
             <Image src={beiratFoto} alt="Die neun Mitglieder des Ortsbeirats Stockhausen in einem Saal" widths={[400]} sizes="320px" />
-            <figcaption>v. l. n. r.: {ortsbeirat.fotoReihe.join(', ')}</figcaption>
+            <figcaption>v. l. n. r.: {ortsbeirat.fotoReihe.join(', ')} · Foto: {ortsbeirat.fotoNachweis}</figcaption>
           </figure>
           <dl class="beirat">
             {ortsbeirat.aemter.map(([amt, name]) => <div><dt>{amt}</dt><dd>{name}</dd></div>)}
