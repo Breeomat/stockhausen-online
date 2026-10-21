@@ -26,6 +26,7 @@ interface Ort { id: string; name: string; gruppe: Gruppe; lat: number; lon: numb
 export const orte: Ort[] = [
   { id: 'feuerwehrhaus', name: 'Feuerwehrhaus', gruppe: 'treffpunkt', lat: 50.562767, lon: 9.446901, zusatz: 'Steinweg 3', href: 'vereine/feuerwehr/', namen: ['Feuerwehrhaus'] },
   { id: 'sportplatz', name: 'Sportplatz', gruppe: 'treffpunkt', lat: 50.561455, lon: 9.45212, zusatz: 'Rasenplatz mit Laufbahn', href: 'vereine/sv-stockhausen/', namen: ['Sportplatz', 'Abfahrt am Sportplatz'] },
+  { id: 'gefrierhaus', name: 'Gefrierhaus', gruppe: 'treffpunkt', lat: 50.562209, lon: 9.448704, zusatz: 'Altefeldstraße 10', href: 'vereine/gefriergemeinschaft/', namen: ['Gefrierhaus'] },
   { id: 'schuetzenhaus', name: 'Schützenhaus', gruppe: 'treffpunkt', lat: 50.56569, lon: 9.44053, zusatz: 'am Weinberg', href: 'vereine/schuetzenverein/', namen: ['Schützenhaus'] },
   { id: 'kirche', name: 'Evangelische Kirche', gruppe: 'kirche', lat: 50.56427, lon: 9.445357, zusatz: 'Am Bockelberg 4', href: 'vereine/kirchengemeinde/', namen: ['Kirche'] },
   { id: 'schloss', name: 'Schloss Stockhausen', gruppe: 'kirche', lat: 50.563582, lon: 9.444021, zusatz: 'Müser Straße 1', href: 'dorf/' },
@@ -39,9 +40,7 @@ export const orte: Ort[] = [
 ];
 
 // Orte, die (noch) nicht in OpenStreetMap stehen – erscheinen in der Liste mit Hinweis
-export const fehlend: { name: string; gruppe: Gruppe }[] = [
-  { name: 'Gefrierhaus', gruppe: 'treffpunkt' },
-];
+export const fehlend: { name: string; gruppe: Gruppe }[] = [];
 
 // Verzeichniseinträge, die auf der Karte nicht unter „Betriebe“ stehen
 const gruppeVerzeichnis: Record<string, Gruppe> = { altfellhalle: 'treffpunkt', 'kindergarten-storchennest': 'familie', kirchengemeinde: 'kirche' };
