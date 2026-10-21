@@ -4,9 +4,8 @@ import { heute } from './termine';
 export const aktion = {
   ziel: 400, // Teilhaberschaften (Personen); mehrere Anteile einer Person zählen einfach
   preis: 100,
-  stand: 453,
-  standText: '14. Oktober 2026',
-  naechsterStandText: '21. Oktober',
+  stand: 474, // Tante Enso aktualisiert die Zahl nicht mehr, weil das Ziel erreicht ist
+  standText: '21. Oktober 2026',
   praemie: 500, // € Dorfsponsoringprämie je weitere 100 Teilhaber
   frist: '2026-10-21',
   fristText: 'Mittwoch, 21. Oktober',
