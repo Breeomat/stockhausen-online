@@ -212,6 +212,9 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
   .held .knopf--leise:hover { background: #fff; color: #2a211c; }
   .held__foto { position: absolute; right: 16px; bottom: 10px; font-size: 0.75rem; color: rgb(255 255 255 / 0.85); text-shadow: 0 1px 4px rgb(0 0 0 / 0.6); }
   @media (max-width: 640px) {
+    /* Handy: Titelbild niedriger, damit „Aktuelles“ schon im ersten Bildschirm anfängt */
+    .held { min-height: clamp(340px, 52vh, 460px); margin-bottom: 1rem; }
+    .held__innen { padding-block: 2.5rem 3rem; }
     .held::before { background: linear-gradient(180deg, rgb(14 32 48 / 0.7), rgb(14 32 48 / 0.55)); }
   }
   .abschnitt--direkt { padding-top: 1rem; }

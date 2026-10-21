@@ -1,0 +1,36 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { url, navigation } from '../lib/site';
+
+// Fehlerseite für unbekannte Adressen (GitHub Pages liefert dist/404.html aus)
+---
+<Basis titel="Seite nicht gefunden" beschreibung="Diese Seite gibt es auf stockhausen-online.de nicht (mehr).">
+  <section class="huelle seitenkopf">
+    <span class="kicker">Fehler 404</span>
+    <h1>Diese Seite gibt es nicht</h1>
+    <p>Vielleicht ist der Link veraltet oder hat einen Tippfehler. Hier geht es weiter:</p>
+  </section>
+
+  <section class="huelle nf">
+    <form class="nf__suche" action={url('suche/')} method="get" role="search">
+      <label for="nf-q">Auf der Seite suchen</label>
+      <div class="nf__zeile">
+        <input id="nf-q" name="q" type="search" placeholder="z. B. Kirmes, Metzgerei, Altfellhalle" />
+        <button class="knopf" type="submit">Suchen</button>
+      </div>
+    </form>
+    <ul class="nf__links">
+      {navigation.map((n) => <li><a class="knopf knopf--leise" href={url(n.href)}>{n.label}</a></li>)}
+    </ul>
+  </section>
+</Basis>
+
+<style>
+  .nf { padding-block: 0.5rem 5rem; display: grid; gap: 2rem; }
+  .nf__suche { max-width: 560px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }
+  .nf__suche label { font-weight: 600; }
+  .nf__zeile { display: flex; gap: 0.5rem; }
+  .nf__zeile .knopf { flex-shrink: 0; }
+  .nf__zeile input { flex: 1; min-width: 0; padding: 0.7rem 0.9rem; font: inherit; color: var(--text); background: var(--flaeche); border: 1.5px solid var(--linie); border-radius: 8px; }
+  .nf__links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+</style>

@@ -15,7 +15,7 @@ interface Props {
 const { name, href, linkText, kicker, text, bild, wappen } = Astro.props;
 ---
 <a class:list={['karte verein-karte', { 'verein-karte--hell': !bild }]} href={href}>
-  {bild && <Image class="verein-karte__bild" src={bild.src} alt="" widths={[640, 1024]} sizes="(max-width: 860px) 100vw, 640px" style={bild.position ? `object-position: ${bild.position}` : undefined} />}
+  {bild && <Image class="verein-karte__bild" src={bild.src} alt="" widths={[480, 640, 800]} sizes="(max-width: 860px) 100vw, 640px" quality={60} style={bild.position ? `object-position: ${bild.position}` : undefined} />}
   {wappen && <Image class="verein-karte__wappen" src={wappen} alt="" width={120} />}
   {kicker && <span class="kicker">{kicker}</span>}
   <h3>{name}</h3>
