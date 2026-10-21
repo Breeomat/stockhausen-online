@@ -4,7 +4,7 @@ import { url } from '../lib/site';
 
 interface Props { termin: Termin; kompakt?: boolean }
 const { termin, kompakt = false } = Astro.props;
-const { titel, datum, ort, verein, text, link, plakat } = termin.data;
+const { titel, datum, ort, verein, mit, text, link, plakat } = termin.data;
 const zeit = zeitraum(termin);
 ---
 <article class="termin" data-verein={verein ?? ''} data-ende={letzterTag(termin)}>
@@ -14,7 +14,7 @@ const zeit = zeitraum(termin);
     <span class="termin__monat">{monatKurz(datum)}</span>
   </div>
   <div class="termin__inhalt">
-    {verein && <span class="termin__verein">{verein}</span>}
+    {verein && <span class="termin__verein">{[verein, ...(mit ?? [])].join(' · mit ')}</span>}
     <h3>{titel}</h3>
     <p class="termin__meta">
       <time datetime={datum}>{new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${datum}T12:00:00`))}</time>

@@ -10,6 +10,9 @@ export function heute(): string {
 
 export const letzterTag = (t: Termin) => t.data.bis ?? t.data.datum;
 
+// Gehört der Termin zu einem Verein? Prüft Veranstalter und beteiligte Vereine (Feld `mit`) auf einen Namensteil
+export const gehoertZu = (t: Termin, teil: string) => [t.data.verein, ...(t.data.mit ?? [])].some((v) => v?.includes(teil));
+
 export async function kommendeTermine(): Promise<Termin[]> {
   const stichtag = heute();
   return (await getCollection('termine'))
