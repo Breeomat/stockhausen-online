@@ -22,9 +22,11 @@ export const gruppenNamen: Record<Gruppe, string> = {
 };
 
 // id: auch Anker (#ort-…) für Links aus den Terminen; namen: Ortsangaben in termine.yaml, die auf diesen Ort zeigen
-interface Ort { id: string; name: string; gruppe: Gruppe; lat: number; lon: number; zusatz?: string; href?: string; namen?: string[] }
+// bei: id eines anderen Orts/Verzeichniseintrags, dessen Marke mitbenutzt wird (z. B. angebaute Gebäude)
+interface Ort { id: string; name: string; gruppe: Gruppe; lat: number; lon: number; zusatz?: string; href?: string; namen?: string[]; bei?: string }
 export const orte: Ort[] = [
   { id: 'feuerwehrhaus', name: 'Feuerwehrhaus', gruppe: 'treffpunkt', lat: 50.562767, lon: 9.446901, zusatz: 'Steinweg 3', href: 'vereine/feuerwehr/', namen: ['Feuerwehrhaus'] },
+  { id: 'sportlerheim', name: 'Sportlerheim', gruppe: 'treffpunkt', lat: 50.561492, lon: 9.451413, zusatz: 'an die Altfellhalle angebaut', href: 'vereine/sv-stockhausen/', namen: ['Sportlerheim'], bei: 'altfellhalle' },
   { id: 'sportplatz', name: 'Sportplatz', gruppe: 'treffpunkt', lat: 50.561455, lon: 9.45212, zusatz: 'Rasenplatz mit Laufbahn', href: 'vereine/sv-stockhausen/', namen: ['Sportplatz', 'Abfahrt am Sportplatz'] },
   { id: 'gefrierhaus', name: 'Gefrierhaus', gruppe: 'treffpunkt', lat: 50.562209, lon: 9.448704, zusatz: 'Altefeldstraße 10', href: 'vereine/gefriergemeinschaft/', namen: ['Gefrierhaus'] },
   { id: 'schuetzenhaus', name: 'Schützenhaus', gruppe: 'treffpunkt', lat: 50.56569, lon: 9.44053, zusatz: 'am Weinberg', href: 'vereine/schuetzenverein/', namen: ['Schützenhaus'] },
@@ -54,10 +56,10 @@ export const adresseAus = (a: string) => a.split(',').map((s) => s.trim()).find(
 
 export async function marken(): Promise<Marke[]> {
   const verzeichnis = (await getCollection('verzeichnis')).sort((a, b) => a.data.name.localeCompare(b.data.name, 'de'));
-  const punkte: { x: number; y: number; eintrag: Eintrag }[] = [
+  const punkte: { x: number; y: number; eintrag: Eintrag; bei?: string }[] = [
     ...orte.map((o) => {
       const [x, y] = projiziere(o.lat, o.lon);
-      return { x, y, eintrag: { id: `ort-${o.id}`, name: o.name, gruppe: o.gruppe, zusatz: o.zusatz, href: o.href } };
+      return { x, y, bei: o.bei && `ort-${o.bei}`, eintrag: { id: `ort-${o.id}`, name: o.name, gruppe: o.gruppe, zusatz: o.zusatz, href: o.href } };
     }),
     ...verzeichnis.flatMap(({ id, data: e }) => {
       const a = e.adresse && adresseAus(e.adresse);
@@ -66,6 +68,10 @@ export async function marken(): Promise<Marke[]> {
       return [{ x, y, eintrag: { id: `ort-${id}`, name: e.name, gruppe: gruppeVerzeichnis[id] ?? 'betrieb', zusatz: a, href: e.seite ?? `wer-macht-was/#eintrag-${id}` } }];
     }),
   ];
+  for (const p of punkte) {
+    const ziel = p.bei && punkte.find((q) => q.eintrag.id === p.bei);
+    if (ziel) { p.x = ziel.x; p.y = ziel.y; }
+  }
   // Einträge an derselben Stelle (z. B. zwei Betriebe im selben Haus) teilen sich eine Marke
   const liste: Marke[] = [];
   for (const p of punkte) {
