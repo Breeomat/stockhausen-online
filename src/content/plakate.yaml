@@ -16,6 +16,10 @@
   bild: sv-kirmesantrinken-2026.jpg
   verein: SV Stockhausen
   gueltig_bis: 2026-10-21
+- id: kirmes-aufspielen-2026
+  titel: Kirmes-Aufspielen
+  bild: kirmes-aufspielen-2026.jpg
+  gueltig_bis: 2026-10-22
 - id: kirmes-2026
   titel: Stockhäuser Kirmes
   bild: kirmes-2026.jpg

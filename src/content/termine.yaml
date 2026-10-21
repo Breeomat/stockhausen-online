@@ -29,6 +29,14 @@
   text: |-
     Kirmesklopse bitte vorbestellen bei Metzgerei Günther (06647 1280) oder Michael Eidmann (0151 23475683).
   plakat: sv-kirmesantrinken-2026
+- id: 2026-10-22-kirmes-aufspielen
+  titel: "Stockhäuser Kirmes: Aufspielen"
+  datum: 2026-10-22
+  beginn: "15:00"
+  verein: Kirmesburschen Stockhausen
+  text: |-
+    Stationen: 15:00 Uhr Berggasse, Perlak/Wahl · 15:45 Uhr Dörr/Eidmann · 16:15 Uhr Bockel · 17:00 Uhr Koches · 17:30 Uhr Brauns Hof
+  plakat: kirmes-aufspielen-2026
 - id: 2026-10-22-kirmes-dorfabend
   titel: "Stockhäuser Kirmes: Dorfabend"
   datum: 2026-10-22
