@@ -11,6 +11,8 @@ export const aktion = {
   fristText: 'Mittwoch, 21. Oktober',
   link: 'https://www.tanteenso.de/content/teilhaberschaft',
   standort: 'https://www.tanteenso.de/content/tanteenso/standorte/stockhausen',
+  // neuestes Standort-Update von Tante Enso (Inhalte auf /tante-enso/ im Kasten „Neues von Tante Enso“)
+  update: { titel: 'Update 2', datumText: '22. Oktober 2026', link: 'https://www.tanteenso.de/content/tanteenso/standorte/stockhausen/neuigkeiten/update-2' },
 };
 
 export const aktionLaeuft = () => heute() <= aktion.frist;

@@ -50,6 +50,18 @@ const quellen = [
       </div>
     )}
 
+    <div class="karte neues">
+      <span class="kicker">Neues von Tante Enso · {aktion.update.datumText}</span>
+      <h2>Ziel erreicht – so geht es weiter</h2>
+      <p>{aktion.stand} statt der nötigen {aktion.ziel} Teilhaber: Tante Enso gratuliert Stockhausen zur erfolgreichen Kampagne. Bei der Bürgerversammlung am 23. September in der Altfellhalle hat das Dorf außerdem die Farbe für seinen Tante-Enso-Laden gewählt: Weinrot.</p>
+      <ul class="neues__liste">
+        <li><strong>Mitgestalten:</strong> Über einen Fragebogen bestimmen alle mit, was der Laden bietet – wichtigster Haushaltsbedarf, Produkte regionaler und lokaler Hersteller, Öffnungszeiten mit Personal. Wer Schwierigkeiten mit dem Computer hat, holt sich Hilfe und füllt ihn gemeinsam aus. <span class="fehlt">[fehlt: Link zum Fragebogen für Stockhausen]</span></li>
+        <li><strong>Standort-Botschafter gesucht:</strong> Tante Enso sucht jemanden aus dem Ort, der die Gegebenheiten kennt und die Updates vor dem Veröffentlichen mit abstimmt. Interessierte schicken ihre Kontaktdaten an <a href="mailto:redaktion@enso-gruppe.de">redaktion@enso-gruppe.de</a>.</li>
+        <li><strong>Karte selbst beantragen:</strong> Wer Teilhaber ist, bekommt nicht automatisch eine Tante-Enso-Karte. Sie ist kostenlos und wird im Kundenkonto oder <a href="https://www.tanteenso.de/content/tanteenso/tante-enso-karte" rel="noopener">online</a> beantragt. Voraussetzung: 18 Jahre, E-Mail-Adresse und ein europäisches Bankkonto (SEPA-Lastschrift). Die Karte kommt meist nach 10–14 Werktagen per Post. Es gibt sie auch als App „Tante Enso: 24/7 einkaufen“ (Google Play und App Store).</li>
+      </ul>
+      <p><a href={aktion.update.link} rel="noopener">Das ganze Update auf tanteenso.de lesen</a></p>
+    </div>
+
     <div class="schritte">
       <article class="karte">
         <span class="schritte__nr">1</span>
@@ -59,8 +71,8 @@ const quellen = [
       </article>
       <article class="karte">
         <span class="schritte__nr">2</span>
-        <h2>Karte erhalten</h2>
-        <p>Mit der Tante-Enso-Karte öffnet sich die Tür rund um die Uhr – auch in jedem anderen Tante-Enso-Laden in Deutschland. Bezahlt wird an der Selbstbedienungskasse.</p>
+        <h2>Karte beantragen</h2>
+        <p>Mit der Tante-Enso-Karte öffnet sich die Tür rund um die Uhr – auch in jedem anderen Tante-Enso-Laden in Deutschland. Bezahlt wird an der Selbstbedienungskasse. Die Karte kommt nicht automatisch mit dem Anteil, sondern wird kostenlos im Kundenkonto beantragt.</p>
       </article>
       <article class="karte">
         <span class="schritte__nr">3</span>
@@ -89,7 +101,7 @@ const quellen = [
       </div>
       <div class="karte vor-ort">
         <h2>Hilfe beim Zeichnen</h2>
-        <p>Neun Paten aus dem Dorf helfen bei Fragen zu Tante Enso, beim Zeichnen der Anteile im Internet und beim Beantragen der Karte, auch ohne Computerkenntnisse. Sprechzeiten gibt es bis zum 19. Oktober in der Altfellhalle (Bleichstraße 19) und im Lädchen (Welzgasse 1).</p>
+        <p>Neun Paten aus dem Dorf helfen bei Fragen zu Tante Enso, beim Zeichnen der Anteile im Internet und beim Beantragen der Karte, auch ohne Computerkenntnisse. Sprechzeiten gab es bis zum 19. Oktober in der Altfellhalle (Bleichstraße 19) und im Lädchen (Welzgasse 1).</p>
         <dl>
           {sprechzeiten.length > 0 && (
             <>
@@ -117,6 +129,7 @@ const quellen = [
       <ul>
         {quellen.map((q) => <li><a href={q.href} rel="noopener">{q.titel}</a></li>)}
         <li><a href={aktion.standort} rel="noopener">Tante Enso: Standort Stockhausen</a></li>
+        <li><a href={aktion.update.link} rel="noopener">Tante Enso: Stockhausen {aktion.update.titel} ({aktion.update.datumText})</a></li>
         <li><a href={aktion.link} rel="noopener">Tante Enso: Teilhaberschaft</a></li>
         <li><a href="https://www.tanteenso.de/content/tanteenso/tante-enso-karte" rel="noopener">Tante Enso: Tante-Enso-Karte</a></li>
       </ul>
@@ -176,6 +189,9 @@ const quellen = [
     font-weight: 600;
     font-size: 1.2rem;
   }
+  .neues { padding: clamp(1.5rem, 4vw, 2.25rem); }
+  .neues h2 { font-size: 1.5rem; }
+  .neues__liste { display: grid; gap: 0.7rem; padding-left: 1.2rem; margin: 1rem 0; }
   .zweier { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   @media (max-width: 860px) { .zweier { grid-template-columns: 1fr; } }
   .vor-ort { padding: clamp(1.5rem, 4vw, 2.25rem); }
