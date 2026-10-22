@@ -20,7 +20,7 @@ export const meldungen: Meldung[] = [
   {
     marke: 'Tante Enso',
     titel: 'Das Lädchen wird ein Tante-Enso-Laden',
-    text: `${aktion.stand} Teilhaber – das Ziel von ${aktion.ziel} ist erreicht. Das Lädchen in der Welzgasse wird ein Tante-Enso-Laden in Weinrot, Betreiber bleibt die Gemeinschaft Altenschlirf.${aktionLaeuft() ? ` Mitmachen geht noch bis ${aktion.fristText}.` : ' Wichtig für Teilhaber: Die Tante-Enso-Karte muss man selbst beantragen.'}`,
+    text: `${aktion.stand} Teilhaber – das Ziel von ${aktion.ziel} ist erreicht. Das Lädchen in der Welzgasse wird ein Tante-Enso-Laden in der Farbe „Weinrot“, Betreiber bleibt die Gemeinschaft Altenschlirf.${aktionLaeuft() ? ` Mitmachen geht noch bis ${aktion.fristText}.` : ' Wichtig für Teilhaber: Die Tante-Enso-Karte muss man selbst beantragen.'}`,
     href: 'tante-enso/',
     linkText: 'Stand und Infos',
     ton: 'info',
