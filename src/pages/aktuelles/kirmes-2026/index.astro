@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
+import titelFoto from '../../../assets/fotos/kirmes-2026-titel.jpg';
 import gruppeFoto from '../../../assets/fotos/kirmes-2026-gruppe.jpg';
 import essenFoto from '../../../assets/fotos/kirmes-2026-kirmesessen.jpg';
 import halleFoto from '../../../assets/fotos/kirmes-2026-halle.jpg';
@@ -11,7 +12,7 @@ import { url } from '../../../lib/site';
 
 // Quelle: Vorbericht zur Kirmes (21.10.2026) und Rückmeldung des Betreibers; Fotos: Kirmesburschen Stockhausen (Gruppenfoto), Marc Ahne
 ---
-<Basis bild={gruppeFoto} titel="Rückblick: Stockhäuser Kirmes 2026" beschreibung="„Oh schöne Kirmes“: Rückblick auf die Stockhäuser Kirmes vom 22. bis 24. Oktober 2026 – drei Tage Blasmusik, Livebands und Tradition, mit Fotos.">
+<Basis bild={titelFoto} titel="Rückblick: Stockhäuser Kirmes 2026" beschreibung="„Oh schöne Kirmes“: Rückblick auf die Stockhäuser Kirmes vom 22. bis 24. Oktober 2026 – drei Tage Blasmusik, Livebands und Tradition, mit Fotos.">
   <article class="huelle bericht">
     <a class="zurueck" href={url('aktuelles/rueckblick/')}>← Rückblick</a>
     <span class="kicker">Rückblick · 22. bis 24. Oktober 2026</span>
@@ -19,11 +20,16 @@ import { url } from '../../../lib/site';
     <p class="vorspann">„Oh schöne Kirmes, du bist nur einmal im Jahr“ – und dieses eine Mal hat sich in Stockhausen richtig gelohnt. Drei Tage lang wurde mit Blasmusik, Livebands, Partynächten und gelebter Tradition gefeiert. Die Kirmes war sehr gut besucht.</p>
 
     <figure class="bild-gross">
-      <Image src={gruppeFoto} alt="Gruppenfoto der Kirmesburschen und Kirmesmädchen 2026 vor der Bühne der Altfellhalle, die Burschen in weißem Hemd, schwarzer Weste und rotem Halstuch" widths={[640, 1163]} sizes="(max-width: 860px) calc(100vw - 32px), 820px" loading="eager" />
-      <figcaption>Die Kirmesburschen und Kirmesmädchen 2026 · Foto: Kirmesburschen Stockhausen</figcaption>
+      <Image src={titelFoto} alt="Gruppenfoto auf einer Sandsteintreppe: vorn sechs Kirmesburschen in weißem Hemd, schwarzer Weste und rotem Halstuch, einer mit Zylinder, dahinter Burschen und Mädchen in schwarzen T-Shirts" widths={[640, 1280]} sizes="(max-width: 860px) calc(100vw - 32px), 820px" loading="eager" />
+      <figcaption>Die Kirmesburschen und Kirmesmädchen · Foto: Kirmesburschen Stockhausen</figcaption>
     </figure>
 
     <p>Gastgeber waren in diesem Jahr 20 Kirmesburschen und 17 Kirmesmädchen. Angeführt wurde das sechsköpfige Komitee von Kirmeswatz Maximilian Wahl. Wie es Brauch ist, wurden die Mädchen eine Woche vorher beim Mädchenverstrich ersteigert, und am Mittwochabend wurde die Kirmes in der Altfellhalle mit dem Kirmeslied „angetrunken“.</p>
+
+    <figure class="bild-gross">
+      <Image src={gruppeFoto} alt="Gruppenfoto der Kirmesburschen und Kirmesmädchen 2026 vor der Bühne der Altfellhalle, die Burschen in weißem Hemd, schwarzer Weste und rotem Halstuch" widths={[640, 1163]} sizes="(max-width: 860px) calc(100vw - 32px), 820px" />
+      <figcaption>Gruppenfoto vor der Bühne in der Altfellhalle · Foto: Kirmesburschen Stockhausen</figcaption>
+    </figure>
 
     <h2>Donnerstag: Aufspielen, Kirmesessen und Dorfabend</h2>
     <p>Ab 15 Uhr holte der Posaunenchor das Dorf mit seinem musikalischen Rundgang aus dem Alltag. Am frühen Abend zogen die Burschen mit Blumen und Sekt zu ihren Kirmesmädchen, wo das Kirmesessen wartete. Danach ging es in die Halle, wo DJ Walle auf Malle beim Dorfabend für ausgelassene Stimmung sorgte.</p>
