@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import TerminKarte from '../../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine, gehoertZu } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 import kircheFoto from '../../../assets/fotos/stockhausen-kirche.jpg';
@@ -88,6 +89,8 @@ const instrumente = ['Trompete', 'Flügelhorn', 'Posaune', 'Tenorhorn', 'Tuba'];
         ))}
       </ul>
     </div>
+
+    <VereinRueckblicke teil="Posaunenchor" />
 
     {termine.length > 0 && (
       <div>

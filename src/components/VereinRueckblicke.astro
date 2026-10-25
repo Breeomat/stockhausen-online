@@ -1,0 +1,44 @@
+---
+// Rückblicke (Berichte mit Fotos) eines Vereins für dessen Seite; erscheint nur, wenn es Berichte gibt
+import { Image } from 'astro:assets';
+import { rueckblickeFuer } from '../lib/rueckblicke';
+import { url } from '../lib/site';
+
+interface Props { teil: string }
+const liste = rueckblickeFuer(Astro.props.teil);
+const datumLang = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${iso}T12:00:00`));
+---
+{liste.length > 0 && (
+  <div class="vr">
+    <span class="kicker">Rückblick</span>
+    <h2>Berichte und Fotos</h2>
+    <ul class="vr__liste">
+      {liste.map((r) => (
+        <li>
+          <a class="karte vr__eintrag" href={url(r.href)}>
+            {r.bild && <Image class="vr__bild" src={r.bild.src} alt={r.bild.alt} widths={[320, 640]} sizes="(max-width: 640px) 100vw, 220px" />}
+            <span class="vr__text">
+              {r.datum && <time datetime={r.datum}>{datumLang(r.datum)}</time>}
+              <strong>{r.titel}</strong>
+              <span>{r.text}</span>
+              <span class="vr__pfeil">Bericht lesen →</span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<style>
+  .vr__liste { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 1rem; }
+  .vr__eintrag { display: grid; grid-template-columns: 220px 1fr; overflow: hidden; text-decoration: none; color: var(--text); transition: transform 0.2s ease; }
+  .vr__eintrag:hover { transform: translateY(-2px); color: var(--text); }
+  .vr__bild { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .vr__text { display: flex; flex-direction: column; gap: 0.3rem; padding: 1.1rem 1.4rem; }
+  .vr__text time { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ziegel); }
+  .vr__text strong { font-family: var(--serif); font-size: 1.25rem; color: var(--meer); }
+  .vr__text span { color: var(--text-leise); }
+  .vr__text .vr__pfeil { margin-top: auto; padding-top: 0.3rem; font-weight: 600; color: var(--ziegel); }
+  @media (max-width: 640px) { .vr__eintrag { grid-template-columns: 1fr; } }
+</style>

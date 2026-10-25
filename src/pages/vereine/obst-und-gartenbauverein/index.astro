@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import maibaumFoto from '../../../assets/fotos/ogv-maibaum.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
@@ -52,6 +53,8 @@ const jahreslauf = [
       <h2>Garten- und Naturfreunde willkommen</h2>
       <p>Der Verein freut sich über alle, die die Streuobsttradition in Stockhausen mitgestalten möchten.</p>
     </div>
+
+    <VereinRueckblicke teil="Gartenbau" />
 
     {termine.length > 0 && (
       <div>

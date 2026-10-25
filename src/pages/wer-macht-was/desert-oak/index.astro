@@ -4,6 +4,7 @@ import Basis from '../../../layouts/Basis.astro';
 import bandFoto from '../../../assets/fotos/desert-oak-band.jpg';
 import logo from '../../../assets/fotos/desert-oak-logo.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
@@ -68,6 +69,8 @@ const besetzung = [
         </dl>
       </aside>
     </div>
+
+    <VereinRueckblicke teil="Desert Oak" />
 
     {termine.length > 0 && (
       <div>

@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import festFoto from '../../../assets/fotos/gefrierhaus-fest.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
@@ -87,6 +88,8 @@ const vorstand = [
         </div>
       </aside>
     </div>
+
+    <VereinRueckblicke teil="Gefrier" />
 
     {termine.length > 0 && (
       <div>

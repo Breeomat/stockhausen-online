@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import TerminKarte from '../../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 import schlossFoto from '../../../assets/fotos/stockhausen-schloss.jpg';
@@ -85,6 +86,8 @@ const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Aus
       <h2>Haben Sie alte Fotos oder Geschichten?</h2>
       <p>Historische Aufnahmen, Schriftstücke oder Erinnerungen aus alten Tagen helfen, das kulturelle Gedächtnis Stockhausens lebendig zu halten. Sprechen Sie den Arbeitskreis an.</p>
     </div>
+
+    <VereinRueckblicke teil="Dorfgeschichte" />
 
     {termine.length > 0 && (
       <div>

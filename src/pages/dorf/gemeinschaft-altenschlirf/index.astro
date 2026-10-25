@@ -6,6 +6,7 @@ import logo from '../../../assets/fotos/gemeinschaft-altenschlirf-logo.png';
 import marktFoto from '../../../assets/fotos/johannimarkt.jpg';
 import parkFoto from '../../../assets/fotos/schloss-stockhausen-park.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
@@ -119,6 +120,8 @@ const johannimarkt = [
         <figcaption>Die Kulisse: Schloss Stockhausen von der Parkseite · Foto: Gemeinschaft Altenschlirf</figcaption>
       </figure>
     </div>
+
+    <VereinRueckblicke teil="Altenschlirf" />
 
     {termine.length > 0 && (
       <div>

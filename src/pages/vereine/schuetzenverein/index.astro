@@ -4,6 +4,7 @@ import Basis from '../../../layouts/Basis.astro';
 import wappen from '../../../assets/fotos/schuetzenverein-wappen.png';
 import luftbild from '../../../assets/fotos/schuetzenhaus-luftbild.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
@@ -82,6 +83,8 @@ const disziplinen = [
       </dl>
     </div>
     </div>
+
+    <VereinRueckblicke teil="Schützenverein" />
 
     {termine.length > 0 && (
       <div>

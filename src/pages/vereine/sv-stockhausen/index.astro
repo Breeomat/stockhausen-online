@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import TerminKarte from '../../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine, heute } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 import wappen from '../../../assets/fotos/sv-stockhausen-wappen.png';
@@ -121,6 +122,8 @@ const erweitert = [
         <figcaption>Die Sportanlage von oben · Foto: Marc Ahne</figcaption>
       </figure>
     </div>
+
+    <VereinRueckblicke teil="SV Stockhausen" />
 
     {termine.length > 0 && (
       <div>

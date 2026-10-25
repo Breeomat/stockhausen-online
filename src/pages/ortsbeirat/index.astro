@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Basis from '../../layouts/Basis.astro';
 import TerminKarte from '../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../components/VereinRueckblicke.astro';
 import beiratFoto from '../../assets/fotos/ortsbeirat-stockhausen.png';
 import { ortsbeirat } from '../../lib/ortsbeirat';
 import { kommendeTermine } from '../../lib/termine';
@@ -71,6 +72,8 @@ const aufgaben = [
       <h2>Wie der Ortsbeirat zustande kommt</h2>
       <p>Die Mitglieder werden von den Bürgerinnen und Bürgern des Ortsbezirks bei der Kommunalwahl für fünf Jahre gewählt. Je nach Einwohnerzahl hat ein Ortsbeirat in Herbstein drei bis neun Mitglieder – in Stockhausen sind es neun. Aus ihrer Mitte wählen sie den Ortsvorsteher, der den Vorsitz führt. In allen acht Stadtteilen von Herbstein gibt es einen Ortsbeirat.</p>
     </div>
+
+    <VereinRueckblicke teil="Ortsbeirat" />
 
     {termine.length > 0 && (
       <div>

@@ -4,6 +4,7 @@ import Basis from '../../../layouts/Basis.astro';
 import gruppenFoto from '../../../assets/fotos/kirmesburschen-gruppe.jpg';
 import komiteeFoto from '../../../assets/fotos/kirmesburschen-komitee.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
@@ -60,6 +61,8 @@ const ablauf = [
         ))}
       </ul>
     </div>
+
+    <VereinRueckblicke teil="Kirmes" />
 
     {termine.length > 0 && (
       <div>

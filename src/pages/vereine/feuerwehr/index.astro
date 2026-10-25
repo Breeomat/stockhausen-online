@@ -4,6 +4,7 @@ import Basis from '../../../layouts/Basis.astro';
 import einsatzFoto from '../../../assets/fotos/feuerwehr-einsatzabteilung.jpg';
 import uniformFoto from '../../../assets/fotos/feuerwehr-uniform.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
@@ -86,6 +87,8 @@ const chronik = [
     <ul class="zahlen">
       {zahlen.map(({ wert, text }) => <li class="karte"><strong>{wert}</strong><span>{text}</span></li>)}
     </ul>
+
+    <VereinRueckblicke teil="Feuerwehr" />
 
     {termine.length > 0 && (
       <div>

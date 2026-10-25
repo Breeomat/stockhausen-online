@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import schoppenFoto from '../../../assets/fotos/gesangverein-daemmerschoppen.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
@@ -81,6 +82,8 @@ const ehrungen = [
         </div>
       </aside>
     </div>
+
+    <VereinRueckblicke teil="Gesangverein" />
 
     {termine.length > 0 && (
       <div>

@@ -9,6 +9,7 @@ import umzugLanzGrau from '../../../assets/fotos/schlepperfreunde-umzug-lanz-gra
 import hanomagLanz from '../../../assets/fotos/schlepperfreunde-hanomag-lanz.jpg';
 import lanzBlau from '../../../assets/fotos/schlepperfreunde-lanz-blau.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
+import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 
@@ -77,6 +78,8 @@ const galerie = [
       </ul>
       <p class="nachweis">Fotos: Marc Ahne</p>
     </div>
+
+    <VereinRueckblicke teil="Schlepperfreunde" />
 
     {termine.length > 0 && (
       <div>
