@@ -5,7 +5,7 @@ import { abgelaufeneMeldungen } from './aktuelles';
 
 // Rückblick (/aktuelles/rueckblick/): Berichte mit Fotos und abgelaufene Meldungen aus „Aktuelles“.
 // Neue Berichte als eigene Seite unter src/pages/aktuelles/<name>/ anlegen und hier eintragen.
-// vereine: Namensteile der beteiligten Vereine – der Bericht erscheint dann auch auf deren Seite (wie beim Terminfilter)
+// vereine: Namensteil des veranstaltenden Vereins (nur Veranstalter, nicht Beteiligte) – der Bericht erscheint dann auch auf dessen Seite
 export interface Rueckblick { titel: string; datum?: string; marke?: string; text: string; href: string; bild?: { src: ImageMetadata; alt: string }; vereine?: string[] }
 
 export const rueckblicke: Rueckblick[] = [
