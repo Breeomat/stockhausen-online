@@ -5,6 +5,8 @@ import gruppeFoto from '../../../assets/fotos/kirmes-2026-gruppe.jpg';
 import essenFoto from '../../../assets/fotos/kirmes-2026-kirmesessen.jpg';
 import halleFoto from '../../../assets/fotos/kirmes-2026-halle.jpg';
 import fackelFoto from '../../../assets/fotos/kirmes-2026-fackelumzug.jpg';
+import plakatKirmes from '../../../assets/plakate/kirmes-2026.jpg';
+import plakatAufspielen from '../../../assets/plakate/kirmes-aufspielen-2026.jpg';
 import { url } from '../../../lib/site';
 
 // Quelle: Vorbericht zur Kirmes (21.10.2026) und Rückmeldung des Betreibers; Fotos: Kirmesburschen Stockhausen (Gruppenfoto), Marc Ahne
@@ -47,6 +49,18 @@ import { url } from '../../../lib/site';
       <figcaption>Fackelumzug durchs Dorf · Foto: Marc Ahne</figcaption>
     </figure>
 
+    <h2>Die Plakate</h2>
+    <div class="plakate">
+      <figure>
+        <a href={url('plakate/#plakat-kirmes-2026')}><Image src={plakatKirmes} alt="Plakat der Stockhäuser Kirmes 22.–24.10.2026 mit dem Programm von Donnerstag bis Samstag" widths={[320, 640]} sizes="(max-width: 640px) 50vw, 300px" /></a>
+        <figcaption>Das Kirmesprogramm</figcaption>
+      </figure>
+      <figure>
+        <a href={url('plakate/#plakat-kirmes-aufspielen-2026')}><Image src={plakatAufspielen} alt="Plakat Kirmes-Aufspielen am Donnerstag, 22.10., ab 15 Uhr mit den Stationen im Dorf" widths={[320, 640]} sizes="(max-width: 640px) 50vw, 300px" /></a>
+        <figcaption>Das Aufspielen am Donnerstag</figcaption>
+      </figure>
+    </div>
+
     <h2>Danke!</h2>
     <p>Die Kirmesburschen und Kirmesmädchen bedanken sich bei allen Besucherinnen und Besuchern, bei den vielen Helferinnen und Helfern, den Sponsoren, Freunden, der Feuerwehr und allen, die zum Gelingen der Kirmes beigetragen haben. Es war eine tolle Kirmes – bis zum nächsten Jahr!</p>
 
@@ -65,4 +79,8 @@ import { url } from '../../../lib/site';
   .bild-gross img, .bild-hoch img { width: 100%; height: auto; border-radius: var(--radius, 12px); }
   .bild-gross figcaption, .bild-hoch figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-leise); }
   .mehr { margin-top: 2rem; font-weight: 600; }
+  .plakate { display: grid; grid-template-columns: repeat(2, minmax(0, 300px)); gap: 1.25rem; margin: 1.25rem 0 0; }
+  .plakate figure { margin: 0; }
+  .plakate img { width: 100%; height: auto; border-radius: 8px; box-shadow: var(--schatten); }
+  .plakate figcaption { margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-leise); }
 </style>

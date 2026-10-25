@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import stallFoto from '../../../assets/fotos/erntedank-2026-stall.jpg';
 import predigtFoto from '../../../assets/fotos/erntedank-2026-predigt.jpg';
+import plakatErntedank from '../../../assets/plakate/erntedank-2026.jpg';
 import { url } from '../../../lib/site';
 
 // Quelle: Beitrag der Ev. Kirchengemeinde Stockhausen-Rixfeld (Facebook, 18.10.2026), Fotos der Kirchengemeinde
@@ -28,6 +29,11 @@ import { url } from '../../../lib/site';
 
     <p>Im Anschluss klang der besondere Tag bei einem gemütlichen Kartoffelfeuer aus.</p>
 
+    <figure class="plakat">
+      <a href={url('plakate/#plakat-erntedank-2026')}><Image src={plakatErntedank} alt="Plakat zum Erntedankgottesdienst am 18. Oktober 2026" widths={[320, 640]} sizes="(max-width: 640px) 60vw, 300px" /></a>
+      <figcaption>Das Plakat zum Gottesdienst</figcaption>
+    </figure>
+
     <p class="mehr"><a href={url('vereine/kirchengemeinde/')}>Mehr über die Ev. Kirchengemeinde Stockhausen-Rixfeld →</a></p>
   </article>
 </Basis>
@@ -41,4 +47,7 @@ import { url } from '../../../lib/site';
   .bild-gross img { width: 100%; height: auto; border-radius: var(--radius, 12px); }
   .bild-gross figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-leise); }
   .mehr { margin-top: 2rem; font-weight: 600; }
+  .plakat { margin: 2rem 0 0; max-width: 300px; }
+  .plakat img { width: 100%; height: auto; border-radius: 8px; box-shadow: var(--schatten); }
+  .plakat figcaption { margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-leise); }
 </style>
