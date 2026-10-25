@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import titelFoto from '../../../assets/fotos/kirmes-2026-titel.jpg';
 import gruppeFoto from '../../../assets/fotos/kirmes-2026-gruppe.jpg';
+import verstrichFoto from '../../../assets/fotos/kirmes-2026-maedchenverstrich.jpg';
 import essenFoto from '../../../assets/fotos/kirmes-2026-kirmesessen.jpg';
 import halleFoto from '../../../assets/fotos/kirmes-2026-halle.jpg';
 import fackelFoto from '../../../assets/fotos/kirmes-2026-fackelumzug.jpg';
@@ -24,11 +25,18 @@ import { url } from '../../../lib/site';
       <figcaption>Die Kirmesburschen und Kirmesmädchen · Foto: Kirmesburschen Stockhausen</figcaption>
     </figure>
 
-    <p>Gastgeber waren in diesem Jahr 20 Kirmesburschen und 17 Kirmesmädchen. Angeführt wurde das sechsköpfige Komitee von Kirmeswatz Maximilian Wahl. Wie es Brauch ist, wurden die Mädchen eine Woche vorher beim Mädchenverstrich ersteigert, und am Mittwochabend wurde die Kirmes in der Altfellhalle mit dem Kirmeslied „angetrunken“.</p>
+    <p>Gastgeber waren in diesem Jahr 20 Kirmesburschen und 17 Kirmesmädchen. Angeführt wurde das sechsköpfige Komitee von Kirmeswatz Maximilian Wahl.</p>
 
     <figure class="bild-gross">
       <Image src={gruppeFoto} alt="Gruppenfoto der Kirmesburschen und Kirmesmädchen 2026 vor der Bühne der Altfellhalle, die Burschen in weißem Hemd, schwarzer Weste und rotem Halstuch" widths={[640, 1163]} sizes="(max-width: 860px) calc(100vw - 32px), 820px" />
       <figcaption>Gruppenfoto vor der Bühne in der Altfellhalle · Foto: Kirmesburschen Stockhausen</figcaption>
+    </figure>
+
+    <p>Wie es Brauch ist, wurden die Mädchen eine Woche vorher beim Mädchenverstrich ersteigert, und am Mittwochabend wurde die Kirmes in der Altfellhalle mit dem Kirmeslied „angetrunken“.</p>
+
+    <figure class="bild-hoch">
+      <Image src={verstrichFoto} alt="Kirmesburschen mit roten Halstüchern und Biergläsern in einem Raum, vorn einer mit Zylinder, der mit einem Holzhammer auf einen Holzklotz schlägt, davor ein altes Verkehrsschild" widths={[480, 900]} sizes="(max-width: 860px) calc(100vw - 32px), 420px" />
+      <figcaption>Beim Mädchenverstrich · Foto: <span class="fehlt">[fehlt: Fotograf]</span></figcaption>
     </figure>
 
     <h2>Donnerstag: Aufspielen, Kirmesessen und Dorfabend</h2>
