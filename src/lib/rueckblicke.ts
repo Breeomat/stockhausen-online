@@ -1,5 +1,6 @@
 import type { ImageMetadata } from 'astro';
 import erntedank2026 from '../assets/fotos/erntedank-2026-stall.jpg';
+import kirmes2026 from '../assets/fotos/kirmes-2026-gruppe.jpg';
 import { abgelaufeneMeldungen } from './aktuelles';
 
 // Rückblick (/aktuelles/rueckblick/): Berichte mit Fotos und abgelaufene Meldungen aus „Aktuelles“.
@@ -7,6 +8,13 @@ import { abgelaufeneMeldungen } from './aktuelles';
 export interface Rueckblick { titel: string; datum?: string; marke?: string; text: string; href: string; bild?: { src: ImageMetadata; alt: string } }
 
 export const rueckblicke: Rueckblick[] = [
+  {
+    titel: 'Stockhäuser Kirmes 2026',
+    datum: '2026-10-24',
+    text: 'Drei Tage Blasmusik, Livebands und Tradition in der sehr gut besuchten Altfellhalle – vom Aufspielen bis zum Fackelumzug.',
+    href: 'aktuelles/kirmes-2026/',
+    bild: { src: kirmes2026, alt: 'Gruppenfoto der Kirmesburschen und Kirmesmädchen 2026' },
+  },
   {
     titel: 'Erntedank im Stall',
     datum: '2026-10-18',

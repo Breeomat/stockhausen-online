@@ -1,0 +1,68 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import gruppeFoto from '../../../assets/fotos/kirmes-2026-gruppe.jpg';
+import essenFoto from '../../../assets/fotos/kirmes-2026-kirmesessen.jpg';
+import halleFoto from '../../../assets/fotos/kirmes-2026-halle.jpg';
+import fackelFoto from '../../../assets/fotos/kirmes-2026-fackelumzug.jpg';
+import { url } from '../../../lib/site';
+
+// Quelle: Vorbericht zur Kirmes (21.10.2026) und Rückmeldung des Betreibers; Fotos: Kirmesburschen Stockhausen
+---
+<Basis bild={gruppeFoto} titel="Rückblick: Stockhäuser Kirmes 2026" beschreibung="„Oh schöne Kirmes“: Rückblick auf die Stockhäuser Kirmes vom 22. bis 24. Oktober 2026 – drei Tage Blasmusik, Livebands und Tradition, mit Fotos.">
+  <article class="huelle bericht">
+    <a class="zurueck" href={url('aktuelles/rueckblick/')}>← Rückblick</a>
+    <span class="kicker">Rückblick · 22. bis 24. Oktober 2026</span>
+    <h1>„Oh schöne Kirmes“</h1>
+    <p class="vorspann">„Oh schöne Kirmes, du bist nur einmal im Jahr“ – und dieses eine Mal hat sich in Stockhausen richtig gelohnt. Drei Tage lang wurde mit Blasmusik, Livebands, Partynächten und gelebter Tradition gefeiert. Die Kirmes war sehr gut besucht.</p>
+
+    <figure class="bild-gross">
+      <Image src={gruppeFoto} alt="Gruppenfoto der Kirmesburschen und Kirmesmädchen 2026 vor der Bühne der Altfellhalle, die Burschen in weißem Hemd, schwarzer Weste und rotem Halstuch" widths={[640, 1163]} sizes="(max-width: 860px) calc(100vw - 32px), 820px" loading="eager" />
+      <figcaption>Die Kirmesburschen und Kirmesmädchen 2026 · Foto: Kirmesburschen Stockhausen</figcaption>
+    </figure>
+
+    <p>Gastgeber waren in diesem Jahr 20 Kirmesburschen und 17 Kirmesmädchen. Angeführt wurde das sechsköpfige Komitee von Kirmeswatz Maximilian Wahl. Wie es Brauch ist, wurden die Mädchen eine Woche vorher beim Mädchenverstrich ersteigert, und am Mittwochabend wurde die Kirmes in der Altfellhalle mit dem Kirmeslied „angetrunken“.</p>
+
+    <h2>Donnerstag: Aufspielen, Kirmesessen und Dorfabend</h2>
+    <p>Ab 15 Uhr holte der Posaunenchor das Dorf mit seinem musikalischen Rundgang aus dem Alltag. Am frühen Abend zogen die Burschen mit Blumen und Sekt zu ihren Kirmesmädchen, wo das Kirmesessen wartete. Danach ging es in die Halle, wo DJ Walle auf Malle beim Dorfabend für ausgelassene Stimmung sorgte.</p>
+
+    <figure class="bild-hoch">
+      <Image src={essenFoto} alt="Kirmesburschen mit rotem Halstuch vor einem Haus, in der Mitte eine Sektflasche auf dem Pflaster" widths={[480, 900]} sizes="(max-width: 860px) calc(100vw - 32px), 420px" />
+      <figcaption>Mit Sekt zu den Kirmesmädchen · Foto: Kirmesburschen Stockhausen</figcaption>
+    </figure>
+
+    <h2>Freitag: Frühschoppen und Livemusik</h2>
+    <p>Beim Frühschoppen spielte die „1. Original Wallenröder Dicke Backe Kapell“ auf, für das Essen sorgte den ganzen Tag der Landgasthof und die Metzgerei Schwarz aus Uffhausen. Am Nachmittag ging es mit den „Fischbörner Buben“ weiter, am Abend stand die Band „Dirty Mind“ mit Partyhits und Rock auf der Bühne.</p>
+
+    <figure class="bild-gross">
+      <Image src={halleFoto} alt="Volle Altfellhalle mit Bierbänken, blauen Tischdecken und vielen Gästen, an der Wand Sponsorenbanner" widths={[640, 1024, 1600]} sizes="(max-width: 860px) calc(100vw - 32px), 820px" />
+      <figcaption>Volles Haus in der Altfellhalle · Foto: Kirmesburschen Stockhausen</figcaption>
+    </figure>
+
+    <h2>Samstag: Kinderkirmes, Fackelumzug und Finale</h2>
+    <p>Bei der Kinderkirmes mit Jan Wehner mussten sich Mädchen und Burschen bei Spielen und Tänzen gegen den Nachwuchs behaupten, auf der Hüpfburg wurde nach Herzenslust getobt. Als es dunkel wurde, zogen alle gemeinsam beim Fackelumzug durchs Dorf, ebenfalls musikalisch begleitet von Jan Wehner. Den Abschluss bildete die Disco mit „Kalbeat“ bis tief in die Nacht.</p>
+
+    <figure class="bild-gross">
+      <Image src={fackelFoto} alt="Fackelumzug in der Dunkelheit: brennende Fackeln im Vordergrund, dahinter viele Kinder und Erwachsene auf der Straße" widths={[640, 1024, 1600]} sizes="(max-width: 860px) calc(100vw - 32px), 820px" />
+      <figcaption>Fackelumzug durchs Dorf · Foto: Kirmesburschen Stockhausen</figcaption>
+    </figure>
+
+    <h2>Danke!</h2>
+    <p>Die Kirmesburschen und Kirmesmädchen bedanken sich bei allen Besucherinnen und Besuchern, bei den vielen Helferinnen und Helfern, den Sponsoren, Freunden, der Feuerwehr und allen, die zum Gelingen der Kirmes beigetragen haben. Es war eine tolle Kirmes – bis zum nächsten Jahr!</p>
+
+    <p class="mehr"><a href={url('vereine/kirmesburschen/')}>Mehr über die Kirmesburschen Stockhausen →</a></p>
+  </article>
+</Basis>
+
+<style>
+  .bericht { padding-block: clamp(2.5rem, 6vw, 4rem) 5rem; max-width: 860px; }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .vorspann { font-size: 1.2rem; color: var(--text-leise); }
+  .bericht p { max-width: 68ch; line-height: 1.7; }
+  .bericht h2 { margin-top: 2.5rem; font-size: 1.5rem; }
+  .bild-gross, .bild-hoch { margin: 2rem 0; }
+  .bild-hoch { max-width: 420px; }
+  .bild-gross img, .bild-hoch img { width: 100%; height: auto; border-radius: var(--radius, 12px); }
+  .bild-gross figcaption, .bild-hoch figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-leise); }
+  .mehr { margin-top: 2rem; font-weight: 600; }
+</style>
