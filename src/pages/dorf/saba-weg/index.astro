@@ -4,7 +4,7 @@ import Basis from '../../../layouts/Basis.astro';
 import karte from '../../../assets/fotos/saba-weg-karte.jpg';
 import { url } from '../../../lib/site';
 
-// Quelle: Texte und PDFs (Karte, Stationsblätter) vom Betreiber (Oktober 2026)
+// Quelle: Texte und PDFs (Karte, Stationsblätter) von herbstein.de (Stadt Herbstein), Oktober 2026
 const jahreszeiten = [
   {
     name: 'Winter', zuordnung: ['Nacht', 'Wasser', 'Norden'], farbe: 'winter',
@@ -53,7 +53,7 @@ const jahreszeiten = [
 
     <figure class="karte-bild">
       <a href={url('saba-weg/saba-weg-karte.pdf')}><Image src={karte} alt="Luftbildkarte des SaBa-Erlebnisweges: Der Weg führt von Stockhausen mit den Stationen 1 bis 3 an der Altefeld über die Alte Hasel, vorbei an Konradsruhe und Riedeselmauern unterhalb des Reißbergs bis nach Schadges mit Station 12" widths={[640, 1024, 1582]} sizes="(max-width: 1000px) calc(100vw - 32px), 960px" /></a>
-      <figcaption>Der Weg mit den 12 Stationen – <a href={url('saba-weg/saba-weg-karte.pdf')}>Karte als PDF</a> · Karte: <span class="fehlt">[fehlt: Quelle]</span></figcaption>
+      <figcaption>Der Weg mit den 12 Stationen – <a href={url('saba-weg/saba-weg-karte.pdf')}>Karte als PDF</a> · Karte: Stadt Herbstein</figcaption>
     </figure>
 
     <h2>Die 12 Stationen</h2>
@@ -75,6 +75,8 @@ const jahreszeiten = [
       ))}
     </div>
     <p class="klein"><a href={url('saba-weg/saba-weg-stationen.pdf')}>Stationsblätter mit Symbolen als PDF</a></p>
+
+    <p class="klein">Texte, Karte und Stationsblätter: <a href="https://www.herbstein.de" rel="noopener">Stadt Herbstein (herbstein.de)</a></p>
 
     <aside class="karte fuehrung">
       <h2>Führungen</h2>
