@@ -192,11 +192,44 @@ const entfernungen = [
       <figcaption>Stockhausen aus der Luft im Frühling · Foto: Marc Ahne</figcaption>
     </figure>
 
-    <ul class="steckbrief">
-      {steckbrief.map(({ wert, text }) => (
-        <li class="karte"><strong>{wert}</strong><span>{text}</span></li>
-      ))}
-    </ul>
+    <div>
+      <span class="kicker">Sehenswert</span>
+      <h2>Was man gesehen haben sollte</h2>
+      <div class="sehenswert">
+        {sehenswert.map(({ titel, text, bild, href, linkText }) => (
+          <article class:list={['karte', { 'mit-bild': bild }]}>
+            {bild && (
+              <figure class="sehenswert__bild">
+                <Image src={bild.src} alt={bild.alt} widths={[480, 800, 1200]} sizes="(max-width: 640px) calc(100vw - 32px), 560px" />
+                <figcaption>Foto: {bild.foto ?? <span class="fehlt">[fehlt: Fotograf]</span>}</figcaption>
+              </figure>
+            )}
+            <div><h3>{titel}</h3><p>{text}</p>{href && <a class="sehenswert__mehr" href={url(href)}>{linkText ?? 'Die Geschichte lesen →'}</a>}</div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <span class="kicker">Rund ums Schloss</span>
+      <h2>Leben und Arbeiten mit der Gemeinschaft Altenschlirf</h2>
+      <p class="schloss-text">Auf dem Schlossgelände wird gelernt, gewebt, gegärtnert und gefeiert. Auch im „Lädchen für alles“, das die Gemeinschaft Altenschlirf betreibt, gibt es neben dem täglichen Bedarf Produkte aus den eigenen Werkstätten.</p>
+      <a class="karte gemeinschaft" href={url('dorf/gemeinschaft-altenschlirf/')}>
+        <figure class="sehenswert__bild">
+          <Image src={gemeinschaftFoto} alt="Schloss Stockhausen mit Torbau und Uhrturm hinter der Sandsteinmauer des Schlossparks" widths={[480, 680]} sizes="(max-width: 760px) calc(100vw - 32px), 560px" />
+          <figcaption>Bild: Gemeinschaft Altenschlirf</figcaption>
+        </figure>
+        <div class="gemeinschaft__text">
+          <Image class="gemeinschaft__logo" src={gemeinschaftLogo} alt="Gemeinschaft Altenschlirf" width={360} />
+          <h3>Gemeinschaft Altenschlirf &amp; Campus am Park</h3>
+          <p>Anthroposophische Lebens- und Arbeitsgemeinschaft für Menschen mit und ohne Hilfebedarf: Demeter-Landwirtschaft, zwölf Werkstätten, Fachschule für Heilerziehungspflege, Kultur und Märkte im Schlosspark.</p>
+          <span class="gemeinschaft__pfeil">Mehr über die Gemeinschaft →</span>
+        </div>
+      </a>
+      <ul class="schloss-leben">
+        {schlossLeben.map(({ titel, text }) => <li class="karte"><h3>{titel}</h3><p>{text}</p></li>)}
+      </ul>
+    </div>
 
     <div class="spalten">
       <div>
@@ -211,23 +244,6 @@ const entfernungen = [
       </div>
 
       <aside class="seitenleiste">
-        <div class="karte kasten">
-          <h3>Einwohner</h3>
-          <table>
-            <tbody>
-              {einwohner.map(([jahr, zahl]) => <tr><th scope="row">{jahr}</th><td>{zahl}</td></tr>)}
-            </tbody>
-          </table>
-          <p class="klein">1961: 749 evangelische und 125 katholische Einwohner. Quelle bis 1967: Historisches Gemeindeverzeichnis für Hessen, Hessisches Statistisches Landesamt 1968.</p>
-        </div>
-        <div class="karte kasten">
-          <h3>Daten</h3>
-          <table>
-            <tbody>
-              {daten.map(([was, wert]) => <tr><th scope="row">{was}</th><td>{wert}</td></tr>)}
-            </tbody>
-          </table>
-        </div>
         <div class="karte kasten" id="ortsbeirat">
           <h3>Ortsbeirat</h3>
           <p class="beirat__amtszeit">Amtszeit 2026–2031 · Sitzungen grundsätzlich öffentlich</p>
@@ -300,6 +316,35 @@ const entfernungen = [
       </div>
     </div>
 
+    <div class="zahlen">
+      <span class="kicker">Zahlen und Daten</span>
+      <h2>Stockhausen in Zahlen</h2>
+      <ul class="steckbrief">
+        {steckbrief.map(({ wert, text }) => (
+          <li class="karte"><strong>{wert}</strong><span>{text}</span></li>
+        ))}
+      </ul>
+      <div class="zahlen__raster">
+        <div class="karte kasten">
+          <h3>Einwohner</h3>
+          <table>
+            <tbody>
+              {einwohner.map(([jahr, zahl]) => <tr><th scope="row">{jahr}</th><td>{zahl}</td></tr>)}
+            </tbody>
+          </table>
+          <p class="klein">1961: 749 evangelische und 125 katholische Einwohner. Quelle bis 1967: Historisches Gemeindeverzeichnis für Hessen, Hessisches Statistisches Landesamt 1968.</p>
+        </div>
+        <div class="karte kasten">
+          <h3>Daten</h3>
+          <table>
+            <tbody>
+              {daten.map(([was, wert]) => <tr><th scope="row">{was}</th><td>{wert}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
     <details class="karte mehr">
       <summary><span class="kicker">Zum Nachlesen</span><h2>Verwaltung und Gerichte im Wandel</h2></summary>
       <div class="mehr__inhalt">
@@ -315,45 +360,6 @@ const entfernungen = [
         <p>In Stockhausen galten die Riedesel’schen Verordnungen als Sonderrecht; das allgemeine „Gemeine Recht“ nur dort, wo sie nichts regelten. Formal blieb das auch im Großherzogtum Hessen so, vor Gericht wurden im 19. Jahrhundert aber nur noch einzelne Bestimmungen angewandt. Am 1. Januar 1900 löste das Bürgerliche Gesetzbuch das Sonderrecht ab.</p>
       </div>
     </details>
-
-    <div>
-      <span class="kicker">Sehenswert</span>
-      <h2>Was man gesehen haben sollte</h2>
-      <div class="sehenswert">
-        {sehenswert.map(({ titel, text, bild, href, linkText }) => (
-          <article class:list={['karte', { 'mit-bild': bild }]}>
-            {bild && (
-              <figure class="sehenswert__bild">
-                <Image src={bild.src} alt={bild.alt} widths={[480, 800, 1200]} sizes="(max-width: 640px) calc(100vw - 32px), 560px" />
-                <figcaption>Foto: {bild.foto ?? <span class="fehlt">[fehlt: Fotograf]</span>}</figcaption>
-              </figure>
-            )}
-            <div><h3>{titel}</h3><p>{text}</p>{href && <a class="sehenswert__mehr" href={url(href)}>{linkText ?? 'Die Geschichte lesen →'}</a>}</div>
-          </article>
-        ))}
-      </div>
-    </div>
-
-    <div>
-      <span class="kicker">Rund ums Schloss</span>
-      <h2>Leben und Arbeiten mit der Gemeinschaft Altenschlirf</h2>
-      <p class="schloss-text">Auf dem Schlossgelände wird gelernt, gewebt, gegärtnert und gefeiert. Auch im „Lädchen für alles“, das die Gemeinschaft Altenschlirf betreibt, gibt es neben dem täglichen Bedarf Produkte aus den eigenen Werkstätten.</p>
-      <a class="karte gemeinschaft" href={url('dorf/gemeinschaft-altenschlirf/')}>
-        <figure class="sehenswert__bild">
-          <Image src={gemeinschaftFoto} alt="Schloss Stockhausen mit Torbau und Uhrturm hinter der Sandsteinmauer des Schlossparks" widths={[480, 680]} sizes="(max-width: 760px) calc(100vw - 32px), 560px" />
-          <figcaption>Bild: Gemeinschaft Altenschlirf</figcaption>
-        </figure>
-        <div class="gemeinschaft__text">
-          <Image class="gemeinschaft__logo" src={gemeinschaftLogo} alt="Gemeinschaft Altenschlirf" width={360} />
-          <h3>Gemeinschaft Altenschlirf &amp; Campus am Park</h3>
-          <p>Anthroposophische Lebens- und Arbeitsgemeinschaft für Menschen mit und ohne Hilfebedarf: Demeter-Landwirtschaft, zwölf Werkstätten, Fachschule für Heilerziehungspflege, Kultur und Märkte im Schlosspark.</p>
-          <span class="gemeinschaft__pfeil">Mehr über die Gemeinschaft →</span>
-        </div>
-      </a>
-      <ul class="schloss-leben">
-        {schlossLeben.map(({ titel, text }) => <li class="karte"><h3>{titel}</h3><p>{text}</p></li>)}
-      </ul>
-    </div>
 
     <p class="quelle">
       Quellen: Wikipedia, Artikel <a href="https://de.wikipedia.org/wiki/Stockhausen_(Herbstein)" rel="noopener">Stockhausen (Herbstein)</a>,
@@ -375,7 +381,8 @@ const entfernungen = [
 <style>
   .neu-link { font-weight: 600; }
   .dorf { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
-  .steckbrief { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+  .steckbrief { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; gap: 1rem; }
+  .zahlen__raster { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1rem; margin-top: 1rem; align-items: start; }
   .steckbrief li { padding: 1.5rem; display: flex; flex-direction: column; }
   .steckbrief strong { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--ziegel); font-weight: 600; line-height: 1; }
   .steckbrief span { color: var(--text-leise); margin-top: 0.4rem; }
