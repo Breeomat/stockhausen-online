@@ -2,9 +2,31 @@
 import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import karte from '../../../assets/fotos/saba-weg-karte.jpg';
+import begegnung from '../../../assets/fotos/saba-05-begegnung.jpg';
+import jakobus from '../../../assets/fotos/saba-06-jakobus-stele.jpg';
+import conradsruhenblick from '../../../assets/fotos/saba-07-conradsruhenblick.jpg';
+import durchblick from '../../../assets/fotos/saba-07-durchblick.jpg';
+import grenzbank from '../../../assets/fotos/saba-08-grenzbank.jpg';
+import ochsengespann from '../../../assets/fotos/saba-09-ochsengespann.jpg';
+import pflug from '../../../assets/fotos/saba-09-pflug.jpg';
+import urvogelLichtung from '../../../assets/fotos/saba-11-urvogel-lichtung.jpg';
+import urvogel from '../../../assets/fotos/saba-11-urvogel.jpg';
 import { url } from '../../../lib/site';
 
 // Quelle: Texte und PDFs (Karte, Stationsblätter) von herbstein.de (Stadt Herbstein), Oktober 2026
+// Fotos: Marc Ahne
+const fotos = [
+  { src: begegnung, titel: '5 · Begegnung', alt: 'Zwei kantige Holzfiguren mit eckigen Köpfen reichen sich am Wegrand die Hand, dahinter ein Feldweg und kahle Bäume' },
+  { src: jakobus, titel: '6 · Jakobus-Stele', alt: 'Rostige Metallstele mit Jakobsmuschel an der Spitze und Silhouetten von Pilgern und einem Reiter, dahinter Feld und Waldhang' },
+  { src: conradsruhenblick, titel: '7 · Conradsruhenblick', alt: 'Ein alter Mühlstein auf einem roten Metallgestell über einem Sockel, dahinter Feld und bewaldeter Hang' },
+  { src: durchblick, titel: '7 · Durchblick durch den Mühlstein', alt: 'Blick durch das runde Loch des Mühlsteins auf Wiese und Wald' },
+  { src: grenzbank, titel: '8 · Grenzbank', alt: 'Steinbank aus grauem Basalt und rotem Sandstein mit welliger Grenzlinie und den eingravierten Stationsnummern 1 bis 12' },
+  { src: ochsengespann, titel: '9 · Ochsengespann', alt: 'Basaltsteine am Wegrand, einer mit Hörnern und Joch aus Metall als Ochsenkopf, daneben ein Schotterweg' },
+  { src: pflug, titel: '9 · Ochsengespann mit Pflug', alt: 'Alter Pflug zwischen bemoosten Basaltsteinen, rechts ein großer Stein mit Metallhörnern als Ochse' },
+  { src: urvogel, titel: '11 · Urvogel', alt: 'Vogelskulptur aus rostigen Metallteilen und Federn mit ausgebreiteten Flügeln auf einem Steinsockel im lichten Wald' },
+  { src: urvogelLichtung, titel: '11 · Urvogel an der Lichtung', alt: 'Der Urvogel aus rostigem Metall vor liegenden Baumstämmen, rechts ein Schild' },
+];
+
 const jahreszeiten = [
   {
     name: 'Winter', zuordnung: ['Nacht', 'Wasser', 'Norden'], farbe: 'winter',
@@ -76,6 +98,17 @@ const jahreszeiten = [
     </div>
     <p class="klein"><a href={url('saba-weg/saba-weg-stationen.pdf')}>Stationsblätter mit Symbolen als PDF</a></p>
 
+    <h2>Unterwegs auf dem Weg</h2>
+    <ul class="galerie">
+      {fotos.map(({ src, titel, alt }) => (
+        <li>
+          <a href={src.src}><Image src={src} alt={alt} widths={[400, 800]} sizes="(max-width: 640px) calc(100vw - 32px), 320px" /></a>
+          <span>{titel}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="klein">Fotos: Marc Ahne · Der Erlebnisweg wurde von der EU (LEADER, Europäischer Landwirtschaftsfonds für die Entwicklung des ländlichen Raums) und vom Land Hessen gefördert, im Rahmen des Entwicklungsplans für den ländlichen Raum 2007–2013.</p>
+
     <p class="klein">Texte, Karte und Stationsblätter: <a href="https://www.herbstein.de" rel="noopener">Stadt Herbstein (herbstein.de)</a></p>
 
     <aside class="karte fuehrung">
@@ -109,6 +142,10 @@ const jahreszeiten = [
   .jz li div { display: flex; flex-direction: column; }
   .wort { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ziegel); }
   .jz small { color: var(--text-leise); font-size: 0.85rem; }
+  .galerie { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 1rem; }
+  .galerie li { margin: 0; }
+  .galerie img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; }
+  .galerie span { display: block; margin-top: 0.4rem; font-size: 0.85rem; font-weight: 600; }
   .klein { font-size: 0.9rem; margin-top: 0.75rem; }
   .fuehrung { margin-top: 3rem; padding: clamp(1.5rem, 4vw, 2.25rem); background: var(--ziegel-hell); }
   .fuehrung h2 { margin: 0 0 0.5rem; }
