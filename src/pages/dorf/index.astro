@@ -151,6 +151,12 @@ const sehenswert = [
     text: 'Altes Sühnekreuz aus einem Block Buntsandstein mit dem eingeritzten Umriss eines Schwertes, im Volksmund Kreppelstein. Es steht an der alten Landwehr in Richtung Blankenau, nahe der heutigen Kreisgrenze. Um das Kreuz ranken sich ein tödliches Duell an der Grenze und die Sage von einem verschwundenen Kloster.',
     href: 'dorf/suehnekreuz-stickelstein/',
   },
+  {
+    titel: 'SaBa-Erlebnisweg',
+    text: 'Der 2,5 km lange Erlebnisweg „SaBa“ (Sandstein/Basalt) führt aus der Stockhäuser Niederung hinauf nach Schadges, dem „Nizza“ des Vogelsberges. An 12 Stationen haben einheimische Künstler und Handwerker Skulpturen, Bauwerke und Installationen geschaffen. Führungen auf Anfrage.',
+    href: 'dorf/saba-weg/',
+    linkText: 'Karte, Stationen und Führungen →',
+  },
 ];
 
 const schlossLeben = [
@@ -314,7 +320,7 @@ const entfernungen = [
       <span class="kicker">Sehenswert</span>
       <h2>Was man gesehen haben sollte</h2>
       <div class="sehenswert">
-        {sehenswert.map(({ titel, text, bild, href }) => (
+        {sehenswert.map(({ titel, text, bild, href, linkText }) => (
           <article class:list={['karte', { 'mit-bild': bild }]}>
             {bild && (
               <figure class="sehenswert__bild">
@@ -322,7 +328,7 @@ const entfernungen = [
                 <figcaption>Foto: {bild.foto ?? <span class="fehlt">[fehlt: Fotograf]</span>}</figcaption>
               </figure>
             )}
-            <div><h3>{titel}</h3><p>{text}</p>{href && <a class="sehenswert__mehr" href={url(href)}>Die Geschichte lesen →</a>}</div>
+            <div><h3>{titel}</h3><p>{text}</p>{href && <a class="sehenswert__mehr" href={url(href)}>{linkText ?? 'Die Geschichte lesen →'}</a>}</div>
           </article>
         ))}
       </div>

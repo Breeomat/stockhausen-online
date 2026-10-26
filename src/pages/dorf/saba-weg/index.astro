@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import karte from '../../../assets/fotos/saba-weg-karte.jpg';
+import { url } from '../../../lib/site';
+
+// Quelle: Texte und PDFs (Karte, Stationsblätter) vom Betreiber (Oktober 2026)
+const jahreszeiten = [
+  {
+    name: 'Winter', zuordnung: ['Nacht', 'Wasser', 'Norden'], farbe: 'winter',
+    stationen: [
+      { nr: 1, wort: 'fließen', titel: 'Altefeldbrücke Stockhausen', von: 'Fa. Rüdiger Greb, Alsfeld' },
+      { nr: 2, wort: 'konzentrieren', titel: 'Rotation', von: 'Heike Cimander, Stockhausen' },
+      { nr: 3, wort: 'überwinden', titel: 'Dieter-Bosselmann-Steg', von: 'Fa. Georg Muth, Stockhausen · Fa. Caspar, Engelrod · Waldarbeiter der Stadt Herbstein' },
+    ],
+  },
+  {
+    name: 'Frühling', zuordnung: ['Morgen', 'Holz', 'Osten'], farbe: 'fruehling',
+    stationen: [
+      { nr: 4, wort: 'wachsen', titel: 'Weidenkuppel „In HaWei“', von: 'Thomas Hofmann, Burkhards' },
+      { nr: 5, wort: 'bewegen', titel: 'Begegnung', von: 'Alfred Lerg, Landenhausen' },
+      { nr: 6, wort: 'drehen', titel: 'Jakobus-Stele', von: 'Claus Weber, Reichlos' },
+    ],
+  },
+  {
+    name: 'Sommer', zuordnung: ['Mittag', 'Feuer', 'Süden'], farbe: 'sommer',
+    stationen: [
+      { nr: 7, wort: 'strahlen', titel: 'Conradsruhenblick', von: 'Fa. Oswin Hacke, Großfelda' },
+      { nr: 8, wort: 'ausdehnen', titel: 'Grenzbank', von: 'Fa. Andreas Ruhl, Alsfeld' },
+      { nr: 9, wort: 'arbeiten', titel: 'Ochsengespann', von: 'Karl Kaiser, Stockhausen' },
+    ],
+  },
+  {
+    name: 'Herbst', zuordnung: ['Abend', 'Metall', 'Westen'], farbe: 'herbst',
+    stationen: [
+      { nr: 10, wort: 'unterschlüpfen', titel: 'Wiesenwäldchen', von: 'natürlicher Viehunterstand' },
+      { nr: 11, wort: 'loslassen', titel: 'Urvogel', von: 'Dieter Harnack, Eiterfeld' },
+      { nr: 12, wort: 'spielen', titel: 'Spielplatz Schadges', von: 'Fa. Caspar, Schwabenrod' },
+    ],
+  },
+];
+---
+<Basis bild={karte} titel="SaBa-Erlebnisweg" beschreibung="Der SaBa-Erlebnisweg (Sandstein/Basalt) zwischen Stockhausen und Schadges: 2,5 km, 12 Stationen mit Skulpturen einheimischer Künstler – Karte, Stationen und Führungen.">
+  <article class="huelle saba">
+    <a class="zurueck" href={url('dorf/')}>← Unser Dorf</a>
+    <span class="kicker">Erlebnisweg · Stockhausen–Schadges · 2,5 km</span>
+    <h1>Der SaBa-Weg</h1>
+    <p class="vorspann">Der Erlebnisweg „SaBa“ (Sandstein/Basalt) zwischen Stockhausen und Schadges führt aus der Stockhäuser Niederung, der Sandsteingegend, zu den östlichen Ausläufern des Vulkanmassivs des Vogelsbergs, der Basaltgegend bei Schadges.</p>
+
+    <p>Der Weg ist abwechslungsreich und ändert stetig seine Beschaffenheit durch begleitende Bachläufe, natürliche Begrenzungen, markante Übergänge und sanfte Steigungen. Nah- und Weitblicke bestimmen die Atmosphäre des Weges, der von der Dorfgrenze Stockhausens über den Rand des Schlossparks ins freie Feld führt. Unterhalb des vulkanischen Reißberges stößt man auf die Riedesel’schen Basaltmauern, geht an uralten Eichen vorbei und erreicht den um 100 m höher gelegenen Weiler Schadges, der wegen seiner besonderen Lage auch das „Nizza“ des Vogelsberges genannt wird.</p>
+    <p>Einheimische Künstler und Handwerker haben entlang des SaBa-Weges an 12 herausragenden Punkten die dort vorhandenen Energien durch Skulpturen, Bauwerke und Installationen verstärkt und in geologische, landschaftliche, kulturelle und bauliche Zusammenhänge eingebettet. Neben Verweilplätzen wie Weidenkuppel, Grenzbank und Sitzblöcken markieren andere Objekte wichtige Kreuzungspunkte, herrliche Blicke und viel Geheimnisvolles.</p>
+    <p>Der SaBa-Weg ist die östliche Erschließung des Geoparks Vulkanregion Vogelsberg und Teil des Herbsteiner Höhenweges, der von Stockhausens Niederndorf (280 m) über Herbstein (450 m) bis zum Geiselstein (730 m) im Oberwald führt.</p>
+
+    <figure class="karte-bild">
+      <a href={url('saba-weg/saba-weg-karte.pdf')}><Image src={karte} alt="Luftbildkarte des SaBa-Erlebnisweges: Der Weg führt von Stockhausen mit den Stationen 1 bis 3 an der Altefeld über die Alte Hasel, vorbei an Konradsruhe und Riedeselmauern unterhalb des Reißbergs bis nach Schadges mit Station 12" widths={[640, 1024, 1582]} sizes="(max-width: 1000px) calc(100vw - 32px), 960px" /></a>
+      <figcaption>Der Weg mit den 12 Stationen – <a href={url('saba-weg/saba-weg-karte.pdf')}>Karte als PDF</a> · Karte: <span class="fehlt">[fehlt: Quelle]</span></figcaption>
+    </figure>
+
+    <h2>Die 12 Stationen</h2>
+    <p>Die Stationen folgen dem Lauf eines Jahres: Jede Jahreszeit hat drei Stationen und steht für eine Tageszeit, ein Element und eine Himmelsrichtung.</p>
+    <div class="jahreszeiten">
+      {jahreszeiten.map(({ name, zuordnung, farbe, stationen }) => (
+        <section class:list={['karte', 'jz', `jz--${farbe}`]}>
+          <h3>{name}</h3>
+          <p class="jz__zuordnung">{zuordnung.join(' · ')}</p>
+          <ol>
+            {stationen.map(({ nr, wort, titel, von }) => (
+              <li>
+                <span class="nr">{nr}</span>
+                <div><span class="wort">{wort}</span><strong>{titel}</strong><small>{von}</small></div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
+    </div>
+    <p class="klein"><a href={url('saba-weg/saba-weg-stationen.pdf')}>Stationsblätter mit Symbolen als PDF</a></p>
+
+    <aside class="karte fuehrung">
+      <h2>Führungen</h2>
+      <p>Termine und weitere Informationen gibt es direkt bei</p>
+      <p><strong>Christiane Kranz</strong><br />Hintergasse 3, 36358 Herbstein-Stockhausen<br />Telefon <a href="tel:+496647919041">06647 919041</a><br />Mobil <a href="tel:+491752512629">0175 2512629</a></p>
+    </aside>
+  </article>
+</Basis>
+
+<style>
+  .saba { padding-block: clamp(2.5rem, 6vw, 4rem) 5rem; max-width: 1000px; }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .vorspann { font-size: 1.2rem; color: var(--text-leise); max-width: 68ch; }
+  .saba > p { max-width: 68ch; line-height: 1.7; }
+  .saba h2 { margin-top: 2.5rem; font-size: 1.5rem; }
+  .karte-bild { margin: 2rem 0; }
+  .karte-bild img { display: block; width: 100%; height: auto; border-radius: var(--radius, 12px); }
+  .karte-bild figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-leise); }
+  .jahreszeiten { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1rem; margin-top: 1.25rem; }
+  .jz { padding: 1.25rem 1.5rem; border-top: 5px solid var(--jz); }
+  .jz--winter { --jz: #5ab4e5; }
+  .jz--fruehling { --jz: #8cc06a; }
+  .jz--sommer { --jz: #ef8f7a; }
+  .jz--herbst { --jz: #b9a68a; }
+  .jz h3 { margin: 0; font-size: 1.3rem; }
+  .jz__zuordnung { margin: 0.2rem 0 0.75rem; font-size: 0.85rem; color: var(--text-leise); letter-spacing: 0.04em; }
+  .jz ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+  .jz li { display: grid; grid-template-columns: 2.4rem 1fr; gap: 0.75rem; align-items: start; }
+  .nr { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 8px; background: var(--jz); color: #1b1b1b; font-weight: 700; font-size: 1.1rem; }
+  .jz li div { display: flex; flex-direction: column; }
+  .wort { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ziegel); }
+  .jz small { color: var(--text-leise); font-size: 0.85rem; }
+  .klein { font-size: 0.9rem; margin-top: 0.75rem; }
+  .fuehrung { margin-top: 3rem; padding: clamp(1.5rem, 4vw, 2.25rem); background: var(--ziegel-hell); }
+  .fuehrung h2 { margin: 0 0 0.5rem; }
+  .fuehrung p { margin: 0 0 0.75rem; }
+  .fuehrung p:last-child { margin: 0; line-height: 1.6; }
+</style>

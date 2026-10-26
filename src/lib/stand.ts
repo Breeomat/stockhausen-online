@@ -21,6 +21,7 @@ export const stand: Record<string, string> = {
   'dorf/gemeinschaft-altenschlirf/': '2026-10',
   'dorf/karte/': '2026-10',
   'dorf/suehnekreuz-stickelstein/': '2026-10',
+  'dorf/saba-weg/': '2026-10',
   'tante-enso/': '2026-10',
   'ortsdurchfahrt/': '2026-10',
 };
