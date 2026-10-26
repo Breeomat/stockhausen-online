@@ -1,0 +1,35 @@
+---
+import Basis from '../../../layouts/Basis.astro';
+import { url } from '../../../lib/site';
+
+// Quelle: Text vom Betreiber (Oktober 2026), Überlieferung und Dorfsage
+---
+<Basis titel="Das Sühnekreuz am Stickelstein" beschreibung="Das steinerne Geheimnis an der Landwehr: das alte Sühnekreuz am Stickelstein (Kreppelstein) zwischen Stockhausen und Blankenau – Überlieferung und Sage.">
+  <article class="huelle geschichte">
+    <a class="zurueck" href={url('dorf/')}>← Unser Dorf</a>
+    <span class="kicker">Geschichte und Sage</span>
+    <h1>Das steinerne Geheimnis an der Landwehr</h1>
+    <p class="vorspann">Wer von Stockhausen aus dem alten Grenzverlauf in Richtung Blankenau folgt, stößt nahe der heutigen Kreisgrenze auf ein stilles, ehrfurchtgebietendes Denkmal vergangener Jahrhunderte: das alte Sühnekreuz am sogenannten Stickelstein – im Volksmund auch als Kreppelstein bekannt.</p>
+
+    <p>Aus einem einzigen massiven Block Buntsandstein gehauen, trotzt das wuchtige Mal Wind und Wetter. Fährt man mit der Hand über die verwitterte Oberfläche, zeichnet sich noch heute deutlich der Umriss eines mittelalterlichen Schwertes ab. Ein stummer Zeuge, dass hier einst Menschenblut vergossen wurde.</p>
+
+    <h2>Blutige Fehde an der Grenze</h2>
+    <p>Nach alter Überlieferung geht das Mal auf das mittelalterliche Rechtswesen zurück. Genau an dieser Nahtstelle zwischen dem riedeselischen Herrschaftsgebiet und dem Fürstbistum Fulda sollen einst zwei berittene Kriegsleute aufeinandergetroffen sein. Ob aus blindem Zorn, Streit um Grenzrechte oder im Zuge einer Fehde: Die Klingen kreuzten sich in einem erbitterten Duell, das für einen der Kontrahenten tödlich endete.</p>
+    <p>Das mittelalterliche Gesetz verlangte strenge Buße: Um einer Blutrache zu entgehen und den Seelenfrieden des Erschlagenen zu sichern, musste der Täter zur Sühne auf eigene Kosten ein Steinkreuz errichten – exakt an der Stelle, an der das Opfer sein Leben ließ. Das eingeritzte Schwert zeigte jedem Vorüberziehenden die Mordwaffe und mahnte zum Frieden.</p>
+
+    <h2>Das Rätsel um das verschwundene Kloster</h2>
+    <p>Doch der Kreppelstein birgt noch ein weiteres Geheimnis. Eine ältere, fast vergessene Dorfsage verknüpft das Monument mit einem längst untergegangenen Mönchskloster, das sich einst in den Wäldern bei Stockhausen befunden haben soll. Die Brüder dieses Klosters sollen das Kreuz nicht nur als heilige Grenzmarke geweiht, sondern dort auch im Gebet derer gedacht haben, die fern der Heimat ein gewaltsames Ende fanden.</p>
+    <p>Heute ist das Kreuz am Stickelstein ein faszinierendes Relikt an der alten Landwehr – ein Ort, an dem Geschichte, Rechtstradition und Sage auf engstem Raum spürbar werden.</p>
+
+    <a class="mehr" href={url('dorf/chronik/')}>Mehr aus der Geschichte des Dorfes: die Chronik →</a>
+  </article>
+</Basis>
+
+<style>
+  .geschichte { padding-block: clamp(2.5rem, 6vw, 4rem) 5rem; max-width: 860px; }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .vorspann { font-size: 1.2rem; color: var(--text-leise); }
+  .geschichte p { max-width: 68ch; line-height: 1.7; }
+  .geschichte h2 { margin-top: 2.5rem; font-size: 1.5rem; }
+  .mehr { display: inline-block; margin-top: 2rem; font-weight: 600; }
+</style>

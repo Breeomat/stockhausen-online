@@ -146,6 +146,11 @@ const sehenswert = [
     text: 'Mausoleum der Familie Riedesel im klassizistischen Stil, 1812 von Johann Conrad Riedesel erbaut. Angeschlossen ist ein kleiner Friedhof, auf dem Conrad Riedesel begraben liegt. Das Mausoleum steht auf 328 m Höhe südwestlich des Dorfes am westlichen Ende eines großen Waldstücks. Am besten erreicht man es von der Schlagmühle an der L 3182 aus: Ein Pfad führt an einer Kapelle vorbei zu einer Allee, an deren Ende die Conrads-Ruhe liegt.',
     bild: { src: conradsRuhe, alt: 'Die Conrads-Ruhe: Mausoleum aus rotem Sandstein mit vier Säulen und der Inschrift „Conrads-Ruhe“, davor zwei weiße Bänke, ringsum kahle Bäume', foto: 'Marc Ahne' },
   },
+  {
+    titel: 'Sühnekreuz am Stickelstein',
+    text: 'Altes Sühnekreuz aus einem Block Buntsandstein mit dem eingeritzten Umriss eines Schwertes, im Volksmund Kreppelstein. Es steht an der alten Landwehr in Richtung Blankenau, nahe der heutigen Kreisgrenze. Um das Kreuz ranken sich ein tödliches Duell an der Grenze und die Sage von einem verschwundenen Kloster.',
+    href: 'dorf/suehnekreuz-stickelstein/',
+  },
 ];
 
 const schlossLeben = [
@@ -309,7 +314,7 @@ const entfernungen = [
       <span class="kicker">Sehenswert</span>
       <h2>Was man gesehen haben sollte</h2>
       <div class="sehenswert">
-        {sehenswert.map(({ titel, text, bild }) => (
+        {sehenswert.map(({ titel, text, bild, href }) => (
           <article class:list={['karte', { 'mit-bild': bild }]}>
             {bild && (
               <figure class="sehenswert__bild">
@@ -317,7 +322,7 @@ const entfernungen = [
                 <figcaption>Foto: {bild.foto ?? <span class="fehlt">[fehlt: Fotograf]</span>}</figcaption>
               </figure>
             )}
-            <div><h3>{titel}</h3><p>{text}</p></div>
+            <div><h3>{titel}</h3><p>{text}</p>{href && <a class="sehenswert__mehr" href={url(href)}>Die Geschichte lesen →</a>}</div>
           </article>
         ))}
       </div>
@@ -417,6 +422,7 @@ const entfernungen = [
   .sehenswert p { max-width: 68ch; }
   .sehenswert article { padding: 1.5rem; }
   .sehenswert p { margin: 0; color: var(--text-leise); }
+  .sehenswert__mehr { display: inline-block; margin-top: 0.75rem; font-weight: 600; }
   .mit-bild:nth-child(even) { grid-template-columns: 1fr 1.3fr; padding: 0 0 0 2rem !important; }
   .mit-bild:nth-child(even) .sehenswert__bild { order: 2; }
   .mit-bild { display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: center; padding: 0 2rem 0 0 !important; overflow: hidden; }
