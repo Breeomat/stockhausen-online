@@ -1,4 +1,5 @@
 import { aktion, aktionLaeuft, baustelle, baustelleAktiv } from './enso';
+import { heute } from './termine';
 
 // Kacheln für „Aktuelles“ (Startseite und /aktuelles/). Nur Einträge mit aktiv() === true erscheinen.
 // ton: 'warnung' (gelb, z. B. Baustelle) oder 'info' (Ziegelton)
@@ -25,6 +26,16 @@ export const meldungen: Meldung[] = [
     linkText: 'Stand und Infos',
     ton: 'info',
     aktiv: () => true,
+  },
+  {
+    marke: 'Neues Buch',
+    titel: '„Saellemoa … – So war’s einmal …“',
+    text: 'Pünktlich zum ersten Advent erscheint das neue Buch des Arbeitskreises Dorfgeschichte: über 260 Seiten Geschichte und Geschichten aus Stockhausen. Buchvorstellung am Samstag, 28. November, um 14 Uhr „i Schmidds Soal“ (Lenny’s im Saal).',
+    href: 'vereine/arbeitskreis-dorfgeschichte/#saellemoa',
+    linkText: 'Mehr zum Buch',
+    ton: 'info',
+    aktiv: () => heute() <= '2026-11-28',
+    datum: '2026-11-28',
   },
 ];
 

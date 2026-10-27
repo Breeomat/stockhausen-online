@@ -7,6 +7,7 @@ import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 import schlossFoto from '../../../assets/fotos/stockhausen-schloss.jpg';
 import buchTitel from '../../../assets/fotos/ons-bladd-titel.jpg';
+import saellemoaTitel from '../../../assets/fotos/saellemoa-titel.jpg';
 
 // Quelle: Dossier „Arbeitskreis Dorfgeschichte Stockhausen“ (Drive, Oktober 2026)
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Dorfgeschichte'));
@@ -61,6 +62,26 @@ const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Aus
           </ul>
         </div>
       </aside>
+    </div>
+
+    <div class="neu-buch" id="saellemoa">
+      <figure class="neu-buch__titel">
+        <Image src={saellemoaTitel} alt="Buchtitel „Saellemoa … So war’s einmal … – Geschichte und Geschichten aus Stockhausen“ mit einem kolorierten alten Foto: ein Junge vor Fachwerkhäusern an einer gepflasterten Dorfstraße" widths={[400, 800]} sizes="(max-width: 760px) calc(100vw - 32px), 360px" />
+      </figure>
+      <div>
+        <span class="kicker">Neu · erscheint zum ersten Advent 2026</span>
+        <h2>„Saellemoa … – So war’s einmal …“</h2>
+        <p class="buch-untertitel">Geschichte und Geschichten aus Stockhausen</p>
+        <p>Pünktlich zum ersten Advent erscheint das neue Buch über Stockhausen. Auf über 260 Seiten berichten wir über die Frühgeschichte der Wüstungen rund um Stockhausen, die Reformation im Riedeselischen Land, Erhebungen über Landwirtschaft und Handwerk, wahre Geschichten von einst bis hin zu Lebenserinnerungen von Gisela Mertin und Hanni Möller.</p>
+        <p>Geschmückt werden diese Beiträge mit alten Bildern aus den Anfängen der Fotografie und auch neueren Farbaufnahmen sowie Belegen aus Landwirtschaft und Handwerk.</p>
+        <div class="karte kasten">
+          <dl class="liste">
+            <div><dt>Buchvorstellung</dt><dd>Samstag, 28. November 2026, 14:00 Uhr</dd></div>
+            <div><dt>Ort</dt><dd>„i Schmidds Soal“ (Lenny’s im Saal), Müser Straße 9</dd></div>
+          </dl>
+          <a class="neu-buch__plakat" href={url('plakate/#plakat-buchvorstellung-saellemoa-2026')}>Plakat ansehen →</a>
+        </div>
+      </div>
     </div>
 
     <div>
@@ -138,6 +159,13 @@ const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Aus
   .namen { list-style: none; margin: 0; padding: 0; display: grid; }
   .namen li { padding: 0.45rem 0; border-bottom: 1px solid var(--linie); font-weight: 600; }
   .namen li:last-child { border-bottom: 0; }
+  .neu-buch { display: grid; grid-template-columns: 360px 1fr; gap: 2.5rem; align-items: start; }
+  @media (max-width: 760px) { .neu-buch { grid-template-columns: 1fr; gap: 1.5rem; } }
+  .neu-buch__titel { margin: 0; }
+  .neu-buch__titel img { display: block; width: 100%; height: auto; border-radius: 6px; box-shadow: var(--schatten); }
+  .neu-buch p { max-width: 68ch; }
+  .neu-buch .kasten { margin-top: 1.25rem; }
+  .neu-buch__plakat { display: inline-block; margin-top: 0.75rem; font-weight: 600; }
   .buch-untertitel { margin-top: -0.5rem; font-size: 1.1rem; color: var(--text-leise); }
   .buch-daten { max-width: 760px; margin-top: 1.25rem; }
   .foerderung { margin: 1rem 0 0; font-size: 0.9rem; color: var(--text-leise); }
