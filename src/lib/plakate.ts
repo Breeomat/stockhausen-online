@@ -17,7 +17,10 @@ const nachDatum = (a: Plakat, b: Plakat) => a.data.gueltig_bis.localeCompare(b.d
 export async function plakate() {
   const stichtag = heute();
   const alle = (await getCollection('plakate')).map(mitBild);
+  // zuletzt eingetragenes Plakat (Reihenfolge in plakate.yaml), das noch aushängt – Vorschaubild der Plakatwand
+  const neuestes = alle.filter((p) => p.data.gueltig_bis >= stichtag).at(-1);
   return {
+    neuestes,
     aktuell: alle.filter((p) => p.data.gueltig_bis >= stichtag).sort(nachDatum),
     archiv: alle.filter((p) => p.data.gueltig_bis < stichtag).sort(nachDatum).reverse(),
   };

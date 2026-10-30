@@ -3,9 +3,9 @@ import Basis from '../../layouts/Basis.astro';
 import PlakatRaster from '../../components/PlakatRaster.astro';
 import { plakate } from '../../lib/plakate';
 
-const { aktuell, archiv } = await plakate();
+const { aktuell, archiv, neuestes } = await plakate();
 ---
-<Basis titel="Plakatwand" beschreibung="Aktuelle Plakate der Vereine aus Stockhausen.">
+<Basis bild={neuestes?.bild} titel="Plakatwand" beschreibung="Aktuelle Plakate der Vereine aus Stockhausen.">
   <section class="huelle seitenkopf">
     <span class="kicker">Plakatwand</span>
     <h1>Aktuell ausgehängt</h1>
