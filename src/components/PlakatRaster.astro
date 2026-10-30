@@ -1,6 +1,7 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import type { Plakat } from '../lib/plakate';
+import { url } from '../lib/site';
 
 // zeigen/fest: nur `zeigen` Plakate anzeigen; die ersten `fest` bleiben, die übrigen Plätze wechseln je Besuch
 interface Props { liste: Plakat[]; archiv?: boolean; zeigen?: number; fest?: number }
@@ -17,6 +18,7 @@ const bis = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'numeric', 
       <p class="plakat__unter">
         <strong>{p.data.titel}</strong>
         <span>{[p.data.verein, archiv ? null : `bis ${bis(p.data.gueltig_bis)}`].filter(Boolean).join(' · ')}</span>
+        <a class="plakat__teilen" href={url(`plakate/${p.id}/`)} data-titel={p.data.titel}>Teilen</a>
       </p>
     </li>
   ))}
@@ -50,6 +52,23 @@ const bis = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'numeric', 
   });
   document.querySelectorAll<HTMLDialogElement>('.leuchtkasten').forEach((kasten) => {
     kasten.addEventListener('click', (e) => { if (e.target === kasten) kasten.close(); });
+  });
+  // Teilen: eigene Seite des Plakats (mit dem Plakat als Vorschaubild) über das Teilen-Menü des Handys, sonst Link kopieren
+  document.querySelectorAll<HTMLAnchorElement>('.plakat__teilen').forEach((link) => {
+    link.addEventListener('click', async (e) => {
+      const ziel = link.href;
+      if (navigator.share) {
+        e.preventDefault();
+        try { await navigator.share({ title: link.dataset.titel, url: ziel }); } catch { /* abgebrochen */ }
+      } else if (navigator.clipboard) {
+        e.preventDefault();
+        try {
+          await navigator.clipboard.writeText(ziel);
+          link.textContent = 'Link kopiert';
+          setTimeout(() => (link.textContent = 'Teilen'), 2000);
+        } catch { location.href = ziel; }
+      }
+    });
   });
   // Link aus einem Termin (#plakat-<id>): Plakat sichtbar machen und groß öffnen
   const ziel = location.hash.startsWith('#plakat-') ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
@@ -91,6 +110,8 @@ const bis = (iso: string) => new Intl.DateTimeFormat('de-DE', { day: 'numeric', 
   .plakate--archiv .plakat { filter: grayscale(0.6); opacity: 0.85; }
   .plakat__unter { margin: 0.75rem 0 0; display: flex; flex-direction: column; font-size: 0.92rem; line-height: 1.35; }
   .plakat__unter span { color: var(--text-leise); font-size: 0.85rem; }
+  .plakat__teilen { width: fit-content; margin-top: 0.3rem; font-size: 0.85rem; font-weight: 600; }
+  .plakat__teilen::before { content: '↗ '; }
 
   .leuchtkasten {
     border: 0;

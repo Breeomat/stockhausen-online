@@ -10,6 +10,8 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
   Abgelaufene Kacheln aus `aktuelles.ts` (aktiv() === false) wandern automatisch in den Rückblick (Feld `datum` für die Reihenfolge).
 - Termine: `src/content/termine.yaml` (Felder siehe Kommentar in der Datei). Vergangene Termine fallen automatisch weg.
 - Plakate: Bild nach `src/assets/plakate/`, Eintrag in `src/content/plakate.yaml`. Nach `gueltig_bis` → Archiv.
+  Jedes Plakat hat eine eigene Seite `/plakate/<id>/` (Vorschaubild beim Teilen = Plakat, Knopf „Teilen“ auf der Plakatwand);
+  `/plakate/` selbst zeigt beim Teilen das zuletzt eingetragene aktuelle Plakat.
 - Bilder/Plakate liefert der Betreiber über Google Drive, Ordner „Stockhausen-Webseite“:
   - „Plakate“ (Ordner-ID 16d65tlcJ2OzsJkx36GuNBOwnsk6SqfCc)
   - „Fotos und Sonstiges“ (Ordner-ID 1gykGhG4TPb4o3Ep1tVcJaSTgClbFIT1Z)

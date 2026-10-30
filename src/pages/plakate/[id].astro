@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../layouts/Basis.astro';
+import TerminKarte from '../../components/TerminKarte.astro';
+import { plakate, type Plakat } from '../../lib/plakate';
+import { kommendeTermine } from '../../lib/termine';
+import { url } from '../../lib/site';
+
+// Eigene Seite je Plakat: zum Teilen mit dem Plakat als Vorschaubild (WhatsApp, Facebook …)
+export async function getStaticPaths() {
+  const { aktuell, archiv } = await plakate();
+  return [...aktuell, ...archiv].map((plakat) => ({ params: { id: plakat.id }, props: { plakat } }));
+}
+
+const { plakat } = Astro.props as { plakat: Plakat };
+const { aktuell } = await plakate();
+const haengt = aktuell.some((p) => p.id === plakat.id);
+const termine = (await kommendeTermine()).filter((t) => t.data.plakat === plakat.id);
+const bis = new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${plakat.data.gueltig_bis}T12:00:00`));
+---
+<Basis bild={plakat.bild} titel={plakat.data.titel} beschreibung={`Plakat${plakat.data.verein ? ` von ${plakat.data.verein}` : ''} an der Plakatwand Stockhausen.`}>
+  <section class="huelle plakatseite">
+    <a class="zurueck" href={url('plakate/')}>← Zur Plakatwand</a>
+    <span class="kicker">Plakatwand{plakat.data.verein && ` · ${plakat.data.verein}`}</span>
+    <h1>{plakat.data.titel}</h1>
+    <p class="plakatseite__bis">{haengt ? `Hängt aus bis ${bis}` : 'Im Archiv'}</p>
+    <div class="plakatseite__inhalt">
+      <a href={plakat.bild.src} class="plakatseite__bild">
+        <Image src={plakat.bild} alt={`Plakat: ${plakat.data.titel}`} widths={[480, 800, 1200]} sizes="(max-width: 760px) calc(100vw - 32px), 560px" loading="eager" />
+      </a>
+      {termine.length > 0 && (
+        <div class="plakatseite__termine">
+          <h2>Termin</h2>
+          {termine.map((t) => <TerminKarte termin={t} />)}
+        </div>
+      )}
+    </div>
+    <a class="knopf knopf--leise plakatseite__alle" href={url('plakate/')}>Alle Plakate ansehen</a>
+  </section>
+</Basis>
+
+<style>
+  .plakatseite { padding-block: clamp(2.5rem, 6vw, 4rem) 5rem; }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .plakatseite h1 { max-width: 24ch; }
+  .plakatseite__bis { color: var(--text-leise); margin-top: -0.5rem; }
+  .plakatseite__inhalt { display: grid; grid-template-columns: minmax(0, 560px) minmax(0, 1fr); gap: 2.5rem; align-items: start; margin-top: 1.5rem; }
+  @media (max-width: 760px) { .plakatseite__inhalt { grid-template-columns: 1fr; } }
+  .plakatseite__bild img { display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: var(--schatten); }
+  .plakatseite__termine { display: grid; gap: 1rem; }
+  .plakatseite__termine h2 { margin: 0; font-size: 1.4rem; }
+  .plakatseite__alle { margin-top: 2rem; }
+</style>
