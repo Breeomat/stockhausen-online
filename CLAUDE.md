@@ -23,6 +23,9 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
   Betriebe aus `verzeichnis.yaml` erscheinen automatisch, wenn ihre Adresse in OSM steht. Ortsangaben in Terminen werden
   zum Link auf die Karte (`namen` in `orte`, `ortsnamenVerzeichnis`). Grundkarte neu erzeugen (nur bei Änderungen in OSM):
   `python3 scripts/dorfkarte.py` (braucht Zugriff auf api.openstreetmap.org). Hinweis „© OpenStreetMap-Mitwirkende“ bleibt unter der Karte.
+- Drohnenflug (/dorf/karte/drohnenflug/, Link oben auf der Dorfkarte): dieselben Marken wie die Dorfkarte, beim Scrollen
+  fliegt die Kamera sie nacheinander an (Start Altfellhalle, dann jeweils der nächstgelegene Ort). Neue Orte erscheinen
+  automatisch. Alles in `src/pages/dorf/karte/drohnenflug/index.astro`.
 - „Stand der Angaben“ (unten auf Vereins- und Infoseiten): `src/lib/stand.ts`. Nach jeder inhaltlichen Änderung einer Seite
   dort den Monat aktualisieren; `veralteteSeiten()` liefert Seiten, die länger als ein Jahr nicht geprüft wurden.
 - Nichts erfinden. Fehlende Angaben als `<span class="fehlt">[fehlt: …]</span>` markieren.

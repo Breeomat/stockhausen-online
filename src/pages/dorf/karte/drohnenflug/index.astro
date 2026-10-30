@@ -1,0 +1,343 @@
+---
+import Basis from '../../../../layouts/Basis.astro';
+import basis from '../../../../assets/dorfkarte/basis.svg?raw';
+import { rahmen, marken, type Marke } from '../../../../lib/dorfkarte';
+import { url } from '../../../../lib/site';
+
+// Drohnenflug über Stockhausen: dieselben Marken wie auf /dorf/karte/, beim Scrollen fliegt die Kamera sie
+// nacheinander an (Start an der Altfellhalle, dann jeweils zum nächstgelegenen noch nicht besuchten Ort).
+// Grundkarte: scripts/dorfkarte.py, Daten © OpenStreetMap-Mitwirkende.
+const liste = await marken();
+const rest = [...liste];
+const start = rest.find((m) => m.eintraege.some((e) => e.id === 'ort-altfellhalle')) ?? rest[0];
+const tour: Marke[] = [];
+for (let m: Marke | undefined = start; m; ) {
+  tour.push(m);
+  rest.splice(rest.indexOf(m), 1);
+  const von = m;
+  m = rest.sort((a, b) => Math.hypot(a.x - von.x, a.y - von.y) - Math.hypot(b.x - von.x, b.y - von.y))[0];
+}
+const mitte = { x: 579, y: 349.9 };
+// Ankerpunkte der Kamera: Start (Übersicht), alle Orte, Ende (Übersicht)
+const anker = [
+  { x: mitte.x, y: mitte.y, z: 1, ort: 'Stockhausen von oben' },
+  ...tour.map((m) => ({ x: +m.x.toFixed(1), y: +m.y.toFixed(1), z: 4.5, ort: m.eintraege.map((e) => e.name).join(' · '), nr: m.nr })),
+  { x: mitte.x, y: mitte.y, z: 1, ort: 'Stockhausen von oben' },
+];
+// Grundkarte als verschachteltes SVG mit fester Größe, damit die Kamera nur die äußere viewBox verschiebt
+const karte = basis.replace('<svg ', `<svg width="${rahmen.breite}" height="${rahmen.hoehe}" `).replace(' class="dorfkarte__basis"', '');
+const kompass = ['N', 'NO', 'O', 'SO', 'S', 'SW', 'W', 'NW'];
+---
+<Basis titel="Drohnenflug" beschreibung="Mit der Drohne über Stockhausen: Beim Scrollen fliegt die Kamera alle Orte der Dorfkarte nacheinander an – von der Altfellhalle bis zum Schloss.">
+  <div class="drohne" aria-hidden="true" data-anker={JSON.stringify(anker)} data-rahmen={JSON.stringify(rahmen)}>
+    <svg class="drohne__kamera" viewBox={`0 0 ${rahmen.breite} ${rahmen.hoehe}`} preserveAspectRatio="xMidYMid slice">
+      <Fragment set:html={karte} />
+      <g class="ziel" transform={`translate(${anker[1].x} ${anker[1].y})`}>
+        <circle r="14"><animate attributeName="r" values="14;48" dur="2.2s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.9;0" dur="2.2s" repeatCount="indefinite" /></circle>
+        <circle r="14"><animate attributeName="r" values="14;48" dur="2.2s" begin="1.1s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.9;0" dur="2.2s" begin="1.1s" repeatCount="indefinite" /></circle>
+      </g>
+      {tour.map((m, i) => (
+        <g class={`dmarke dmarke--${m.gruppe}`} data-i={i + 1}>
+          <circle cx={m.x.toFixed(1)} cy={m.y.toFixed(1)} r="11" />
+          <text x={m.x.toFixed(1)} y={(m.y + 4).toFixed(1)}>{m.nr}</text>
+        </g>
+      ))}
+    </svg>
+    <div class="drohne__fadenkreuz"></div>
+  </div>
+
+  <div class="hud" aria-hidden="true">
+    <span class="ecke ecke--lo"></span><span class="ecke ecke--ro"></span><span class="ecke ecke--lu"></span><span class="ecke ecke--ru"></span>
+    <div class="hud__seite hud__seite--links">
+      <span>ALT</span><b data-hud="hoehe">120</b><small>m</small>
+      <span>SPD</span><b data-hud="tempo">0.0</b><small>m/s</small>
+    </div>
+    <div class="hud__seite hud__seite--rechts">
+      <span>HDG</span><b data-hud="kurs">000</b><small>°</small>
+      <span>BAT</span><b data-hud="akku">100</b><small>%</small>
+    </div>
+    <div class="hud__leiste">
+      <span class="rec"><i></i>REC <span data-hud="zeit">00:00</span></span>
+      <span class="breit" data-hud="status">STARTBEREIT</span>
+      <span class="schmal">ALT <span data-hud="hoehe2">120</span> m</span>
+      <span class="kompass breit"><span data-hud="kompass">{[0, 1, 2].map(() => kompass.map((r) => <i>{r}</i>))}</span></span>
+      <span class="ort"><span data-hud="ort">Stockhausen von oben</span><span class="breit" data-hud="gps"></span></span>
+    </div>
+  </div>
+
+  <section class="huelle etappe etappe--start" data-anker="0">
+    <div class="karte-glas">
+      <span class="kicker">Unser Dorf</span>
+      <h1>Drohnenflug über Stockhausen</h1>
+      <p>Einmal mit der Drohne durchs Dorf: Scrollen Sie langsam nach unten – die Kamera fliegt alle {tour.length} Orte der <a href={url('dorf/karte/')}>Dorfkarte</a> nacheinander an, von der Altfellhalle quer durch Stockhausen.</p>
+      <p class="hinweis">↓ Scrollen zum Starten</p>
+    </div>
+  </section>
+
+  {tour.map((m, i) => (
+    <section class="huelle etappe" data-anker={i + 1}>
+      <div class="karte-glas">
+        <span class="etappe__zaehler">Etappe {i + 1} von {tour.length}</span>
+        {m.eintraege.map((e) => (
+          <div class="etappe__ort">
+            <span class={`nr dmarke--${e.gruppe}`}>{m.nr}</span>
+            <div>
+              <h2>{e.href ? <a href={url(e.href)}>{e.name}</a> : e.name}</h2>
+              {e.zusatz && <p>{e.zusatz}</p>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <section class="huelle etappe etappe--ende" data-anker={tour.length + 1}>
+    <div class="karte-glas">
+      <h2>Gelandet</h2>
+      <p>Das war Stockhausen von oben. Alle Orte mit Adressen und Links stehen auf der <a href={url('dorf/karte/')}>Dorfkarte</a>.</p>
+      <p><a class="knopf" href={url('dorf/karte/')}>Zur Dorfkarte</a></p>
+      <p class="quelle">Kartendaten © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap-Mitwirkende</a></p>
+    </div>
+  </section>
+</Basis>
+
+<script>
+  const ebene = document.querySelector<HTMLElement>('.drohne')!;
+  const kamera = ebene.querySelector<SVGSVGElement>('.drohne__kamera')!;
+  const ziel = ebene.querySelector<SVGGElement>('.ziel')!;
+  const dmarken = [...ebene.querySelectorAll<SVGGElement>('.dmarke')];
+  const etappen = [...document.querySelectorAll<HTMLElement>('.etappe')];
+  const anzeige = document.querySelector<HTMLElement>('.hud')!;
+  const inhalt = document.querySelector<HTMLElement>('main')!;
+  const hud: Record<string, HTMLElement> = {};
+  document.querySelectorAll<HTMLElement>('[data-hud]').forEach((el) => (hud[el.dataset.hud!] = el));
+
+  type Anker = { x: number; y: number; z: number; ort: string };
+  const anker: Anker[] = JSON.parse(ebene.dataset.anker!);
+  const rahmen = JSON.parse(ebene.dataset.rahmen!);
+  const letzter = anker.length - 1;
+  const meterJeEinheit = ((rahmen.ost - rahmen.west) * 111320 * Math.cos(((rahmen.sued + rahmen.nord) / 2) * (Math.PI / 180))) / rahmen.breite;
+  // Flugrichtung je Strecke (0° = Norden), die letzte Strecke dreht zurück nach Norden
+  const richtung = anker.map((a, i) => {
+    const b = anker[Math.min(i + 1, letzter)];
+    return i >= letzter - 1 ? 0 : ((Math.atan2(b.x - a.x, -(b.y - a.y)) * 180) / Math.PI + 360) % 360;
+  });
+
+  const glatt = (t: number) => t * t * (3 - 2 * t);
+  const winkel = (a: number, b: number, t: number) => a + ((((b - a) % 360) + 540) % 360 - 180) * t;
+  let geplant = false;
+  let vorher = { x: anker[0].x, y: anker[0].y, t: performance.now() };
+  let tempo = 0;
+  let mitten: number[] = [];
+
+  const messen = () => (mitten = etappen.map((e) => e.offsetTop + e.offsetHeight / 2));
+
+  function zeichnen() {
+    geplant = false;
+    const blick = scrollY + innerHeight / 2;
+    let i = 0;
+    while (i < letzter - 1 && blick > mitten[i + 1]) i++;
+    const roh = Math.min(1, Math.max(0, (blick - mitten[i]) / (mitten[i + 1] - mitten[i])));
+    const t = glatt(roh);
+    const a = anker[i], b = anker[i + 1];
+    const strecke = Math.hypot(b.x - a.x, b.y - a.y);
+    // zwischen zwei Orten kurz steigen, dann wieder absinken
+    const bogen = a.z > 2 && b.z > 2 ? Math.min(1.8, strecke / 90) * Math.sin(Math.PI * t) : 0;
+    const x = a.x + (b.x - a.x) * t;
+    const y = a.y + (b.y - a.y) * t;
+    const z = Math.max(1, a.z + (b.z - a.z) * t - bogen);
+    const kurs = (winkel(richtung[Math.max(0, i - 1)], richtung[i], Math.min(1, roh / 0.35)) + 360) % 360;
+
+    const pxJeEinheit = Math.max(innerWidth / rahmen.breite, innerHeight / rahmen.hoehe) * 1.05 * z;
+    const diag = Math.ceil(Math.hypot(innerWidth, innerHeight));
+    const sicht = diag / pxJeEinheit;
+    kamera.style.width = kamera.style.height = diag + 'px';
+    // Ziel im oberen Bilddrittel zeigen, damit die Etappen-Karte darunter es nicht verdeckt (bei Übersicht mittig)
+    const hoch = innerHeight * 0.2 * Math.min(1, Math.max(0, (z - 1) / 2));
+    const rad = (kurs * Math.PI) / 180;
+    const mx = x - (hoch * Math.sin(rad)) / pxJeEinheit;
+    const my = y + (hoch * Math.cos(rad)) / pxJeEinheit;
+    ebene.style.setProperty('--hoch', `${hoch.toFixed(1)}px`);
+    kamera.setAttribute('viewBox', `${(mx - sicht / 2).toFixed(2)} ${(my - sicht / 2).toFixed(2)} ${sicht.toFixed(2)} ${sicht.toFixed(2)}`);
+    kamera.style.transform = `translate(-50%, -50%) rotate(${(-kurs).toFixed(2)}deg)`;
+
+    // aktuelles Ziel hervorheben
+    const naechster = roh < 0.5 ? i : i + 1;
+    const zielAnker = naechster > 0 && naechster < letzter ? anker[naechster] : null;
+    ziel.style.display = zielAnker ? '' : 'none';
+    if (zielAnker) ziel.setAttribute('transform', `translate(${zielAnker.x} ${zielAnker.y})`);
+    dmarken.forEach((m) => m.classList.toggle('aktiv', Number(m.dataset.i) === naechster));
+    // Nummern bleiben beim Drehen der Kamera aufrecht
+    dmarken.forEach((m) => {
+      const c = m.querySelector('circle')!;
+      m.setAttribute('transform', `rotate(${kurs.toFixed(2)} ${c.getAttribute('cx')} ${c.getAttribute('cy')})`);
+    });
+
+    const jetzt = performance.now();
+    const dt = Math.max(16, jetzt - vorher.t) / 1000;
+    tempo = tempo * 0.8 + Math.min(18, (Math.hypot(x - vorher.x, y - vorher.y) * meterJeEinheit) / dt) * 0.2;
+    vorher = { x, y, t: jetzt };
+    const hoehe = Math.round(15 + ((4.5 - z) / 3.5) * 105);
+    const p = (i + roh) / letzter;
+    hud.hoehe.textContent = hud.hoehe2.textContent = String(hoehe);
+    hud.tempo.textContent = tempo.toFixed(1);
+    hud.kurs.textContent = String(Math.round(kurs) % 360).padStart(3, '0');
+    hud.akku.textContent = String(Math.round(100 - p * 55));
+    hud.ort.textContent = (roh < 0.5 ? a : b).ort;
+    const lat = rahmen.nord - (y / rahmen.hoehe) * (rahmen.nord - rahmen.sued);
+    const lon = rahmen.west + (x / rahmen.breite) * (rahmen.ost - rahmen.west);
+    hud.gps.textContent = `${lat.toFixed(4)} N  ${lon.toFixed(4)} E`;
+    const amZiel = (roh < 0.12 || roh > 0.88) && zielAnker;
+    hud.status.textContent = blick < mitten[0] + 40 ? 'STARTBEREIT' : i >= letzter - 1 && roh > 0.9 ? 'GELANDET' : amZiel ? 'IN POSITION' : 'IM FLUG';
+    hud.kompass.style.transform = `translateX(${(-(8 + kurs / 45) * 3.2 + 3.2 * 1.5).toFixed(3)}em)`;
+    // Anzeige ausblenden, sobald der Seitenfuß ins Bild kommt
+    anzeige.classList.toggle('weg', inhalt.getBoundingClientRect().bottom < innerHeight * 0.75);
+    if (tempo > 0.2) planen();
+  }
+
+  function planen() {
+    if (!geplant) {
+      geplant = true;
+      requestAnimationFrame(zeichnen);
+    }
+  }
+
+  const flugbeginn = performance.now();
+  const uhr = () => {
+    const s = Math.floor((performance.now() - flugbeginn) / 1000);
+    hud.zeit.textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+  };
+  setInterval(uhr, 1000);
+
+  messen();
+  addEventListener('scroll', planen, { passive: true });
+  addEventListener('resize', () => { messen(); planen(); });
+  addEventListener('load', () => { messen(); planen(); });
+  planen();
+</script>
+
+<style>
+  /* Kamera: fest hinter dem Inhalt, dunkle Abendflug-Farben für die Grundkarte (Klassen aus scripts/dorfkarte.py) */
+  .drohne { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: #0d181b; pointer-events: none; }
+  .drohne__kamera { position: absolute; left: 50%; top: 50%; will-change: transform; animation: schweben 7s ease-in-out infinite; }
+  @keyframes schweben {
+    0%, 100% { translate: 0 0; }
+    33% { translate: 3px -2px; }
+    66% { translate: -2px 2px; }
+  }
+  .drohne::after {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at center, transparent 40%, rgb(5 8 16 / 0.8) 100%),
+      repeating-linear-gradient(0deg, rgb(255 255 255 / 0.025) 0 1px, transparent 1px 3px);
+  }
+  .drohne__fadenkreuz {
+    position: absolute; left: 50%; top: calc(50% - var(--hoch, 0px)); width: 120px; height: 120px; translate: -50% -50%;
+    border: 1px solid rgb(159 245 220 / 0.35); border-radius: 50%;
+    background:
+      linear-gradient(rgb(159 245 220 / 0.45), rgb(159 245 220 / 0.45)) center / 1px 34px no-repeat,
+      linear-gradient(90deg, rgb(159 245 220 / 0.45), rgb(159 245 220 / 0.45)) center / 34px 1px no-repeat;
+  }
+  .drohne :global(.k-grund) { fill: #0d181b; }
+  .drohne :global(.k-acker) { fill: #15252a; }
+  .drohne :global(.k-wiese) { fill: #132c25; }
+  .drohne :global(.k-wald) { fill: #0e3023; }
+  .drohne :global(.k-gebuesch) { fill: #122c20; }
+  .drohne :global(.k-wohnen) { fill: #1a2430; }
+  .drohne :global(.k-gewerbe) { fill: #1e2232; }
+  .drohne :global(.k-friedhof) { fill: #142c27; }
+  .drohne :global(.k-parken) { fill: #1d2530; }
+  .drohne :global(.k-sport) { fill: #12503a; }
+  .drohne :global(.k-wasser) { fill: #1b5b8a; }
+  .drohne :global(.k-fluss) { fill: none; stroke: #1b5b8a; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .drohne :global(.k-bach) { fill: none; stroke: #2a77ad; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .drohne :global(.k-haus) { fill: #2a4250; stroke: #6fd6c6; stroke-width: 0.35; stroke-opacity: 0.7; }
+  .drohne :global(:is(.k-feldweg, .k-weg, .k-treppe, .k-zufahrt, .k-wohnstrasse, .k-hauptstrasse, [class$='-rand'])) { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .drohne :global(.k-feldweg) { stroke: #3f6a62; stroke-width: 1.2; stroke-dasharray: 4 3; }
+  .drohne :global(.k-weg) { stroke: #4f8077; stroke-width: 1.2; stroke-dasharray: 2 2; }
+  .drohne :global(.k-treppe) { stroke: #4f8077; stroke-width: 2.5; stroke-dasharray: 1 1.5; }
+  .drohne :global(.k-zufahrt-rand) { stroke: #081012; stroke-width: 5; }
+  .drohne :global(.k-zufahrt) { stroke: #33505a; stroke-width: 3.5; }
+  .drohne :global(.k-wohnstrasse-rand) { stroke: #081012; stroke-width: 9; }
+  .drohne :global(.k-wohnstrasse) { stroke: #3b5c66; stroke-width: 7; }
+  .drohne :global(.k-hauptstrasse-rand) { stroke: #081012; stroke-width: 12; }
+  .drohne :global(.k-hauptstrasse) { stroke: #c9a75a; stroke-width: 10; }
+  .drohne :global(.k-name) { font: 600 9px var(--sans); fill: #bff3e8; paint-order: stroke; stroke: #0d181b; stroke-width: 3; stroke-linejoin: round; dominant-baseline: central; letter-spacing: 0.04em; }
+
+  .dmarke circle { fill: var(--farbe); stroke: #fff; stroke-width: 2.5; transition: r 0.3s; }
+  .dmarke text { font: 700 11px var(--sans); fill: #fff; text-anchor: middle; }
+  .dmarke { opacity: 0.75; }
+  .dmarke.aktiv { opacity: 1; }
+  .dmarke.aktiv circle { r: 15; stroke: #ffd76a; stroke-width: 3; }
+  .ziel circle { fill: none; stroke: #ffd76a; stroke-width: 2; }
+  .dmarke--treffpunkt { --farbe: #c0522b; }
+  .dmarke--kirche { --farbe: #7a4a8c; }
+  .dmarke--familie { --farbe: #2e7d4f; }
+  .dmarke--bus { --farbe: #1f6e92; }
+  .dmarke--betrieb { --farbe: #6f6157; }
+
+  /* Etappen: je ein Ort, Glas-Karte in der Bildmitte */
+  .etappe { min-height: 85vh; display: grid; align-items: center; justify-items: center; padding-block: 2rem; }
+  .etappe:not(.etappe--start, .etappe--ende) .karte-glas { translate: 0 22vh; }
+  .etappe--start { min-height: calc(100vh - 80px); }
+  .etappe--ende { min-height: 100vh; }
+  .karte-glas {
+    width: min(100%, 34rem); padding: 1.4rem 1.6rem; border-radius: 20px;
+    background: rgb(8 14 20 / 0.55); border: 1px solid rgb(255 215 106 / 0.35); color: #f2f5f7;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 20px 50px -25px rgb(0 0 0 / 0.8);
+  }
+  .karte-glas h1, .karte-glas h2 { color: #fff; margin: 0.2rem 0 0.4rem; }
+  .karte-glas h2 { font-size: 1.35rem; }
+  .karte-glas p { color: #d5dde2; margin: 0.4rem 0; }
+  .karte-glas a:not(.knopf) { color: #ffd76a; }
+  .karte-glas .kicker { color: #ffd76a; }
+  .hinweis { font-family: ui-monospace, Menlo, Consolas, monospace; letter-spacing: 0.1em; color: #9ff5dc !important; animation: wippen 1.6s ease-in-out infinite; }
+  @keyframes wippen { 50% { translate: 0 5px; } }
+  .etappe__zaehler { font: 600 0.75rem/1 ui-monospace, Menlo, Consolas, monospace; letter-spacing: 0.12em; color: #9ff5dc; text-transform: uppercase; }
+  .etappe__ort { display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.8rem; align-items: start; margin-top: 0.7rem; }
+  .nr { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: grid; place-items: center; background: var(--farbe); color: #fff; font-weight: 700; box-shadow: 0 0 0 2px #fff; }
+  .quelle { font-size: 0.85rem; }
+
+  /* Drohnen-Anzeige */
+  .hud {
+    position: fixed; inset: 0; z-index: 20; pointer-events: none;
+    font: 600 0.72rem/1.2 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; letter-spacing: 0.08em;
+    color: #9ff5dc; text-shadow: 0 0 8px rgb(159 245 220 / 0.6); transition: opacity 0.4s;
+  }
+  .hud.weg { opacity: 0; }
+  .hud b { font-weight: 700; font-size: 1.35rem; color: #eafff8; }
+  .hud small { opacity: 0.7; }
+  .ecke { position: absolute; width: 28px; height: 28px; border: 2px solid rgb(159 245 220 / 0.7); }
+  .ecke--lo { left: 12px; top: 88px; border-right: 0; border-bottom: 0; }
+  .ecke--ro { right: 12px; top: 88px; border-left: 0; border-bottom: 0; }
+  .ecke--lu { left: 12px; bottom: 12px; border-right: 0; border-top: 0; }
+  .ecke--ru { right: 12px; bottom: 12px; border-left: 0; border-top: 0; }
+  .hud__seite { position: absolute; top: 55%; translate: 0 -50%; display: none; grid-template-columns: auto auto auto; align-items: baseline; gap: 0.3rem 0.5rem; }
+  .hud__seite--links { left: 28px; }
+  .hud__seite--rechts { right: 28px; }
+  .hud__leiste {
+    position: absolute; left: 50%; bottom: 14px; translate: -50% 0; width: min(100% - 80px, 52rem);
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0.45rem 0.9rem; border-radius: 999px; white-space: nowrap;
+    background: rgb(5 10 18 / 0.65); border: 1px solid rgb(159 245 220 / 0.25);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .rec { display: inline-flex; align-items: center; gap: 0.4rem; color: #ffd1d6; }
+  .rec i { width: 8px; height: 8px; border-radius: 50%; background: #ff4d61; box-shadow: 0 0 8px #ff4d61; animation: blinken 1.2s steps(1) infinite; }
+  @keyframes blinken { 50% { opacity: 0; } }
+  .ort { display: inline-flex; gap: 0.8rem; min-width: 0; overflow: hidden; }
+  .ort > span:first-child { overflow: hidden; text-overflow: ellipsis; }
+  .kompass { position: relative; width: 9.6em; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); }
+  .kompass::after { content: ''; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: #ffd76a; }
+  .kompass > span { display: inline-flex; }
+  .kompass i { width: 3.2em; flex: none; text-align: center; font-style: normal; }
+  .breit { display: none; }
+  .schmal { display: inline; }
+  @media (min-width: 760px) { .breit { display: inline-flex; } .schmal { display: none; } }
+  @media (min-width: 1150px) { .hud__seite { display: grid; } }
+  @media (prefers-reduced-motion: reduce) { .drohne__kamera, .rec i, .hinweis { animation: none; } }
+
+  /* Seitenfuß und „Stand“ bleiben lesbar über der Karte */
+  :global(main:has(.drohne) .stand) { color: #d5dde2; padding-bottom: 4rem; }
+</style>
