@@ -1,0 +1,206 @@
+---
+import { getCollection } from 'astro:content';
+
+// Stimmung des Titelbilds auf der Startseite: Tageszeit (Sonnenstand in Stockhausen), Wetter des Tages
+// (aus der nächtlichen Tagesnotiz, Open-Meteo) und Anlässe (Kirmes, Halloween, Advent, Weihnachten, Silvester).
+// Alles entscheidet der Browser beim Besuch; keine externen Dienste. Zum Ausprobieren: /?stimmung=nacht,schnee,halloween
+const dateien = import.meta.glob<{ default: { datum: string; wetter?: { lage: string; hoechst: number; tiefst: number } } }>('../data/tagesnotiz.json', { eager: true });
+const notiz = Object.values(dateien)[0]?.default;
+const wetter = notiz?.wetter ? { datum: notiz.datum, ...notiz.wetter } : null;
+
+// Kirmes: vom ersten bis zum letzten Termin „Stockhäuser Kirmes …“ in termine.yaml
+const kirmes = (await getCollection('termine')).filter((t) => t.data.titel.startsWith('Stockhäuser Kirmes')).map((t) => t.data.datum).sort();
+const kirmesZeit = kirmes.length ? { von: kirmes[0], bis: kirmes.at(-1) } : null;
+---
+<div class="stimmung" aria-hidden="true" data-wetter={wetter ? JSON.stringify(wetter) : undefined} data-kirmes={kirmesZeit ? JSON.stringify(kirmesZeit) : undefined}>
+  <div class="stimmung__licht"></div>
+  <div class="stimmung__nebel"></div>
+  <canvas class="stimmung__fall"></canvas>
+  <svg class="stimmung__wimpel" viewBox="0 0 1200 70" preserveAspectRatio="none">
+    <path d="M0 8 Q600 60 1200 8" fill="none" stroke="#3a2a20" stroke-width="2" />
+    {Array.from({ length: 24 }, (_, i) => {
+      const x = 25 + i * 48;
+      const y = 8 + 52 * (1 - ((x - 600) / 600) ** 2) * 0.96;
+      const farbe = ['#c0232b', '#ffffff', '#1d1d1d'][i % 3];
+      return <polygon points={`${x - 16},${y} ${x + 16},${y} ${x},${y + 30}`} fill={farbe} stroke="rgb(0 0 0 / 0.25)" stroke-width="1" />;
+    })}
+  </svg>
+  <svg class="stimmung__kuerbis" viewBox="0 0 120 110">
+    <path d="M60 22 q4 -14 14 -16" fill="none" stroke="#4d6b2a" stroke-width="6" stroke-linecap="round" />
+    <ellipse cx="38" cy="66" rx="30" ry="38" fill="#e8741c" />
+    <ellipse cx="82" cy="66" rx="30" ry="38" fill="#e8741c" />
+    <ellipse cx="60" cy="66" rx="30" ry="40" fill="#f08a24" />
+    <path d="M40 54 l10 -10 l10 10 z M70 54 l10 -10 l10 10 z" fill="#ffd36b" />
+    <path d="M36 74 q24 22 48 0 l-6 6 l-6 -6 l-6 8 l-6 -8 l-6 8 l-6 -8 l-6 6 z" fill="#ffd36b" />
+  </svg>
+  <div class="stimmung__lichter">
+    {Array.from({ length: 18 }, (_, i) => <span style={`--i:${i}`}></span>)}
+  </div>
+  <div class="stimmung__sterne">
+    {Array.from({ length: 40 }, (_, i) => <span style={`left:${(i * 37) % 100}%;top:${(i * 53) % 55}%;--v:${(i % 7) * 0.4}s`}></span>)}
+  </div>
+</div>
+<p class="stimmung__info" hidden></p>
+
+<script>
+  const huelle = document.querySelector<HTMLElement>('.stimmung');
+  if (huelle) {
+    const held = huelle.closest<HTMLElement>('.held');
+    const info = held?.querySelector<HTMLElement>('.stimmung__info');
+    const tz = 'Europe/Berlin';
+    const jetzt = new Date();
+    const heute = new Intl.DateTimeFormat('sv-SE', { timeZone: tz }).format(jetzt);
+    const [J, M, T] = heute.split('-').map(Number);
+    const teile = Object.fromEntries(new Intl.DateTimeFormat('de-DE', { timeZone: tz, hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(jetzt).map((p) => [p.type, p.value]));
+    const minute = Number(teile.hour) * 60 + Number(teile.minute);
+
+    // Sonnenauf- und -untergang für Stockhausen (vereinfachte NOAA-Formel), in Minuten deutscher Zeit
+    const LAT = 50.5615, LON = 9.4445;
+    const tagImJahr = Math.round((Date.UTC(J, M - 1, T) - Date.UTC(J, 0, 0)) / 86400000);
+    const g = (2 * Math.PI / 365) * (tagImJahr - 1);
+    const zeitgl = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+    const dekl = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+    const rad = (LAT * Math.PI) / 180;
+    const ha = (Math.acos(Math.cos((90.833 * Math.PI) / 180) / (Math.cos(rad) * Math.cos(dekl)) - Math.tan(rad) * Math.tan(dekl)) * 180) / Math.PI;
+    const versatz = Number(new Date(Date.UTC(J, M - 1, T, 12)).toLocaleString('en-US', { timeZone: tz, timeZoneName: 'shortOffset' }).match(/GMT([+-]\d+)/)?.[1] ?? 1) * 60;
+    const aufgang = 720 - 4 * (LON + ha) - zeitgl + versatz;
+    const untergang = 720 - 4 * (LON - ha) - zeitgl + versatz;
+
+    let tageszeit = 'tag';
+    if (minute < aufgang - 30 || minute > untergang + 45) tageszeit = 'nacht';
+    else if (minute < aufgang + 60) tageszeit = 'morgen';
+    else if (minute > untergang - 75) tageszeit = 'abend';
+
+    // Wetter nur, wenn die Tagesnotiz von heute ist
+    let wetter = '';
+    let wetterText = '';
+    try {
+      const w = JSON.parse(huelle.dataset.wetter ?? 'null');
+      if (w && w.datum === heute) {
+        const l = String(w.lage).toLowerCase();
+        wetter = /nebel/.test(l) ? 'nebel' : /schnee|griesel/.test(l) ? 'schnee' : /gewitter/.test(l) ? 'regen' : /regen|niesel|schauer/.test(l) ? 'regen' : '';
+        wetterText = `Heute in Stockhausen: ${w.lage}, ${w.tiefst} bis ${w.hoechst} °C`;
+      }
+    } catch { /* ohne Wetter */ }
+
+    // Anlässe
+    const md = heute.slice(5);
+    const anlaesse: string[] = [];
+    try {
+      const k = JSON.parse(huelle.dataset.kirmes ?? 'null');
+      if (k && heute >= k.von && heute <= k.bis) anlaesse.push('kirmes');
+    } catch { /* keine Kirmes */ }
+    if (md === '10-31') anlaesse.push('halloween');
+    const weihnacht = new Date(Date.UTC(J, 11, 25));
+    const ersterAdvent = new Date(weihnacht.getTime() - ((weihnacht.getUTCDay() || 7) + 21) * 86400000).toISOString().slice(0, 10);
+    if (heute >= ersterAdvent && md <= '12-23') anlaesse.push('advent');
+    if (md >= '12-24' && md <= '12-26') anlaesse.push('weihnachten');
+    if (md === '12-31' || md === '01-01') anlaesse.push('silvester');
+
+    // Vorschau: /?stimmung=nacht,schnee,kirmes
+    const probe = new URLSearchParams(location.search).get('stimmung');
+    if (probe) {
+      const p = probe.split(',');
+      tageszeit = p.find((x) => ['morgen', 'tag', 'abend', 'nacht'].includes(x)) ?? tageszeit;
+      wetter = p.find((x) => ['nebel', 'regen', 'schnee'].includes(x)) ?? wetter;
+      anlaesse.splice(0, anlaesse.length, ...p.filter((x) => ['kirmes', 'halloween', 'advent', 'weihnachten', 'silvester'].includes(x)));
+    }
+    if (anlaesse.includes('weihnachten') && !wetter) wetter = 'schnee';
+
+    huelle.dataset.zeit = tageszeit;
+    if (wetter) huelle.dataset.fall = wetter;
+    anlaesse.forEach((a) => huelle.classList.add(`stimmung--${a}`));
+    if (info && wetterText) { info.textContent = wetterText; info.hidden = false; }
+
+    // Schnee und Regen (bei „weniger Bewegung“ im System nicht animiert)
+    const leinwand = huelle.querySelector<HTMLCanvasElement>('.stimmung__fall');
+    const ruhig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (leinwand && (wetter === 'schnee' || wetter === 'regen') && !ruhig) {
+      const ctx = leinwand.getContext('2d')!;
+      const groesse = () => { leinwand.width = leinwand.clientWidth * devicePixelRatio; leinwand.height = leinwand.clientHeight * devicePixelRatio; };
+      groesse();
+      addEventListener('resize', groesse);
+      const schnee = wetter === 'schnee';
+      const teilchen = Array.from({ length: schnee ? 90 : 120 }, () => ({ x: Math.random(), y: Math.random(), v: 0.4 + Math.random() * 0.6, r: 1 + Math.random() * 2.2, d: Math.random() * Math.PI * 2 }));
+      let sichtbar = true;
+      new IntersectionObserver(([e]) => (sichtbar = e.isIntersecting)).observe(leinwand);
+      const malen = () => {
+        if (sichtbar) {
+          const { width: w, height: h } = leinwand;
+          ctx.clearRect(0, 0, w, h);
+          ctx.fillStyle = 'rgba(255,255,255,0.85)';
+          ctx.strokeStyle = 'rgba(210,225,240,0.45)';
+          ctx.lineWidth = devicePixelRatio;
+          for (const t of teilchen) {
+            if (schnee) {
+              t.y += (0.0009 * t.v);
+              t.d += 0.01;
+              t.x += Math.sin(t.d) * 0.0004;
+              ctx.beginPath();
+              ctx.arc(t.x * w, t.y * h, t.r * devicePixelRatio, 0, Math.PI * 2);
+              ctx.fill();
+            } else {
+              t.y += 0.012 * t.v;
+              t.x += 0.002 * t.v;
+              ctx.beginPath();
+              ctx.moveTo(t.x * w, t.y * h);
+              ctx.lineTo((t.x - 0.004) * w, t.y * h - 14 * devicePixelRatio);
+              ctx.stroke();
+            }
+            if (t.y > 1.05) { t.y = -0.05; t.x = Math.random(); }
+            if (t.x > 1.05) t.x = -0.05;
+          }
+        }
+        requestAnimationFrame(malen);
+      };
+      malen();
+    }
+  }
+</script>
+
+<style>
+  .stimmung { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+  .stimmung > * { position: absolute; inset: 0; }
+  .stimmung__licht { transition: background 1s ease; }
+  .stimmung[data-zeit='morgen'] .stimmung__licht { background: linear-gradient(180deg, rgb(255 170 140 / 0.28), rgb(255 210 160 / 0.08) 60%, transparent); mix-blend-mode: soft-light; }
+  .stimmung[data-zeit='abend'] .stimmung__licht { background: linear-gradient(180deg, rgb(255 130 50 / 0.38), rgb(200 80 60 / 0.25) 55%, rgb(40 20 60 / 0.3)); mix-blend-mode: multiply; }
+  .stimmung[data-zeit='nacht'] .stimmung__licht { background: linear-gradient(180deg, rgb(4 10 30 / 0.72), rgb(8 18 40 / 0.6)); }
+
+  .stimmung__sterne { opacity: 0; transition: opacity 1s; }
+  .stimmung[data-zeit='nacht'] .stimmung__sterne { opacity: 1; }
+  .stimmung[data-fall] .stimmung__sterne { opacity: 0; }
+  .stimmung__sterne span { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #fff; box-shadow: 0 0 4px #fff; animation: funkeln 3s ease-in-out infinite; animation-delay: var(--v); }
+  @keyframes funkeln { 50% { opacity: 0.25; } }
+
+  .stimmung__nebel { opacity: 0; background: linear-gradient(90deg, rgb(225 230 235 / 0.05) 0%, rgb(230 234 238 / 0.3) 50%, rgb(236 239 242 / 0.5) 100%), linear-gradient(0deg, rgb(236 239 242 / 0.35), transparent 60%); backdrop-filter: blur(1.5px); }
+  .stimmung[data-fall='nebel'] .stimmung__nebel { opacity: 1; animation: wabern 18s ease-in-out infinite alternate; }
+  @keyframes wabern { to { opacity: 0.75; transform: translateX(3%); } }
+  .stimmung__fall { width: 100%; height: 100%; }
+
+  .stimmung .stimmung__wimpel { display: none; top: -4px; bottom: auto; height: 70px; width: 100%; filter: drop-shadow(0 3px 4px rgb(0 0 0 / 0.3)); }
+  .stimmung.stimmung--kirmes .stimmung__wimpel { display: block; animation: wehen 4s ease-in-out infinite alternate; transform-origin: top; }
+  @keyframes wehen { to { transform: skewX(1.5deg) translateY(2px); } }
+
+  .stimmung .stimmung__kuerbis { display: none; top: auto; left: auto; right: clamp(125px, 14vw, 190px); bottom: -6px; width: clamp(80px, 11vw, 140px); height: auto; filter: drop-shadow(0 0 18px rgb(255 160 40 / 0.7)); }
+  .stimmung--halloween .stimmung__kuerbis, .stimmung.stimmung--halloween .stimmung__kuerbis { display: block; animation: gucken 6s ease-in-out infinite; }
+  @keyframes gucken { 0%, 100% { transform: translateY(35%); } 30%, 70% { transform: translateY(0); } }
+
+  .stimmung .stimmung__lichter { display: none; top: 0; bottom: auto; height: 40px; }
+  .stimmung.stimmung--advent .stimmung__lichter, .stimmung.stimmung--weihnachten .stimmung__lichter { display: block; }
+  .stimmung__lichter span { position: absolute; top: calc(10px + 14px * sin(calc(var(--i) * 20deg))); left: calc(var(--i) * 5.6% + 2%); width: 10px; height: 14px; border-radius: 50% 50% 45% 45%; background: #ffd27a; box-shadow: 0 0 12px 4px rgb(255 200 100 / 0.7); animation: gluehen 2.4s ease-in-out infinite; animation-delay: calc(var(--i) * 0.17s); }
+  @keyframes gluehen { 50% { opacity: 0.55; box-shadow: 0 0 6px 2px rgb(255 200 100 / 0.5); } }
+
+  .stimmung--silvester .stimmung__sterne { opacity: 1; }
+  .stimmung--silvester .stimmung__sterne span { width: 4px; height: 4px; background: hsl(calc(var(--v) * 300) 90% 70%); box-shadow: 0 0 10px 3px currentColor; animation-duration: 1.4s; }
+
+  .stimmung__info {
+    position: absolute; right: 16px; top: 14px; margin: 0; padding: 0.3rem 0.75rem; border-radius: 999px;
+    font-size: 0.78rem; color: #fff; background: rgb(14 32 48 / 0.45); backdrop-filter: blur(4px);
+  }
+  .stimmung--kirmes ~ .stimmung__info { top: 64px; }
+
+  @media (max-width: 640px) { .stimmung .stimmung__wimpel { height: 46px; } .stimmung--kirmes ~ .stimmung__info { top: 48px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .stimmung *, .stimmung { animation: none !important; transition: none !important; }
+  }
+</style>

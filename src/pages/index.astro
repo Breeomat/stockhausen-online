@@ -5,6 +5,7 @@ import luftbild from '../assets/fotos/stockhausen-luftbild.jpg';
 import TerminKarte from '../components/TerminKarte.astro';
 import PlakatRaster from '../components/PlakatRaster.astro';
 import Tagesnotiz from '../components/Tagesnotiz.astro';
+import HeldStimmung from '../components/HeldStimmung.astro';
 import { kommendeTermine } from '../lib/termine';
 import { plakate } from '../lib/plakate';
 import { url } from '../lib/site';
@@ -45,6 +46,7 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
 <Basis strukturiert={webseite}>
   <section class="held">
     <Image class="held__bild" src={luftbild} alt="Stockhausen aus der Luft: das Dorf zwischen Feldern und Wiesen, dahinter bewaldete Hügel" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <HeldStimmung />
     <div class="huelle held__innen">
       <span class="kicker">36358 Herbstein · Vogelsberg</span>
       <h1>Willkommen in <em>Stockhausen</em></h1>

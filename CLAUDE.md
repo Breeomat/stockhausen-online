@@ -33,6 +33,10 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
   Seite), lässt Claude 2–4 Sätze schreiben → `src/data/tagesnotiz.json` (nicht eingecheckt). Braucht das Repository-Secret
   `ANTHROPIC_API_KEY`; ohne Secret oder bei Fehlern erscheint keine Notiz. Anzeige nur, wenn das Datum von heute ist
   (`src/components/Tagesnotiz.astro`).
+- Stimmung des Titelbilds (Startseite, `src/components/HeldStimmung.astro`): Tageszeit nach Sonnenstand (Morgen, Abend,
+  Nacht mit Sternen), Wetter aus der Tagesnotiz (Nebel, Regen, Schnee) und Anlässe (Kirmes = Zeitraum der Termine
+  „Stockhäuser Kirmes …“, Halloween, Advent, Weihnachten, Silvester). Alles im Browser, keine externen Dienste.
+  Vorschau: `/?stimmung=nacht,schnee,kirmes` (Werte: morgen, tag, abend, nacht, nebel, regen, schnee, kirmes, halloween, advent, weihnachten, silvester).
 - „Stand der Angaben“ (unten auf Vereins- und Infoseiten): `src/lib/stand.ts`. Nach jeder inhaltlichen Änderung einer Seite
   dort den Monat aktualisieren; `veralteteSeiten()` liefert Seiten, die länger als ein Jahr nicht geprüft wurden.
 - Nichts erfinden. Fehlende Angaben als `<span class="fehlt">[fehlt: …]</span>` markieren.
