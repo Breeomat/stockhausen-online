@@ -28,6 +28,11 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
 - Drohnenflug (/dorf/karte/drohnenflug/, Link oben auf der Dorfkarte): dieselben Marken wie die Dorfkarte, beim Scrollen
   fliegt die Kamera sie nacheinander an (Start Altfellhalle, dann jeweils der nächstgelegene Ort). Neue Orte erscheinen
   automatisch. Alles in `src/pages/dorf/karte/drohnenflug/index.astro`.
+- „Was steht heute an?“ (KI-Tagesnotiz, Startseite über den Aktuelles-Kacheln): `scripts/tagesnotiz.mjs` (übernommen von ahne.de)
+  läuft im Workflow vor dem Build (Zeitplan 23:05 UTC), holt Wetter (Open-Meteo) und Termine der nächsten 7 Tage (termine.ics der
+  Seite), lässt Claude 2–4 Sätze schreiben → `src/data/tagesnotiz.json` (nicht eingecheckt). Braucht das Repository-Secret
+  `ANTHROPIC_API_KEY`; ohne Secret oder bei Fehlern erscheint keine Notiz. Anzeige nur, wenn das Datum von heute ist
+  (`src/components/Tagesnotiz.astro`).
 - „Stand der Angaben“ (unten auf Vereins- und Infoseiten): `src/lib/stand.ts`. Nach jeder inhaltlichen Änderung einer Seite
   dort den Monat aktualisieren; `veralteteSeiten()` liefert Seiten, die länger als ein Jahr nicht geprüft wurden.
 - Nichts erfinden. Fehlende Angaben als `<span class="fehlt">[fehlt: …]</span>` markieren.

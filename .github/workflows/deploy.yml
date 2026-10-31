@@ -4,8 +4,10 @@ on:
   push:
     branches: [main]
   schedule:
-    # täglich frühmorgens neu bauen, damit vergangene Termine und Plakate verschwinden
-    - cron: '17 2 * * *'
+    # täglich kurz nach Mitternacht (deutsche Zeit) neu bauen: vergangene Termine und Plakate verschwinden,
+    # die Tagesnotiz „Was steht heute an?“ (KI) wird neu geschrieben. GitHub startet geplante Läufe oft später;
+    # das Datum nehmen Skript und Seite in deutscher Zeit.
+    - cron: '5 23 * * *'
   workflow_dispatch:
 
 permissions:
@@ -27,6 +29,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Tagesnotiz des Tages (scripts/tagesnotiz.mjs); ohne Secret oder bei Fehlern wird sie einfach übersprungen
+      - name: Tagesnotiz schreiben
+        run: node scripts/tagesnotiz.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       - run: npm run build
       - uses: actions/upload-pages-artifact@v5
         with:

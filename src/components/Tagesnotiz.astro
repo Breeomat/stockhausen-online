@@ -1,0 +1,43 @@
+---
+import { heute } from '../lib/termine';
+
+// „Was steht heute an?“: nachts von scripts/tagesnotiz.mjs geschrieben (Claude, Wetter von Open-Meteo, eigene Termine).
+// Erscheint nur, wenn die Notiz von heute ist – sonst (kein Schlüssel, Fehler, alter Stand) bleibt die Stelle leer.
+const dateien = import.meta.glob<{ default: { datum: string; text: string } }>('../data/tagesnotiz.json', { eager: true });
+const notiz = Object.values(dateien)[0]?.default;
+const zeigen = notiz?.datum === heute() && notiz.text;
+const datum = zeigen
+  ? new Date(`${notiz.datum}T12:00:00`).toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' })
+  : '';
+---
+{zeigen && (
+  <aside class="tagesnotiz" aria-label="Was steht heute an?">
+    <h3><span class="tagesnotiz__punkt" aria-hidden="true"></span>Was steht heute an?</h3>
+    <p class="tagesnotiz__datum">{datum}</p>
+    <p class="tagesnotiz__text">{notiz.text}</p>
+    <p class="tagesnotiz__hinweis">
+      Jede Nacht automatisch von einer KI (Claude) geschrieben – aus Wetterdaten von
+      <a href="https://open-meteo.com/" rel="noopener">Open-Meteo.com</a> und den Terminen dieser Seite.
+    </p>
+  </aside>
+)}
+
+<style>
+  .tagesnotiz {
+    margin: 0 0 1.25rem;
+    padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 2rem);
+    border-radius: var(--radius, 14px);
+    background: var(--meer);
+    color: #fff;
+    box-shadow: var(--schatten);
+  }
+  .tagesnotiz h3 { display: flex; align-items: center; gap: 0.6rem; margin: 0; color: #fff; font-size: 1.4rem; }
+  .tagesnotiz__punkt { width: 0.8rem; height: 0.8rem; border-radius: 50%; background: var(--gold); flex: none; }
+  .tagesnotiz__datum { margin: 0.35rem 0 0.75rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+  .tagesnotiz__text { margin: 0; max-width: 70ch; font-size: 1.08rem; line-height: 1.65; color: #fff; }
+  .tagesnotiz__hinweis { margin: 0.9rem 0 0; font-size: 0.8rem; color: rgb(255 255 255 / 0.7); }
+  .tagesnotiz__hinweis a { color: var(--gold); }
+  @media (prefers-color-scheme: dark) {
+    .tagesnotiz { background: #16324a; }
+  }
+</style>
