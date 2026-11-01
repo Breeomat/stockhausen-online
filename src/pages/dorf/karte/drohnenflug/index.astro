@@ -30,10 +30,10 @@ const anker = [
 // Echtes Luftbild (Marc Ahne, Blick von Norden nach Süden, also auf dem Kopf zur Karte): Kartenpunkte → Bildpunkte
 // über eine affine Abbildung aus Passpunkten, dazu eine Korrektur (Gauß-RBF), die an jedem Passpunkt exakt trifft
 // und mit dem Abstand ausläuft. Passpunkte: [Karte x, y, Abweichung x, y in Bildpunkten zur affinen Abbildung] –
-// Schloss, Kirche, Friedhof, Altfellhalle, Schule, Struthgrund 15, Müser Straße 36 und 49, Blankenauer Straße 4. Bei neuen Passpunkten die affine
+// Schloss, Kirche, Friedhof, Altfellhalle, Schule, Struthgrund 15, Müser Straße 36 und 49, Blankenauer Straße 4, Kehrweg 21. Bei neuen Passpunkten die affine
 // Abbildung neu ausgleichen (kleinste Quadrate) und die Abweichungen hier eintragen.
 const foto = { breite: luftbild.width, hoehe: luftbild.height };
-const passpunkte = [[480.0, 289.9, 12.4, -42.3], [535.6, 245.0, 19.0, 16.0], [582.9, 173.4, 8.6, 40.4], [787.1, 413.6, -37.2, -34.5], [342.1, 394.2, -26.1, 0.5], [780.4, 524.2, -19.6, -27.6], [750.8, 583.8, 18.5, 11.0], [756.9, 631.1, 24.4, 26.8], [841.4, 675.1, -0.0, 9.7]];
+const passpunkte = [[480.0, 289.9, 17.6, -41.3], [535.6, 245.0, 37.6, 19.7], [582.9, 173.4, 42.9, 47.3], [787.1, 413.6, -7.3, -28.5], [342.1, 394.2, -52.9, -4.9], [780.4, 524.2, -5.2, -24.7], [750.8, 583.8, 21.1, 11.5], [756.9, 631.1, 21.7, 26.2], [841.4, 675.1, 2.6, 10.3], [770.3, 293.6, -78.1, -15.7]];
 const kern = (ax: number, ay: number, bx: number, by: number) => Math.exp(-((ax - bx) ** 2 + (ay - by) ** 2) / (2 * 60 ** 2));
 // Gewichte lösen: K · g = Abweichung (Gauß-Elimination, je für x und y)
 const loesen = (spalte: 2 | 3) => {
@@ -54,8 +54,8 @@ const aufsFoto = (x: number, y: number) => {
   let dx = 0, dy = 0;
   passpunkte.forEach(([px, py], i) => { const w = kern(x, y, px, py); dx += w * gx[i]; dy += w * gy[i]; });
   return {
-    x: +((-1.55604 * x + 0.18108 * y + 2152.03 + dx) * (foto.breite / 2532)).toFixed(1),
-    y: +((-0.02338 * x - 1.11267 * y + 871.12 + dy) * (foto.hoehe / 1170)).toFixed(1),
+    x: +((-1.68928 * x + 0.31283 * y + 2172.54 + dx) * (foto.breite / 2532)).toFixed(1),
+    y: +((-0.05015 * x - 1.0862 * y + 875.24 + dy) * (foto.hoehe / 1170)).toFixed(1),
   };
 };
 const fotoMitte = { x: foto.breite / 2, y: foto.hoehe * 0.47 };
