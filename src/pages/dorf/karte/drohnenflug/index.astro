@@ -28,12 +28,23 @@ const anker = [
   { x: mitte.x, y: mitte.y, z: 1, ort: 'Stockhausen von oben' },
 ];
 // Echtes Luftbild (Marc Ahne, Blick von Norden nach Süden, also auf dem Kopf zur Karte): Kartenpunkte → Bildpunkte
-// über eine affine Abbildung aus Passpunkten (Schloss, Kirche, Friedhof, Altfellhalle, Schule); Genauigkeit etwa ein Haus.
+// über eine affine Abbildung aus Passpunkten, dazu eine örtliche Korrektur, die an jedem Passpunkt exakt trifft
+// und mit dem Abstand ausläuft. Passpunkte: [Karte x, y, Abweichung x, y in Bildpunkten] – Schloss, Kirche, Friedhof,
+// Altfellhalle, Schule, Struthgrund 15. Weitere Passpunkte verbessern die Lage in ihrer Umgebung.
 const foto = { breite: luftbild.width, hoehe: luftbild.height };
-const aufsFoto = (x: number, y: number) => ({
-  x: +((-1.58765 * x - 0.03204 * y + 2229.24) * (foto.breite / 2532)).toFixed(1),
-  y: +((-0.05405 * x - 1.33864 * y + 952.39) * (foto.hoehe / 1170)).toFixed(1),
-});
+const passpunkte = [[480.0, 289.9, 12.1, -43.4], [535.6, 245.0, 12.7, 8.0], [582.9, 173.4, -7.7, 21.0], [787.1, 413.6, -19.0, -13.1], [342.1, 394.2, -12.2, 15.6], [780.4, 524.2, 14.1, 11.9]];
+const aufsFoto = (x: number, y: number) => {
+  let dx = 0, dy = 0, summe = 0;
+  for (const [px, py, rx, ry] of passpunkte) {
+    const w = Math.exp(-((x - px) ** 2 + (y - py) ** 2) / (2 * 70 ** 2));
+    dx += w * rx; dy += w * ry; summe += w;
+  }
+  const n = Math.max(1, summe);
+  return {
+    x: +((-1.55961 * x + 0.04076 * y + 2194.69 + dx / n) * (foto.breite / 2532)).toFixed(1),
+    y: +((-0.03031 * x - 1.27697 * y + 923.12 + dy / n) * (foto.hoehe / 1170)).toFixed(1),
+  };
+};
 const fotoMitte = { x: foto.breite / 2, y: foto.hoehe * 0.47 };
 const ankerFoto = anker.map((a, i) => (i === 0 || i === anker.length - 1 ? { ...a, ...fotoMitte, z: 1 } : { ...a, ...aufsFoto(a.x, a.y), z: 2.6 }));
 const fotoBild = await getImage({ src: luftbild, width: luftbild.width, format: 'webp', quality: 80 });
