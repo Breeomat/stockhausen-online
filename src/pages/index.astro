@@ -202,8 +202,8 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
     inset: 0;
     z-index: -1;
     background:
-      linear-gradient(90deg, rgb(14 32 48 / 0.78) 0%, rgb(14 32 48 / 0.5) 45%, rgb(14 32 48 / 0.05) 80%),
-      linear-gradient(0deg, rgb(14 32 48 / 0.35), transparent 40%);
+      linear-gradient(90deg, rgb(14 32 48 / 0.62) 0%, rgb(14 32 48 / 0.32) 45%, rgb(14 32 48 / 0) 75%),
+      linear-gradient(0deg, rgb(14 32 48 / 0.25), transparent 40%);
   }
   .held__innen { padding-block: clamp(3rem, 8vw, 6rem); }
   .held .kicker { color: var(--gold); text-shadow: 0 1px 8px rgb(0 0 0 / 0.4); }
@@ -219,7 +219,7 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
     /* Handy: Titelbild niedriger, damit „Aktuelles“ schon im ersten Bildschirm anfängt */
     .held { min-height: clamp(340px, 52vh, 460px); margin-bottom: 1rem; }
     .held__innen { padding-block: 2.5rem 3rem; }
-    .held::before { background: linear-gradient(180deg, rgb(14 32 48 / 0.7), rgb(14 32 48 / 0.55)); }
+    .held::before { background: linear-gradient(180deg, rgb(14 32 48 / 0.55), rgb(14 32 48 / 0.38)); }
   }
   .abschnitt--direkt { padding-top: 1rem; }
   .aktuelles-start { padding-bottom: 1.5rem; }
