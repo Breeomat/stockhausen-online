@@ -10,7 +10,11 @@ import Brummi from '../../../../components/Brummi.astro';
 // Drohnenflug über Stockhausen: dieselben Marken wie auf /dorf/karte/, beim Scrollen fliegt die Kamera sie
 // nacheinander an (Start an der Altfellhalle, dann jeweils zum nächstgelegenen noch nicht besuchten Ort).
 // Grundkarte: scripts/dorfkarte.py, Daten © OpenStreetMap-Mitwirkende.
-const liste = await marken();
+// Orte außerhalb des Luftbilds fliegt die Drohne nicht an (Schützenhaus, Riedesel-Kapelle mit Conrads-Ruhe)
+const ausserhalb = ['ort-schuetzenhaus', 'ort-riedesel-kapelle', 'ort-conrads-ruhe'];
+const liste = (await marken())
+  .map((m) => ({ ...m, eintraege: m.eintraege.filter((e) => !ausserhalb.includes(e.id)) }))
+  .filter((m) => m.eintraege.length > 0);
 const rest = [...liste];
 const start = rest.find((m) => m.eintraege.some((e) => e.id === 'ort-altfellhalle')) ?? rest[0];
 const tour: Marke[] = [];

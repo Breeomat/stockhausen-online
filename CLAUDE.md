@@ -31,7 +31,7 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
   Umschalter „Echt / Karte“ (Standard Echt, Wahl im Browser gemerkt): „Echt“ fliegt über das Luftbild
   `src/assets/fotos/drohnenflug-luftbild.jpg` (Marc Ahne, Blick Nord→Süd, schräg; die Kamera dreht dort nicht).
   Kartenpunkte → Bildpunkte über die affine Abbildung `aufsFoto` (`passpunkte`: Schloss, Kirche, Friedhof, Altfellhalle, Schule, Struthgrund 15, Müser Straße 36 und 49, Blankenauer Straße 4, Kehrweg 21;
-  bei neuem Foto neu bestimmen). Dazu „Brummi“, die kleine Drohne von ahne.de (`src/components/Brummi.astro`).
+  bei neuem Foto neu bestimmen). Orte außerhalb des Fotos (Schützenhaus, Riedesel-Kapelle/Conrads-Ruhe) fliegt die Drohne nicht an (`ausserhalb`). Dazu „Brummi“, die kleine Drohne von ahne.de (`src/components/Brummi.astro`).
 - „Was steht heute an?“ (KI-Tagesnotiz, Startseite über den Aktuelles-Kacheln): `scripts/tagesnotiz.mjs` (übernommen von ahne.de)
   läuft im Workflow vor dem Build (Zeitplan 23:05 UTC), holt Wetter (Open-Meteo) und Termine der nächsten 7 Tage (termine.ics der
   Seite), lässt Claude 2–4 Sätze schreiben → `src/data/tagesnotiz.json` (nicht eingecheckt). Braucht das Repository-Secret
