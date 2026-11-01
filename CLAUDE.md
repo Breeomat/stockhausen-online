@@ -28,6 +28,10 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
 - Drohnenflug (/dorf/karte/drohnenflug/, Link oben auf der Dorfkarte): dieselben Marken wie die Dorfkarte, beim Scrollen
   fliegt die Kamera sie nacheinander an (Start Altfellhalle, dann jeweils der nächstgelegene Ort). Neue Orte erscheinen
   automatisch. Alles in `src/pages/dorf/karte/drohnenflug/index.astro`.
+  Umschalter „Echt / Karte“ (Standard Echt, Wahl im Browser gemerkt): „Echt“ fliegt über das Luftbild
+  `src/assets/fotos/drohnenflug-luftbild.jpg` (Marc Ahne, Blick Nord→Süd, schräg; die Kamera dreht dort nicht).
+  Kartenpunkte → Bildpunkte über die affine Abbildung `aufsFoto` (Passpunkte Schloss, Kirche, Friedhof, Altfellhalle, Schule;
+  bei neuem Foto neu bestimmen). Dazu „Brummi“, die kleine Drohne von ahne.de (`src/components/Brummi.astro`).
 - „Was steht heute an?“ (KI-Tagesnotiz, Startseite über den Aktuelles-Kacheln): `scripts/tagesnotiz.mjs` (übernommen von ahne.de)
   läuft im Workflow vor dem Build (Zeitplan 23:05 UTC), holt Wetter (Open-Meteo) und Termine der nächsten 7 Tage (termine.ics der
   Seite), lässt Claude 2–4 Sätze schreiben → `src/data/tagesnotiz.json` (nicht eingecheckt). Braucht das Repository-Secret
