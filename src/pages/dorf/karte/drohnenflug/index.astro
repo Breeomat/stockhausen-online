@@ -28,21 +28,34 @@ const anker = [
   { x: mitte.x, y: mitte.y, z: 1, ort: 'Stockhausen von oben' },
 ];
 // Echtes Luftbild (Marc Ahne, Blick von Norden nach Süden, also auf dem Kopf zur Karte): Kartenpunkte → Bildpunkte
-// über eine affine Abbildung aus Passpunkten, dazu eine örtliche Korrektur, die an jedem Passpunkt exakt trifft
-// und mit dem Abstand ausläuft. Passpunkte: [Karte x, y, Abweichung x, y in Bildpunkten] – Schloss, Kirche, Friedhof,
-// Altfellhalle, Schule, Struthgrund 15. Weitere Passpunkte verbessern die Lage in ihrer Umgebung.
+// über eine affine Abbildung aus Passpunkten, dazu eine Korrektur (Gauß-RBF), die an jedem Passpunkt exakt trifft
+// und mit dem Abstand ausläuft. Passpunkte: [Karte x, y, Abweichung x, y in Bildpunkten zur affinen Abbildung] –
+// Schloss, Kirche, Friedhof, Altfellhalle, Schule, Struthgrund 15, Müser Straße 36. Bei neuen Passpunkten die affine
+// Abbildung neu ausgleichen (kleinste Quadrate) und die Abweichungen hier eintragen.
 const foto = { breite: luftbild.width, hoehe: luftbild.height };
-const passpunkte = [[480.0, 289.9, 12.1, -43.4], [535.6, 245.0, 12.7, 8.0], [582.9, 173.4, -7.7, 21.0], [787.1, 413.6, -19.0, -13.1], [342.1, 394.2, -12.2, 15.6], [780.4, 524.2, 14.1, 11.9]];
-const aufsFoto = (x: number, y: number) => {
-  let dx = 0, dy = 0, summe = 0;
-  for (const [px, py, rx, ry] of passpunkte) {
-    const w = Math.exp(-((x - px) ** 2 + (y - py) ** 2) / (2 * 70 ** 2));
-    dx += w * rx; dy += w * ry; summe += w;
+const passpunkte = [[480.0, 289.9, 12.1, -43.4], [535.6, 245.0, 13.9, 9.9], [582.9, 173.4, -4.3, 26.1], [787.1, 413.6, -23.5, -19.9], [342.1, 394.2, -15.2, 11.1], [780.4, 524.2, 6.2, -0.1], [750.8, 583.8, 10.8, 16.4]];
+const kern = (ax: number, ay: number, bx: number, by: number) => Math.exp(-((ax - bx) ** 2 + (ay - by) ** 2) / (2 * 60 ** 2));
+// Gewichte lösen: K · g = Abweichung (Gauß-Elimination, je für x und y)
+const loesen = (spalte: 2 | 3) => {
+  const n = passpunkte.length;
+  const m = passpunkte.map((p, i) => [...passpunkte.map((q) => kern(p[0], p[1], q[0], q[1])), p[spalte]]);
+  for (let k = 0; k < n; k++) {
+    for (let i = k + 1; i < n; i++) {
+      const f = m[i][k] / m[k][k];
+      for (let j = k; j <= n; j++) m[i][j] -= f * m[k][j];
+    }
   }
-  const n = Math.max(1, summe);
+  const g = Array(n).fill(0);
+  for (let i = n - 1; i >= 0; i--) g[i] = (m[i][n] - m[i].slice(i + 1, n).reduce((s, v, j) => s + v * g[i + 1 + j], 0)) / m[i][i];
+  return g;
+};
+const gx = loesen(2), gy = loesen(3);
+const aufsFoto = (x: number, y: number) => {
+  let dx = 0, dy = 0;
+  passpunkte.forEach(([px, py], i) => { const w = kern(x, y, px, py); dx += w * gx[i]; dy += w * gy[i]; });
   return {
-    x: +((-1.55961 * x + 0.04076 * y + 2194.69 + dx / n) * (foto.breite / 2532)).toFixed(1),
-    y: +((-0.03031 * x - 1.27697 * y + 923.12 + dy / n) * (foto.hoehe / 1170)).toFixed(1),
+    x: +((-1.55763 * x + 0.07181 * y + 2184.77 + dx) * (foto.breite / 2532)).toFixed(1),
+    y: +((-0.02729 * x - 1.22977 * y + 908.04 + dy) * (foto.hoehe / 1170)).toFixed(1),
   };
 };
 const fotoMitte = { x: foto.breite / 2, y: foto.hoehe * 0.47 };
