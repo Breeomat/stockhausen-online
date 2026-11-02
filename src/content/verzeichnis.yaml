@@ -119,10 +119,17 @@
 - id: kindergarten-storchennest
   name: Ev. Kindergarten „Storchennest“
   kategorie: Einrichtung
-  text: Kindertagesstätte in Trägerschaft der Evangelischen Kirche mit Betreuungs- und Förderangeboten für Kleinkinder und Kindergartenkinder aus Stockhausen und Umgebung.
+  text: >-
+    Kindertagesstätte in Trägerschaft der Evangelischen Kirche mit Betreuungs- und Förderangeboten für Kleinkinder und Kindergartenkinder aus Stockhausen und Umgebung.
+    Die Kinder besuchen Seniorinnen und Senioren in Stockhausen zu runden und halbrunden Geburtstagen ab 75 Jahren und bringen ein Ständchen –
+    wer sich über einen Besuch freuen würde, meldet sich im Kindergarten, der Termin wird gemeinsam vereinbart.
   adresse: Müser Straße 27, 36358 Herbstein-Stockhausen
   telefon: 06647 333
   email: kita.stockhausen@ekhn.de
+  angebot:
+    titel: Plakat „Eine Freude zum Geburtstag“
+    datei: angebote/kindergarten-geburtstagsbesuche.jpg
+    bis: 2027-12-31
 - id: ortsbeirat
   name: Ortsbeirat Stockhausen
   kategorie: Einrichtung
