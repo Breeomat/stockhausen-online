@@ -187,10 +187,13 @@
 - id: 2026-11-21-ffw-nachtuebung-blaulichtabend
   titel: Öffentliche Nachtübung und Blaulichtabend
   datum: 2026-11-21
-  beginn: "17:30"
+  beginn: "17:00"
   ort: Feuerwehrhaus
   verein: Freiwillige Feuerwehr Stockhausen e.V.
-  text: Ab 17:30 Uhr öffentliche Nachtübung, danach Gyros mit Pommes und Blaulichtabend.
+  text: >-
+    Nachtübung mit dem Löschzug 2 (Schadges/Rixfeld), Zuschauer erwünscht. Im Anschluss Blaulichtabend im Feuerwehrhaus
+    mit Gyros, Krautsalat und Pommes sowie Bratwurst vom Grill. Das ganze Dorf ist eingeladen.
+  plakat: ffw-nachtuebung-2026
 - id: 2026-11-07-hausflohmarkt
   titel: Hausflohmarkt
   datum: 2026-11-07
