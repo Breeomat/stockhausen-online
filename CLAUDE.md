@@ -9,6 +9,7 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
   `src/lib/rueckblicke.ts` (Feld `vereine`: nur der Veranstalter, nicht beteiligte Vereine → Bericht erscheint auch auf dessen Vereinsseite). Keine eigene Kachel je Bericht – unter „Aktuelles“ steht immer eine feste Kachel „Rückblick“ (zeigt den neuesten Eintrag).
   Abgelaufene Kacheln aus `aktuelles.ts` (aktiv() === false) wandern automatisch in den Rückblick (Feld `datum` für die Reihenfolge).
 - Termine: `src/content/termine.yaml` (Felder siehe Kommentar in der Datei). Vergangene Termine fallen automatisch weg.
+  Termine der Feuerwehr erscheinen nur auf der Feuerwehr-Seite, nicht auf Startseite, /termine/ und im Kalender-Abo (`dorfTermine()`, `nurBeimVerein` in `src/lib/termine.ts`).
 - Plakate: Bild nach `src/assets/plakate/`, Eintrag in `src/content/plakate.yaml`. Nach `gueltig_bis` → Archiv.
   Jedes Plakat hat eine eigene Seite `/plakate/<id>/` (Vorschaubild beim Teilen = Plakat, Knopf „Teilen“ auf der Plakatwand);
   `/plakate/` selbst zeigt beim Teilen eine Collage der vier zuletzt eingetragenen aktuellen Plakate (`src/pages/plakate/vorschau.jpg.ts`, entsteht beim Build).

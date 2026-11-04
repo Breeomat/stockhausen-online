@@ -6,7 +6,7 @@ import TerminKarte from '../components/TerminKarte.astro';
 import PlakatRaster from '../components/PlakatRaster.astro';
 import Tagesnotiz from '../components/Tagesnotiz.astro';
 import HeldStimmung from '../components/HeldStimmung.astro';
-import { kommendeTermine } from '../lib/termine';
+import { dorfTermine } from '../lib/termine';
 import { plakate } from '../lib/plakate';
 import { url } from '../lib/site';
 import AktuellesKarten from '../components/AktuellesKarten.astro';
@@ -17,7 +17,7 @@ import BereichSymbol from '../components/BereichSymbol.astro';
 import { getCollection } from 'astro:content';
 import { webseite } from '../lib/strukturiert';
 
-const naechste = (await kommendeTermine()).slice(0, 4);
+const naechste = (await dorfTermine()).slice(0, 4);
 const { aktuell } = await plakate();
 // Vereine auf der Startseite: vier Stück, im Browser bei jedem Besuch zufällig gewählt.
 // Ohne JavaScript (und bis das Skript läuft) wechselt die Auswahl täglich mit dem nächtlichen Neubau.

@@ -20,6 +20,13 @@ export async function kommendeTermine(): Promise<Termin[]> {
     .sort((a, b) => (a.data.datum + (a.data.beginn ?? '')).localeCompare(b.data.datum + (b.data.beginn ?? '')));
 }
 
+// Termine für die allgemeinen Listen (Startseite, /termine/, Kalender-Abo termine.ics, Tagesnotiz):
+// ohne Termine der Feuerwehr – die stehen nur auf der Feuerwehr-Seite.
+export const nurBeimVerein = ['Feuerwehr'];
+export async function dorfTermine(): Promise<Termin[]> {
+  return (await kommendeTermine()).filter((t) => !nurBeimVerein.some((v) => t.data.verein?.includes(v)));
+}
+
 const alsDatum = (iso: string) => new Date(`${iso}T12:00:00`);
 
 export const wochentagKurz = (iso: string) =>

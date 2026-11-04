@@ -1,13 +1,13 @@
 ---
 import Basis from '../../layouts/Basis.astro';
 import TerminKarte from '../../components/TerminKarte.astro';
-import { kommendeTermine, gruppiertNachMonat } from '../../lib/termine';
+import { dorfTermine, gruppiertNachMonat } from '../../lib/termine';
 import { url } from '../../lib/site';
 import { getImage } from 'astro:assets';
 import { plakate } from '../../lib/plakate';
 import { veranstaltungen } from '../../lib/strukturiert';
 
-const termine = await kommendeTermine();
+const termine = await dorfTermine();
 const vereine = [...new Set(termine.flatMap((t) => (t.data.verein ? [t.data.verein] : [])))].sort((a, b) => a.localeCompare(b, 'de'));
 const monate = gruppiertNachMonat(termine);
 // Plakatbilder als absolute Adressen für die strukturierten Daten
