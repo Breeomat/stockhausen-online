@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import einsatzFoto from '../../../assets/fotos/feuerwehr-einsatzabteilung.jpg';
 import uniformFoto from '../../../assets/fotos/feuerwehr-uniform.jpg';
+import altesHausFoto from '../../../assets/fotos/feuerwehr-altes-geraetehaus.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
 import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
@@ -108,6 +109,10 @@ const chronik = [
       </div>
 
       <aside class="seitenleiste">
+        <figure class="karte altes-haus">
+          <Image src={altesHausFoto} alt="Das alte Feuerwehrhaus: kleines verputztes Gebäude mit Satteldach, Sirene auf dem Giebel und der Aufschrift „Feuerwehr“, im offenen Tor das rote Löschfahrzeug VW LT 50" widths={[400, 680]} sizes="(max-width: 900px) calc(100vw - 32px), 340px" />
+          <figcaption>Das alte Feuerwehrhaus mit dem früheren Löschfahrzeug, einem VW LT 50 · Foto: <span class="fehlt">[fehlt: Fotograf]</span></figcaption>
+        </figure>
         <div class="karte kasten">
           <h3>Kontakt</h3>
           <dl class="liste">
@@ -150,6 +155,9 @@ const chronik = [
   @media (max-width: 640px) { .zahlen { grid-template-columns: 1fr; } }
 
   .termine { display: grid; gap: 1rem; margin-top: 1.25rem; }
+  .altes-haus { margin: 0; padding: 0; overflow: hidden; }
+  .altes-haus img { display: block; width: 100%; height: auto; }
+  .altes-haus figcaption { padding: 0.75rem 1rem; font-size: 0.85rem; color: var(--text-leise); }
 
   .spalten { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
   @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }

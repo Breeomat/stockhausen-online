@@ -3,7 +3,7 @@
 // Seiten, deren Stand älter als ein Jahr ist, zeigt `veralteteSeiten()` (für die jährliche Durchsicht).
 export const stand: Record<string, string> = {
   'vereine/arbeitskreis-dorfgeschichte/': '2026-11',
-  'vereine/feuerwehr/': '2026-10',
+  'vereine/feuerwehr/': '2026-11',
   'vereine/gefriergemeinschaft/': '2026-10',
   'vereine/gesangverein/': '2026-10',
   'vereine/kirchengemeinde/': '2026-10',
