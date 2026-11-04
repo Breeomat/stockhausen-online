@@ -21,10 +21,10 @@ export async function kommendeTermine(): Promise<Termin[]> {
 }
 
 // Termine für die allgemeinen Listen (Startseite, /termine/, Kalender-Abo termine.ics, Tagesnotiz):
-// ohne Termine der Feuerwehr – die stehen nur auf der Feuerwehr-Seite.
+// ohne Termine der Feuerwehr – die stehen nur auf der Feuerwehr-Seite (Ausnahme: `oeffentlich: true`).
 export const nurBeimVerein = ['Feuerwehr'];
 export async function dorfTermine(): Promise<Termin[]> {
-  return (await kommendeTermine()).filter((t) => !nurBeimVerein.some((v) => t.data.verein?.includes(v)));
+  return (await kommendeTermine()).filter((t) => t.data.oeffentlich || !nurBeimVerein.some((v) => t.data.verein?.includes(v)));
 }
 
 const alsDatum = (iso: string) => new Date(`${iso}T12:00:00`);
