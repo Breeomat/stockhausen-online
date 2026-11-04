@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Basis from '../../../layouts/Basis.astro';
 import einsatzFoto from '../../../assets/fotos/feuerwehr-einsatzabteilung.jpg';
 import uniformFoto from '../../../assets/fotos/feuerwehr-uniform.jpg';
+import wappen from '../../../assets/fotos/feuerwehr-wappen.png';
 import altesHausFoto from '../../../assets/fotos/feuerwehr-altes-geraetehaus.jpg';
 import TerminKarte from '../../../components/TerminKarte.astro';
 import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
@@ -65,7 +66,8 @@ const chronik = [
 ];
 ---
 <Basis bild={einsatzFoto} titel="Freiwillige Feuerwehr" beschreibung="Freiwillige Feuerwehr Stockhausen e.V.: seit 1874 im Einsatz – Wehrführer, Vorstand und 150 Jahre Chronik.">
-  <section class="huelle seitenkopf">
+  <section class="huelle seitenkopf ffw-kopf">
+    <Image class="ffw-kopf__wappen" src={wappen} alt="Emblem der Freiwilligen Feuerwehr Stockhausen: Helm mit gekreuzten Beilen und Strahlrohr, Umschrift „Freiwillige Feuerwehr Stockhausen *1874*“" width={200} />
     <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
     <span class="kicker">Verein · seit 1874</span>
     <h1>Freiwillige Feuerwehr Stockhausen e.V.</h1>
@@ -141,6 +143,8 @@ const chronik = [
 <style>
   .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
   .wehr { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
+  .ffw-kopf { position: relative; }
+  .ffw-kopf__wappen { float: right; width: clamp(96px, 14vw, 170px); height: auto; margin: 0 0 1rem 1.5rem; filter: drop-shadow(0 6px 14px rgb(0 0 0 / 0.18)); }
 
   .fotos { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .fotos figure { margin: 0; }

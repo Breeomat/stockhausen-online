@@ -1,6 +1,7 @@
 import type { ImageMetadata } from 'astro';
 import { kommendeTermine } from './termine';
 import feuerwehrFoto from '../assets/fotos/feuerwehr-einsatzabteilung.jpg';
+import feuerwehrWappen from '../assets/fotos/feuerwehr-wappen.png';
 import svWappen from '../assets/fotos/sv-stockhausen-wappen.png';
 import schuetzenWappen from '../assets/fotos/schuetzenverein-wappen.png';
 import sportplatzFoto from '../assets/fotos/sv-sportplatz-luftbild.jpg';
@@ -24,6 +25,7 @@ export const vereinsseiten = [
     seit: 'seit 1874',
     text: '57 Aktive, 183 Mitglieder und 150 Jahre Geschichte – von der Spritzenmannschaft bis zum LF 10.',
     href: 'vereine/feuerwehr/',
+    wappen: feuerwehrWappen,
     bild: { src: feuerwehrFoto, alt: 'Die Einsatzabteilung in Schutzkleidung und Helm vor dem Feuerwehrhaus und einem roten Löschfahrzeug', nachweis: 'Foto: Christian Heuser' },
   },
   {
