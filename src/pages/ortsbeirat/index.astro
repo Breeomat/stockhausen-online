@@ -7,6 +7,7 @@ import beiratFoto from '../../assets/fotos/ortsbeirat-stockhausen.png';
 import { ortsbeirat } from '../../lib/ortsbeirat';
 import { kommendeTermine } from '../../lib/termine';
 import { url } from '../../lib/site';
+import { veroeffentlichungen, datumText } from '../../lib/veroeffentlichungen';
 
 // Quelle: Stadt Herbstein, Seite „Ortsbeiräte“ (Oktober 2026) – nur Stockhausen
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Ortsbeirat'));
@@ -73,6 +74,24 @@ const aufgaben = [
       <p>Die Mitglieder werden von den Bürgerinnen und Bürgern des Ortsbezirks bei der Kommunalwahl für fünf Jahre gewählt. Je nach Einwohnerzahl hat ein Ortsbeirat in Herbstein drei bis neun Mitglieder – in Stockhausen sind es neun. Aus ihrer Mitte wählen sie den Ortsvorsteher, der den Vorsitz führt. In allen acht Stadtteilen von Herbstein gibt es einen Ortsbeirat.</p>
     </div>
 
+    {veroeffentlichungen.length > 0 && (
+      <div id="veroeffentlichungen">
+        <span class="kicker">Veröffentlichungen</span>
+        <h2>Aus dem Ortsbeirat</h2>
+        <ul class="veroeff">
+          {veroeffentlichungen.map((v) => (
+            <li class="karte">
+              <a href={url(v.href)}>
+                <time datetime={v.datum}>{datumText(v.datum)}</time>
+                <strong>{v.betreff}</strong>
+                <span>{v.kurz}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
     <VereinRueckblicke teil="Ortsbeirat" />
 
     {termine.length > 0 && (
@@ -88,6 +107,11 @@ const aufgaben = [
 </Basis>
 
 <style>
+  .veroeff { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 0.75rem; }
+  .veroeff a { display: grid; gap: 0.25rem; padding: 1.1rem 1.4rem; text-decoration: none; color: inherit; }
+  .veroeff time { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; color: var(--ziegel); }
+  .veroeff strong { font-family: var(--serif); font-size: 1.2rem; color: var(--meer); }
+  .veroeff span { color: var(--text-leise); }
   .ob { padding-block: 1rem 5rem; display: grid; gap: 3.5rem; }
   .spalten { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 3rem; align-items: start; }
   @media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }

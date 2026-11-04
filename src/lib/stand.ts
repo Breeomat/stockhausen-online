@@ -16,7 +16,7 @@ export const stand: Record<string, string> = {
   'wer-macht-was/': '2026-10',
   'wer-macht-was/desert-oak/': '2026-10',
   'neu-im-dorf/': '2026-10',
-  'ortsbeirat/': '2026-10',
+  'ortsbeirat/': '2026-11',
   'dorf/': '2026-10',
   'dorf/gemeinschaft-altenschlirf/': '2026-10',
   'dorf/karte/': '2026-10',

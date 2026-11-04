@@ -42,6 +42,9 @@ Dorfseite für 36358 Herbstein-Stockhausen. Astro 5, statisch, Hosting über Git
   Nacht mit Sternen), Wetter aus der Tagesnotiz (Nebel, Regen, Schnee) und Anlässe (Kirmes = Zeitraum der Termine
   „Stockhäuser Kirmes …“, Halloween, Advent, Weihnachten, Silvester). Alles im Browser, keine externen Dienste.
   Vorschau: `/?stimmung=nacht,schnee,kirmes` (Werte: morgen, tag, abend, nacht, nebel, regen, schnee, kirmes, halloween, advent, weihnachten, silvester).
+- Veröffentlichungen des Ortsbeirats (Rundschreiben des Ortsvorstehers, mit Datum): je eine Seite unter
+  `src/pages/ortsbeirat/veroeffentlichungen/<JJJJ-MM-TT-name>/` (Wortlaut unverändert) und Eintrag in `src/lib/veroeffentlichungen.ts`
+  (neueste zuerst); Liste „Aus dem Ortsbeirat“ auf /ortsbeirat/.
 - „Stand der Angaben“ (unten auf Vereins- und Infoseiten): `src/lib/stand.ts`. Nach jeder inhaltlichen Änderung einer Seite
   dort den Monat aktualisieren; `veralteteSeiten()` liefert Seiten, die länger als ein Jahr nicht geprüft wurden.
 - Nichts erfinden. Fehlende Angaben als `<span class="fehlt">[fehlt: …]</span>` markieren.
