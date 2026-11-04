@@ -6,14 +6,41 @@ import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
 import schlossFoto from '../../../assets/fotos/stockhausen-schloss.jpg';
-import buchTitel from '../../../assets/fotos/ons-bladd-titel.jpg';
+import onsBladdTitel from '../../../assets/fotos/ons-bladd-titel.jpg';
 import saellemoaTitel from '../../../assets/fotos/saellemoa-titel.jpg';
+import schullTitel from '../../../assets/fotos/die-schull-is-ous-titel.jpg';
+import trotzeTitel from '../../../assets/fotos/trotze-on-zirinke-titel.jpg';
 
 // Quelle: Dossier „Arbeitskreis Dorfgeschichte Stockhausen“ (Drive, Oktober 2026)
 const termine = (await kommendeTermine()).filter((t) => t.data.verein?.includes('Dorfgeschichte'));
 
-// Mitarbeit laut Impressum „Die Schull is ous!“ (2010)
-const mitwirkende = ['Hans-Jürgen Döll', 'Martina Eichenauer', 'Michael Eichenauer', 'Wilhelm Picker', 'Hanne Maaser (für Schadges)'];
+// Aktive Mitglieder und Mitarbeit an den Büchern: Angaben von Michael Eichenauer (November 2026)
+const aktive = ['Hans-Jürgen Döll', 'Martina Eichenauer', 'Michael Eichenauer', 'Christian Oestreich', 'Wilhelm Picker'];
+
+// Ältere Bücher des Arbeitskreises, neueste zuerst
+const buecher = [
+  {
+    titel: '„Ons Bladd!“', untertitel: 'Bie die Stockhäiser schwaddse – Die Mundart von Stockhausen im Vogelsberg', jahr: '2015', bild: onsBladdTitel,
+    alt: 'Buchtitel „Ons Bladd! Bie die Stockhäiser schwaddse“ mit altem Farbfoto: Dorfstraße mit Ortsschild „Stockhausen Kreis Lauterbach“, dahinter die Kirche',
+    mitarbeit: ['Hans-Jürgen Döll', 'Martina Eichenauer', 'Michael Eichenauer', 'Wilhelm Picker'],
+  },
+  {
+    titel: '„Die Schull is ous!“', untertitel: 'Aus 400 Jahren Schulgeschichte von Stockhausen und Schadges', jahr: '2010', bild: schullTitel,
+    alt: 'Buchtitel „Die Schull is ous!“: altes grünes Heft mit Etikett „Aus 400 Jahren Schulgeschichte von Stockhausen und Schadges“, Schriftzug wie mit Kreide',
+    mitarbeit: ['Hans-Jürgen Döll', 'Martina Eichenauer', 'Michael Eichenauer', 'Wilhelm Picker', 'Hanne Maaser (für Schadges)'],
+    daten: [
+      ['Herausgeber', 'Der Magistrat der Stadt Herbstein · Arbeitskreis Dorfgeschichte Stockhausen'],
+      ['ISBN', '978-3-929359-22-1'],
+      ['Druck', 'Mergard, Lauterbach · Buchbindearbeiten Keller, Kleinlüder'],
+      ['Förderung', 'Land Hessen über das Amt für den ländlichen Raum (Vogelsbergkreis)'],
+    ],
+  },
+  {
+    titel: '„Trotze on Zirinke“', untertitel: 'Aus der Geschichte von Stockhausen', jahr: '2005', bild: trotzeTitel,
+    alt: 'Buchtitel „Trotze on Zirinke – Aus der Geschichte von Stockhausen“ mit einer farbigen Zeichnung von Schloss und Kirche',
+    mitarbeit: ['Hans-Jürgen Döll', 'Martina Eichenauer', 'Michael Eichenauer', 'Helmut Fischer', 'Gerhard Heinemann', 'Wilhelm Picker'],
+  },
+];
 
 const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Ausstellungen', 'Ahnenforschung'];
 ---
@@ -44,10 +71,6 @@ const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Aus
       </div>
 
       <aside class="seitenleiste">
-        <figure class="karte buch">
-          <Image src={buchTitel} alt="Buchtitel „Ons Bladd! Bie die Stockhäiser schwaddse.“ – Die Mundart von Stockhausen im Vogelsberg, mit altem Foto der Dorfstraße und der Kirche" widths={[400]} sizes="300px" />
-          <figcaption>„Ons Bladd! Bie die Stockhäiser schwaddse.“ – Die Mundart von Stockhausen im Vogelsberg</figcaption>
-        </figure>
         <div class="karte kasten">
           <h3>Kontakt</h3>
           <dl class="liste">
@@ -56,9 +79,13 @@ const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Aus
           </dl>
         </div>
         <div class="karte kasten">
-          <h3>Mitwirkende</h3>
+          <h3>Treffen</h3>
+          <p class="treffen">Am ersten Montagabend im Monat in der Bibliothek in der Altfellhalle.</p>
+        </div>
+        <div class="karte kasten">
+          <h3>Aktive Mitglieder</h3>
           <ul class="namen">
-            {mitwirkende.map((n) => <li>{n}</li>)}
+            {aktive.map((n) => <li>{n}</li>)}
           </ul>
         </div>
       </aside>
@@ -78,34 +105,39 @@ const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Aus
           <dl class="liste">
             <div><dt>Buchvorstellung</dt><dd>Samstag, 28. November 2026, 14:00 Uhr</dd></div>
             <div><dt>Ort</dt><dd>„i Schmidds Soal“ (Lenny’s im Saal), Müser Straße 9</dd></div>
+            <div><dt>Erhältlich</dt><dd>bis 4. Dezember täglich 10–12 und 14–17:30 Uhr, danach jeden Freitag 15–18 Uhr in der Bücherei in der Altfellhalle (Sportplatz) – und bei der Volksbank Stockhausen</dd></div>
+            <div><dt>Mitarbeit</dt><dd>{aktive.join(', ')}</dd></div>
           </dl>
-          <a class="neu-buch__plakat" href={url('plakate/#plakat-buchvorstellung-saellemoa-2026')}>Plakat ansehen →</a>
+          <a class="neu-buch__plakat" href={url('plakate/buchvorstellung-saellemoa-2026/')}>Plakat ansehen →</a>
         </div>
       </div>
     </div>
 
     <div>
-      <span class="kicker">Veröffentlichung</span>
-      <h2>„Die Schull is ous!“</h2>
-      <p class="buch-untertitel">Aus 100 Jahren Schulgeschichte von Stockhausen und Schadges</p>
-      <div class="karte kasten buch-daten">
-        <dl class="liste">
-          <div><dt>Herausgeber</dt><dd>Der Magistrat der Stadt Herbstein, Marktplatz 7, 36358 Herbstein · Arbeitskreis Dorfgeschichte Stockhausen</dd></div>
-          <div><dt>Erschienen</dt><dd>2010</dd></div>
-          <div><dt>ISBN</dt><dd>978-3-929359-22-1</dd></div>
-          <div><dt>Konzept und Gestaltung</dt><dd>Arbeitskreis Dorfgeschichte Stockhausen</dd></div>
-          <div><dt>Mitarbeit</dt><dd>{mitwirkende.join(', ')}</dd></div>
-          <div><dt>Umsetzung und Druck</dt><dd>Mergard, Lauterbach</dd></div>
-          <div><dt>Buchbindearbeiten</dt><dd>Keller, Kleinlüder</dd></div>
-        </dl>
-        <p class="foerderung">Gefördert durch das Land Hessen über das Amt für den ländlichen Raum (Vogelsbergkreis).</p>
-      </div>
+      <span class="kicker">Veröffentlichungen</span>
+      <h2>Davor erschienen</h2>
+      <ul class="buecher">
+        {buecher.map((b) => (
+          <li class="karte buch-karte">
+            <Image src={b.bild} alt={b.alt} widths={[320, 640]} sizes="(max-width: 760px) calc(100vw - 32px), 340px" />
+            <div class="buch-karte__text">
+              <span class="buch-karte__jahr">{b.jahr}</span>
+              <h3>{b.titel}</h3>
+              <p class="buch-karte__unter">{b.untertitel}</p>
+              <dl class="liste">
+                <div><dt>Mitarbeit</dt><dd>{b.mitarbeit.join(', ')}</dd></div>
+                {b.daten?.map(([dt, dd]) => <div><dt>{dt}</dt><dd>{dd}</dd></div>)}
+              </dl>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
 
     <div class="karte aufruf">
       <span class="kicker">Mitmachen</span>
       <h2>Haben Sie alte Fotos oder Geschichten?</h2>
-      <p>Historische Aufnahmen, Schriftstücke oder Erinnerungen aus alten Tagen helfen, das kulturelle Gedächtnis Stockhausens lebendig zu halten. Sprechen Sie den Arbeitskreis an.</p>
+      <p>Historische Aufnahmen, Schriftstücke oder Erinnerungen aus alten Tagen helfen, das kulturelle Gedächtnis Stockhausens lebendig zu halten. Sprechen Sie den Arbeitskreis an. Wer Interesse an der Mitarbeit im Arbeitskreis hat, ist jederzeit gerne willkommen.</p>
     </div>
 
     <VereinRueckblicke teil="Dorfgeschichte" />
@@ -145,9 +177,7 @@ const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Aus
   .themen li { padding: 0.3rem 0.8rem; border-radius: 999px; background: var(--ziegel-hell); color: var(--ziegel); font-size: 0.85rem; font-weight: 600; }
 
   .seitenleiste { display: grid; gap: 1rem; }
-  .buch { margin: 0; padding: 1rem; }
-  .buch img { width: 100%; height: auto; border-radius: 6px; }
-  .buch figcaption { margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-leise); }
+  .treffen { margin: 0; font-weight: 600; }
   .kasten { padding: 1.5rem; }
   .kasten h3 { margin: 0 0 0.75rem; }
   .liste { margin: 0; display: grid; }
@@ -167,8 +197,13 @@ const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Aus
   .neu-buch .kasten { margin-top: 1.25rem; }
   .neu-buch__plakat { display: inline-block; margin-top: 0.75rem; font-weight: 600; }
   .buch-untertitel { margin-top: -0.5rem; font-size: 1.1rem; color: var(--text-leise); }
-  .buch-daten { max-width: 760px; margin-top: 1.25rem; }
-  .foerderung { margin: 1rem 0 0; font-size: 0.9rem; color: var(--text-leise); }
+  .buecher { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1.25rem; }
+  .buch-karte { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .buch-karte img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 0.95; object-fit: cover; }
+  .buch-karte__text { padding: 1.1rem 1.25rem 1.25rem; }
+  .buch-karte__jahr { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; color: var(--ziegel); }
+  .buch-karte h3 { margin: 0.2rem 0 0.25rem; font-size: 1.25rem; }
+  .buch-karte__unter { margin: 0 0 0.75rem; color: var(--text-leise); font-size: 0.92rem; }
 
   .aufruf { padding: clamp(1.75rem, 4vw, 2.5rem); background: var(--ziegel-hell); border-color: color-mix(in srgb, var(--ziegel) 25%, transparent); }
   .aufruf h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
