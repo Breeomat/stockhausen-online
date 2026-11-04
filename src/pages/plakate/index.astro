@@ -2,10 +2,11 @@
 import Basis from '../../layouts/Basis.astro';
 import PlakatRaster from '../../components/PlakatRaster.astro';
 import { plakate } from '../../lib/plakate';
+import { BREITE, HOEHE } from './vorschau.jpg';
 
-const { aktuell, archiv, neuestes } = await plakate();
+const { aktuell, archiv } = await plakate();
 ---
-<Basis bild={neuestes?.bild} titel="Plakatwand" beschreibung="Aktuelle Plakate der Vereine aus Stockhausen.">
+<Basis vorschaubild={{ pfad: 'plakate/vorschau.jpg', breite: BREITE, hoehe: HOEHE }} titel="Plakatwand" beschreibung="Aktuelle Plakate der Vereine aus Stockhausen.">
   <section class="huelle seitenkopf">
     <span class="kicker">Plakatwand</span>
     <h1>Aktuell ausgehängt</h1>

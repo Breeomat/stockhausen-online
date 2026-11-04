@@ -14,9 +14,11 @@ interface Props {
   strukturiert?: object;
   // Vorschaubild beim Teilen (WhatsApp, Facebook …); ohne Angabe das Luftbild von Stockhausen
   bild?: ImageMetadata;
+  // fertiges Vorschaubild unter eigener Adresse (z. B. die Plakatwand-Collage); geht vor `bild`
+  vorschaubild?: { pfad: string; breite: number; hoehe: number };
 }
 
-const { titel, strukturiert, bild = standardBild, beschreibung = 'Neuigkeiten, Termine, Plakate und Geschichten aus Stockhausen, Ortsteil von Herbstein im Vogelsberg.' } = Astro.props;
+const { titel, strukturiert, bild = standardBild, vorschaubild, beschreibung = 'Neuigkeiten, Termine, Plakate und Geschichten aus Stockhausen, Ortsteil von Herbstein im Vogelsberg.' } = Astro.props;
 const seitentitel = titel ? `${titel} · Stockhausen` : 'Stockhausen · Ortsteil von Herbstein';
 const aktuell = Astro.url.pathname;
 const kanonisch = new URL(aktuell, Astro.site).href;
@@ -24,7 +26,9 @@ const standSeite = stand[aktuell.replace(url(''), '')];
 // Suche (Pagefind): diese Seiten nicht in den Suchindex aufnehmen
 const suchbar = !['suche/', 'qr-code/', '404'].some((pfad) => aktuell.startsWith(url(pfad)));
 const fehlerseite = aktuell.startsWith(url('404'));
-const vorschau = await getImage({ src: bild, width: Math.min(bild.width, 1200), format: 'jpg' });
+const vorschau = vorschaubild
+  ? { src: url(vorschaubild.pfad), attributes: { width: vorschaubild.breite, height: vorschaubild.hoehe } }
+  : await getImage({ src: bild, width: Math.min(bild.width, 1200), format: 'jpg' });
 const vorschauUrl = new URL(vorschau.src, Astro.site).href;
 const istAktiv = (href: string) => (href === '' ? aktuell === url('') : aktuell.startsWith(url(href)));
 ---
