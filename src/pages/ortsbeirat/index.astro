@@ -78,6 +78,7 @@ const aufgaben = [
       <div id="veroeffentlichungen">
         <span class="kicker">Veröffentlichungen</span>
         <h2>Aus dem Ortsbeirat</h2>
+        <p class="veroeff__hinweis">Sie möchten eine Mitteilung über den Verteiler des Ortsbeirats bekannt machen? Dann wenden Sie sich bitte an Ortsvorsteher Jonas Domaschka – per E-Mail an <a href={`mailto:${ortsbeirat.email}`}>{ortsbeirat.email}</a> oder telefonisch unter <a href={tel}>{ortsbeirat.telefon}</a>.</p>
         <ul class="veroeff">
           {veroeffentlichungen.map((v) => (
             <li class="karte">
@@ -107,6 +108,7 @@ const aufgaben = [
 </Basis>
 
 <style>
+  .veroeff__hinweis { max-width: 68ch; color: var(--text-leise); }
   .veroeff { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 0.75rem; }
   .veroeff a { display: grid; gap: 0.25rem; padding: 1.1rem 1.4rem; text-decoration: none; color: inherit; }
   .veroeff time { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; color: var(--ziegel); }
