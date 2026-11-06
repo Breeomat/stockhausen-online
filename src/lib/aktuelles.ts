@@ -1,4 +1,4 @@
-import { baustelle, baustelleAktiv } from './enso';
+import { aktion, aktionLaeuft, baustelle, baustelleAktiv } from './enso';
 import { heute } from './termine';
 
 // Kacheln für „Aktuelles“ (Startseite und /aktuelles/). Nur Einträge mit aktiv() === true erscheinen.
@@ -7,7 +7,6 @@ import { heute } from './termine';
 // datum (JJJJ-MM-TT) bestimmt dort die Reihenfolge.
 export interface Meldung { marke: string; titel: string; text: string; href: string; linkText: string; ton: 'warnung' | 'info'; aktiv: () => boolean; datum?: string }
 
-// Die Tante-Enso-Kachel wurde am 06.11.2026 auf Wunsch des Betreibers entfernt (Infos weiter unter /tante-enso/).
 export const meldungen: Meldung[] = [
   {
     marke: 'Baustelle',
@@ -18,6 +17,16 @@ export const meldungen: Meldung[] = [
     ton: 'warnung',
     aktiv: baustelleAktiv,
     datum: baustelle.bis ?? undefined,
+  },
+  {
+    marke: 'Tante Enso',
+    titel: 'Das Lädchen wird ein Tante-Enso-Laden',
+    text: `${aktion.stand} Teilhaber – das Ziel von ${aktion.ziel} ist erreicht. Das Lädchen in der Welzgasse wird ein Tante-Enso-Laden in der Farbe „Weinrot“, Betreiber bleibt die Gemeinschaft Altenschlirf.${aktionLaeuft() ? ` Mitmachen geht noch bis ${aktion.fristText}.` : ' Wichtig für Teilhaber: Die Tante-Enso-Karte muss man selbst beantragen.'}`,
+    href: 'tante-enso/',
+    linkText: 'Stand und Infos',
+    ton: 'info',
+    // seit 06.11.2026 nicht mehr unter „Was gerade wichtig ist“; ohne `datum` steht sie im Rückblick als ältester Eintrag
+    aktiv: () => false,
   },
   {
     marke: 'Neues Buch',
