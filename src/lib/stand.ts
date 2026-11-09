@@ -23,7 +23,7 @@ export const stand: Record<string, string> = {
   'dorf/karte/drohnenflug/': '2026-10',
   'dorf/suehnekreuz-stickelstein/': '2026-10',
   'dorf/saba-weg/': '2026-10',
-  'tante-enso/': '2026-10',
+  'tante-enso/': '2026-11',
   'ortsdurchfahrt/': '2026-10',
 };
 

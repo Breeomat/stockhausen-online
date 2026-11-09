@@ -51,15 +51,24 @@ const quellen = [
     )}
 
     <div class="karte neues">
-      <span class="kicker">Neues von Tante Enso · {aktion.update.datumText}</span>
-      <h2>Ziel erreicht – so geht es weiter</h2>
-      <p>{aktion.stand} statt der nötigen {aktion.ziel} Teilhaber: Tante Enso gratuliert Stockhausen zur erfolgreichen Kampagne. Bei der Bürgerversammlung am 23. September in der Altfellhalle hat das Dorf außerdem abgestimmt: Der Tante-Enso-Laden kommt in der Farbe „Weinrot“.</p>
+      <span class="kicker">Neues von Tante Enso · {aktion.update.titel} vom {aktion.update.datumText}</span>
+      <h2>Umstellung läuft – Umbau ab dem neuen Jahr</h2>
+      <p>Im Hintergrund ist schon Tante Enso: Technik und Lieferanten werden umgestellt, im Laden selbst ändert sich erst mit der Eröffnung alles. Das neue Update von Tante Enso gilt für alle übernommenen Standorte, also auch für Stockhausen.</p>
       <ul class="neues__liste">
-        <li><strong>Mitgestalten:</strong> Über einen Fragebogen bestimmen alle mit, was der Laden bietet – wichtigster Haushaltsbedarf, Produkte regionaler und lokaler Hersteller, Öffnungszeiten mit Personal. Wer Schwierigkeiten mit dem Computer hat, holt sich Hilfe und füllt ihn gemeinsam aus. <span class="fehlt">[fehlt: Link zum Fragebogen für Stockhausen]</span></li>
-        <li><strong>Standort-Botschafter gesucht:</strong> Tante Enso sucht jemanden aus dem Ort, der die Gegebenheiten kennt und die Updates vor dem Veröffentlichen mit abstimmt. Interessierte schicken ihre Kontaktdaten an <a href="mailto:redaktion@enso-gruppe.de">redaktion@enso-gruppe.de</a>.</li>
+        <li><strong>Holpriger Übergang:</strong> Durch den Wechsel der Lieferanten wird das Sortiment ausgetauscht. Nicht jedes Produkt ist im Moment verfügbar, Tante Enso sucht Alternativen und arbeitet auch an den Produktwünschen.</li>
+        <li><strong>Eröffnung und Umbau:</strong> Erst zur Eröffnung sieht der Laden wie ein Tante Enso aus. Dann gibt es Einkaufen rund um die Uhr, Selbstbedienungskassen, die Wünsch-dir-was-Tafel und die Karte als Türöffner. Die Planung für 2027 läuft; welcher Laden wann eröffnet, hängt vor allem vom Zustand von Gebäude und Einrichtung ab. Die Umbauarbeiten beginnen mit dem neuen Jahr. Einen Termin für Stockhausen nennt Tante Enso noch nicht.</li>
+        <li><strong>Öffnungszeiten und Telefon:</strong> stehen jetzt auf der <a href={aktion.neuigkeiten} rel="noopener">Stockhausen-Seite von Tante Enso</a>.</li>
+        <li><strong>Rabattaktionen:</strong> Vom 15. November bis 15. Dezember 2026 feiert Tante Enso seinen „Meilenstein-Monat“ mit vielen Rabattaktionen (Infos im Newsletter und auf Social Media).</li>
         <li><strong>Karte selbst beantragen:</strong> Wer Teilhaber ist, bekommt nicht automatisch eine Tante-Enso-Karte. Sie ist kostenlos und wird im Kundenkonto oder <a href="https://www.tanteenso.de/content/tanteenso/tante-enso-karte" rel="noopener">online</a> beantragt. Voraussetzung: 18 Jahre, E-Mail-Adresse und ein europäisches Bankkonto (SEPA-Lastschrift). Die Karte kommt meist nach 10–14 Werktagen per Post. Es gibt sie auch als App „Tante Enso: 24/7 einkaufen“ (Google Play und App Store).</li>
       </ul>
       <p><a href={aktion.update.link} rel="noopener">Das ganze Update auf tanteenso.de lesen</a></p>
+
+      <h3 class="neues__frueher">Aus {aktion.vorheriges.titel} ({aktion.vorheriges.datumText})</h3>
+      <ul class="neues__liste">
+        <li><strong>Ziel erreicht:</strong> {aktion.stand} statt der nötigen {aktion.ziel} Teilhaber. Bei der Bürgerversammlung am 23. September in der Altfellhalle hat das Dorf außerdem die Farbe „Weinrot“ gewählt.</li>
+        <li><strong>Mitgestalten:</strong> Über einen Fragebogen bestimmen alle mit, was der Laden bietet – wichtigster Haushaltsbedarf, Produkte regionaler und lokaler Hersteller, Öffnungszeiten mit Personal. Wer Schwierigkeiten mit dem Computer hat, holt sich Hilfe und füllt ihn gemeinsam aus. <a href="https://www.tanteenso.de/content/tanteenso/standorte/stockhausen/mitgestalten" rel="noopener">Zum Mitgestalten</a></li>
+        <li><strong>Standort-Botschafter gesucht:</strong> Tante Enso sucht jemanden aus dem Ort, der die Gegebenheiten kennt und die Updates vor dem Veröffentlichen mit abstimmt. Interessierte schicken ihre Kontaktdaten an <a href="mailto:redaktion@enso-gruppe.de">redaktion@enso-gruppe.de</a>.</li>
+      </ul>
     </div>
 
     <div class="schritte">
@@ -128,8 +137,9 @@ const quellen = [
       <h2>Quellen</h2>
       <ul>
         {quellen.map((q) => <li><a href={q.href} rel="noopener">{q.titel}</a></li>)}
-        <li><a href={aktion.standort} rel="noopener">Tante Enso: Standort Stockhausen</a></li>
+        <li><a href={aktion.standort} rel="noopener">Tante Enso: Neuigkeiten aus Stockhausen</a></li>
         <li><a href={aktion.update.link} rel="noopener">Tante Enso: Stockhausen {aktion.update.titel} ({aktion.update.datumText})</a></li>
+        <li><a href={aktion.vorheriges.link} rel="noopener">Tante Enso: Stockhausen {aktion.vorheriges.titel} ({aktion.vorheriges.datumText})</a></li>
         <li><a href={aktion.link} rel="noopener">Tante Enso: Teilhaberschaft</a></li>
         <li><a href="https://www.tanteenso.de/content/tanteenso/tante-enso-karte" rel="noopener">Tante Enso: Tante-Enso-Karte</a></li>
       </ul>
@@ -191,6 +201,7 @@ const quellen = [
   }
   .neues { padding: clamp(1.5rem, 4vw, 2.25rem); }
   .neues h2 { font-size: 1.5rem; }
+  .neues__frueher { margin: 1.75rem 0 0; font-size: 1.1rem; }
   .neues__liste { display: grid; gap: 0.7rem; padding-left: 1.2rem; margin: 1rem 0; }
   .zweier { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   @media (max-width: 860px) { .zweier { grid-template-columns: 1fr; } }
