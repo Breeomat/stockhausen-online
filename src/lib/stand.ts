@@ -9,7 +9,7 @@ export const stand: Record<string, string> = {
   'vereine/kirchengemeinde/': '2026-10',
   'vereine/kirmesburschen/': '2026-10',
   'vereine/obst-und-gartenbauverein/': '2026-10',
-  'vereine/posaunenchor/': '2026-10',
+  'vereine/posaunenchor/': '2026-11',
   'vereine/schlepperfreunde/': '2026-10',
   'vereine/schuetzenverein/': '2026-10',
   'vereine/sv-stockhausen/': '2026-10',
