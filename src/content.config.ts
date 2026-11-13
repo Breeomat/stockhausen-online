@@ -21,6 +21,7 @@ const termine = defineCollection({
     // weitere beteiligte Vereine: Termin erscheint auch auf deren Vereinsseite
     mit: z.array(z.string()).optional(),
     oeffentlich: z.boolean().optional(),
+    abgesagt: z.boolean().optional(),
     text: z.string().optional(),
     plakat: z.string().optional(),
     link: z.string().url().optional(),

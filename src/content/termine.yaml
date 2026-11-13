@@ -1,7 +1,8 @@
 # Termine aller Vereine. Ein Eintrag je Termin, Reihenfolge egal.
 # Pflicht: id (eindeutig, z. B. 2026-11-kirmes), titel, datum
 # Optional: verein, mit (Liste weiterer beteiligter Vereine), bis (mehrtägig), beginn, ende, ort, text, plakat (id aus plakate.yaml), link,
-#           oeffentlich (true: Feuerwehr-Termin erscheint trotzdem in den allgemeinen Terminen)
+#           oeffentlich (true: Feuerwehr-Termin erscheint trotzdem in den allgemeinen Terminen),
+#           abgesagt (true: Termin bleibt sichtbar, mit Hinweis „Abgesagt“)
 #
 # - id: 2026-11-14-martinsumzug
 #   titel: Martinsumzug
@@ -76,10 +77,8 @@
   ende: "18:30"
   ort: Abfahrt am Sportplatz
   verein: SV Stockhausen
-  text: |-
-    Abfahrt 8:00 Uhr am Sportplatz, Rückfahrt 18:30 Uhr ab Erfurt.
-    25 € pro Person (Vereinsmitglieder), inklusive Getränke und Frühstück auf der Fahrt.
-    Anmeldung bei Michael Eidmann, 0151 23475683.
+  abgesagt: true
+  text: Die Fahrt zum Weihnachtsmarkt Erfurt ist abgesagt.
   plakat: sv-weihnachtsmarkt-erfurt-2026
 - id: 2026-10-16-tante-enso-sprechzeit
   titel: "Tante Enso: Sprechzeit der Paten"

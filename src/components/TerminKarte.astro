@@ -5,11 +5,11 @@ import { kartenAnker } from '../lib/dorfkarte';
 
 interface Props { termin: Termin; kompakt?: boolean }
 const { termin, kompakt = false } = Astro.props;
-const { titel, datum, ort, verein, mit, text, link, plakat } = termin.data;
+const { titel, datum, ort, verein, mit, text, link, plakat, abgesagt } = termin.data;
 const zeit = zeitraum(termin);
 const anker = kartenAnker(ort);
 ---
-<article class="termin" data-verein={verein ?? ''} data-ende={letzterTag(termin)}>
+<article class:list={['termin', { 'termin--abgesagt': abgesagt }]} data-verein={verein ?? ''} data-ende={letzterTag(termin)}>
   <div class="termin__datum" aria-hidden="true">
     <span class="termin__wt">{wochentagKurz(datum)}</span>
     <span class="termin__tag">{tag(datum)}</span>
@@ -17,7 +17,7 @@ const anker = kartenAnker(ort);
   </div>
   <div class="termin__inhalt">
     {verein && <span class="termin__verein">{[verein, ...(mit ?? [])].join(' · mit ')}</span>}
-    <h3>{titel}</h3>
+    <h3>{abgesagt && <span class="termin__abgesagt">Abgesagt</span>}<span class="termin__titel">{titel}</span></h3>
     <p class="termin__meta">
       <time datetime={datum}>{new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${datum}T12:00:00`))}</time>
       {zeit && <span>{zeit}</span>}
@@ -26,7 +26,7 @@ const anker = kartenAnker(ort);
     {!kompakt && text && <p class="termin__text">{text}</p>}
     {!kompakt && (
       <p class="termin__aktionen">
-        <a href={url(`termine/${termin.id}.ics`)} download>In meinen Kalender</a>
+        {!abgesagt && <a href={url(`termine/${termin.id}.ics`)} download>In meinen Kalender</a>}
         {plakat && <a href={url(`plakate/#plakat-${plakat}`)}>Plakat ansehen</a>}
         {link && <a href={link} rel="noopener">Mehr erfahren</a>}
       </p>
@@ -63,6 +63,8 @@ const anker = kartenAnker(ort);
   .termin__tag { font-family: var(--serif); font-size: 2rem; font-weight: 600; margin: 0.2rem 0; }
   .termin__verein { font-size: 0.78rem; font-weight: 600; color: var(--lagune); letter-spacing: 0.04em; }
   .termin__inhalt { min-width: 0; }
+  .termin__abgesagt { display: inline-block; margin-right: 0.5rem; padding: 0.1rem 0.5rem; border-radius: 4px; background: #c0232b; color: #fff; font-family: var(--sans); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; vertical-align: 0.2em; }
+  .termin--abgesagt .termin__titel { text-decoration: line-through; text-decoration-thickness: 1px; color: var(--text-leise); }
   .termin h3 { margin: 0.15rem 0 0.35rem; font-size: 1.25rem; hyphens: auto; overflow-wrap: break-word; }
   .termin__meta { color: var(--text-leise); font-size: 0.92rem; margin: 0; }
   .termin__meta > * + *::before { content: ' · '; }

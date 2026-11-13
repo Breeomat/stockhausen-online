@@ -35,7 +35,7 @@ export function veranstaltungen(termine: Termin[], plakatBild: (id?: string) => 
         name: d.titel,
         startDate: zeitpunkt(d.datum, d.beginn),
         endDate: d.bis ? zeitpunkt(d.bis, d.ende) : d.ende ? zeitpunkt(d.datum, d.ende) : undefined,
-        eventStatus: 'https://schema.org/EventScheduled',
+        eventStatus: d.abgesagt ? 'https://schema.org/EventCancelled' : 'https://schema.org/EventScheduled',
         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
         location: { ...ort, name: d.ort ? `${d.ort}, Stockhausen` : 'Stockhausen', address: { ...ort.address, streetAddress: strasse } },
         organizer: d.verein ? { '@type': 'Organization', name: d.verein } : undefined,

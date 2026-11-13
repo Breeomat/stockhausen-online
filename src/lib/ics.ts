@@ -49,7 +49,7 @@ function falten(zeile: string): string {
 }
 
 function ereignis(t: Termin, seite: string): string[] {
-  const { titel, datum, bis, beginn, ende, ort, verein, text } = t.data;
+  const { titel, datum, bis, beginn, ende, ort, verein, text, abgesagt } = t.data;
   const zeilen = ['BEGIN:VEVENT', `UID:${t.id}@stockhausen-online.de`, `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').slice(0, 15)}Z`];
   if (beginn) {
     zeilen.push(`DTSTART;TZID=Europe/Berlin:${kompakt(datum)}T${zeit(beginn)}`);
@@ -58,7 +58,8 @@ function ereignis(t: Termin, seite: string): string[] {
     zeilen.push(`DTSTART;VALUE=DATE:${kompakt(datum)}`);
     zeilen.push(`DTEND;VALUE=DATE:${kompakt(folgetag(bis ?? datum))}`);
   }
-  zeilen.push(`SUMMARY:${escape(titel)}`);
+  zeilen.push(`SUMMARY:${escape(abgesagt ? `Abgesagt: ${titel}` : titel)}`);
+  if (abgesagt) zeilen.push('STATUS:CANCELLED');
   if (ort) zeilen.push(`LOCATION:${escape(`${ort}, Stockhausen, 36358 Herbstein`)}`);
   zeilen.push(`DESCRIPTION:${escape([text, verein && `Veranstalter: ${verein}`].filter(Boolean).join('\n'))}`);
   zeilen.push(`URL:${seite}`);
