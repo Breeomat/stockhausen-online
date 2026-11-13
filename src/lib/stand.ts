@@ -4,7 +4,7 @@
 export const stand: Record<string, string> = {
   'vereine/arbeitskreis-dorfgeschichte/': '2026-11',
   'vereine/feuerwehr/': '2026-11',
-  'vereine/gefriergemeinschaft/': '2026-10',
+  'vereine/gefriergemeinschaft/': '2026-11',
   'vereine/gesangverein/': '2026-10',
   'vereine/kirchengemeinde/': '2026-10',
   'vereine/kirmesburschen/': '2026-10',
