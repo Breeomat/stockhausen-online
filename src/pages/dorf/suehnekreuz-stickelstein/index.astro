@@ -2,7 +2,7 @@
 import Basis from '../../../layouts/Basis.astro';
 import { url } from '../../../lib/site';
 
-// Quelle: Text vom Betreiber (Oktober 2026), Überlieferung und Dorfsage
+// Quelle: zusammengestellt vom Betreiber aus Internet-Quellen, eigenem Wissen und Angaben des Arbeitskreises Dorfgeschichte (Oktober 2026)
 ---
 <Basis titel="Das Sühnekreuz am Stickelstein" beschreibung="Das steinerne Geheimnis an der Landwehr: das alte Sühnekreuz am Stickelstein (Kreppelstein) zwischen Stockhausen und Blankenau – Überlieferung und Sage.">
   <article class="huelle geschichte">
@@ -21,6 +21,8 @@ import { url } from '../../../lib/site';
     <p>Doch der Kreppelstein birgt noch ein weiteres Geheimnis. Eine ältere, fast vergessene Dorfsage verknüpft das Monument mit einem längst untergegangenen Mönchskloster, das sich einst in den Wäldern bei Stockhausen befunden haben soll. Die Brüder dieses Klosters sollen das Kreuz nicht nur als heilige Grenzmarke geweiht, sondern dort auch im Gebet derer gedacht haben, die fern der Heimat ein gewaltsames Ende fanden.</p>
     <p>Heute ist das Kreuz am Stickelstein ein faszinierendes Relikt an der alten Landwehr – ein Ort, an dem Geschichte, Rechtstradition und Sage auf engstem Raum spürbar werden.</p>
 
+    <p class="quelle">Quellen: Überlieferung und Dorfsage, zusammengestellt aus Veröffentlichungen im Internet, Angaben des <a href={url('vereine/arbeitskreis-dorfgeschichte/')}>Arbeitskreises Dorfgeschichte</a> und eigener Kenntnis (Marc Ahne).</p>
+
     <a class="mehr" href={url('dorf/chronik/')}>Mehr aus der Geschichte des Dorfes: die Chronik →</a>
   </article>
 </Basis>
@@ -31,5 +33,6 @@ import { url } from '../../../lib/site';
   .vorspann { font-size: 1.2rem; color: var(--text-leise); }
   .geschichte p { max-width: 68ch; line-height: 1.7; }
   .geschichte h2 { margin-top: 2.5rem; font-size: 1.5rem; }
+  .quelle { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--linie); font-size: 0.85rem; color: var(--text-leise); }
   .mehr { display: inline-block; margin-top: 2rem; font-weight: 600; }
 </style>
