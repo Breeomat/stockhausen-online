@@ -171,10 +171,19 @@
   datum: 2026-10-31
   verein: Kirmesburschen Stockhausen
 - id: 2026-11-29-gv-seniorennachmittag
-  titel: Seniorennachmittag
+  titel: Musikalischer Adventsnachmittag für Seniorinnen und Senioren
   datum: 2026-11-29
+  beginn: "13:30"
+  ende: "17:00"
   ort: Altfellhalle
   verein: Gesangverein „Germania“ Stockhausen
+  mit: [Stadt Herbstein]
+  text: >-
+    Am 1. Advent laden die Stadt Herbstein und der Gesangverein zu einem stimmungsvollen Nachmittag ein:
+    musikalische Darbietungen, Kaffee und selbstgebackener Kuchen, gesellige Stunden mit Bekannten und Freunden.
+    Seniorinnen und Senioren aus Stockhausen müssen sich nicht anmelden. Alle anderen melden sich bis Freitag, 21. November,
+    im Bürgerbüro der Stadtverwaltung Herbstein an – dort auch angeben, wer den Fahrservice der Stadt nutzen möchte.
+  plakat: gv-adventsnachmittag-2026
 - id: 2026-12-06-sv-kartenvorverkauf-theater
   titel: Kartenvorverkauf Theater
   datum: 2026-12-06
