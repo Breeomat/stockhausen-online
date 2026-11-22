@@ -185,9 +185,16 @@
     im Bürgerbüro der Stadtverwaltung Herbstein an – dort auch angeben, wer den Fahrservice der Stadt nutzen möchte.
   plakat: gv-adventsnachmittag-2026
 - id: 2026-12-06-sv-kartenvorverkauf-theater
-  titel: Kartenvorverkauf Theater
+  titel: "Kartenvorverkauf Theater „Cyrano in Buffalo“"
   datum: 2026-12-06
+  beginn: "16:00"
+  ende: "17:30"
+  ort: Altfellhalle
   verein: SV Stockhausen
+  text: >-
+    Erster Vorverkauf der Platzkarten (10, 12 und 14 Euro). Ab Montag, 7. Dezember, gibt es Karten bei Firma Fritz
+    (Dach u. Fassade aus Metall) und bei der Volksbank eG Grebenhain, Geschäftsstelle Stockhausen.
+  plakat: sv-theater-cyrano-2026
 - id: 2026-12-12-schuetzen-gluehweinabend
   titel: Glühweinabend
   datum: 2026-12-12
@@ -270,3 +277,73 @@
     Sanftes Yoga für alle – ankommen, durchatmen, Kraft schöpfen. Alle sind willkommen.
     Anmeldung bei Katrin Eidmann, 0151 23474562.
   plakat: yoga-schnupperstunde-2026
+- id: 2026-12-27-sv-theater-generalprobe
+  titel: "Theater „Cyrano in Buffalo“ – öffentliche Generalprobe"
+  datum: 2026-12-27
+  beginn: "17:30"
+  ort: Altfellhalle
+  verein: SV Stockhausen
+  text: >-
+    Die Theatergruppe des SV Stockhausen spielt die Komödie in drei Akten von Ken Ludwig. Regie: Frank Lang.
+    Platzkarten zu 10, 12 und 14 Euro.
+  plakat: sv-theater-cyrano-2026
+- id: 2026-12-28-sv-theater-cyrano
+  titel: "Theater: „Cyrano in Buffalo“"
+  datum: 2026-12-28
+  beginn: "19:30"
+  ort: Altfellhalle
+  verein: SV Stockhausen
+  text: >-
+    Die Theatergruppe des SV Stockhausen spielt die Komödie in drei Akten von Ken Ludwig. Regie: Frank Lang.
+    Platzkarten zu 10, 12 und 14 Euro.
+  plakat: sv-theater-cyrano-2026
+- id: 2026-12-30-sv-theater-cyrano
+  titel: "Theater: „Cyrano in Buffalo“"
+  datum: 2026-12-30
+  beginn: "19:30"
+  ort: Altfellhalle
+  verein: SV Stockhausen
+  text: >-
+    Die Theatergruppe des SV Stockhausen spielt die Komödie in drei Akten von Ken Ludwig. Regie: Frank Lang.
+    Platzkarten zu 10, 12 und 14 Euro.
+  plakat: sv-theater-cyrano-2026
+- id: 2027-01-02-sv-theater-cyrano
+  titel: "Theater: „Cyrano in Buffalo“"
+  datum: 2027-01-02
+  beginn: "19:30"
+  ort: Altfellhalle
+  verein: SV Stockhausen
+  text: >-
+    Die Theatergruppe des SV Stockhausen spielt die Komödie in drei Akten von Ken Ludwig. Regie: Frank Lang.
+    Platzkarten zu 10, 12 und 14 Euro.
+  plakat: sv-theater-cyrano-2026
+- id: 2027-01-03-sv-theater-cyrano
+  titel: "Theater: „Cyrano in Buffalo“"
+  datum: 2027-01-03
+  beginn: "18:00"
+  ort: Altfellhalle
+  verein: SV Stockhausen
+  text: >-
+    Die Theatergruppe des SV Stockhausen spielt die Komödie in drei Akten von Ken Ludwig. Regie: Frank Lang.
+    Platzkarten zu 10, 12 und 14 Euro.
+  plakat: sv-theater-cyrano-2026
+- id: 2027-01-08-sv-theater-cyrano
+  titel: "Theater: „Cyrano in Buffalo“"
+  datum: 2027-01-08
+  beginn: "19:30"
+  ort: Altfellhalle
+  verein: SV Stockhausen
+  text: >-
+    Die Theatergruppe des SV Stockhausen spielt die Komödie in drei Akten von Ken Ludwig. Regie: Frank Lang.
+    Platzkarten zu 10, 12 und 14 Euro.
+  plakat: sv-theater-cyrano-2026
+- id: 2027-01-09-sv-theater-cyrano
+  titel: "Theater: „Cyrano in Buffalo“"
+  datum: 2027-01-09
+  beginn: "19:30"
+  ort: Altfellhalle
+  verein: SV Stockhausen
+  text: >-
+    Die Theatergruppe des SV Stockhausen spielt die Komödie in drei Akten von Ken Ludwig. Regie: Frank Lang.
+    Platzkarten zu 10, 12 und 14 Euro.
+  plakat: sv-theater-cyrano-2026

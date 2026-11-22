@@ -11,7 +11,7 @@ import turnFoto from '../../../assets/fotos/sv-turnkinder-nikolaus.jpg';
 import sportplatzFoto from '../../../assets/fotos/sv-sportplatz-luftbild.jpg';
 import fussballFoto from '../../../assets/fotos/sv-fussball.jpg';
 import faschingFoto from '../../../assets/fotos/sv-fasching.jpg';
-import theaterPlakat from '../../../assets/fotos/sv-theater-2023.jpg';
+import theaterPlakat from '../../../assets/plakate/sv-theater-cyrano-2026.jpg';
 
 // Quellen: Vereinsangaben und Profil-PDF „Sportverein Stockhausen 1946 e. V.“ (Oktober 2026)
 const termine = (await kommendeTermine()).filter((t) => t.data.verein === 'SV Stockhausen');
@@ -102,12 +102,13 @@ const erweitert = [
       <div>
         <span class="kicker">Theatergruppe</span>
         <h2>Jedes Jahr ein Stück auf der Bühne</h2>
-        <p>Die Theatergruppe des SV spielt jedes Jahr in der Altfellhalle. Zum Jahreswechsel 2023/24 war es die Komödie „Drei Männer im Schnee“ von Erich Kästner, unter der Regie von Frank Lang: sechs Abende von Ende Dezember bis Mitte Januar, dazu eine öffentliche Generalprobe.</p>
-        <p class="klein">Die Termine für das nächste Stück stehen im Kalender, sobald sie feststehen.</p>
+        <p>Die Theatergruppe des SV spielt jedes Jahr zum Jahreswechsel in der Altfellhalle. 2026/27 steht „Cyrano in Buffalo“ auf dem Programm, eine Komödie in drei Akten von Ken Ludwig, unter der Regie von Frank Lang. Es spielen Nadine Borrmann, Daniel Fritz, Ralf Kaiser, Christoph Kimpel, Helene Kimpel, Jürgen Kimpel, Paul Miller, Romana Schwarz und Frank Lang.</p>
+        <p>Aufführungen am 28. und 30. Dezember 2026 sowie am 2., 3., 8. und 9. Januar 2027, öffentliche Generalprobe am 27. Dezember. Der Vorverkauf beginnt am Sonntag, 6. Dezember, von 16 bis 17:30 Uhr in der Altfellhalle; Platzkarten kosten 10, 12 und 14 Euro. Alle Termine stehen unten im Kalender.</p>
+        <p class="klein">Im Vorjahr 2023/24 spielte die Gruppe „Drei Männer im Schnee“ von Erich Kästner.</p>
       </div>
       <a class="theater__plakat" href={theaterPlakat.src} title="Plakat in voller Größe öffnen">
-        <Image src={theaterPlakat} alt="Plakat „Drei Männer im Schnee“, Theatergruppe des SV Stockhausen, Aufführungen vom 29. Dezember 2023 bis 13. Januar 2024 in der Altfellhalle" widths={[360, 560, 750]} sizes="(max-width: 760px) 70vw, 320px" />
-        <span>Plakat 2023/24</span>
+        <Image src={theaterPlakat} alt="Plakat „Cyrano in Buffalo“, Komödie von Ken Ludwig, Theatergruppe des SV Stockhausen, Aufführungen vom 28. Dezember 2026 bis 9. Januar 2027 in der Altfellhalle" widths={[360, 560, 750]} sizes="(max-width: 760px) 70vw, 320px" />
+        <span>Plakat 2026/27</span>
       </a>
     </div>
 
