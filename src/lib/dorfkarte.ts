@@ -42,7 +42,7 @@ export const orte: Ort[] = [
   { id: 'bus-ortsmitte', name: 'Haltestelle „Stockhausen Ortsmitte“', gruppe: 'bus', lat: 50.5626677, lon: 9.4463971, zusatz: 'während der Baustelle nicht angefahren', href: 'ortsdurchfahrt/#schulbus' },
   { id: 'bus-kindergarten', name: 'Haltestelle „Kindergarten“', gruppe: 'bus', lat: 50.5603635, lon: 9.4486121, zusatz: 'während der Baustelle nicht angefahren', href: 'ortsdurchfahrt/#schulbus' },
   // Ersatzhaltestellen beidseits der K 87 „Am Weinberg“ (Lage nach Karte der VGO, ab 26.11.2026); nach Ende der Baustelle entfernen
-  { id: 'bus-ersatz-weinberg', name: 'Ersatzhaltestellen „Am Weinberg“', gruppe: 'bus', lat: 50.564617, lon: 9.444572, zusatz: 'während der Baustelle, beidseits der Straße', href: 'ortsdurchfahrt/#schulbus' },
+  { id: 'bus-ersatz-weinberg', name: 'Ersatzhaltestelle „Am Weinberg (Ersatz)“', gruppe: 'bus', lat: 50.564617, lon: 9.444572, zusatz: 'während der Baustelle, beidseits der Straße', href: 'ortsdurchfahrt/#schulbus' },
 ];
 
 // Orte, die (noch) nicht in OpenStreetMap stehen – erscheinen in der Liste mit Hinweis
