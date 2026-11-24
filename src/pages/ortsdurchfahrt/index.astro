@@ -6,7 +6,6 @@ import haltestellenKarte from '../../assets/fotos/ersatzhaltestellen-am-weinberg
 
 // Quelle: Mitteilung der Stadtverwaltung Herbstein (Oktober 2026); 2. Bauabschnitt und Schulbus: Mitteilung mit Karte der VGO (November 2026)
 const umleitungen = [
-  'über die K 87 („Am Weinberg“) auf die B 275 bei Eisenbach, weiter in Richtung „Rixfelder Kreuz“ oder Lauterbach',
   'über Blankenau, Zahmen und Heisters, weiter ins Stadtgebiet Herbstein oder ins Gemeindegebiet Grebenhain',
   'über Blankenau, Hainzell und Uffhausen, weiter ins Gemeindegebiet Großenlüder sowie nach Wartenberg und Lauterbach',
 ];
@@ -42,7 +41,7 @@ const umleitungen = [
       <ol class="umleitungen">
         {umleitungen.map((u) => <li class="karte">{u}</li>)}
       </ol>
-      <p class="klein">In der Gegenrichtung gelten die Umleitungen entsprechend.</p>
+      <p class="klein">In der Gegenrichtung gelten die Umleitungen entsprechend. Die frühere Umleitung über die K 87 („Am Weinberg“) zur B 275 bei Eisenbach ist durch die Sperrung im zweiten Bauabschnitt nicht mehr möglich.</p>
     </div>
 
     <div class="karte erreichbar">
