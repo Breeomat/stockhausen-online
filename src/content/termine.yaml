@@ -198,8 +198,13 @@
 - id: 2026-12-12-schuetzen-gluehweinabend
   titel: Glühweinabend
   datum: 2026-12-12
+  beginn: "17:00"
   ort: Lennys
   verein: KK Schützenverein 1926/68 e.V. Stockhausen
+  text: >-
+    Winterliche Kälte, funkelnde Lichter und der Duft von Glühwein: Glühwein, allerlei Weihnachtsgetränke und
+    Weihnachtssnacks bei Lenny’s im Saal, Müser Straße 9.
+  plakat: schuetzen-gluehweinabend-2026
 - id: 2026-11-21-ffw-nachtuebung-blaulichtabend
   titel: Öffentliche Nachtübung und Blaulichtabend
   datum: 2026-11-21
