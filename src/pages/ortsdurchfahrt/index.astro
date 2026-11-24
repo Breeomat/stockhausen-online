@@ -1,8 +1,10 @@
 ---
 import Basis from '../../layouts/Basis.astro';
+import { Image } from 'astro:assets';
 import { url } from '../../lib/site';
+import haltestellenKarte from '../../assets/fotos/ersatzhaltestellen-am-weinberg.jpg';
 
-// Quelle: Mitteilung der Stadtverwaltung Herbstein (Oktober 2026)
+// Quelle: Mitteilung der Stadtverwaltung Herbstein (Oktober 2026); 2. Bauabschnitt und Schulbus: Mitteilung mit Karte der VGO (November 2026)
 const umleitungen = [
   'über die K 87 („Am Weinberg“) auf die B 275 bei Eisenbach, weiter in Richtung „Rixfelder Kreuz“ oder Lauterbach',
   'über Blankenau, Zahmen und Heisters, weiter ins Stadtgebiet Herbstein oder ins Gemeindegebiet Grebenhain',
@@ -18,9 +20,20 @@ const umleitungen = [
 
   <section class="huelle od">
     <div class="karte sperrung">
-      <span class="kicker">Vollsperrung</span>
-      <h2>Bauabschnitt 2026</h2>
-      <p>Gesperrt ist die Strecke vom <strong>Ortseingang aus Richtung Schadges</strong> bis zur <strong>Mitte der Einmündung der K 87 („Am Weinberg“)</strong>. Dieser Abschnitt soll noch in diesem Jahr fertig werden.</p>
+      <span class="kicker">Vollsperrung · ab Donnerstag, 26. November 2026</span>
+      <h2>Zweiter Bauabschnitt</h2>
+      <p>Voll gesperrt ist die <strong>Müser Straße zwischen der Abfahrt nach Rudlos und dem Bereich Schloßstraße/Welzgasse</strong>.</p>
+      <p class="frueher">Im ersten Bauabschnitt seit 5. Oktober war die Strecke vom Ortseingang aus Richtung Schadges bis zur Einmündung der K 87 („Am Weinberg“) gesperrt.</p>
+    </div>
+
+    <div class="karte schulbus" id="schulbus">
+      <span class="kicker">Wichtig für den Schulweg</span>
+      <h2>Geänderte Schulbushaltestellen</h2>
+      <p>Die Haltestellen <strong>„Stockhausen, Ortsmitte“</strong> und <strong>„Stockhausen, Kindergarten“</strong> können von den regulären Busfahrten nicht mehr angefahren werden. Stattdessen gibt es zwei <strong>Ersatzhaltestellen in der Straße „Am Weinberg“</strong> (K 87), auf beiden Straßenseiten zwischen der Einmündung Müser Straße und der Alten Hohl. Bitte berücksichtigt die geänderten Haltestellen bei der Planung des Schulwegs.</p>
+      <figure>
+        <a href={haltestellenKarte.src}><Image src={haltestellenKarte} alt="Karte der VGO: zwei rote Punkte markieren die Ersatzhaltestellen beidseits der Straße „Am Weinberg“ (K 87) auf Höhe der Häuser 2a und 2b, nördlich der Einmündung in die Müser Straße, gegenüber der Evangelischen Kirche" widths={[480, 900]} sizes="(max-width: 900px) calc(100vw - 32px), 860px" /></a>
+        <figcaption>Ersatzhaltestellen (rote Punkte) · Karte: Verkehrsgesellschaft Oberhessen (VGO), Kartendaten © OpenStreetMap-Mitwirkende · <a href={url('dorf/karte/#ort-bus-ersatz-weinberg')}>Auf der Dorfkarte</a></figcaption>
+      </figure>
     </div>
 
     <div>
@@ -34,7 +47,7 @@ const umleitungen = [
 
     <div class="karte erreichbar">
       <h2>Trotz Baustelle erreichbar</h2>
-      <p><a href={url('tante-enso/')}>Tante Enso</a> und die Metzgerei Günther sind weiterhin für euch da. Danke für eure Unterstützung!</p>
+      <p><a href={url('tante-enso/')}>Tante Enso</a> und die Metzgerei Günther sind weiterhin für euch da. Danke für eure Unterstützung! <span class="fehlt">[fehlt: Bestätigung, dass beide auch im zweiten Bauabschnitt erreichbar sind]</span></p>
     </div>
 
     <p class="quelle">Quelle: Mitteilung der Stadtverwaltung Herbstein. Die Stadt bittet alle Verkehrsteilnehmenden, sich auf die Einschränkungen einzustellen.</p>
@@ -48,6 +61,12 @@ const umleitungen = [
   .sperrung h2 { color: var(--warnung-text); }
   .sperrung h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
   .sperrung p { margin: 0; }
+  .sperrung .frueher { margin-top: 0.75rem; font-size: 0.9rem; opacity: 0.85; }
+  .schulbus { padding: clamp(1.5rem, 4vw, 2.25rem); border-left: 6px solid var(--lagune); }
+  .schulbus h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
+  .schulbus figure { margin: 1.25rem 0 0; }
+  .schulbus img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--linie); }
+  .schulbus figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-leise); }
   .umleitungen { margin: 1.25rem 0 0; padding: 0; list-style: none; counter-reset: u; display: grid; gap: 0.75rem; }
   .umleitungen li { counter-increment: u; position: relative; padding: 1rem 1.25rem 1rem 3.5rem; }
   .umleitungen li::before { content: counter(u); position: absolute; left: 1rem; top: 0.9rem; width: 1.8rem; height: 1.8rem; display: grid; place-items: center; border-radius: 50%; background: var(--meer); color: #fff; font-weight: 700; font-size: 0.9rem; }

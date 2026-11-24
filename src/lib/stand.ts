@@ -24,7 +24,7 @@ export const stand: Record<string, string> = {
   'dorf/suehnekreuz-stickelstein/': '2026-10',
   'dorf/saba-weg/': '2026-10',
   'tante-enso/': '2026-11',
-  'ortsdurchfahrt/': '2026-10',
+  'ortsdurchfahrt/': '2026-11',
 };
 
 export const standText = (jjjjmm: string) =>
