@@ -7,6 +7,7 @@ import schuetzenWappen from '../assets/fotos/schuetzenverein-wappen.png';
 import sportplatzFoto from '../assets/fotos/sv-sportplatz-luftbild.jpg';
 import kircheFoto from '../assets/fotos/stockhausen-kirche.jpg';
 import schlossFoto from '../assets/fotos/stockhausen-schloss.jpg';
+import dorfgeschichteFoto from '../assets/fotos/dorfgeschichte-dorfstrasse-alt.jpg';
 import chorFoto from '../assets/fotos/posaunenchor.jpg';
 import gefrierFoto from '../assets/fotos/gefrierhaus-fest.jpg';
 import maibaumFoto from '../assets/fotos/ogv-maibaum.jpg';
@@ -51,7 +52,7 @@ export const vereinsseiten = [
     seit: 'Heimatforschung',
     text: 'Ortschronik, Bildarchiv und Hofgeschichten – das Gedächtnis des Dorfes. Alte Fotos und Geschichten sind willkommen.',
     href: 'vereine/arbeitskreis-dorfgeschichte/',
-    bild: { src: schlossFoto, alt: 'Schloss Stockhausen: langgestreckter Barockbau mit Uhrturm hinter einer Rasenfläche mit Teich', nachweis: 'Foto: Marc Ahne', position: '50% 40%' },
+    bild: { src: dorfgeschichteFoto, alt: 'Altes koloriertes Foto: Junge vor Fachwerkhäusern an einer gepflasterten Dorfstraße in Stockhausen', nachweis: 'Bild: Titelbild „Saellemoa“', position: '50% 55%' },
   },
   {
     name: 'KK Schützenverein 1926/68 e.V. Stockhausen',

@@ -5,7 +5,7 @@ import TerminKarte from '../../../components/TerminKarte.astro';
 import VereinRueckblicke from '../../../components/VereinRueckblicke.astro';
 import { kommendeTermine } from '../../../lib/termine';
 import { url } from '../../../lib/site';
-import schlossFoto from '../../../assets/fotos/stockhausen-schloss.jpg';
+import titelFoto from '../../../assets/fotos/dorfgeschichte-dorfstrasse-alt.jpg';
 import onsBladdTitel from '../../../assets/fotos/ons-bladd-titel.jpg';
 import saellemoaTitel from '../../../assets/fotos/saellemoa-titel.jpg';
 import schullTitel from '../../../assets/fotos/die-schull-is-ous-titel.jpg';
@@ -44,16 +44,16 @@ const buecher = [
 
 const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Ausstellungen', 'Ahnenforschung'];
 ---
-<Basis bild={schlossFoto} titel="Arbeitskreis Dorfgeschichte" beschreibung="Arbeitskreis Dorfgeschichte Stockhausen: Ortschronik, Bildarchiv und Hofgeschichten – das Gedächtnis des Dorfes.">
+<Basis bild={titelFoto} titel="Arbeitskreis Dorfgeschichte" beschreibung="Arbeitskreis Dorfgeschichte Stockhausen: Ortschronik, Bildarchiv und Hofgeschichten – das Gedächtnis des Dorfes.">
   <section class="ak-held">
-    <Image class="ak-held__bild" src={schlossFoto} alt="Schloss Stockhausen: langgestreckter Barockbau mit Uhrturm hinter einer Rasenfläche mit Teich" widths={[640, 1024, 1600]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <Image class="ak-held__bild" src={titelFoto} alt="Altes koloriertes Foto aus Stockhausen: ein Junge an einem Holzzaun vor Fachwerkhäusern an einer gepflasterten Dorfstraße, daneben Leiterwagen" widths={[640, 730]} sizes="100vw" loading="eager" fetchpriority="high" />
     <div class="huelle ak-kopf">
       <a class="zurueck" href={url('vereine/')}>← Alle Vereine</a>
       <span class="kicker">Heimatforschung · Chronik · Bildarchiv</span>
       <h1>Arbeitskreis Dorfgeschichte Stockhausen</h1>
       <p>Wer die Zukunft des Dorfes gestalten will, muss seine Wurzeln kennen. Der Arbeitskreis erforscht, sammelt und bewahrt die Geschichte von Herbstein-Stockhausen.</p>
     </div>
-    <span class="ak-held__foto">Foto: Marc Ahne</span>
+    <span class="ak-held__foto">Bild: Titelbild „Saellemoa“, Arbeitskreis Dorfgeschichte</span>
   </section>
 
   <section class="huelle ak">
@@ -154,7 +154,7 @@ const themen = ['Dorfchronik', 'Historisches Bildarchiv', 'Hofgeschichten', 'Aus
 
 <style>
   .ak-held { position: relative; isolation: isolate; overflow: hidden; margin-bottom: 2.5rem; color: #fff; }
-  .ak-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; z-index: -2; }
+  .ak-held__bild { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; z-index: -2; }
   .ak-held::before {
     content: '';
     position: absolute;
