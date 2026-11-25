@@ -70,16 +70,6 @@
     18:30 Uhr Fackelumzug
     21:00 Uhr Kalbeat
   plakat: kirmes-2026
-- id: 2026-11-28-sv-weihnachtsmarkt-erfurt
-  titel: Fahrt zum Weihnachtsmarkt Erfurt
-  datum: 2026-11-28
-  beginn: "08:00"
-  ende: "18:30"
-  ort: Abfahrt am Sportplatz
-  verein: SV Stockhausen
-  abgesagt: true
-  text: Die Fahrt zum Weihnachtsmarkt Erfurt ist abgesagt.
-  plakat: sv-weihnachtsmarkt-erfurt-2026
 - id: 2026-10-16-tante-enso-sprechzeit
   titel: "Tante Enso: Sprechzeit der Paten"
   datum: 2026-10-16
