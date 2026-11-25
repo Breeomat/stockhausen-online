@@ -5,13 +5,10 @@ import { url } from '../../lib/site';
 import haltestellenKarte from '../../assets/fotos/ersatzhaltestellen-am-weinberg.jpg';
 import haltestellenAnsicht from '../../assets/fotos/ersatzhaltestellen-strassenansicht.jpg';
 
-// Quelle: Mitteilung der Stadtverwaltung Herbstein (Oktober 2026); 2. Bauabschnitt und Schulbus: Mitteilung mit Karte der VGO (November 2026)
-const umleitungen = [
-  'über Blankenau, Zahmen und Heisters, weiter ins Stadtgebiet Herbstein oder ins Gemeindegebiet Grebenhain',
-  'über Blankenau, Hainzell und Uffhausen, weiter ins Gemeindegebiet Großenlüder sowie nach Wartenberg und Lauterbach',
-];
+// Quellen: Mitteilung der Stadtverwaltung Herbstein (Oktober 2026); 2. Bauabschnitt: Herbsteiner Nachrichten, Amtliches
+// Bekanntmachungsorgan der Stadt Herbstein (25.11.2026, meinort.app); Ersatzhaltestellen: Lageplan der VGO
 ---
-<Basis titel="Baustelle Ortsdurchfahrt" beschreibung="Erneuerung der Ortsdurchfahrt Stockhausen: Vollsperrung, Umleitungen und Erreichbarkeit von Lädchen und Metzgerei.">
+<Basis titel="Baustelle Ortsdurchfahrt" beschreibung="Erneuerung der Ortsdurchfahrt Stockhausen: Vollsperrung im zweiten Bauabschnitt, Auswirkungen, Ersatzhaltestellen für den Schulbus und Erreichbarkeit von Lädchen und Metzgerei.">
   <section class="huelle seitenkopf">
     <span class="kicker">Baustelle · Mitteilung der Stadtverwaltung</span>
     <h1>Erneuerung der Ortsdurchfahrt</h1>
@@ -22,7 +19,7 @@ const umleitungen = [
     <div class="karte sperrung">
       <span class="kicker">Vollsperrung · ab Donnerstag, 26. November 2026</span>
       <h2>Zweiter Bauabschnitt</h2>
-      <p>Voll gesperrt ist die <strong>Müser Straße zwischen der Abfahrt nach Rudlos und dem Bereich Schloßstraße/Welzgasse</strong>.</p>
+      <p>Ab Donnerstag, 26. November 2026, laufen die Arbeiten am zweiten Bauabschnitt im Bereich der Müser Straße. Die Arbeiten am Straßenkörper erfolgen unter Vollsperrung: Sie <strong>beginnt im Bereich „Am Weinberg“ und endet nach der Einfahrt zur Schloßstraße</strong>.</p>
       <p class="frueher">Im ersten Bauabschnitt seit 5. Oktober war die Strecke vom Ortseingang aus Richtung Schadges bis zur Einmündung der K 87 („Am Weinberg“) gesperrt.</p>
     </div>
 
@@ -30,6 +27,7 @@ const umleitungen = [
       <span class="kicker">Wichtig für den Schulweg</span>
       <h2>Geänderte Schulbushaltestellen</h2>
       <p>Die Haltestellen <strong>„Stockhausen, Ortsmitte“</strong> und <strong>„Stockhausen, Kindergarten“</strong> können von den regulären Busfahrten nicht mehr angefahren werden. Stattdessen gibt es zwei <strong>Ersatzhaltestellen in der Straße „Am Weinberg“</strong> (K 87), auf beiden Straßenseiten zwischen der Einmündung Müser Straße und der Alten Hohl. Bitte berücksichtigt die geänderten Haltestellen bei der Planung des Schulwegs.</p>
+      <p>Die Ersatzhaltestellen werden am 25. November aufgestellt. Die VGO bringt zeitgleich an den regulären Haltestellen Fahrgastinformationen und an den Ersatzhaltestellen Fahrpläne an.</p>
       <figure>
         <a href={haltestellenAnsicht.src}><Image src={haltestellenAnsicht} alt="Straßenansicht „Am Weinberg“ in Richtung Ortsmitte: zwei gelbe Punkte markieren die Ersatzhaltestellen links und rechts der Straße" widths={[480, 900]} sizes="(max-width: 900px) calc(100vw - 32px), 860px" /></a>
         <figcaption>Ersatzhaltestelle „Am Weinberg (Ersatz)“ – Blick in Richtung Ortsmitte, die gelben Punkte zeigen die beiden Haltepunkte · Bild: VGO</figcaption>
@@ -42,12 +40,13 @@ const umleitungen = [
     </div>
 
     <div>
-      <span class="kicker">Umleitungen</span>
-      <h2>So kommt man aus Stockhausen heraus</h2>
-      <ol class="umleitungen">
-        {umleitungen.map((u) => <li class="karte">{u}</li>)}
-      </ol>
-      <p class="klein">In der Gegenrichtung gelten die Umleitungen entsprechend. Die frühere Umleitung über die K 87 („Am Weinberg“) zur B 275 bei Eisenbach ist durch die Sperrung im zweiten Bauabschnitt nicht mehr möglich.</p>
+      <span class="kicker">Was bedeutet das für die Fahrt?</span>
+      <h2>Auswirkungen der Sperrung</h2>
+      <ul class="auswirkungen">
+        <li class="karte nein"><strong>Keine Weiterfahrt nach Blankenau/Fulda:</strong> Wer aus Richtung Lauterbach oder Herbstein/Schadges kommt, kann ab dem 26. November nicht mehr weiter in Richtung Blankenau/Fulda fahren.</li>
+        <li class="karte ja"><strong>Freie Fahrt zwischen Lauterbach und Herbstein/Schadges:</strong> Die Strecke bleibt in beiden Richtungen befahrbar – von Lauterbach Richtung Schadges/Herbstein und umgekehrt.</li>
+      </ul>
+      <p class="klein">Im ersten Bauabschnitt führten die Umleitungen über Blankenau sowie über die K 87 („Am Weinberg“) zur B 275 – sie gelten im zweiten Bauabschnitt nicht mehr.</p>
     </div>
 
     <div class="karte erreichbar">
@@ -55,7 +54,7 @@ const umleitungen = [
       <p><a href={url('tante-enso/')}>Tante Enso</a> und die Metzgerei Günther sind im zweiten Bauabschnitt von Müs und von Blankenau aus erreichbar, aus Richtung Schlechtenwegen, Schadges und Lauterbach dagegen nicht. Wie es im weiteren Verlauf aussieht, ist noch unklar.</p>
     </div>
 
-    <p class="quelle">Quelle: Mitteilung der Stadtverwaltung Herbstein. Die Stadt bittet alle Verkehrsteilnehmenden, sich auf die Einschränkungen einzustellen.</p>
+    <p class="quelle">Quellen: Mitteilungen der Stadtverwaltung Herbstein; zweiter Bauabschnitt: <a href="https://share.meinort.app/vrhHRuaw56upzjWAc" rel="noopener">Herbsteiner Nachrichten, Amtliches Bekanntmachungsorgan der Stadt Herbstein (25.11.2026)</a>; Ersatzhaltestellen: VGO.</p>
   </section>
 </Basis>
 
@@ -73,9 +72,11 @@ const umleitungen = [
   .schulbus img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--linie); }
   .schulbus .pdf { margin: 1rem 0 0; font-weight: 600; }
   .schulbus figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-leise); }
-  .umleitungen { margin: 1.25rem 0 0; padding: 0; list-style: none; counter-reset: u; display: grid; gap: 0.75rem; }
-  .umleitungen li { counter-increment: u; position: relative; padding: 1rem 1.25rem 1rem 3.5rem; }
-  .umleitungen li::before { content: counter(u); position: absolute; left: 1rem; top: 0.9rem; width: 1.8rem; height: 1.8rem; display: grid; place-items: center; border-radius: 50%; background: var(--meer); color: #fff; font-weight: 700; font-size: 0.9rem; }
+  .auswirkungen { margin: 1.25rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.75rem; }
+  .auswirkungen li { padding: 1rem 1.25rem 1rem 3.25rem; position: relative; }
+  .auswirkungen li::before { position: absolute; left: 1rem; top: 0.95rem; width: 1.6rem; height: 1.6rem; display: grid; place-items: center; border-radius: 50%; color: #fff; font-weight: 700; }
+  .auswirkungen .nein::before { content: '✕'; background: #c0232b; }
+  .auswirkungen .ja::before { content: '✓'; background: #2e7d4f; }
   .klein { font-size: 0.9rem; color: var(--text-leise); margin: 0.75rem 0 0; }
   .erreichbar { padding: 1.5rem; }
   .erreichbar h2 { font-size: 1.4rem; }
