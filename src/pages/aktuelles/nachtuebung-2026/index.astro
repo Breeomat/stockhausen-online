@@ -1,0 +1,99 @@
+---
+import { Image } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import lageFoto from '../../../assets/fotos/ffw-nachtuebung-2026-lage.jpg';
+import zuschauerFoto from '../../../assets/fotos/ffw-nachtuebung-2026-zuschauer.jpg';
+import zuschauer2Foto from '../../../assets/fotos/ffw-nachtuebung-2026-zuschauer-2.jpg';
+import atemschutzFoto from '../../../assets/fotos/ffw-nachtuebung-2026-atemschutz.jpg';
+import zugfuehrerFoto from '../../../assets/fotos/ffw-nachtuebung-2026-zugfuehrer.jpg';
+import lf10Foto from '../../../assets/fotos/ffw-nachtuebung-2026-lf10.jpg';
+import pumpeFoto from '../../../assets/fotos/ffw-nachtuebung-2026-pumpe.jpg';
+import wasserFoto from '../../../assets/fotos/ffw-nachtuebung-2026-wasser.jpg';
+import { url } from '../../../lib/site';
+
+// Quelle: Angaben des Betreibers (Marc Ahne) zur Nachtübung am 21.11.2026 und Termin/Plakat der Feuerwehr
+const foto = '[fehlt: Fotograf]';
+---
+<Basis bild={lageFoto} titel="Rückblick: Nachtübung und Blaulichtabend" beschreibung="Nachtübung der Freiwilligen Feuerwehr Stockhausen am 21. November 2026: Personenrettung am Pfarrhaus unter Atemschutz, viele Zuschauer und Blaulichtabend am Feuerwehrhaus.">
+  <article class="huelle bericht">
+    <a class="zurueck" href={url('aktuelles/rueckblick/')}>← Rückblick</a>
+    <span class="kicker">Rückblick · 21. November 2026</span>
+    <h1>Einsatz am Pfarrhaus</h1>
+    <p class="vorspann">Blaulicht, Scheinwerfer und Schläuche quer über das Pflaster: Bei ihrer öffentlichen Nachtübung zeigte die Freiwillige Feuerwehr Stockhausen gemeinsam mit dem Löschzug 2 (Schadges/Rixfeld), was im Ernstfall zählt – und viele Stockhäuserinnen und Stockhäuser schauten zu.</p>
+
+    <figure class="bild-gross">
+      <Image src={lageFoto} alt="Einsatzkräfte in Schutzkleidung vor einem Fachwerkhaus, darunter der Zugführer mit roter Weste, rechts viele Zuschauer, auf dem Pflaster liegen Schläuche" widths={[640, 1200]} sizes="(max-width: 860px) calc(100vw - 32px), 820px" loading="eager" />
+      <figcaption>Einsatzkräfte und Zuschauer am Pfarrhaus · Foto: <span class="fehlt">{foto}</span></figcaption>
+    </figure>
+
+    <h2>Menschen in Not</h2>
+    <p>Die angenommene Lage hatte es in sich: Im Pfarrhaus waren Personen eingeschlossen. Vier Atemschutzgeräteträger rüsteten sich aus, gingen unter schwerem Atemschutz vor und durchsuchten das Gebäude. Am Ende brachten sie zwei Kinder und einen recht großen Erwachsenen sicher ins Freie – eine Rettung, die Kraft und gute Abstimmung verlangt.</p>
+
+    <div class="bilder">
+      <figure>
+        <Image src={atemschutzFoto} alt="Einsatzkräfte vor einem Wohnhaus, einer mit Atemschutzgerät auf dem Rücken, daneben Schlauch und Zuschauer" widths={[480, 900]} sizes="(max-width: 640px) calc(100vw - 32px), 400px" />
+        <figcaption>Der Atemschutztrupp macht sich bereit</figcaption>
+      </figure>
+      <figure>
+        <Image src={zugfuehrerFoto} alt="Der Zugführer in roter Weste mit der Aufschrift „Zugführer 2 Herbstein“ vor dem Fachwerk des Pfarrhauses, daneben ein Schlauch" widths={[480, 900]} sizes="(max-width: 640px) calc(100vw - 32px), 400px" />
+        <figcaption>Der Zugführer behält den Überblick</figcaption>
+      </figure>
+    </div>
+
+    <h2>Wasser marsch</h2>
+    <p>Draußen liefen die Schläuche vom Löschfahrzeug durch die Gassen, an der Pumpe wurde der Druck eingestellt, und schließlich stiegen die Wasserstrahlen in den Nachthimmel.</p>
+
+    <figure class="bild-gross">
+      <Image src={wasserFoto} alt="Zwei Feuerwehrleute mit Strahlrohr spritzen Wasser in die Dunkelheit, am Rand schauen Kinder zu, rechts das Fachwerkhaus" widths={[640, 1200]} sizes="(max-width: 860px) calc(100vw - 32px), 820px" />
+      <figcaption>Die Wasserstrahlen im Licht der Straßenlaterne</figcaption>
+    </figure>
+
+    <div class="bilder">
+      <figure>
+        <Image src={lf10Foto} alt="Das Löschfahrzeug von hinten mit Blaulicht und Scheinwerfern im Nebel, davor Schläuche auf der Straße und einige Zuschauer am Hang" widths={[480, 900]} sizes="(max-width: 640px) calc(100vw - 32px), 400px" />
+        <figcaption>Das Löschfahrzeug im Scheinwerferlicht</figcaption>
+      </figure>
+      <figure>
+        <Image src={pumpeFoto} alt="Die Pumpenbedienung des Löschfahrzeugs mit Manometern, angeschlossenem Schlauch und Handschuhen" widths={[480, 900]} sizes="(max-width: 640px) calc(100vw - 32px), 400px" />
+        <figcaption>An der Pumpe</figcaption>
+      </figure>
+    </div>
+
+    <h2>Großes Publikum</h2>
+    <p>Rund um die Übungsstelle drängten sich die Zuschauer, mit Kinderwagen, Hund und viel Neugier. Besonders die Kinder hatten ihren Spaß und verfolgten jeden Handgriff ganz aus der Nähe.</p>
+
+    <div class="bilder">
+      <figure>
+        <Image src={zuschauerFoto} alt="Viele Zuschauer auf der Straße vor einem Wohnhaus, links Einsatzkräfte bei der Arbeit" widths={[480, 900]} sizes="(max-width: 640px) calc(100vw - 32px), 400px" />
+        <figcaption>Viele schauten zu</figcaption>
+      </figure>
+      <figure>
+        <Image src={zuschauer2Foto} alt="Zuschauer mit Kinderwagen und Hund, daneben das Fachwerkhaus und Einsatzkräfte" widths={[480, 900]} sizes="(max-width: 640px) calc(100vw - 32px), 400px" />
+        <figcaption>… mit Kinderwagen und Hund</figcaption>
+      </figure>
+    </div>
+
+    <h2>Blaulichtabend</h2>
+    <p>Nach getaner Arbeit ging es zum Feuerwehrhaus. Beim Blaulichtabend gab es Gyros, und bei gemütlichem Beisammensein klang der Abend aus.</p>
+
+    <p class="foto-hinweis">Fotos: <span class="fehlt">{foto}</span></p>
+    <p><a class="mehr" href={url('vereine/feuerwehr/')}>Mehr über die Freiwillige Feuerwehr Stockhausen →</a></p>
+  </article>
+</Basis>
+
+<style>
+  .bericht { padding-block: clamp(2.5rem, 6vw, 4rem) 5rem; max-width: 860px; }
+  .zurueck { display: block; width: fit-content; margin-bottom: 1.25rem; font-size: 0.9rem; text-decoration: none; }
+  .vorspann { font-size: 1.2rem; color: var(--text-leise); }
+  .bericht p { max-width: 68ch; line-height: 1.7; }
+  .bericht h2 { margin-top: 2.5rem; font-size: 1.5rem; }
+  .bild-gross { margin: 2rem 0; }
+  .bild-gross img { width: 100%; height: auto; border-radius: var(--radius, 12px); }
+  .bilder { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+  @media (max-width: 640px) { .bilder { grid-template-columns: 1fr; } }
+  .bilder figure { margin: 0; }
+  .bilder img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--radius, 12px); }
+  figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-leise); }
+  .foto-hinweis { font-size: 0.85rem; color: var(--text-leise); }
+  .mehr { font-weight: 600; }
+</style>

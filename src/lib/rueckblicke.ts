@@ -1,6 +1,7 @@
 import type { ImageMetadata } from 'astro';
 import erntedank2026 from '../assets/fotos/erntedank-2026-stall.jpg';
 import kirmes2026 from '../assets/fotos/kirmes-2026-titel.jpg';
+import nachtuebung2026 from '../assets/fotos/ffw-nachtuebung-2026-lage.jpg';
 import { abgelaufeneMeldungen } from './aktuelles';
 
 // Rückblick (/aktuelles/rueckblick/): Berichte mit Fotos und abgelaufene Meldungen aus „Aktuelles“.
@@ -9,6 +10,14 @@ import { abgelaufeneMeldungen } from './aktuelles';
 export interface Rueckblick { titel: string; datum?: string; marke?: string; text: string; href: string; bild?: { src: ImageMetadata; alt: string }; vereine?: string[] }
 
 export const rueckblicke: Rueckblick[] = [
+  {
+    titel: 'Nachtübung und Blaulichtabend',
+    datum: '2026-11-21',
+    text: 'Vier Atemschutzgeräteträger retteten am Pfarrhaus zwei Kinder und einen Erwachsenen – vor großem Publikum. Danach Gyros und Blaulichtabend am Feuerwehrhaus.',
+    href: 'aktuelles/nachtuebung-2026/',
+    vereine: ['Feuerwehr'],
+    bild: { src: nachtuebung2026, alt: 'Einsatzkräfte und Zuschauer vor einem Fachwerkhaus bei der Nachtübung' },
+  },
   {
     titel: 'Stockhäuser Kirmes 2026',
     datum: '2026-10-24',
