@@ -9,10 +9,16 @@ import zugfuehrerFoto from '../../../assets/fotos/ffw-nachtuebung-2026-zugfuehre
 import lf10Foto from '../../../assets/fotos/ffw-nachtuebung-2026-lf10.jpg';
 import pumpeFoto from '../../../assets/fotos/ffw-nachtuebung-2026-pumpe.jpg';
 import wasserFoto from '../../../assets/fotos/ffw-nachtuebung-2026-wasser.jpg';
+import kinderFoto from '../../../assets/fotos/ffw-nachtuebung-2026-kinder.jpg';
+import kinder2Foto from '../../../assets/fotos/ffw-nachtuebung-2026-kinder-2.jpg';
+import atemFahrzeugFoto from '../../../assets/fotos/ffw-nachtuebung-2026-atemschutz-fahrzeug.jpg';
+import atemMaskeFoto from '../../../assets/fotos/ffw-nachtuebung-2026-atemschutz-maske.jpg';
+import einsatzkraftFoto from '../../../assets/fotos/ffw-nachtuebung-2026-einsatzkraft.jpg';
 import { url } from '../../../lib/site';
 
 // Quelle: Angaben des Betreibers (Marc Ahne) zur Nachtübung am 21.11.2026 und Termin/Plakat der Feuerwehr
-const foto = '[fehlt: Fotograf]';
+// Fotos: Carina Leipold, Einsatzkraft vor dem Fachwerkhaus: Joachim Kurz; alle Abgebildeten sind einverstanden
+const foto = 'Carina Leipold';
 ---
 <Basis bild={lageFoto} titel="Rückblick: Nachtübung und Blaulichtabend" beschreibung="Nachtübung der Freiwilligen Feuerwehr Stockhausen am 21. November 2026: Personenrettung am Pfarrhaus unter Atemschutz, viele Zuschauer und Blaulichtabend am Feuerwehrhaus.">
   <article class="huelle bericht">
@@ -23,7 +29,7 @@ const foto = '[fehlt: Fotograf]';
 
     <figure class="bild-gross">
       <Image src={lageFoto} alt="Einsatzkräfte in Schutzkleidung vor einem Fachwerkhaus, darunter der Zugführer mit roter Weste, rechts viele Zuschauer, auf dem Pflaster liegen Schläuche" widths={[640, 1200]} sizes="(max-width: 860px) calc(100vw - 32px), 820px" loading="eager" />
-      <figcaption>Einsatzkräfte und Zuschauer am Pfarrhaus · Foto: <span class="fehlt">{foto}</span></figcaption>
+      <figcaption>Einsatzkräfte und Zuschauer am Pfarrhaus · Foto: {foto}</figcaption>
     </figure>
 
     <h2>Menschen in Not</h2>
@@ -37,6 +43,28 @@ const foto = '[fehlt: Fotograf]';
       <figure>
         <Image src={zugfuehrerFoto} alt="Der Zugführer in roter Weste mit der Aufschrift „Zugführer 2 Herbstein“ vor dem Fachwerk des Pfarrhauses, daneben ein Schlauch" widths={[480, 900]} sizes="(max-width: 640px) calc(100vw - 32px), 400px" />
         <figcaption>Der Zugführer behält den Überblick</figcaption>
+      </figure>
+    </div>
+
+    <div class="bilder">
+      <figure>
+        <Image src={atemMaskeFoto} alt="Atemschutzgeräteträger mit Maske, Helm und Pressluftflasche, neben ihm ein Kamerad, im Hintergrund das Ehrenmal" widths={[480, 900]} sizes="(max-width: 640px) calc(100vw - 32px), 400px" />
+        <figcaption>Unter Atemschutz</figcaption>
+      </figure>
+      <figure>
+        <Image src={atemFahrzeugFoto} alt="Feuerwehrmann mit Atemschutzgerät am Löschfahrzeug, vorn ein gelbes Stromaggregat" widths={[480, 900]} sizes="(max-width: 640px) calc(100vw - 32px), 400px" />
+        <figcaption>Durchschnaufen nach dem Einsatz am Fahrzeug</figcaption>
+      </figure>
+    </div>
+
+    <div class="bilder">
+      <figure>
+        <Image src={kinderFoto} alt="Zwei Kinder in Winterjacken und Mützen an der Mauer beim Ehrenmal, angestrahlt von Scheinwerfern" widths={[480, 900]} sizes="(max-width: 640px) calc(100vw - 32px), 400px" />
+        <figcaption>Die Kinder im Scheinwerferlicht</figcaption>
+      </figure>
+      <figure>
+        <Image src={kinder2Foto} alt="Die beiden Kinder an der Sandsteinmauer neben dem Torpfosten" widths={[480, 900]} sizes="(max-width: 640px) calc(100vw - 32px), 400px" />
+        <figcaption>Mittendrin statt nur dabei</figcaption>
       </figure>
     </div>
 
@@ -59,6 +87,11 @@ const foto = '[fehlt: Fotograf]';
       </figure>
     </div>
 
+    <figure class="bild-hoch">
+      <Image src={einsatzkraftFoto} alt="Junge Einsatzkraft mit Helm und Schutzkleidung vor dem Fachwerkhaus, dahinter eine Einsatzkraft mit Weste „LF10 KatS Herbstein 8/43“" widths={[480, 900]} sizes="(max-width: 640px) calc(100vw - 32px), 420px" />
+      <figcaption>Vor dem Fachwerkhaus · Foto: Joachim Kurz</figcaption>
+    </figure>
+
     <h2>Großes Publikum</h2>
     <p>Rund um die Übungsstelle drängten sich die Zuschauer, mit Kinderwagen, Hund und viel Neugier. Besonders die Kinder hatten ihren Spaß und verfolgten jeden Handgriff ganz aus der Nähe.</p>
 
@@ -76,7 +109,7 @@ const foto = '[fehlt: Fotograf]';
     <h2>Blaulichtabend</h2>
     <p>Nach getaner Arbeit ging es zum Feuerwehrhaus. Beim Blaulichtabend gab es Gyros, und bei gemütlichem Beisammensein klang der Abend aus.</p>
 
-    <p class="foto-hinweis">Fotos: <span class="fehlt">{foto}</span></p>
+    <p class="foto-hinweis">Fotos: Carina Leipold, Joachim Kurz</p>
     <p><a class="mehr" href={url('vereine/feuerwehr/')}>Mehr über die Freiwillige Feuerwehr Stockhausen →</a></p>
   </article>
 </Basis>
@@ -89,6 +122,8 @@ const foto = '[fehlt: Fotograf]';
   .bericht h2 { margin-top: 2.5rem; font-size: 1.5rem; }
   .bild-gross { margin: 2rem 0; }
   .bild-gross img { width: 100%; height: auto; border-radius: var(--radius, 12px); }
+  .bild-hoch { margin: 2rem 0; max-width: 420px; }
+  .bild-hoch img { width: 100%; height: auto; border-radius: var(--radius, 12px); }
   .bilder { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
   @media (max-width: 640px) { .bilder { grid-template-columns: 1fr; } }
   .bilder figure { margin: 0; }
