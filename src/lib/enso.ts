@@ -22,7 +22,7 @@ export const aktionLaeuft = () => heute() <= aktion.frist;
 // Baustellen-Hinweis: Lädchen und Metzgerei bleiben erreichbar. Ende noch offen –
 // bei bekanntem Datum `bis` setzen (JJJJ-MM-TT), dann verschwindet der Hinweis danach von selbst.
 export const baustelle = {
-  text: 'Ortsdurchfahrt voll gesperrt (Seit 26. November ist die Müser Straße von „Am Weinberg“ bis nach der Einfahrt Schloßstraße gesperrt, keine Durchfahrt zwischen Blankenau/Müs und Lauterbach/Herbstein). Metzgerei und Ortsladen sind aus Blankenau erreichbar. Der Schulbus hält an Ersatzhaltestellen „Am Weinberg“.',
+  text: 'Ortsdurchfahrt voll gesperrt (Ab 26. November ist die Müser Straße von „Am Weinberg“ bis nach der Einfahrt Schloßstraße gesperrt, keine Durchfahrt zwischen Blankenau/Müs und Lauterbach/Herbstein). Metzgerei und Ortsladen sind aus Blankenau erreichbar. Der Schulbus hält an Ersatzhaltestellen „Am Weinberg“.',
   bis: null as string | null,
 };
 export const baustelleAktiv = () => baustelle.bis === null || heute() <= baustelle.bis;
