@@ -11,7 +11,7 @@ export const meldungen: Meldung[] = [
   {
     marke: 'Baustelle',
     titel: 'Ortsdurchfahrt voll gesperrt',
-    text: baustelle.text.replace(/^Ortsdurchfahrt voll gesperrt \((.*?)\)\. /, 'Vom $1. '),
+    text: baustelle.text.replace(/^Ortsdurchfahrt voll gesperrt \((.*?)\)\. /, '$1. '),
     href: 'ortsdurchfahrt/',
     linkText: 'Umleitungen und Infos',
     ton: 'warnung',
