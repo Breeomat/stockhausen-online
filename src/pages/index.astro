@@ -61,6 +61,7 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
       <h2>{aktuelleMeldungen().length > 0 ? 'Was gerade wichtig ist' : 'Neues und Rückblick'}</h2>
       <Tagesnotiz />
       <AktuellesKarten />
+      <p class="hinweis-amtlich"><strong>Hinweis:</strong> Diese Seite dient nur der Information und ist keine offizielle Mitteilung der Stadt Herbstein oder des Ortsbeirats Stockhausen. Verbindlich sind die amtlichen Bekanntmachungen der Stadt Herbstein (<a href="https://www.herbstein.de" rel="noopener">herbstein.de</a>, Herbsteiner Nachrichten).</p>
     </div>
   </section>
 
@@ -224,6 +225,7 @@ const bereiche = (Object.keys(bereichNamen) as (keyof typeof bereichNamen)[])
   .abschnitt--direkt { padding-top: 1rem; }
   .aktuelles-start { padding-bottom: 1.5rem; }
   .aktuelles-start h2 { margin-bottom: 1.25rem; }
+  .hinweis-amtlich { margin: 1rem 0 0; max-width: 80ch; font-size: 0.85rem; color: var(--text-leise); }
 
   .raster-termine { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1rem; }
 
