@@ -40,6 +40,12 @@ import haltestellenAnsicht from '../../assets/fotos/ersatzhaltestellen-strassena
       <p class="pdf"><a href={url('baustelle/vgo-ersatzhaltestellen-am-weinberg.pdf')}>Lageplan der VGO als PDF (Straßenansicht, Satellitenbild, Karte)</a></p>
     </div>
 
+    <div class="karte fussweg" id="fussweg">
+      <span class="kicker">Zu Fuß</span>
+      <h2>Fußweg durch die Baustelle</h2>
+      <p>Nach Rücksprache mit dem örtlichen Polier wird der Fußweg auf der Seite des Pfarrhauses und des Friedhofs vorerst nicht zurückgebaut. Anlieger und Schulkinder können auf dieser Seite durch die Baustelle laufen. Wegen der Vollsperrung gibt es dort – bis auf die Baustellenfahrzeuge – kaum Verkehr.</p>
+    </div>
+
     <div>
       <span class="kicker">Was bedeutet das für die Fahrt?</span>
       <h2>Auswirkungen der Sperrung</h2>
@@ -63,6 +69,9 @@ import haltestellenAnsicht from '../../assets/fotos/ersatzhaltestellen-strassena
 <style>
   .od { padding-block: 1rem 5rem; display: grid; gap: 2.5rem; }
   .od > * { max-width: 900px; }
+  .fussweg { padding: 1.5rem; border-left: 6px solid #2e7d4f; }
+  .fussweg h2 { font-size: 1.4rem; }
+  .fussweg p { margin: 0; }
   .hinweis-amtlich { margin: 0; padding: 0.9rem 1.2rem; font-size: 0.9rem; color: var(--text-leise); }
   .sperrung { padding: clamp(1.5rem, 4vw, 2.25rem); background: var(--warnung); border-color: var(--warnung-rand); color: var(--warnung-text); }
   .sperrung h2 { color: var(--warnung-text); }
