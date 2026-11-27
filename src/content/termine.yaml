@@ -144,11 +144,15 @@
   ort: Feuerwehrhaus
   verein: Freiwillige Feuerwehr Stockhausen e.V.
 - id: 2026-12-04-sv-letzte-turnstunde
-  titel: Letzte Turnstunde (Nikolausabend)
+  titel: Letzte Turnstunde 2026
   datum: 2026-12-04
   beginn: "17:30"
   ort: Altfellhalle
   verein: SV Stockhausen
+  text: >-
+    Die Abteilung Turnen und Leichtathletik lädt Familien, Freunde und Bekannte ganz herzlich ein –
+    zu Sport, Theater, Tanz und Vorfreude.
+  plakat: sv-letzte-turnstunde-2026
 - id: 2027-01-16-sv-flamingo-bounce
   titel: "Flamingo Bounce – Fasching mit dem Männerballett"
   datum: 2027-01-16
